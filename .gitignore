@@ -2,7 +2,7 @@
 
 # Build #
 ###################
-*.css
+src/**/*.css
 
 # Compiled source #
 ###################
