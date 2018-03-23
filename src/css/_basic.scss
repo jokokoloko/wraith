@@ -6,13 +6,13 @@
 html {
 	min-height: 100%;
 	position: relative;
-}
+	}
 body {
 	padding: 0;
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
-}
+	}
 
 /* ----------!HEADING---------- */
 h1,
@@ -28,43 +28,43 @@ h6 {
 	text-transform: inherit;
 	line-height: inherit;
 	color: inherit;
-}
+	}
 
 /* ----------!PARAGRAPH---------- */
 p {
 	margin: 0;
-}
+	}
 
 /* ----------!LIST---------- */
 ol,
 ul {
 	margin: 0;
-}
+	}
 
 /* ----------!UNDERLINE---------- */
 u {
 	text-decoration: none;
-}
+	}
 
 /* ----------!IMAGE---------- */
 img {
 	max-width: 100%;
 	height: auto;
-}
+	}
 
 /* ----------!BLOCKQUOTE---------- */
 blockquote {
 	margin: 0;
-}
+	}
 
 /* ----------!FIGURE---------- */
 figure {
 	margin: 0;
-}
+	}
 
 /* ----------!ADDRESS---------- */
 address {
 	margin: 0;
 	font-style: inherit;
 	line-height: inherit;
-}
+	}
