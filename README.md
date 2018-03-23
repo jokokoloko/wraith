@@ -5,6 +5,8 @@ React ES6 Starter Application
 ## Stack
 
 React `16.2.0`
+React Router `4.2.2`
+Redux `3.7.2`
 
 ## Database
 
@@ -14,8 +16,8 @@ React `16.2.0`
 
 ## Prerequisites
 
-* Install [node.js](http://nodejs.org/)
-* Clone the repo: https://github.com/jokokoloko/spectre.git
+*   Install [node.js](http://nodejs.org/)
+*   Clone the repo: https://github.com/jokokoloko/spectre.git
 
 ## Installation
 
