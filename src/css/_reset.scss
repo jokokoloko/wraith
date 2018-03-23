@@ -1,0 +1,142 @@
+/* ========================== */
+/* ==========!RESET========== */
+/* ========================== */
+
+/* ----------!OUTLINE---------- */
+a,
+a:active,
+a:hover,
+a:focus,
+a:visited,
+button,
+button:active,
+button:hover,
+button:focus,
+button:visited,
+:focus,
+.btn.active,
+.btn.active.focus,
+.btn.active:hover,
+.btn.active:focus,
+.btn.focus,
+.btn:active,
+.btn:active.focus,
+.btn:active:hover,
+.btn:active:focus,
+.btn:hover,
+.btn:focus,
+.open > .dropdown-toggle.btn,
+.open > .dropdown-toggle.btn.focus
+.open > .dropdown-toggle.btn:hover,
+.open > .dropdown-toggle.btn:focus {
+	outline: 0 none transparent;
+	outline-offset: 0;
+	-webkit-box-shadow: none;
+			box-shadow: none;
+	}
+
+/* ----------!CORNER---------- */
+img,
+select,
+button,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="submit"],
+.uneditable-input,
+.input-lg,
+.input-group-addon,
+.form-control,
+.form-group-lg .form-control,
+.well,
+.card,
+.card-list .card,
+.card-header,
+.pager li > a,
+.pager li > span,
+.pagination,
+.pagination li > a,
+.pagination li > span,
+.btn,
+.corner,
+.image,
+.navbar-toggle,
+.dropdown-menu,
+.modal-content,
+.validation_error {
+	border-radius: 0 !important;
+	}
+
+/* ----------!USER---------- */
+label,
+figure,
+.navbar,
+.carousel,
+.hero {
+	user-select: none;
+	}
+
+/* ----------!CLEAR---------- */
+form:before,
+form:after,
+.gform_fields:before,
+.gform_fields:after,
+.gform_footer:before,
+.gform_footer:after,
+.ginput_container:before,
+.ginput_container:after,
+.ms-membership-form-wrapper .form:before,
+.ms-membership-form-wrapper .form:after,
+.node:before,
+.node:after,
+.block:before,
+.block:after,
+.social:before,
+.social:after,
+.box:before,
+.box:after,
+.btn-group:before,
+.btn-group:after,
+.modal-header:before,
+.modal-header:after {
+	display: table;
+	content: " ";
+	}
+form:after,
+.gform_fields:after,
+.gform_footer:after,
+.ginput_container:after,
+.ms-membership-form-wrapper .form:after,
+.node:after,
+.block:after,
+.social:after,
+.box:after,
+.btn-group:after,
+.modal-header:after {
+	clear: both;
+	}
+
+/* ----------!HIDE---------- */
+.gform_heading,
+.horizontal label {
+	border: 0;
+	margin: -1px;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	}

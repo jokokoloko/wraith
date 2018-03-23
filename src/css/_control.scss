@@ -1,0 +1,81 @@
+/* ========================= */
+/* ==========!GRID========== */
+/* ========================= */
+
+/* ----------!BREAK---------- */
+$grid-breakpoints: (
+	xs:							0,			// PHONE	0
+	sm:							576px,		// TABLET	576px
+	md:							768px,		// CLASSIC	768px
+	lg:							992px,		// LAPTOP	992px
+	xl:							1200px,		// DESKTOP	1200px
+	hg:							1456px,		// WIDE		1456px
+	gt:							1680px		// CINEMA	1680px
+) !default;
+
+/* ========================= */
+/* ==========!SIZE========== */
+/* ========================= */
+
+/* ----------!ADMINISTRATION---------- */
+$wpadminbar-height-xs:			46px;
+$wpadminbar-height-md:			32px;
+
+/* ----------!HEADER---------- */
+$header-height-xs:				50px;
+$header-height-sm:				80px;
+$header-height-md:				80px;
+
+/* ----------!FOOTER---------- */
+$footer-height-xs:				auto;
+$footer-height-sm:				340px;
+$footer-height-md:				340px;
+
+/* ========================== */
+/* ==========!COLOR========== */
+/* ========================== */
+
+/* ----------!SHADE---------- */
+$color-transparent:				transparent;
+$color-white:					#fff;
+$color-snow:					#fffafa;
+$color-ghost:					#fafafa;
+$color-phantom:					#f8f8f8;
+$color-smoke:					#f5f5f5;
+$color-dust:					#eee;
+$color-steel:					#ddd;
+$color-grey:					#ccc;
+$color-aluminium:				#aaa;
+$color-stone:					#444;
+$color-charcoal:				#333;
+$color-tin:						#2a2a2a;
+$color-metal:					#222;
+$color-night:					#111;
+$color-void:					#101010;
+$color-black:					#000;
+
+/* ----------!TINT---------- */
+$color-red-300:					#ffa0a0;
+$color-red-400:					#f04040;
+$color-orange-300:				#ffb78c;
+$color-orange-400:				#ff853c;
+$color-yellow-300:				#ffec8b;
+$color-yellow-400:				#fc0;
+$color-green-300:				#c3ff88;
+$color-green-400:				#8dff1c;
+$color-blue-200:				#66afe9;
+$color-blue-300:				#428bca;
+$color-blue-400:				#337ab7;
+$color-blue-400-30:				rgba(51, 122, 183, 0.3);
+$color-blue-500:				#3276b1;
+$color-blue-600:				#23527c;
+
+/* ----------!SELECTION---------- */
+$color-selection:				($color-blue-200, null, $color-white);
+
+/* ----------!ALERT---------- */
+$color-alert-tip:				(null, null, $color-red-400 !important);
+$color-alert-failure:			($color-red-300 !important, $color-red-400 !important, null);
+$color-alert-danger:			($color-orange-300 !important, $color-orange-400 !important, null);
+$color-alert-warning:			($color-yellow-300 !important, $color-yellow-400 !important, null);
+$color-alert-success:			($color-green-300 !important, $color-green-400 !important, null);
