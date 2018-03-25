@@ -26,6 +26,10 @@ export const PrivateRoute = ({ component: Page, authenticated, ...rest }) => (
 
 export const PublicRoute = ({ component: Page, authenticated, ...rest }) => <Route {...rest} render={(props) => (authenticated === false ? <Page {...props} /> : <Redirect to="/dashboard" />)} />;
 
+PrivateRoute.defaultProps = {
+    location: undefined,
+};
+
 PrivateArea.propTypes = {
     component: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,
@@ -35,10 +39,6 @@ PrivateRoute.propTypes = {
     component: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,
     location: PropTypes.objectOf(PropTypes.any),
-};
-
-PrivateRoute.defaultProps = {
-    location: undefined,
 };
 
 PublicRoute.propTypes = {
