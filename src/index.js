@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import service from './js/service';
+import service from './service';
 import Root from './js/react/Root';
 import './css/theme.css';
 
