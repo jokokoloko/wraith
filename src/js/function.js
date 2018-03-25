@@ -1,3 +1,5 @@
+// Refactor to ES6
+
 export function capitalize(text) {
     return text.replace(/\b\w/g, (l) => l.toUpperCase());
 }
