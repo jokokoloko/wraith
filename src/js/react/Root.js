@@ -1,7 +1,23 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import * as path from '../path';
-import Public from './Public';
+import Login from './Login';
+import Register from './Register';
+import About from './About';
+import Home from './Home';
+import Empty from './404';
+
+const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+        this.isAuthenticated = true;
+        setTimeout(cb, 100); // fake async
+    },
+    signout(cb) {
+        this.isAuthenticated = false;
+        setTimeout(cb, 100); // fake async
+    },
+};
 
 class Root extends Component {
     render() {
@@ -28,7 +44,13 @@ class Root extends Component {
 
                     <hr />
 
-                    <Public />
+                    <Switch>
+                        <Route path={path.Login} component={Login} />
+                        <Route path={path.Register} component={Register} />
+                        <Route path={path.About} component={About} />
+                        <Route path={path.Home} exact component={Home} />
+                        <Route component={Empty} />
+                    </Switch>
                 </Fragment>
             </Router>
         );
