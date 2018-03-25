@@ -16,6 +16,12 @@ class Root extends Component {
                             <Link to={path.About}>About</Link>
                         </li>
                         <li>
+                            <Link to={path.Register}>Register</Link>
+                        </li>
+                        <li>
+                            <Link to={path.Login}>Login</Link>
+                        </li>
+                        <li>
                             <Link to={path._Home}>Dashboard</Link>
                         </li>
                     </ul>
