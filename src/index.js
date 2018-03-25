@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import service from './js/service';
-import App from './js/react/App';
+import Root from './js/react/Root';
 import './css/theme.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById('root'));
 service();
