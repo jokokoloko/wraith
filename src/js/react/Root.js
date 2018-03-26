@@ -7,6 +7,7 @@ import Register from './Register';
 import About from './About';
 import Home from './Home';
 import Empty from './404';
+import Compass from './area/Compass';
 import fakeAuth from '../../api/fakeAuth';
 
 const AuthButton = withRouter(
@@ -55,6 +56,7 @@ class Root extends Component {
         return (
             <Router>
                 <Fragment>
+                    <Compass />
                     <AuthButton />
                     <ul>
                         <li>
