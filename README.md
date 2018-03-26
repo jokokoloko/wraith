@@ -4,8 +4,8 @@ React ES6 Starter Application
 
 ## Stack
 
-React `16.2.0`
-React Router `4.2.2`
+React `16.2.0`</br >
+React Router `4.2.2`</br >
 Redux `3.7.2`
 
 ## Database
