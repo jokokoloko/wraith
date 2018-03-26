@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import * as path from '../path';
 import _Home from './_Home';
 import Login from './Login';
@@ -16,7 +16,7 @@ const AuthButton = withRouter(
                 Welcome!{' '}
                 <button
                     onClick={() => {
-                        fakeAuth.signout(() => history.push('/'));
+                        fakeAuth.signout(() => history.push(path.Home));
                         console.log(fakeAuth.isAuthenticated);
                     }}>
                     Sign out
@@ -27,7 +27,7 @@ const AuthButton = withRouter(
         ),
 );
 
-export const PrivateRoute = ({ component: Page, ...rest }) => (
+const PrivateRoute = ({ component: Page, ...rest }) => (
     <Route
         {...rest}
         render={(props) =>
@@ -36,7 +36,7 @@ export const PrivateRoute = ({ component: Page, ...rest }) => (
             ) : (
                 <Redirect
                     to={{
-                        pathname: '/login',
+                        pathname: path.Login,
                         state: {
                             from: props.location,
                         },
@@ -46,6 +46,8 @@ export const PrivateRoute = ({ component: Page, ...rest }) => (
         }
     />
 );
+
+const PublicRoute = ({ component: Page, ...rest }) => <Route {...rest} render={(props) => (fakeAuth.isAuthenticated === false ? <Page {...props} /> : <Redirect to={path._Home} />)} />;
 
 class Root extends Component {
     render() {
@@ -76,8 +78,8 @@ class Root extends Component {
 
                     <Switch>
                         <PrivateRoute path={path._Home} component={_Home} />
-                        <Route path={path.Login} component={Login} />
-                        <Route path={path.Register} component={Register} />
+                        <PublicRoute path={path.Login} component={Login} />
+                        <PublicRoute path={path.Register} component={Register} />
                         <Route path={path.About} component={About} />
                         <Route path={path.Home} component={Home} exact />
                         <Route component={Empty} />
