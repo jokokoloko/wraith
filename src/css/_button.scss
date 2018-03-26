@@ -1,0 +1,52 @@
+/* =========================== */
+/* ==========!BUTTON========== */
+/* =========================== */
+
+/* ----------!BASIC---------- */
+.btn {
+	background-image: none;
+	padding: 6px 12px;
+	-ms-touch-action: manipulation;
+		touch-action: manipulation;
+	cursor: pointer;
+	}
+.btn-default {
+	background-color: $color-white;
+	border-color: $color-grey;
+	color: $color-metal;
+	}
+.btn-default:active,
+.btn-default:hover,
+.btn-default:focus {
+	background-color: $color-dust;
+	border-color: $color-aluminium;
+	color: $color-metal;
+	}
+/* ----------!SIZE---------- */
+@include media-breakpoint-up(sm) {
+	.btn-auto {
+		width: auto;
+		display: inline-block;
+		}
+	}
+@include media-breakpoint-up(lg) {
+	.btn-xl {
+		padding: 15px 20px;
+		max-width: 210px;
+		font-size: 27px;
+		line-height: 20px;
+		}
+	.btn-hg {
+		padding: 25px 30px;
+		max-width: 340px;
+		font-size: 34px;
+		line-height: 25px;
+		}
+	}
+
+/* ----------!GROUP---------- */
+.input-group-btn > .btn:active,
+.input-group-btn > .btn:hover,
+.input-group-btn > .btn:focus {
+	z-index: initial;
+	}

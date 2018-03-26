@@ -17,19 +17,16 @@ $grid-breakpoints: (
 /* ==========!SIZE========== */
 /* ========================= */
 
-/* ----------!ADMINISTRATION---------- */
-$wpadminbar-height-xs:			46px;
-$wpadminbar-height-md:			32px;
+/* ----------!FONT---------- */
+$font-size-base:				20px;		// 20px is default
 
 /* ----------!HEADER---------- */
 $header-height-xs:				50px;
-$header-height-sm:				80px;
-$header-height-md:				80px;
+$header-height-lg:				80px;
 
 /* ----------!FOOTER---------- */
 $footer-height-xs:				auto;
-$footer-height-sm:				340px;
-$footer-height-md:				340px;
+$footer-height-lg:				340px;
 
 /* ========================== */
 /* ==========!COLOR========== */

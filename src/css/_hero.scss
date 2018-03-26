@@ -1,0 +1,28 @@
+/* ========================= */
+/* ==========!HERO========== */
+/* ========================= */
+
+/* ----------!MAIN---------- */
+.hero {
+	height: auto;
+	overflow: hidden;
+	cursor: default;
+	}
+
+/* =============================== */
+/* ==========!RESPONSIVE========== */
+/* =============================== */
+
+/* ----------!TABLET---------- */
+@include media-breakpoint-up(sm) {
+	.hero {
+		height: 340px;
+		}
+	}
+
+/* ----------!LAPTOP---------- */
+@include media-breakpoint-up(lg) {
+	.hero {
+		height: 550px;
+		}
+	}

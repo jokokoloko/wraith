@@ -1,0 +1,77 @@
+/* ============================= */
+/* ==========!POSITION========== */
+/* ============================= */
+
+/* ----------!BASIC---------- */
+.absolute {
+	position: absolute !important;
+	}
+.fixed {
+	position: fixed !important;
+	}
+.relative {
+	position: relative !important;
+	}
+.middle {
+	margin: 0 auto !important;
+	}
+
+/* ----------!ALIGN---------- */
+.aligninitial,
+.alignleft,
+.alignright {
+	margin-bottom: 30px;
+	}
+.alignleft {
+	margin-right: 30px;
+	float: left;
+	}
+.alignright {
+	margin-left: 30px;
+	float: right;
+	}
+.aligncenter {
+	margin: 0 auto;
+	display: block;
+	clear: both;
+	}
+
+/* ----------!EXACT---------- */
+.exact-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+	}
+.exact-center-horizontal {
+	position: absolute;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+	}
+.exact-center-vertical {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+	}
+
+/* ----------!TEXT---------- */
+.text-center .btn {
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+/* ----------!GRID---------- */
+@include media-breakpoint-up(sm) {
+	.grid-center .row:last-child {
+		font-size: 0; // This removes the browser generated spaces for "inline-block" elements (The space is a character space, so setting the font-size to zero makes the size of the space zero as well).
+		text-align: center;
+		}
+	.grid-center .row:last-child [class*="col-"] {
+		display: inline-block;
+		float: none;
+		vertical-align: top;
+		}
+	}

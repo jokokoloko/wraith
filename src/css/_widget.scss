@@ -1,0 +1,13 @@
+/* =========================== */
+/* ==========!WIDGET========== */
+/* =========================== */
+
+/* ----------!MAIN---------- */
+.widget select {
+	max-width: 100%;
+	}
+.widget ul:not([class*="flex"]) {
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none;
+	}

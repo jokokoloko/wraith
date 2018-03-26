@@ -1,0 +1,103 @@
+/* ========================= */
+/* ==========!SIZE========== */
+/* ========================= */
+
+@mixin property($list) {
+	margin-top: nth($list, 1);
+	margin-bottom: nth($list, 2);
+	font-size: nth($list, 3);
+	line-height: nth($list, 4);
+	}
+@mixin two($element, $device, $type) {
+	$i: 10;
+	@each $list in $type {
+		.#{$element}-#{$device}-#{$i}-x {
+			@include property($list);
+			}
+		$i: $i + 2;
+		}
+	}
+@mixin five($element, $device, $type) {
+	$i: 10;
+	@each $list in $type {
+		.#{$element}-#{$device}-#{$i} {
+			@include property($list);
+			}
+		$i: $i + 5;
+		}
+	}
+
+$paragraph-by-two: (
+	(-6px, -6px, 10px, 20px),		// 10
+	(-6px, -6px, 12px, 22px),		// 12
+	(-7px, -7px, 14px, 24px),		// 14
+	(-7px, -7px, 16px, 26px),		// 16
+	(-8px, -8px, 18px, 28px),		// 18
+	(-8px, -8px, 20px, 30px)		// 20
+);
+
+$heading-by-two: (
+	(-4px, -4px, 10px, 16px),		// 10
+	(-4px, -4px, 12px, 18px),		// 12
+	(-5px, -5px, 14px, 20px),		// 14
+	(-5px, -5px, 16px, 22px),		// 16
+	(-5px, -5px, 18px, 24px),		// 18
+	(-6px, -6px, 20px, 26px)		// 20
+);
+
+$paragraph-by-five: (
+	(-5px, -5px, 14px, 20px),		// 10
+	(-7px, -8px, 20px, 30px),		// 15
+	(-6px, -9px, 27px, 35px),		// 20
+	(-9px, -11px, 34px, 45px),		// 25
+	(-9px, -11px, 41px, 50px)		// 30
+);
+
+$heading-by-five: (
+	(-2px, -3px, 14px, 15px),		// 10
+	(-4px, -6px, 20px, 25px),		// 15
+	(-4px, -6px, 27px, 30px),		// 20
+	(-7px, -8px, 34px, 40px),		// 25
+	(-6px, -9px, 41px, 45px),		// 30
+	(-6px, -9px, 48px, 50px),		// 35
+	(-9px, -11px, 55px, 60px),		// 40
+	(-11px, -14px, 62px, 70px),		// 45
+	(-11px, -14px, 69px, 75px),		// 50
+	(-13px, -17px, 76px, 85px),		// 55
+	(-13px, -17px, 83px, 90px),		// 60
+	(-15px, -20px, 90px, 100px),	// 65
+	(-15px, -20px, 97px, 105px),	// 70
+	(-18px, -22px, 104px, 115px),	// 75
+	(-18px, -22px, 111px, 120px)	// 80
+);
+
+/* ----------!BUILD---------- */
+@include two('p', 'xs', $paragraph-by-two);
+@include two('h', 'xs', $heading-by-two);
+@include five('p', 'xs', $paragraph-by-five);
+@include five('h', 'xs', $heading-by-five);
+
+@include media-breakpoint-up(sm) {
+	@include two('p', 'sm', $paragraph-by-two);
+	@include two('h', 'sm', $heading-by-two);
+	@include five('p', 'sm', $paragraph-by-five);
+	@include five('h', 'sm', $heading-by-five);
+	}
+@include media-breakpoint-up(md) {
+	@include two('p', 'md', $paragraph-by-two);
+	@include two('h', 'md', $heading-by-two);
+	@include five('p', 'md', $paragraph-by-five);
+	@include five('h', 'md', $heading-by-five);
+	}
+@include media-breakpoint-up(lg) {
+	@include two('p', 'lg', $paragraph-by-two);
+	@include two('h', 'lg', $heading-by-two);
+	@include five('p', 'lg', $paragraph-by-five);
+	@include five('h', 'lg', $heading-by-five);
+	}
+@include media-breakpoint-up(xl) {
+	@include two('p', 'xl', $paragraph-by-two);
+	@include two('h', 'xl', $heading-by-two);
+	@include five('p', 'xl', $paragraph-by-five);
+	@include five('h', 'xl', $heading-by-five);
+	}

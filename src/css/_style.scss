@@ -1,0 +1,62 @@
+/* ========================== */
+/* ==========!STYLE========== */
+/* ========================== */
+
+/* ----------!SELECTION---------- */
+::selection {
+	@include color($color-selection);
+	}
+
+/* ----------!COLOR---------- */
+.color-0 {
+	background-color: $color-transparent !important;
+	}
+.color-1 {
+	background-color: $color-white !important;
+	}
+.color-2 {
+	background-color: $color-ghost !important;
+	}
+.color-3 {
+	background-color: $color-dust !important;
+	}
+.color-4 {
+	background-color: $color-grey !important;
+	}
+.color-5 {
+	background-color: $color-aluminium !important;
+	}
+.color-6 {
+	background-color: $color-stone !important;
+	color: $color-white;
+	}
+.color-7 {
+	background-color: $color-charcoal !important;
+	color: $color-white;
+	}
+.color-8 {
+	background-color: $color-metal !important;
+	color: $color-white;
+	}
+.color-9 {
+	background-color: $color-night !important;
+	color: $color-white;
+	}
+.color-10 {
+	background-color: $color-black !important;
+	color: $color-white;
+	}
+
+/* ----------!BACKGROUND---------- */
+.background-image {
+	background-color: $color-black !important;
+	}
+.background-parallax {
+	background-color: $color-transparent !important;
+	}
+
+/* ----------!BORDER---------- */
+.style-border {
+	border-top: 5px solid $color-white;
+	padding-top: 30px;
+	}

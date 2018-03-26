@@ -1,6 +1,47 @@
+// Logic
 @import 'control';
 @import 'break';
 @import 'function';
 
+// Setup
 @import 'reset';
 @import 'basic';
+@import 'help';
+
+// Grid
+@import 'grid';
+
+// Fancy
+@import 'animation';
+@import 'position';
+@import 'script';
+
+// Section
+@import 'hero';
+@import 'modal';
+@import 'quote';
+@import 'widget';
+
+// Part
+@import 'information';
+@import 'navigation';
+
+// Unit
+@import 'flag';
+@import 'icon';
+@import 'loader';
+@import 'social';
+
+// Element
+@import 'button';
+@import 'form';
+@import 'table';
+
+// Font
+@import 'font-offset';
+@import 'font-size';
+
+// Style
+@import 'space';
+@import 'text';
+@import 'style';

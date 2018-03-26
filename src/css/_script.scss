@@ -1,0 +1,101 @@
+/* =========================== */
+/* ==========!SCRIPT========== */
+/* =========================== */
+
+/* ----------!AFFIX---------- */
+.affix {
+	top: 30px;
+	}
+.affix-bottom {
+	position: absolute;
+	}
+
+/* ----------!MEASURE---------- */
+.measure {
+	background-color: $color-red-300;
+	height: 50px;
+	position: fixed;
+	top: 340px;
+	right: 0;
+	left: 0;
+	opacity: 0.5;
+	}
+
+/* ----------!BOTTOM---------- */
+@include media-breakpoint-up(sm) {
+	.bottom {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		}
+	}
+
+/* ----------!HEIGHT---------- */
+.height-auto,
+.height-half {
+    height: auto !important;
+    }
+.height-full {
+	min-height: 340px;
+    height: 100vh !important;
+    }
+.height-fill {
+    height: calc(100vh - #{$header-height-xs}) !important;
+    }
+@include media-breakpoint-up(sm) {
+	.height-half {
+	    height: 50vh !important;
+	    }
+	}
+@include media-breakpoint-up(lg) {
+	.height-fill {
+	    height: calc(100vh - #{$header-height-lg}) !important;
+	    }
+	}
+
+/* ----------!INFINITE---------- */
+.infinite-scroll .paging-navigation, /* Older / Newer Posts Navigation (always hidden) */
+.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
+	display: none;
+	}
+.infinity-end.neverending .site-footer {
+	display: block;
+	}
+
+/* ----------!KNOCK---------- */
+.knock {
+	padding-top: 0 !important;
+	}
+.knock #header,
+.knock #primary,
+.knock #secondary {
+	background-color: $color-transparent;
+	border: 0 none $color-transparent;
+	}
+.knock .follow:not(.fill) .table {
+	padding-top: 50px;
+	}
+
+/* ----------!PARALLAX---------- */
+.parallax-repeat {
+	background-size: unset;
+	background-repeat: repeat;
+	}
+@include media-breakpoint-down(md) {
+	.parallax-mirror.canvas-slid {
+		margin-left: 15px;
+		}
+	}
+
+/* ----------!REMOTE---------- */
+.remote .trigger {
+	cursor: pointer;
+	}
+.remote .target.passive {
+	opacity: 0;
+	z-index: 0;
+	}
+.remote .target.active {
+	opacity: 1;
+	z-index: 1;
+	}

@@ -39,3 +39,26 @@ $space: (0, 10, 20, 30, 50, 80, 130, 210, 340);
 @include media-breakpoint-up(xl) {
 	@include space('xl', $space);
 	}
+
+/* =========================== */
+/* ==========!BOTTOM========== */
+/* =========================== */
+
+@mixin bottom($value) {
+	.bottom #main {
+		margin-bottom: $value;
+		}
+	.bottom #footer {
+		height: $value;
+		}
+	}
+
+/* ========================== */
+/* ==========!COLOR========== */
+/* ========================== */
+
+@mixin color($list) {
+	background-color: nth($list, 1);
+	border-color: nth($list, 2);
+	color: nth($list, 3);
+	}

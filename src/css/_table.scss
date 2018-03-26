@@ -1,0 +1,53 @@
+/* ========================== */
+/* ==========!TABLE========== */
+/* ========================== */
+
+/* ----------!MAIN---------- */
+.table {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	display: table;
+	table-layout: fixed;
+	}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+	line-height: inherit;
+	}
+.table .cell {
+	width: 1%;
+	display: table-cell;
+	vertical-align: middle;
+	}
+
+/* ----------!LAYOUT---------- */
+.table-fixed {
+    table-layout: fixed;
+    }
+
+/* ----------!CUSTOM---------- */
+.table-50 .cell {
+	width: 50%;
+	}
+@include media-breakpoint-down(xs) {
+	.table-50 .cell {
+		width: 100%;
+		display: block;
+		}
+	.table-50 .cell + .cell {
+		padding-top: 50px;
+		}
+	}
+@include media-breakpoint-up(sm) {
+	.table-50 .cell:nth-child(odd) {
+		padding-right: 10px;
+		}
+	.table-50 .cell:nth-child(even) {
+		padding-left: 10px;
+		}
+	}

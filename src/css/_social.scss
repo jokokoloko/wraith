@@ -1,0 +1,52 @@
+/* =========================== */
+/* ==========!SOCIAL========== */
+/* =========================== */
+
+/* ----------!MAIN---------- */
+.social .fa  {
+	text-align: center;
+	}
+.social-square {
+	margin: -2.5px !important;
+	}
+.social-square li {
+	margin: 2.5px;
+	}
+.social-square li a {
+	color: $color-white;
+	}
+.social-square li a:hover,
+.social-square li a:focus {
+	opacity: 0.8;
+	}
+.social-square li a[href*="facebook"] {
+	background-color: #3b5998;
+	}
+.social-square li a[href*="google"] {
+	background-color: #dd4b39;
+	}
+.social-square li a[href*="twitter"] {
+	background-color: #00aced;
+	}
+.social-square li a[href*="yelp"] {
+	background-color: #C93C27;
+	}
+.social-square li a[href*="linkedin"] {
+	background-color: #007bb6;
+	}
+.social-circle {
+	margin-right: 0;
+	}
+.social-circle li + li {
+	margin-left: 10px;
+	}
+.social-circle li a {
+	background-color: $color-white;
+	border-radius: 50%;
+	color: $color-charcoal;
+	}
+.social-circle li a:active,
+.social-circle li a:hover,
+.social-circle li a:focus {
+	background-color: $color-blue-400;
+	}

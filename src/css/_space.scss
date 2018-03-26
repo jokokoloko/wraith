@@ -1,0 +1,267 @@
+/* ========================== */
+/* ==========!SPACE========== */
+/* ========================== */
+
+/* ----------!BASIC---------- */
+figure + header,
+figure + section,
+figure + footer,
+header + figure,
+header + section,
+header + footer,
+section + figure,
+section + footer,
+footer + figure {
+	padding-top: 30px; // 30px spacing
+	}
+
+/* ----------!HEADING---------- */
+h1 + h1,
+h1 + h2,
+h2 + h2,
+h1 + h3,
+h2 + h3,
+h3 + h3,
+h1 + h4,
+h2 + h4,
+h3 + h4,
+h4 + h4 {
+	padding-top: 11px; // 15px spacing
+	}
+h1 + h5,
+h2 + h5,
+h3 + h5,
+h4 + h5,
+h5 + h5,
+h1 + h6,
+h2 + h6,
+h3 + h6,
+h4 + h6,
+h5 + h6,
+h6 + h6 {
+	padding-top: 13px; // 15px spacing
+	}
+
+/* ----------!PARAGRAPH---------- */
+p + p,
+h1 + p {
+	padding-top: 23px; // 30px spacing
+	}
+h2 + p,
+h3 + p,
+h4 + p {
+	padding-top: 24px; // 30px spacing
+	}
+h5 + p,
+h6 + p {
+	padding-top: 27px; // 30px spacing
+	}
+
+/* ----------!LIST---------- */
+ol:not([class*="row"]):not([class*="nav"]):not([class*="navbar-nav"]):not([class*="dropdown-menu"]):not([class*="pager"]):not([class*="carousel-indicators"]) > li + li,
+ul:not([class*="row"]):not([class*="nav"]):not([class*="navbar-nav"]):not([class*="dropdown-menu"]):not([class*="pager"]):not([class*="carousel-indicators"]) > li + li {
+	padding-top: 23px; // 30px spacing
+	}
+ol + p,
+ul + p {
+	padding-top: 43px; // 50px spacing
+	}
+p + ol,
+p + ul {
+	padding-top: 50px; // 50px spacing
+	}
+
+/* ----------!BETWEEN---------- */
+p + h1,
+ol + h1,
+ul + h1 {
+	padding-top: 44px; // 50px spacing
+	}
+p + h2,
+ol + h2,
+ul + h2,
+p + h3,
+ol + h3,
+ul + h3,
+p + h4,
+ol + h4,
+ul + h4 {
+	padding-top: 46px; // 50px spacing
+	}
+p + h5,
+ol + h5,
+ul + h5,
+p + h6,
+ol + h6,
+ul + h6 {
+	padding-top: 48px; // 50px spacing
+	}
+
+/* ----------!BUTTON---------- */
+h1 + button,
+h2 + button,
+h3 + button,
+h4 + button,
+h5 + button,
+h6 + button,
+p + button,
+h1 + .btn,
+h2 + .btn,
+h3 + .btn,
+h4 + .btn,
+h5 + .btn,
+h6 + .btn,
+p + .btn {
+	margin-top: 30px; // 30px spacing
+	}
+
+/* ----------!MEDIA---------- */
+blockquote + p,
+embed + p,
+figure + p,
+img + p,
+blockquote + ol,
+embed + ol,
+figure + ol,
+img + ol,
+blockquote + ul,
+embed + ul,
+figure + ul,
+img + ul {
+	padding-top: 43px; // 50px spacing
+	}
+p + blockquote,
+ol + blockquote,
+ul + blockquote,
+p + embed,
+ol + embed,
+ul + embed,
+p + figure,
+ol + figure,
+ul + figure,
+p + img,
+ol + img,
+ul + img {
+	margin-top: 50px; // 50px spacing
+	}
+p + .alignleft,
+p + .alignright {
+	margin-top: 30px; // 30px spacing
+	}
+p + .alignleft + p,
+p + .alignright + p {
+	padding-top: 23px; // 30px spacing
+	}
+blockquote p:last-child,
+blockquote ol:last-child,
+blockquote ul:last-child {
+    margin-bottom: -8px;
+	}
+.icon + h3,
+.icon + h4,
+.icon + p {
+	padding-top: 50px; // 50px spacing
+	}
+
+/* ----------!EXTRA---------- */
+hr {
+	margin-top: 50px; // 50px spacing
+	margin-bottom: 49px; // 50px spacing
+	}
+
+/* ========================= */
+/* ==========!TYPE========== */
+/* ========================= */
+
+/* ----------!META---------- */
+.headline + .meta {
+	padding-top: 28px; // 30px spacing
+	}
+
+/* ========================= */
+/* ==========!NODE========== */
+/* ========================= */
+
+/* ----------!HEADER---------- */
+header .title + p {
+	padding-top: 23px; // 30px spacing
+	}
+
+/* ----------!SECTION---------- */
+section p + .row {
+	padding-top: 42px; // 50px spacing
+	}
+section .row + p {
+	padding-top: 43px; // 50px spacing
+	}
+
+/* =========================== */
+/* ==========!WIDGET========== */
+/* =========================== */
+
+/* ----------!INSTAGRAM---------- */
+p + .instagram-media {
+    margin-top: 50px !important; // 50px spacing
+    }
+.instagram-media + p + p {
+    padding-top: 50px !important; // 50px spacing
+    }
+
+/* ----------!CONTACT---------- */
+.map + .contact {
+    padding-top: 30px; // 30px spacing
+	}
+
+/* ============================== */
+/* ==========!COMPONENT========== */
+/* ============================== */
+
+/* ----------!ACCORDION---------- */
+.accordion .card-list .card + .card {
+    margin-top: 15px; // 15px spacing
+	}
+
+/* ----------!HERO---------- */
+.hero h1 + p {
+	padding-top: 24px; // 30px spacing
+	}
+.hero h2 + p,
+.hero h3 + p {
+	padding-top: 23px; // 30px spacing
+	}
+
+/* ============================= */
+/* ==========!TEMPLATE========== */
+/* ============================= */
+
+/* ----------!ARCHIVE---------- */
+.archive .hentry + .hentry,
+.blog .hentry + .hentry,
+.search .hentry + .hentry {
+	padding-top: 50px; // 50px spacing
+	}
+
+/* ----------!SINGLE---------- */
+@include media-breakpoint-up(lg) {
+	.single figure + header,
+	.single figure + section,
+	.single figure + footer,
+	.single header + figure,
+	.single header + section,
+	.single header + footer,
+	.single section + figure,
+	.single section + footer,
+	.single footer + figure {
+		padding-top: 50px; // 50px spacing
+		}
+	}
+.single .hentry figure img + .wp-caption-text {
+	padding-top: 15px; // 15px spacing
+	}
+.single .hentry .headline + .tagline {
+	padding-top: 26px; // 30px spacing
+	}
+.single .hentry .headline + .meta,
+.single .hentry .tagline + .meta {
+	padding-top: 28px; // 30px spacing
+	}

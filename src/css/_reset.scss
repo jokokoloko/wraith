@@ -91,14 +91,6 @@ figure,
 /* ----------!CLEAR---------- */
 form:before,
 form:after,
-.gform_fields:before,
-.gform_fields:after,
-.gform_footer:before,
-.gform_footer:after,
-.ginput_container:before,
-.ginput_container:after,
-.ms-membership-form-wrapper .form:before,
-.ms-membership-form-wrapper .form:after,
 .node:before,
 .node:after,
 .block:before,
@@ -115,10 +107,6 @@ form:after,
 	content: " ";
 	}
 form:after,
-.gform_fields:after,
-.gform_footer:after,
-.ginput_container:after,
-.ms-membership-form-wrapper .form:after,
 .node:after,
 .block:after,
 .social:after,
@@ -129,7 +117,6 @@ form:after,
 	}
 
 /* ----------!HIDE---------- */
-.gform_heading,
 .horizontal label {
 	border: 0;
 	margin: -1px;

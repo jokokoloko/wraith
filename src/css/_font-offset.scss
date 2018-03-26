@@ -1,0 +1,221 @@
+/* =========================== */
+/* ==========!OFFSET========== */
+/* =========================== */
+
+@mixin offset($value) {
+	margin-left: $value;
+	margin-right: $value;
+	}
+
+/* ------------------------------
+	Open Sans				-1px
+	Roboto Condensed		 0px
+------------------------------ */
+
+$offset: 0px;
+$not: ':not([class*="col"]):not([class*="gutter"]):not([class*="flex"]):not([class*="space"]):not([class*="node"]):not([class*="order"])';
+
+/* ----------!BUILD---------- */
+[class*="xs-10"]#{$not},
+[class*="xs-12"]#{$not},
+[class*="xs-14"]#{$not},
+[class*="xs-15"]#{$not},
+[class*="xs-16"]#{$not},
+[class*="xs-18"]#{$not} {
+	@include offset($offset);
+	}
+[class*="xs-20"]#{$not},
+[class*="xs-25"]#{$not} {
+	@include offset($offset - 1);
+	}
+[class*="xs-30"]#{$not} {
+	@include offset($offset - 2);
+	}
+[class*="xs-35"]#{$not} {
+	@include offset($offset - 3);
+	}
+[class*="xs-40"]#{$not},
+[class*="xs-45"]#{$not} {
+	@include offset($offset - 4);
+	}
+[class*="xs-50"]#{$not} {
+	@include offset($offset - 5);
+	}
+[class*="xs-55"]#{$not},
+[class*="xs-60"]#{$not} {
+	@include offset($offset - 6);
+	}
+[class*="xs-65"]#{$not},
+[class*="xs-70"]#{$not} {
+	@include offset($offset - 7);
+	}
+[class*="xs-75"]#{$not} {
+	@include offset($offset - 8);
+	}
+[class*="xs-80"]#{$not} {
+	@include offset($offset - 9);
+	}
+@include media-breakpoint-up(sm) {
+	[class*="sm-10"]#{$not},
+	[class*="sm-12"]#{$not},
+	[class*="sm-14"]#{$not},
+	[class*="sm-15"]#{$not},
+	[class*="sm-16"]#{$not},
+	[class*="sm-18"]#{$not} {
+		@include offset($offset);
+		}
+	[class*="sm-20"]#{$not},
+	[class*="sm-25"]#{$not} {
+		@include offset($offset - 1);
+		}
+	[class*="sm-30"]#{$not} {
+		@include offset($offset - 2);
+		}
+	[class*="sm-35"]#{$not} {
+		@include offset($offset - 3);
+		}
+	[class*="sm-40"]#{$not},
+	[class*="sm-45"]#{$not} {
+		@include offset($offset - 4);
+		}
+	[class*="sm-50"]#{$not} {
+		@include offset($offset - 5);
+		}
+	[class*="sm-55"]#{$not},
+	[class*="sm-60"]#{$not} {
+		@include offset($offset - 6);
+		}
+	[class*="sm-65"]#{$not} {
+		@include offset($offset - 7);
+		}
+	[class*="sm-70"]#{$not},
+	[class*="sm-75"]#{$not} {
+		@include offset($offset - 8);
+		}
+	[class*="sm-80"]#{$not} {
+		@include offset($offset - 9);
+		}
+	}
+@include media-breakpoint-up(md) {
+	[class*="md-10"]#{$not},
+	[class*="md-12"]#{$not},
+	[class*="md-14"]#{$not},
+	[class*="md-15"]#{$not},
+	[class*="md-16"]#{$not},
+	[class*="md-18"]#{$not} {
+		@include offset($offset);
+		}
+	[class*="md-20"]#{$not},
+	[class*="md-25"]#{$not} {
+		@include offset($offset - 1);
+		}
+	[class*="md-30"]#{$not} {
+		@include offset($offset - 2);
+		}
+	[class*="md-35"]#{$not} {
+		@include offset($offset - 3);
+		}
+	[class*="md-40"]#{$not},
+	[class*="md-45"]#{$not} {
+		@include offset($offset - 4);
+		}
+	[class*="md-50"]#{$not} {
+		@include offset($offset - 5);
+		}
+	[class*="md-55"]#{$not},
+	[class*="md-60"]#{$not} {
+		@include offset($offset - 6);
+		}
+	[class*="md-65"]#{$not} {
+		@include offset($offset - 7);
+		}
+	[class*="md-70"]#{$not},
+	[class*="md-75"]#{$not} {
+		@include offset($offset - 8);
+		}
+	[class*="md-80"]#{$not} {
+		@include offset($offset - 9);
+		}
+	}
+@include media-breakpoint-up(lg) {
+	[class*="lg-10"]#{$not},
+	[class*="lg-12"]#{$not},
+	[class*="lg-14"]#{$not},
+	[class*="lg-15"]#{$not},
+	[class*="lg-16"]#{$not},
+	[class*="lg-18"]#{$not} {
+		@include offset($offset);
+		}
+	[class*="lg-20"]#{$not},
+	[class*="lg-25"]#{$not} {
+		@include offset($offset - 1);
+		}
+	[class*="lg-30"]#{$not} {
+		@include offset($offset - 2);
+		}
+	[class*="lg-35"]#{$not} {
+		@include offset($offset - 3);
+		}
+	[class*="lg-40"]#{$not},
+	[class*="lg-45"]#{$not} {
+		@include offset($offset - 4);
+		}
+	[class*="lg-50"]#{$not} {
+		@include offset($offset - 5);
+		}
+	[class*="lg-55"]#{$not},
+	[class*="lg-60"]#{$not} {
+		@include offset($offset - 6);
+		}
+	[class*="lg-65"]#{$not} {
+		@include offset($offset - 7);
+		}
+	[class*="lg-70"]#{$not},
+	[class*="lg-75"]#{$not} {
+		@include offset($offset - 8);
+		}
+	[class*="lg-80"]#{$not} {
+		@include offset($offset - 9);
+		}
+	}
+@include media-breakpoint-up(xl) {
+	[class*="xl-10"]#{$not},
+	[class*="xl-12"]#{$not},
+	[class*="xl-14"]#{$not},
+	[class*="xl-15"]#{$not},
+	[class*="xl-16"]#{$not},
+	[class*="xl-18"]#{$not} {
+		@include offset($offset);
+		}
+	[class*="xl-20"]#{$not},
+	[class*="xl-25"]#{$not} {
+		@include offset($offset - 1);
+		}
+	[class*="xl-30"]#{$not} {
+		@include offset($offset - 2);
+		}
+	[class*="xl-35"]#{$not} {
+		@include offset($offset - 3);
+		}
+	[class*="xl-40"]#{$not},
+	[class*="xl-45"]#{$not} {
+		@include offset($offset - 4);
+		}
+	[class*="xl-50"]#{$not} {
+		@include offset($offset - 5);
+		}
+	[class*="xl-55"]#{$not},
+	[class*="xl-60"]#{$not} {
+		@include offset($offset - 6);
+		}
+	[class*="xl-65"]#{$not} {
+		@include offset($offset - 7);
+		}
+	[class*="xl-70"]#{$not},
+	[class*="xl-75"]#{$not} {
+		@include offset($offset - 8);
+		}
+	[class*="xl-80"]#{$not} {
+		@include offset($offset - 9);
+		}
+	}
