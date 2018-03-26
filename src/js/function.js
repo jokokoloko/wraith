@@ -11,7 +11,7 @@ export function textify(text) {
             // Replace - with spaces
             .replace(/-/g, ' ')
             // Remove all non-word chars
-            .replace(/[^\w\-]+/g, ' ')
+            .replace(/[^\w]+/g, ' ')
             // Trim spaces from start and end of text
             .trim()
     );
@@ -22,7 +22,7 @@ export function classify(text) {
             .toString()
             .toLowerCase()
             // Remove all non-word chars
-            .replace(/[^\w\-]+/g, ' ')
+            .replace(/[^\w]+/g, ' ')
             // Trim spaces from start and end of text
             .trim()
     );
@@ -42,9 +42,9 @@ export function slugify(text) {
             // Replace & with 'and'
             .replace(/&/g, '-and-')
             // Remove all non-word chars
-            .replace(/[^\w\-]+/g, '')
+            .replace(/[^\w]+/g, '')
             // Replace multiple - with single -
-            .replace(/\-\-+/g, '-')
+            .replace(/--+/g, '-')
             // Replace something with single -
             .replace(/[\s_-]+/g, '-')
             // Trim - from start of text
