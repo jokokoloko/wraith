@@ -1,0 +1,82 @@
+/* =========================== */
+/* ==========!BUTTON========== */
+/* =========================== */
+
+/* ----------!BASIC---------- */
+button,
+.btn {
+	padding: 4px 14px;
+	}
+.btn-default,
+.gform_wrapper .gform_button,
+.ms-membership-form-wrapper input[type="submit"] {
+	@include color($color-button-default);
+	}
+.btn-default.active,
+.btn-default.active.focus,
+.btn-default.active:hover,
+.btn-default.active:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default:active.focus,
+.btn-default:active:hover,
+.btn-default:active:focus,
+.btn-default:hover,
+.btn-default:focus,
+.open > .dropdown-toggle.btn-default,
+.open > .dropdown-toggle.btn-default.focus,
+.open > .dropdown-toggle.btn-default:hover,
+.open > .dropdown-toggle.btn-default:focus,
+.gform_wrapper .gform_button:hover,
+.gform_wrapper .gform_button:focus,
+.gform_wrapper .gform_button:active,
+.gform_wrapper .gform_button.active,
+.ms-membership-form-wrapper input[type="submit"]:hover,
+.ms-membership-form-wrapper input[type="submit"]:focus,
+.ms-membership-form-wrapper input[type="submit"]:active,
+.ms-membership-form-wrapper input[type="submit"].active {
+	@include color($color-button-default-hover);
+	}
+.btn-link {
+	@include color($color-button-link);
+	}
+
+/* ----------!HOLLOW---------- */
+.btn-hollow {
+	@include color($color-button-hollow);
+	font-weight: $font-weight-1 !important;
+	}
+.btn-hollow.active,
+.btn-hollow.active.focus,
+.btn-hollow.active:hover,
+.btn-hollow.active:focus,
+.btn-hollow.focus,
+.btn-hollow:active,
+.btn-hollow:active.focus,
+.btn-hollow:active:hover,
+.btn-hollow:active:focus,
+.btn-hollow:hover,
+.btn-hollow:focus,
+.open > .dropdown-toggle.btn-hollow,
+.open > .dropdown-toggle.btn-hollow.focus,
+.open > .dropdown-toggle.btn-hollow:hover,
+.open > .dropdown-toggle.btn-hollow:focus {
+	@include color($color-button-hollow-hover);
+	}
+
+/* ----------!STYLE---------- */
+.btn-pill {
+	border-radius: 20px !important;
+	}
+.btn-lean {
+	@include color($color-button-hollow);
+	padding: 14px 30px !important;
+	line-height: 10px;
+	}
+
+/* ----------!SIZE---------- */
+@include media-breakpoint-up(sm) {
+	.btn-width {
+		max-width: 210px;
+		}
+	}

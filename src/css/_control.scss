@@ -67,6 +67,30 @@ $color-blue-400-30:				rgba(51, 122, 183, 0.3);
 $color-blue-500:				#3276b1;
 $color-blue-600:				#23527c;
 
+/* ----------!BRAND---------- */
+$color-brand-black-300:			$color-night;
+
+/* ----------!REGION---------- */
+$color-body:					($color-metal, null, null);
+$color-offcanvas:				($color-ghost, $color-dust !important, null);
+$color-header:					($color-white, $color-dust !important, null);
+$color-bar:						($color-blue-400, $color-blue-400 !important, null);
+$color-main:					(null, null, null);
+$color-footer:					($color-metal, null, $color-white);
+$color-modal:					(null, null, null);
+
+/* ----------!BUTTON---------- */
+$color-button-default:			(null, null, null);
+$color-button-default-hover:	(null, null, null);
+$color-button-alternate:		(null, null, null);
+$color-button-alternate-hover:	(null, null, null);
+$color-button-hollow:			($color-transparent !important, rgba(255, 255, 255, 0.8) !important, $color-white !important);
+$color-button-hollow-hover:		(rgba(255, 255, 255, 0.3) !important, rgba(255, 255, 255, 0.8) !important, null);
+$color-button-form:				(null, null, null);
+$color-button-form-hover:		(null, null, null);
+$color-button-link:				(null, null, null);
+$color-button-link-hover:		(null, null, null);
+
 /* ----------!SELECTION---------- */
 $color-selection:				($color-blue-200, null, $color-white);
 
