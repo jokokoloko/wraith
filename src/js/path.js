@@ -1,10 +1,10 @@
 // Private
-export const _Home = '/dashboard';
+export const _Private = '/dashboard';
 
 // Public
 export const Login = '/login';
 export const Register = '/register';
 export const About = '/about';
 export const Post = '/post';
-export const PostView = '/:id';
-export const Home = '/';
+export const PostView = '/:id'; // create helper function to remove slash
+export const Root = '/';

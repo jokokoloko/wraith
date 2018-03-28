@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import * as path from '../path';
-import _Home from './_Home';
+import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
 import About from './About';
@@ -17,7 +17,7 @@ const AuthButton = withRouter(
                 Welcome!{' '}
                 <button
                     onClick={() => {
-                        fakeAuth.signout(() => history.push(path.Home));
+                        fakeAuth.signout(() => history.push(path.Root));
                         console.log(fakeAuth.isAuthenticated);
                     }}>
                     Sign out
@@ -48,7 +48,7 @@ const PrivateRoute = ({ component: Page, ...rest }) => (
     />
 );
 
-const PublicRoute = ({ component: Page, ...rest }) => <Route {...rest} render={(props) => (fakeAuth.isAuthenticated === false ? <Page {...props} /> : <Redirect to={path._Home} />)} />;
+const PublicRoute = ({ component: Page, ...rest }) => <Route {...rest} render={(props) => (fakeAuth.isAuthenticated === false ? <Page {...props} /> : <Redirect to={path._Private} />)} />;
 
 class Root extends Component {
     render() {
@@ -60,7 +60,7 @@ class Root extends Component {
                     <AuthButton />
                     <ul>
                         <li>
-                            <Link to={path.Home}>Home</Link>
+                            <Link to={path.Root}>Home</Link>
                         </li>
                         <li>
                             <Link to={path.About}>About</Link>
@@ -72,18 +72,18 @@ class Root extends Component {
                             <Link to={path.Login}>Login</Link>
                         </li>
                         <li>
-                            <Link to={path._Home}>Dashboard</Link>
+                            <Link to={path._Private}>Dashboard</Link>
                         </li>
                     </ul>
 
                     <hr />
 
                     <Switch>
-                        <PrivateRoute path={path._Home} component={_Home} />
+                        <PrivateRoute path={path._Private} component={_Private} />
                         <PublicRoute path={path.Login} component={Login} />
                         <PublicRoute path={path.Register} component={Register} />
                         <Route path={path.About} component={About} />
-                        <Route path={path.Home} component={Home} exact />
+                        <Route path={path.Root} component={Home} exact />
                         <Route component={Empty} />
                     </Switch>
                 </Fragment>
