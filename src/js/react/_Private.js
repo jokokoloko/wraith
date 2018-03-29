@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
-import _Empty from './_404';
 import _Home from './_Home';
+import _Empty from './_404';
 
 const _Private = ({ match }) => (
     <Fragment>
@@ -10,7 +10,7 @@ const _Private = ({ match }) => (
 
         <Switch>
             <Route path={`${match.path}/post`} component={_Home} />
-            <Route path={`${match.path}`} component={_Home} />
+            <Route path={`${match.path}`} component={_Home} exact />
             <Route component={_Empty} />
         </Switch>
     </Fragment>
