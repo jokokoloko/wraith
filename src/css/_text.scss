@@ -88,6 +88,15 @@ label {
 	@extend .p-xs-15;
 	}
 
+/* ========================== */
+/* ==========!CLASS========== */
+/* ========================== */
+
+/* ----------!BACKGROUND---------- */
+.background-image {
+	color: $color-white;
+	}
+
 /* ========================= */
 /* ==========!TYPE========== */
 /* ========================= */
@@ -170,9 +179,6 @@ button,
 	}
 
 /* ----------!CAROUSEL---------- */
-.carousel {
-	color: $color-white;
-	}
 .carousel h1 {
 	@extend [class*="xs-40"];
 	@extend .h-xs-40;
@@ -201,9 +207,6 @@ button,
 	}
 
 /* ----------!HERO---------- */
-.hero {
-	color: $color-white;
-	}
 .hero h1 {
 	@extend [class*="xs-40"];
 	@extend .h-xs-40;
@@ -247,28 +250,6 @@ button,
 #footer p,
 #footer a {
 	color: $color-white !important;
-	}
-
-/* ============================= */
-/* ==========!TEMPLATE========== */
-/* ============================= */
-
-/* ----------!SINGLE---------- */
-.single .hentry h2 {
-	font-style: italic;
-	color: $color-aluminium;
-	}
-.single .hentry h3 {
-	font-weight: $font-weight-2;
-	}
-.single .hentry h4,
-.single .hentry h5,
-.single .hentry h6 {
-	font-weight: $font-weight-3;
-	}
-.single .hentry figure .wp-caption-text {
-	@extend [class*="xs-10"];
-	@extend .p-xs-10;
 	}
 
 /* ========================== */
