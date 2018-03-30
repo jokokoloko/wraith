@@ -1,4 +1,5 @@
 // Private
+export const _Post = '/post';
 export const _Private = '/dashboard';
 
 // Public
