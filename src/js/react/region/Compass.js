@@ -2,13 +2,14 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { classify } from '../../function';
 import * as client from '../../client';
+import * as path from '../../path';
 
 const Compass = ({ location }) => {
-    let path = location.pathname;
-    if (path === '/') {
-        path = 'home';
+    let page = location.pathname;
+    if (page === path.Root) {
+        page = 'home';
     }
-    document.body.className = `${classify(`${client.BRAND} ${path}`)}`;
+    document.body.className = `${classify(`${client.BRAND} ${page}`)}`;
     return null;
 };
 
