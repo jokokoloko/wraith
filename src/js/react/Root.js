@@ -7,7 +7,8 @@ import Register from './Register';
 import About from './About';
 import Home from './Home';
 import Empty from './404';
-import Compass from './area/Compass';
+import Compass from './region/Compass';
+import Footer from './region/Footer';
 import fakeAuth from '../../api/fakeAuth';
 
 const AuthButton = withRouter(
@@ -86,6 +87,8 @@ class Root extends Component {
                         <Route path={path.Root} component={Home} exact />
                         <Route component={Empty} />
                     </Switch>
+
+                    <Footer />
                 </Fragment>
             </Router>
         );
