@@ -80,3 +80,116 @@ button,
 		max-width: 210px;
 		}
 	}
+
+/* =========================== */
+/* ==========!REGION========== */
+/* =========================== */
+
+/* ----------!BODY---------- */
+#body {
+	@include color($color-body);
+	padding-top: $header-height-xs;
+	}
+@include media-breakpoint-up(lg) {
+	#body {
+		padding-top: $header-height-lg;
+		}
+	}
+
+/* ----------!OFFCANVAS---------- */
+#offcanvas {
+	@include color($color-offcanvas);
+	// -webkit-box-shadow: inset 5px 0 20px -10px rgba(0, 0, 0, 0.2);
+	// 		box-shadow: inset 5px 0 20px -10px rgba(0, 0, 0, 0.2);
+	}
+#offcanvas .logo {
+	padding: 10px 15px;
+	}
+
+/* ----------!HEADER---------- */
+#header {
+	@include color($color-header);
+	border-bottom: 1px solid;
+	}
+#header .logo {
+    width: 30px;
+    max-width: none;
+    height: 30px;
+	}
+
+/* ----------!BAR---------- */
+#bar {
+	@include color($color-bar);
+	border-bottom: 1px solid;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+	z-index: -1;
+	}
+
+/* ----------!MAIN---------- */
+#main {
+	@include color($color-main);
+	}
+
+/* ----------!FOOTER---------- */
+#footer {
+	@include color($color-footer);
+	}
+#footer .copyright {
+	margin-left: -15px !important;
+	}
+
+/* =============================== */
+/* ==========!RESPONSIVE========== */
+/* =============================== */
+
+/* ----------!PHONE---------- */
+@include media-breakpoint-down(xs) {
+	br,
+	.ajax-loader {
+		display: none;
+		}
+	address br {
+		display: block;
+		}
+	.sidebar,
+	.sidebar [class*="space-"],
+	.hidden-xs + [class*="col-"] {
+		padding-top: 0 !important;
+		}
+	}
+
+/* ----------!TABLET---------- */
+@include media-breakpoint-up(sm) {
+
+	}
+
+/* ----------!CLASSIC---------- */
+@include media-breakpoint-up(md) {
+
+	}
+
+/* ----------!LAPTOP---------- */
+@include media-breakpoint-up(lg) {
+	@include bottom($footer-height-lg);
+	}
+
+/* ----------!DESKTOP---------- */
+@include media-breakpoint-up(xl) {
+
+	}
+
+/* ----------!WIDE---------- */
+@include media-breakpoint-up(hg) {
+	.container {
+	    max-width: 1280px;
+		}
+	}
+
+/* ----------!CINEMA---------- */
+@include media-breakpoint-up(gt) {
+	.container {
+	    max-width: 1440px;
+		}
+	}
