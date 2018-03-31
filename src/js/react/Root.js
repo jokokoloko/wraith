@@ -19,7 +19,7 @@ const AuthButton = withRouter(
                 <button
                     onClick={() => {
                         fakeAuth.signout(() => history.push(path.Root));
-                        console.log(fakeAuth.isAuthenticated);
+                        console.log(`authenticated: ${fakeAuth.isAuthenticated}`);
                     }}>
                     Sign out
                 </button>
@@ -53,7 +53,7 @@ const PublicRoute = ({ component: Page, ...rest }) => <Route {...rest} render={(
 
 class Root extends Component {
     render() {
-        console.log(fakeAuth.isAuthenticated);
+        console.log(`authenticated: ${fakeAuth.isAuthenticated}`);
         return (
             <Router>
                 <Fragment>
