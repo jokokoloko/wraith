@@ -35,7 +35,7 @@ class Image extends Component {
     render() {
         const { loaded, error } = this.state;
         const { position, source, alternate } = this.props;
-        return loaded === false ? <Loader position="exact-center" error={error} /> : <img className={`img-fluid ${position} unit`} src={source} alt={alternate} />;
+        return loaded === false ? <Loader position="exact-center" error={error} /> : <img className={`img-fluid ${position}`} src={source} alt={alternate} />;
     }
 }
 

@@ -17,7 +17,7 @@ const Action = ({ type, action, kind, size, link, onClick }) => {
     } else if (type === 'submit') {
         button = <input type="submit" className={`btn btn-${kind} btn-${size}`} value={action} />;
     }
-    return <div className={`action ${type} unit`}>{button}</div>;
+    return button;
 };
 
 Action.propTypes = {

@@ -32,7 +32,7 @@ class Loader extends Component {
                 dots -= 1;
             }
         }
-        return <div className={`loader ${position} unit`}>{text}</div>;
+        return <div className={`loader ${position}`}>{text}</div>;
     }
 }
 
