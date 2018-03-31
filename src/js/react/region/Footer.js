@@ -5,9 +5,10 @@ import * as client from '../../client';
 import * as path from '../../path';
 
 const Footer = ({ location }) => {
+    const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
-    if (location.pathname.includes(path._Private)) {
+    if (_Private) {
         container = 'container-fluid';
     }
     return (
