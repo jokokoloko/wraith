@@ -35,23 +35,23 @@
 .height-half {
     height: auto !important;
     }
-.height-full {
-	min-height: 340px;
-    height: 100vh !important;
-    }
-.height-fill {
-    height: calc(100vh - #{$header-height-xs}) !important;
-    }
 @include media-breakpoint-up(sm) {
 	.height-half {
 	    height: 50vh !important;
 	    }
 	}
+.height-fill {
+    height: calc(100vh - #{$header-height-xs}) !important;
+    }
 @include media-breakpoint-up(lg) {
 	.height-fill {
 	    height: calc(100vh - #{$header-height-lg}) !important;
 	    }
 	}
+.height-full {
+	min-height: 340px;
+    height: 100vh !important;
+    }
 
 /* ----------!INFINITE---------- */
 .infinite-scroll .paging-navigation, /* Older / Newer Posts Navigation (always hidden) */
@@ -66,14 +66,26 @@
 .knock {
 	padding-top: 0 !important;
 	}
+.knock .follow:not(.fill) .table {
+	padding-top: 50px;
+	}
+.knock .navbar .logo {
+	filter: brightness(0) invert(1); // might not be fully supported in all browsers
+	}
+.knock .navbar .navbar-brand,
+.knock .navbar .navbar-text,
+.knock .navbar .navbar-search,
+.knock .navbar .navbar-menu,
+.knock .navbar .navbar-nav > li > a,
+.knock .navbar .navbar-nav > li > a > .caret {
+	background-color: $color-transparent !important;
+	color: $color-white !important;
+	}
 .knock #header,
 .knock #primary,
 .knock #secondary {
 	background-color: $color-transparent;
 	border: 0 none $color-transparent;
-	}
-.knock .follow:not(.fill) .table {
-	padding-top: 50px;
 	}
 
 /* ----------!PARALLAX---------- */
