@@ -38,6 +38,9 @@
 	padding-right: 15px;
 	position: relative;
 	}
+.navbar .navbar-nav:last-child {
+	margin-right: -15px;
+	}
 .navbar .navbar-brand,
 .navbar .navbar-text,
 .navbar .navbar-nav > li > a {
