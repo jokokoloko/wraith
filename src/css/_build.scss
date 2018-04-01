@@ -90,6 +90,10 @@ $triangle-position: 15px;
 	background-color: $color-ghost;
 	color: $color-metal;
 	}
+.navbar .navbar-nav > li > a.active,
+.navbar .navbar-nav > li > a.active:active,
+.navbar .navbar-nav > li > a.active:hover,
+.navbar .navbar-nav > li > a.active:focus,
 .navbar .navbar-nav > li.active > a,
 .navbar .navbar-nav > li.active > a:active,
 .navbar .navbar-nav > li.active > a:hover,
