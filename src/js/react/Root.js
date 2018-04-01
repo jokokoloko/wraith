@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import * as path from '../path';
 import _Private from './_Private';
 import Login from './Login';
@@ -8,13 +8,14 @@ import About from './About';
 import Home from './Home';
 import Empty from './404';
 import Compass from './region/Compass';
+import Header from './region/Header';
 import Footer from './region/Footer';
 import fakeAuth from '../../api/fakeAuth';
 
 const AuthButton = withRouter(
     ({ history }) =>
         fakeAuth.isAuthenticated ? (
-            <p>
+            <p className="text-center">
                 Welcome!{' '}
                 <button
                     onClick={() => {
@@ -25,7 +26,7 @@ const AuthButton = withRouter(
                 </button>
             </p>
         ) : (
-            <p>You are not logged in.</p>
+            <p className="text-center">You are not logged in.</p>
         ),
 );
 
@@ -58,26 +59,7 @@ class Root extends Component {
             <Router>
                 <Fragment>
                     <Compass />
-                    <AuthButton />
-                    <ul>
-                        <li>
-                            <Link to={path.Root}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to={path.About}>About</Link>
-                        </li>
-                        <li>
-                            <Link to={path.Register}>Register</Link>
-                        </li>
-                        <li>
-                            <Link to={path.Login}>Login</Link>
-                        </li>
-                        <li>
-                            <Link to={path._Private}>Dashboard</Link>
-                        </li>
-                    </ul>
-
-                    <hr />
+                    <Header />
 
                     <Switch>
                         <PrivateRoute path={path._Private} component={_Private} />
@@ -89,6 +71,7 @@ class Root extends Component {
                     </Switch>
 
                     <Footer />
+                    <AuthButton />
                 </Fragment>
             </Router>
         );
