@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import * as path from '../path';
 import _Private from './_Private';
 import Login from './Login';
@@ -22,24 +22,6 @@ const fakeAuth = {
         setTimeout(cb, 100); // fake async
     },
 };
-
-const AuthButton = withRouter(
-    ({ history }) =>
-        fakeAuth.isAuthenticated ? (
-            <p className="text-center">
-                Welcome!{' '}
-                <button
-                    onClick={() => {
-                        fakeAuth.signout(() => history.push(path.Root));
-                        console.log(`authenticated: ${fakeAuth.isAuthenticated}`);
-                    }}>
-                    Sign out
-                </button>
-            </p>
-        ) : (
-            <p className="text-center">You are not logged in.</p>
-        ),
-);
 
 const PrivateRoute = ({ component: Page, ...rest }) => (
     <Route
@@ -82,7 +64,6 @@ class Root extends Component {
                     </Switch>
 
                     <Footer />
-                    <AuthButton />
                 </Fragment>
             </Router>
         );
