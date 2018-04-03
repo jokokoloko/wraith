@@ -1,0 +1,76 @@
+/* ========================== */
+/* ==========!ALERT========== */
+/* ========================== */
+
+/* ----------!FORM---------- */
+.strength h3 {
+	margin-bottom: 25px;
+	}
+.strength p {
+	font-size: 14px;
+	}
+.strength a {
+	font-weight: 700;
+	text-decoration: underline;
+	color: inherit;
+	}
+
+/* ----------!DEFAULT---------- */
+.status,
+.strength {
+	background-color: #eee !important;
+	border: 1px solid #ddd !important;
+	position: relative;
+	color: #000;
+	}
+.status,
+.strength {
+	border: 0 none $color-transparent !important;
+	margin: 50px 0 0;
+	padding: 15px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	font-size: 14px;
+	font-weight: 300;
+    line-height: 20px;
+	text-align: center;
+	color: #fff;
+	z-index: 1000;
+	}
+.strength {
+	display: none;
+	}
+
+/* ----------!FAILURE---------- */
+.status.error,
+.strength.short {
+	background-color: #ffa0a0 !important;
+	border-color: #f04040 !important;
+	display: block;
+	}
+
+/* ----------!DANGER---------- */
+.strength.error,
+.strength.bad {
+	background-color: #ffb78c !important;
+	border-color: #ff853c !important;
+	display: block;
+	}
+
+/* ----------!WARNING---------- */
+.strength.good {
+	background-color: #ffec8b !important;
+	border-color: #fc0 !important;
+	display: block;
+	}
+
+/* ----------!SUCCESS---------- */
+.status,
+.strength.strong {
+	background-color: #c3ff88 !important;
+	border-color: #8dff1c !important;
+	display: block;
+	}

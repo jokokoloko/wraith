@@ -175,10 +175,6 @@ $triangle-position: 15px;
 /* =========================== */
 
 /* ----------!BASIC---------- */
-button,
-.btn {
-	padding: 4px 14px;
-	}
 .btn-default {
 	@include color($color-button-default);
 	}
