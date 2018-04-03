@@ -1,33 +1,33 @@
 import toastr from 'toastr';
 import { ajaxCallBegin, ajaxCallError } from './actionAjax';
-import * as types from '../type';
+import { POST_VIEW, POST_LOVE, POST_HATE, POST_ADD_SUCCESS, POST_EDIT_SUCCESS, POST_DELETE_SUCCESS, POSTS_LOAD_SUCCESS } from '../type';
 import apiPost from '../../../api/apiPost';
 
 // View
 export const postView = (post) => ({
-    type: types.POST_VIEW,
+    type: POST_VIEW,
     post,
 });
 
 // Vote
 export const postLove = (post) => ({
-    type: types.POST_LOVE,
+    type: POST_LOVE,
     post,
 });
 
 export const postHate = (post) => ({
-    type: types.POST_HATE,
+    type: POST_HATE,
     post,
 });
 
 // Save
 export const postAddSuccess = (post) => ({
-    type: types.POST_ADD_SUCCESS,
+    type: POST_ADD_SUCCESS,
     post,
 });
 
 export const postEditSuccess = (post) => ({
-    type: types.POST_EDIT_SUCCESS,
+    type: POST_EDIT_SUCCESS,
     post,
 });
 
@@ -55,7 +55,7 @@ export const postSave = (post) => (dispatch) => {
 
 // Delete
 export const postDeleteSuccess = (post) => ({
-    type: types.POST_DELETE_SUCCESS,
+    type: POST_DELETE_SUCCESS,
     post,
 });
 
@@ -78,7 +78,7 @@ export const postDelete = (post) => (dispatch) => {
 
 // Load
 export const postsLoadSuccess = (posts) => ({
-    type: types.POSTS_LOAD_SUCCESS,
+    type: POSTS_LOAD_SUCCESS,
     posts,
 });
 

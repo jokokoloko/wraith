@@ -1,20 +1,20 @@
 import toastr from 'toastr';
 import { ajaxCallBegin, ajaxCallError } from './actionAjax';
-import * as types from '../type';
+import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
 import apiAccount from '../../../api/apiAccount';
 
 // Check
 export const accountLogInSuccess = (user) => ({
-    type: types.ACCOUNT_LOG_IN_SUCCESS,
+    type: ACCOUNT_LOG_IN_SUCCESS,
     user,
 });
 
 export const accountLogOutSuccess = () => ({
-    type: types.ACCOUNT_LOG_OUT_SUCCESS,
+    type: ACCOUNT_LOG_OUT_SUCCESS,
 });
 
 export const accountCheckSuccess = () => ({
-    type: types.ACCOUNT_CHECK_SUCCESS,
+    type: ACCOUNT_CHECK_SUCCESS,
 });
 
 export const accountCheck = () => (dispatch) => {

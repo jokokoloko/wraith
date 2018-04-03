@@ -1,16 +1,16 @@
 import toastr from 'toastr';
 import { ajaxCallBegin, ajaxCallError } from './actionAjax';
-import * as types from '../type';
+import { REVIEW_ADD_SUCCESS, REVIEW_EDIT_SUCCESS, REVIEWS_LOAD_SUCCESS } from '../type';
 import apiReview from '../../../api/apiReview';
 
 // Save
 export const reviewAddSuccess = (review) => ({
-    type: types.REVIEW_ADD_SUCCESS,
+    type: REVIEW_ADD_SUCCESS,
     review,
 });
 
 export const reviewEditSuccess = (review) => ({
-    type: types.REVIEW_EDIT_SUCCESS,
+    type: REVIEW_EDIT_SUCCESS,
     review,
 });
 
@@ -38,7 +38,7 @@ export const reviewSave = (review) => (dispatch) => {
 
 // Load
 export const reviewsLoadSuccess = (reviews) => ({
-    type: types.REVIEWS_LOAD_SUCCESS,
+    type: REVIEWS_LOAD_SUCCESS,
     reviews,
 });
 

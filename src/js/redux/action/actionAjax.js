@@ -1,9 +1,9 @@
-import * as types from '../type';
+import { AJAX_CALL_BEGIN, AJAX_CALL_ERROR } from '../type';
 
 export const ajaxCallBegin = () => ({
-    type: types.AJAX_CALL_BEGIN,
+    type: AJAX_CALL_BEGIN,
 });
 
 export const ajaxCallError = () => ({
-    type: types.AJAX_CALL_ERROR,
+    type: AJAX_CALL_ERROR,
 });

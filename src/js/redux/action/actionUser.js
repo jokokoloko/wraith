@@ -1,17 +1,17 @@
 import toastr from 'toastr';
 import { ajaxCallBegin, ajaxCallError } from './actionAjax';
-import * as types from '../type';
+import { USER_ADD_SUCCESS, USERS_LOAD_SUCCESS } from '../type';
 import apiUser from '../../../api/apiUser';
 
 // Save
 export const userAddSuccess = (user) => ({
-    type: types.USER_ADD_SUCCESS,
+    type: USER_ADD_SUCCESS,
     user,
 });
 
 // Load
 export const usersLoadSuccess = (users) => ({
-    type: types.USERS_LOAD_SUCCESS,
+    type: USERS_LOAD_SUCCESS,
     users,
 });
 
