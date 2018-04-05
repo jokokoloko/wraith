@@ -1,33 +1,27 @@
-// Refactor to ES6
+// Text
+export const capitalize = (text) => text.replace(/\b\w/g, (l) => l.toUpperCase());
 
-export function capitalize(text) {
-    return text.replace(/\b\w/g, (l) => l.toUpperCase());
-}
-export function textify(text) {
-    return (
-        text
-            .toString()
-            .toLowerCase()
-            // Replace - with spaces
-            .replace(/-/g, ' ')
-            // Remove all non-word chars
-            .replace(/[^\w]+/g, ' ')
-            // Trim spaces from start and end of text
-            .trim()
-    );
-}
-export function classify(text) {
-    return (
-        text
-            .toString()
-            .toLowerCase()
-            // Remove all non-word chars
-            .replace(/[^\w]+/g, ' ')
-            // Trim spaces from start and end of text
-            .trim()
-    );
-}
-export function slugify(text) {
+export const textify = (text) =>
+    text
+        .toString()
+        .toLowerCase()
+        // Replace - with spaces
+        .replace(/-/g, ' ')
+        // Remove all non-word chars
+        .replace(/[^\w]+/g, ' ')
+        // Trim spaces from start and end of text
+        .trim();
+
+export const classify = (text) =>
+    text
+        .toString()
+        .toLowerCase()
+        // Remove all non-word chars
+        .replace(/[^\w]+/g, ' ')
+        // Trim spaces from start and end of text
+        .trim();
+
+export const slugify = (text) => {
     const a = 'àáäâèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;';
     const b = 'aaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------';
     const p = new RegExp(a.split('').join('|'), 'g');
@@ -54,18 +48,4 @@ export function slugify(text) {
             // Trim spaces from start and end of text
             .trim()
     );
-}
-// // Domainify
-// export function domainify($string) {
-//     // In case scheme relative URI is passed
-//     $string = trim($string, '/');
-//     // If scheme is not included, prepend it
-//     if(!preg_match('#^http(s)?://#', $string)) {
-//         $string = 'http://' . $string;
-//     }
-//     $url = parse_url($string);
-//     // Remove www
-//     $domain = preg_replace('/^www\./', '', $url['host']);
-//     // Return domain
-//     return $domain;
-// }
+};
