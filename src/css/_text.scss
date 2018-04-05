@@ -62,13 +62,13 @@ ul:not([class*="row"]):not([class*="nav"]):not([class*="navbar-nav"]):not([class
 /* ----------!ANCHOR---------- */
 a {
 	font-weight: $font-weight-2;
-	color: $color-blue-400;
+	color: $color-brand-blue-300;
 	}
 a:active,
 a:hover,
 a:focus {
 	text-decoration: none;
-	color: $color-blue-300;
+	color: $color-brand-blue-400;
 	}
 
 /* ----------!UNDERLINE---------- */
