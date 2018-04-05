@@ -23,6 +23,11 @@
 	color: $color-metal;
 	}
 
+/* ----------!LINK---------- */
+.btn-link {
+	text-decoration: none !important;
+	}
+
 /* ----------!SIZE---------- */
 .btn-lg {
 	padding: 9px 14px;
@@ -46,11 +51,4 @@
 		font-size: 34px;
 		line-height: 25px;
 		}
-	}
-
-/* ----------!GROUP---------- */
-.input-group-btn > .btn:active,
-.input-group-btn > .btn:hover,
-.input-group-btn > .btn:focus {
-	z-index: initial;
 	}
