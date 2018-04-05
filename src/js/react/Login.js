@@ -1,5 +1,6 @@
 import React from 'react';
 import Basic from './section/Basic';
+import FormLogin from './form/FormLogin';
 
 const Login = () => (
     <main id="main" role="main">
@@ -8,6 +9,10 @@ const Login = () => (
                 <header className="text-center">
                     <h1>Login</h1>
                 </header>
+
+                <section>
+                    <FormLogin />
+                </section>
             </Basic>
         </div>
     </main>
