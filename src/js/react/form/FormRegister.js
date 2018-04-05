@@ -21,16 +21,16 @@ class FormRegister extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     onChange(event) {
-        const user = this.state.user;
+        const { user } = this.state;
         const target = event.target;
-        const field = target.name;
-        user[field] = target.type === 'checkbox' ? target.checked : target.value;
+        const input = target.name;
+        user[input] = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             user,
         });
     }
     onSubmit(event) {
-        const user = this.state.user;
+        const { user } = this.state;
         event.preventDefault();
         if (!this.isValid()) {
             return;
@@ -46,7 +46,7 @@ class FormRegister extends Component {
         });
     }
     isValid() {
-        const user = this.state.user;
+        const { user } = this.state;
         const errors = {};
         const emailLength = 5;
         const passwordLength = 5;
