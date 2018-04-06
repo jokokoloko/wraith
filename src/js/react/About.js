@@ -7,6 +7,7 @@ const About = () => (
             <Basic space="space-xs-50 space-lg-80">
                 <header className="text-center">
                     <h1>About</h1>
+                    <p>React ES6 Starter Application.</p>
                 </header>
             </Basic>
         </div>
