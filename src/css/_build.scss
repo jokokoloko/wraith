@@ -246,9 +246,16 @@ $triangle-position: 15px;
 /* ----------!REGISTER---------- */
 @include media-breakpoint-up(lg) {
 	#form-login,
-	#form-register {
+	#form-register,
+	#form-search {
 		margin: 0 auto;
+		}
+	#form-login,
+	#form-register {
 		width: 550px;
+		}
+	#form-search {
+		width: 890px;
 		}
 	}
 
