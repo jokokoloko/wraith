@@ -1,5 +1,6 @@
 import React from 'react';
 import Basic from './section/Basic';
+import FormSearch from './form/FormSearch';
 
 const Home = () => (
     <main id="main" role="main">
@@ -8,6 +9,10 @@ const Home = () => (
                 <header className="text-center">
                     <h1>Home</h1>
                 </header>
+
+                <section>
+                    <FormSearch />
+                </section>
             </Basic>
         </div>
     </main>
