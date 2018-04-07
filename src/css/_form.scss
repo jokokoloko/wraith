@@ -142,12 +142,22 @@ input[type="tel"]:focus,
 	}
 
 /* ----------!SIZE---------- */
-.form-control-md {
+.form-control-md,
+.input-group-md > .form-control,
+.input-group-md > .input-group-append > .btn,
+.input-group-md > .input-group-append > .input-group-text,
+.input-group-md > .input-group-prepend > .btn,
+.input-group-md > .input-group-prepend > .input-group-text {
 	padding: 4px 14px;
 	font-size: 14px;
 	line-height: 20px;
 	}
-.form-control-lg {
+.form-control-lg,
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-append > .btn,
+.input-group-lg > .input-group-append > .input-group-text,
+.input-group-lg > .input-group-prepend > .btn,
+.input-group-lg > .input-group-prepend > .input-group-text {
 	padding: 9px 14px;
 	font-size: 20px;
 	line-height: 30px;
