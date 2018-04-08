@@ -12,7 +12,28 @@ const InputText = ({ type, name, label, placeholder, onChange, value, error, siz
             <label htmlFor={name} className="sr-only">
                 {label}
             </label>
-            {type === 'area' ? <textarea id={name} className={fieldClass} name={name} placeholder={placeholder} onChange={onChange} value={value} /> : <input type={type} id={name} className={fieldClass} name={name} placeholder={placeholder} onChange={onChange} value={value} />}
+            {type === 'area' ? (
+                <textarea
+                    id={name}
+                    className={fieldClass}
+                    name={name}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    value={value}
+                    autoComplete="on"
+                />
+            ) : (
+                <input
+                    type={type}
+                    id={name}
+                    className={fieldClass}
+                    name={name}
+                    placeholder={placeholder}
+                    onChange={onChange}
+                    value={value}
+                    autoComplete="on"
+                />
+            )}
             {error && (
                 <div className="alert alert-danger" role="alert">
                     {error}

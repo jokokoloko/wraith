@@ -14,7 +14,7 @@ const InputSearch = ({ name, label, placeholder, onReset, value, error, size }) 
                 {label}
             </label>
             <div className={`input-group input-group-${size}`}>
-                <input type="search" id={name} className={fieldClass} name={name} placeholder={placeholder} value={value} />
+                <input type="search" id={name} className={fieldClass} name={name} placeholder={placeholder} value={value} autoComplete="on" />
                 <div className="input-group-append">
                     <input type="reset" className="btn btn-outline-secondary btn-reset" name="reset" onClick={onReset} value="Reset" />
                     <input type="button" className="btn btn-outline-secondary btn-location" name="location" value="Location" />
