@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputSearch = ({ name, label, placeholder, onReset, value, error, size }) => {
+const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) => {
     const fieldClass = 'form-control';
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
@@ -34,19 +34,19 @@ InputSearch.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
+    size: PropTypes.string,
     onReset: PropTypes.func,
     // onChange: PropTypes.func.isRequired,
     // onSearch: PropTypes.func.isRequired,
     value: PropTypes.string,
     error: PropTypes.string,
-    size: PropTypes.string,
 };
 
 InputSearch.defaultProps = {
+    size: 'md',
     onReset: undefined,
     value: '',
     error: undefined,
-    size: undefined,
 };
 
 export default InputSearch;

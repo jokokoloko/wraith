@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputText = ({ type, name, label, placeholder, onChange, value, error, size }) => {
+const InputText = ({ type, name, label, placeholder, size, onChange, value, error }) => {
     const fieldClass = `form-control form-control-${size}`;
     let wrapperClass = 'form-group';
     if (error && error.length > 0) {
@@ -48,17 +48,17 @@ InputText.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
+    size: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,
     error: PropTypes.string,
-    size: PropTypes.string,
 };
 
 InputText.defaultProps = {
     type: 'text',
+    size: 'md',
     value: '',
     error: undefined,
-    size: undefined,
 };
 
 export default InputText;
