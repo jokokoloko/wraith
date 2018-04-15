@@ -64,9 +64,9 @@ a {
 	font-weight: $font-weight-2;
 	color: $color-brand-blue-300;
 	}
-a:active,
-a:hover,
-a:focus {
+a:active:not([class*="btn"]),
+a:hover:not([class*="btn"]),
+a:focus:not([class*="btn"]) {
 	text-decoration: none;
 	color: $color-brand-blue-400;
 	}
