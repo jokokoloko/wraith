@@ -3,8 +3,9 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
 import * as path from '../../path';
+import Account from '../widget/Account';
 
-const Header = ({ location }) => {
+const Header = ({ location, authenticated, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
@@ -29,7 +30,7 @@ const Header = ({ location }) => {
 
                 <nav className="navbar-collapse collapse">
                     {!_Private && (
-                        <ul className="navbar-nav ml-auto">
+                        <ul className="navbar-nav">
                             <li className="nav-item">
                                 <NavLink className="nav-link" activeClassName="active" to={path.About}>
                                     About
@@ -52,6 +53,7 @@ const Header = ({ location }) => {
                             </li>
                         </ul>
                     )}
+                    <Account authenticated={authenticated} onLogOut={onLogOut} />
                 </nav>
             </div>
         </header>
@@ -60,6 +62,9 @@ const Header = ({ location }) => {
 
 Header.propTypes = {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
+    authenticated: PropTypes.bool.isRequired,
+    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    onLogOut: PropTypes.func.isRequired,
 };
 
 export default withRouter(Header);
