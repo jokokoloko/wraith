@@ -18,7 +18,7 @@ const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) 
                 <div className="input-group-append">
                     <input type="reset" className="btn btn-outline-secondary btn-reset" name="reset" onClick={onReset} value="Reset" />
                     <input type="button" className="btn btn-outline-secondary btn-location" name="location" value="Location" />
-                    <input type="submit" className="btn btn-success btn-search" name="search" value="Search" />
+                    <input type="submit" className="btn btn-info btn-search" name="search" value="Search" />
                 </div>
             </div>
             {error && (
