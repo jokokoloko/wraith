@@ -27,12 +27,7 @@ const fakeAuth = {
 const AuthButton = withRouter(
     ({ login, logout }) =>
         fakeAuth.isAuthenticated ? (
-            <p>
-                Welcome!{' '}
-                <button className="btn btn-secondary btn-lg btn-log-in" onClick={logout}>
-                    Sign Out
-                </button>
-            </p>
+            <p>Welcome!</p>
         ) : (
             <p>
                 You are not logged in.{' '}
@@ -52,7 +47,7 @@ class Root extends Component {
             this.setState({ redirectToReferrer: true });
         });
     };
-    logout = () => {
+    onLogOut = () => {
         fakeAuth.signout(() => {
             this.setState({ redirectToReferrer: false });
         });
@@ -64,7 +59,7 @@ class Root extends Component {
             <Router>
                 <Fragment>
                     <Compass />
-                    <Header />
+                    <Header authenticated={authenticated} onLogOut={this.onLogOut} />
 
                     <Switch>
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
@@ -77,7 +72,7 @@ class Root extends Component {
 
                     <aside>
                         <div className="container text-center">
-                            <AuthButton login={this.login} logout={this.logout} />
+                            <AuthButton login={this.login} />
                         </div>
                     </aside>
 
