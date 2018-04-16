@@ -73,18 +73,52 @@ class FormLogin extends Component {
         const size = 'lg';
         const { user, errors, status } = this.state;
         return (
-            <form id="form-login" className={`form form-${size}`} onSubmit={this.onSubmit}>
-                <InputText type="email" name="email" label="Email" placeholder="Email" size={size} onChange={this.onChange} value={user.email} error={errors.email} />
-                <InputText type="password" name="password" label="Password" placeholder="Password" size={size} onChange={this.onChange} value={user.password} error={errors.password} />
+            <form id="form-login" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
+                <InputText
+                    type="email"
+                    name="email"
+                    label="Email"
+                    placeholder="Email"
+                    size={size}
+                    onChange={this.onChange}
+                    value={user.email}
+                    error={errors.email}
+                />
+                <InputText
+                    type="password"
+                    name="password"
+                    label="Password"
+                    placeholder="Password"
+                    size={size}
+                    onChange={this.onChange}
+                    value={user.password}
+                    error={errors.password}
+                />
                 <div className="form-row">
                     <div className="form-column col-lg">
                         <div className="form-group">
-                            <InputAction type="submit" name="log-in" action={status ? 'Logging in...' : 'Log In'} kind="primary" size={size} status={status} />
+                            <InputAction
+                                type="submit"
+                                name="log-in"
+                                action={status ? 'Logging in...' : 'Log In'}
+                                kind="primary"
+                                size={size}
+                                display="block"
+                                status={status}
+                            />
                         </div>
                     </div>
                     <div className="form-column col-lg">
                         <div className="form-group text-right">
-                            <InputAction type="button" name="reset-password" action="Forgot Password?" kind="link" size={size} onClick={this.onResetPassword} />
+                            <InputAction
+                                type="button"
+                                name="reset-password"
+                                action="Forgot Password?"
+                                kind="link"
+                                size={size}
+                                display="block"
+                                onClick={this.onResetPassword}
+                            />
                         </div>
                     </div>
                 </div>

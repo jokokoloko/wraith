@@ -68,11 +68,37 @@ class FormRegister extends Component {
         const size = 'lg';
         const { user, errors, status } = this.state;
         return (
-            <form id="form-register" className={`form form-${size}`} onSubmit={this.onSubmit}>
-                <InputText type="email" name="email" label="Email" placeholder="Email" size={size} onChange={this.onChange} value={user.email} error={errors.email} />
-                <InputText type="password" name="password" label="Password" placeholder="Password" size={size} onChange={this.onChange} value={user.password} error={errors.password} />
+            <form id="form-register" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
+                <InputText
+                    type="email"
+                    name="email"
+                    label="Email"
+                    placeholder="Email"
+                    size={size}
+                    onChange={this.onChange}
+                    value={user.email}
+                    error={errors.email}
+                />
+                <InputText
+                    type="password"
+                    name="password"
+                    label="Password"
+                    placeholder="Password"
+                    size={size}
+                    onChange={this.onChange}
+                    value={user.password}
+                    error={errors.password}
+                />
                 <div className="form-group">
-                    <InputAction type="submit" name="register" action={status ? 'Registering...' : 'Register'} kind="success" size={size} status={status} />
+                    <InputAction
+                        type="submit"
+                        name="register"
+                        action={status ? 'Registering...' : 'Register'}
+                        kind="success"
+                        size={size}
+                        display="block"
+                        status={status}
+                    />
                 </div>
             </form>
         );

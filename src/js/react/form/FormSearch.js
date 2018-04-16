@@ -5,7 +5,7 @@ import InputSearch from '../input/InputSearch';
 const FormSearch = ({ onReset, onSubmit }) => {
     const size = 'lg';
     return (
-        <form id="form-search" className={`form form-${size}`} onSubmit={onSubmit}>
+        <form id="form-search" className={`form form-${size} mx-lg-auto`} onSubmit={onSubmit}>
             <InputSearch name="search" label="Search" placeholder="Search" size={size} onReset={onReset} />
         </form>
     );
