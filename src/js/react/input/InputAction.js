@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputAction = ({ type, name, action, kind, size, onClick, status }) => <input type={type} className={`btn btn-${kind} btn-${size} btn-${name}`} name={name} onClick={onClick} value={action} disabled={status} />;
+const InputAction = ({ type, name, action, kind, size, display, onClick, status }) => (
+    <input
+        type={type}
+        className={`btn btn-${kind} btn-${size} btn-${display} btn-${name}`}
+        name={name}
+        onClick={onClick}
+        value={action}
+        disabled={status}
+    />
+);
 
 InputAction.propTypes = {
     type: PropTypes.string,
@@ -9,6 +18,7 @@ InputAction.propTypes = {
     action: PropTypes.string,
     kind: PropTypes.string,
     size: PropTypes.string,
+    display: PropTypes.string,
     onClick: PropTypes.func,
     status: PropTypes.bool,
 };
@@ -19,6 +29,7 @@ InputAction.defaultProps = {
     action: 'Submit',
     kind: 'default',
     size: 'md',
+    display: 'initial',
     onClick: undefined,
     status: false,
 };
