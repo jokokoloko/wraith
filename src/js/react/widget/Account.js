@@ -7,7 +7,7 @@ const Account = ({ authenticated, onLogOut }) => {
     const fieldClass = 'btn btn-lg';
     const wrapperClass = 'account ml-auto';
     return authenticated === true ? (
-        <div className={`member ${wrapperClass}`}>
+        <div className={`account-member ${wrapperClass}`}>
             <Link className={`to-dashboard ${fieldClass} btn-secondary`} to={path._Private}>
                 @
             </Link>
@@ -16,7 +16,7 @@ const Account = ({ authenticated, onLogOut }) => {
             </button>
         </div>
     ) : (
-        <div className={`guest ${wrapperClass}`}>
+        <div className={`account-guest ${wrapperClass}`}>
             <Link className={`to-register ${fieldClass} btn-success`} to={path.Register}>
                 Register
             </Link>
