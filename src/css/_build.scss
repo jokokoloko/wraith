@@ -175,6 +175,9 @@ $triangle-position: 15px;
 /* =========================== */
 
 /* ----------!BASIC---------- */
+.btn {
+	min-width: 130px;
+	}
 .btn-default {
 	@include color($color-button-default);
 	}
@@ -243,16 +246,11 @@ $triangle-position: 15px;
 /* ==========!FORM========== */
 /* ========================= */
 
-/* ----------!REGISTER---------- */
+/* ----------!WIDTH---------- */
 @include media-breakpoint-up(lg) {
-	#form-login,
 	#form-register,
-	#form-search {
-		margin: 0 auto;
-		}
-	#form-login,
-	#form-register {
-		width: 550px;
+	#form-login {
+		width: 340px;
 		}
 	#form-search {
 		width: 890px;
