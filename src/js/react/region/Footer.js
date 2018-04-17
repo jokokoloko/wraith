@@ -14,7 +14,7 @@ const Footer = ({ location }) => {
     return (
         <footer id="footer" className={`navbar navbar-expand-lg navbar-${type}-bottom bottom`} role="contentinfo">
             <div className={container}>
-                <p className="copyright navbar-text">
+                <p className="copyright navbar-text ml-lg-auto">
                     <Link className="navbar-link" title={client.BRAND} rel="home" to={path.Root}>
                         {client.BRAND}
                     </Link>{' '}
