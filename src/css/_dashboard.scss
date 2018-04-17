@@ -1,8 +1,123 @@
+/* ========================= */
+/* ==========!GRID========== */
+/* ========================= */
+
+$dashboard-void-sm: 80px;
+$dashboard-void-md: 130px;
+$dashboard-void-lg: 210px;
+
+/* ----------!VOID---------- */
+@include media-breakpoint-up(sm) {
+    .dashboard .void {
+        margin-right: $dashboard-void-sm;
+        }
+    .dashboard #header,
+    .dashboard #main,
+    .dashboard #footer {
+        margin-left: $dashboard-void-sm;
+        }
+    .dashboard #toolbar {
+        width: $dashboard-void-sm;
+        }
+	}
+@include media-breakpoint-up(md) {
+    .dashboard .void {
+        margin-right: $dashboard-void-md;
+        }
+    .dashboard #header,
+    .dashboard #main,
+    .dashboard #footer {
+        margin-left: $dashboard-void-md;
+        }
+    .dashboard #toolbar {
+        width: $dashboard-void-md;
+        }
+	}
+@include media-breakpoint-up(lg) {
+    .dashboard .void {
+        margin-right: $dashboard-void-lg;
+        }
+    .dashboard #header,
+    .dashboard #main,
+    .dashboard #footer {
+        margin-left: $dashboard-void-lg;
+        }
+    .dashboard #toolbar {
+        width: $dashboard-void-lg;
+        }
+	}
+
 /* ========================== */
 /* ==========!BASIC========== */
 /* ========================== */
 
-/* ----------!DASHBOARD---------- */
+/* ----------!MAIN---------- */
 .dashboard {
-	background-color: $color-phantom;
+    padding-top: $footer-height-lg;
+    background-color: $color-phantom;
+    }
+
+/* =========================== */
+/* ==========!REGION========== */
+/* =========================== */
+
+/* ----------!TOOLBAR---------- */
+.dashboard #toolbar {
+    background-color: $color-metal;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    }
+.dashboard #toolbar .toolbar-brand,
+.dashboard #toolbar .toolbar-text,
+.dashboard #toolbar .toolbar-nav > li > a {
+	@extend .p-xs-15;
+	background-color: $color-transparent;
+	margin: 0;
+    padding: 10px 15px;
+    font-weight: $font-weight-2;
+    line-height: $line-height-text;
+    color: $color-white;
+    display: block;
 	}
+.dashboard #toolbar .toolbar-brand {
+    border-bottom: 1px solid $color-charcoal;
+    }
+@include media-breakpoint-up(lg) {
+	.dashboard #toolbar .toolbar-brand {
+	    @extend .p-lg-20;
+        padding-top: (($header-height-lg - $line-height-text) / 2);
+        padding-bottom: (($header-height-lg - $line-height-text) / 2);
+		}
+	}
+.dashboard #toolbar .toolbar-nav {
+    padding-top: 14px;
+    }
+.dashboard #toolbar .toolbar-nav > li > a:focus,
+.dashboard #toolbar .toolbar-nav > li > a:hover {
+    background-color: $color-charcoal;
+    }
+
+/* ========================= */
+/* ==========!PAGE========== */
+/* ========================= */
+
+/* ----------!POST-HOME---------- */
+.dashboard .source-post .column-1 {
+    width: 5%;
+    }
+.dashboard .source-post .column-3 {
+    width: 10%;
+    }
+.dashboard .source-post .column-4 {
+    width: 15%;
+    }
+.dashboard .source-post .column-5 {
+    width: 20%;
+    }
+.dashboard .source-post .column-6 {
+    width: 10%;
+    }
