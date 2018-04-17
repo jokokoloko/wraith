@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as path from '../path';
 import _Home from './_Home';
 import _Empty from './_404';
+import Toolbar from './region/Toolbar';
 
 const _Private = ({ match }) => (
     <Fragment>
-        <aside className="jumbotron">Toolbar</aside>
+        <Toolbar match={match} />
 
         <Switch>
             <Route path={`${match.path}${path._Post}`} component={_Home} />
