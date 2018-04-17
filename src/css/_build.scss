@@ -2,9 +2,6 @@
 /* ==========!NAVIGATION========== */
 /* =============================== */
 
-$line-height-text: 30px;
-$line-height-toggle: 14px;
-
 $triangle-size: 6px;
 $triangle-color: $color-metal;
 $triangle-position: 15px;
@@ -58,9 +55,9 @@ $triangle-position: 15px;
 	margin: 0;
 	line-height: $line-height-text;
 	}
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(lg) {
 	.navbar .navbar-brand {
-	    @extend .p-md-20;
+	    @extend .p-lg-20;
 		}
 	}
 .navbar .navbar-brand,
@@ -312,8 +309,10 @@ $triangle-position: 15px;
 #footer {
 	@include color($color-footer);
 	}
-#footer .copyright {
-	margin-left: -15px !important;
+@include media-breakpoint-up(lg) {
+	#footer .copyright {
+		margin-right: -15px !important;
+		}
 	}
 
 /* =============================== */
