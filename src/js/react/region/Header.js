@@ -23,9 +23,9 @@ const Header = ({ location, authenticated, onLogOut }) => {
 
                 <button className="navbar-menu navbar-toggler" type="button">
                     <span className="icon-text sr-only">Menu</span>
-                    <span className="icon-bar">&boxh;</span>
-                    <span className="icon-bar">&boxh;</span>
-                    <span className="icon-bar">&boxh;</span>
+                    <span className="icon-bar">&#9472;</span>
+                    <span className="icon-bar">&#9472;</span>
+                    <span className="icon-bar">&#9472;</span>
                 </button>
 
                 <nav className="navbar-collapse collapse">
