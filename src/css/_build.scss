@@ -44,12 +44,14 @@ $triangle-position: 15px;
 
 /* ----------!NAVBAR---------- */
 .navbar .navbar-brand,
-.navbar .navbar-nav > li > a {
+.navbar .navbar-nav > li > a,
+.navbar .navbar-nav > li > button {
 	font-weight: $font-weight-2;
 	}
 .navbar .navbar-brand,
 .navbar .navbar-text,
-.navbar .navbar-nav > li > a {
+.navbar .navbar-nav > li > a,
+.navbar .navbar-nav > li > button {
 	@extend .p-xs-15;
 	background-color: $color-transparent;
 	margin: 0;
@@ -65,7 +67,9 @@ $triangle-position: 15px;
 .navbar .navbar-search,
 .navbar .navbar-menu,
 .navbar .navbar-nav > li > a,
-.navbar .navbar-nav > li > a > .caret {
+.navbar .navbar-nav > li > a > .caret,
+.navbar .navbar-nav > li > button,
+.navbar .navbar-nav > li > button > .caret {
 	color: $color-metal;
 	}
 .navbar .navbar-brand:active,
@@ -80,10 +84,17 @@ $triangle-position: 15px;
 .navbar .navbar-nav > li > a:active,
 .navbar .navbar-nav > li > a:hover,
 .navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > li > button:active,
+.navbar .navbar-nav > li > button:hover,
+.navbar .navbar-nav > li > button:focus,
 .navbar .navbar-nav > li.show > a,
 .navbar .navbar-nav > li.show > a:active,
 .navbar .navbar-nav > li.show > a:hover,
-.navbar .navbar-nav > li.show > a:focus {
+.navbar .navbar-nav > li.show > a:focus,
+.navbar .navbar-nav > li.show > button,
+.navbar .navbar-nav > li.show > button:active,
+.navbar .navbar-nav > li.show > button:hover,
+.navbar .navbar-nav > li.show > button:focus {
 	background-color: $color-ghost;
 	color: $color-metal;
 	}
@@ -91,17 +102,26 @@ $triangle-position: 15px;
 .navbar .navbar-nav > li > a.active:active,
 .navbar .navbar-nav > li > a.active:hover,
 .navbar .navbar-nav > li > a.active:focus,
+.navbar .navbar-nav > li > button.active,
+.navbar .navbar-nav > li > button.active:active,
+.navbar .navbar-nav > li > button.active:hover,
+.navbar .navbar-nav > li > button.active:focus,
 .navbar .navbar-nav > li.active > a,
 .navbar .navbar-nav > li.active > a:active,
 .navbar .navbar-nav > li.active > a:hover,
-.navbar .navbar-nav > li.active > a:focus {
+.navbar .navbar-nav > li.active > a:focus,
+.navbar .navbar-nav > li.active > button,
+.navbar .navbar-nav > li.active > button:active,
+.navbar .navbar-nav > li.active > button:hover,
+.navbar .navbar-nav > li.active > button:focus {
 	background-color: $color-transparent;
 	color: $color-brand-blue-300;
 	}
 .navbar .navbar-brand,
 .navbar .navbar-text,
 .navbar .navbar-search,
-.navbar .navbar-nav > li > a {
+.navbar .navbar-nav > li > a,
+.navbar .navbar-nav > li > button {
 	padding-top: (($header-height-xs - $line-height-text) / 2);
 	padding-bottom: (($header-height-xs - $line-height-text) / 2);
 	}
@@ -109,7 +129,8 @@ $triangle-position: 15px;
 	.navbar .navbar-brand,
 	.navbar .navbar-text,
 	.navbar .navbar-search,
-	.navbar .navbar-nav > li > a {
+	.navbar .navbar-nav > li > a,
+	.navbar .navbar-nav > li > button {
 	    padding-top: (($header-height-lg - $line-height-text) / 2);
 		padding-bottom: (($header-height-lg - $line-height-text) / 2);
 		}
