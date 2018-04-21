@@ -1,31 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as path from '../../path';
 
-const Account = ({ authenticated, onLogOut }) => {
-    const fieldClass = 'btn btn-lg';
-    const wrapperClass = 'account ml-auto';
-    return authenticated === true ? (
-        <div className={`account-member ${wrapperClass}`}>
-            <Link className={`to-dashboard ${fieldClass} btn-secondary btn-icon`} to={path._Private}>
-                @
-            </Link>
-            <button type="button" className={`on-logout ${fieldClass} btn-danger btn-initial`} onClick={onLogOut} role="menuitem" tabIndex="-1">
-                Log Out
-            </button>
-        </div>
+const Account = ({ authenticated, onLogOut }) =>
+    authenticated === true ? (
+        <ul className="navbar-nav ml-auto account account-member">
+            <li className="nav-item">
+                <NavLink className="nav-link to-dashboard" activeClassName="active" to={path._Private}>
+                    @
+                </NavLink>
+            </li>
+            <li className="nav-item">
+                <button type="button" className="nav-btn btn on-log-out" onClick={onLogOut} role="menuitem" tabIndex="-1">
+                    Log Out
+                </button>
+            </li>
+        </ul>
     ) : (
-        <div className={`account-guest ${wrapperClass}`}>
-            <Link className={`to-register ${fieldClass} btn-success btn-initial`} to={path.Register}>
+        <div className="navbar-action ml-auto account account-guest">
+            <Link className="btn btn-lg btn-success btn-initial to-register" to={path.Register}>
                 Register
             </Link>
-            <Link className={`to-login ${fieldClass} btn-primary btn-initial`} to={path.Login}>
+            <Link className="btn btn-lg btn-primary btn-initial to-login" to={path.Login}>
                 Log In
             </Link>
         </div>
     );
-};
 
 Account.propTypes = {
     authenticated: PropTypes.bool.isRequired,
