@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
 
 const Account = ({ authenticated, onLogOut }) =>
@@ -8,7 +10,7 @@ const Account = ({ authenticated, onLogOut }) =>
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
                 <NavLink className="nav-link to-dashboard" activeClassName="active" to={path._Private}>
-                    @
+                    <FontAwesomeIcon icon={faTachometer} />
                 </NavLink>
             </li>
             <li className="nav-item">
