@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faMapMarker from '@fortawesome/fontawesome-pro-regular/faMapMarker';
+import faSearch from '@fortawesome/fontawesome-pro-regular/faSearch';
+import faTimesCircle from '@fortawesome/fontawesome-pro-regular/faTimesCircle';
 
 const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) => {
     const fieldClass = 'form-control';
@@ -16,9 +20,15 @@ const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) 
             <div className={`input-group input-group-${size}`}>
                 <input type="search" id={name} className={fieldClass} name={name} placeholder={placeholder} value={value} autoComplete="on" />
                 <div className="input-group-append">
-                    <input type="reset" className="btn btn-outline-secondary btn-icon btn-reset" name="reset" onClick={onReset} value="Reset" />
-                    <input type="button" className="btn btn-outline-secondary btn-icon btn-location" name="location" value="Location" />
-                    <input type="submit" className="btn btn-info btn-initial btn-search" name="search" value="Search" />
+                    <button type="reset" className="btn btn-outline-secondary btn-icon btn-reset" onClick={onReset}>
+                        <FontAwesomeIcon icon={faTimesCircle} />
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary btn-icon btn-location">
+                        <FontAwesomeIcon icon={faMapMarker} />
+                    </button>
+                    <button type="submit" className="btn btn-info btn-icon btn-search">
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
                 </div>
             </div>
             {error && (

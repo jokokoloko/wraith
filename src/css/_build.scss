@@ -275,6 +275,25 @@ $triangle-position: 15px;
 		}
 	}
 
+/* ----------!SEARCH---------- */
+#form-search .input-group-append {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 9999;
+	}
+#form-search .input-group-append .btn-location,
+#form-search .input-group-append .btn-reset {
+	border: 0 none $color-transparent;
+	}
+#form-search .input-group-append .btn-search {
+	margin-left: 15px;
+	}
+#form-search #search {
+	padding-right: 155px;
+	}
+
 /* =========================== */
 /* ==========!REGION========== */
 /* =========================== */
