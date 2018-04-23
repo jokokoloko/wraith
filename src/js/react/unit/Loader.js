@@ -20,7 +20,7 @@ class Loader extends Component {
     }
     render() {
         const { frame } = this.state;
-        const { amount, position, error } = this.props;
+        const { amount, position, label, error } = this.props;
         let text = '';
         if (error) {
             text = 'x';
@@ -32,12 +32,13 @@ class Loader extends Component {
                 dots -= 1;
             }
         }
-        return <div className={`loader ${position}`}>{text}</div>;
+        return <div className={`loader ${position}`}>{label ? `${label}${text}` : text}</div>;
     }
 }
 
 Loader.propTypes = {
     position: PropTypes.string,
+    label: PropTypes.string,
     interval: PropTypes.number,
     amount: PropTypes.number,
     error: PropTypes.bool,
@@ -45,6 +46,7 @@ Loader.propTypes = {
 
 Loader.defaultProps = {
     position: 'no-position',
+    label: undefined,
     interval: 300,
     amount: 3,
     error: false,
