@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { PrivateRoute, PublicRoute } from '../access';
+import { findByKey } from '../filter';
 import * as path from '../path';
+import * as actions from '../redux/action/actionAccount';
 import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
@@ -11,55 +16,33 @@ import Empty from './404';
 import Compass from './region/Compass';
 import Header from './region/Header';
 import Footer from './region/Footer';
-
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true;
-        setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-        this.isAuthenticated = false;
-        setTimeout(cb, 100); // fake async
-    },
-};
-
-const AuthButton = withRouter(
-    ({ login, logout }) =>
-        fakeAuth.isAuthenticated ? (
-            <p>Welcome!</p>
-        ) : (
-            <p>
-                You are not logged in.{' '}
-                <button className="btn btn-primary btn-lg btn-log-in" onClick={login}>
-                    Log In
-                </button>
-            </p>
-        ),
-);
+import Loader from './unit/Loader';
 
 class Root extends Component {
-    state = {
-        redirectToReferrer: false,
-    };
-    login = () => {
-        fakeAuth.authenticate(() => {
-            this.setState({ redirectToReferrer: true });
-        });
-    };
-    onLogOut = () => {
-        fakeAuth.signout(() => {
-            this.setState({ redirectToReferrer: false });
-        });
-    };
+    constructor(props) {
+        super(props);
+        this.onLogOut = this.onLogOut.bind(this);
+    }
+    componentDidMount() {
+        this.removeListener = this.props.actions.accountCheck();
+    }
+    componentWillUnmount() {
+        this.removeListener();
+    }
+    onLogOut() {
+        this.props.actions.accountLogOut();
+    }
     render() {
-        const authenticated = fakeAuth.isAuthenticated;
-        console.log(`authenticated: ${fakeAuth.isAuthenticated}`);
-        return (
+        const { account, profile } = this.props;
+        const authenticated = account.authenticated;
+        console.log(`authenticated: ${authenticated}`);
+        return account.initialized === false ? (
+            <Loader position="exact-center fixed" label="Initializing" />
+        ) : (
             <Router>
                 <Fragment>
                     <Compass />
-                    <Header authenticated={authenticated} onLogOut={this.onLogOut} />
+                    <Header authenticated={authenticated} profile={profile} onLogOut={this.onLogOut} />
 
                     <Switch>
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
@@ -70,12 +53,6 @@ class Root extends Component {
                         <Route component={Empty} />
                     </Switch>
 
-                    <aside>
-                        <div className="container text-center">
-                            <AuthButton login={this.login} />
-                        </div>
-                    </aside>
-
                     <Footer />
                 </Fragment>
             </Router>
@@ -83,4 +60,24 @@ class Root extends Component {
     }
 }
 
-export default Root;
+Root.propTypes = {
+    actions: PropTypes.objectOf(PropTypes.func).isRequired,
+    account: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+function mapStateToProps(state) {
+    const profile = findByKey(state.users, state.account.key);
+    return {
+        account: state.account,
+        profile,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root);
