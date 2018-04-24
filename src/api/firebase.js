@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
-// Initialize Firebase
 const config = {
-    apiKey: 'AIzaSyAR5k-yTH4BDN8mHjo6LOO2f2H29WojJcQ',
-    authDomain: 'spectre-c0e66.firebaseapp.com',
-    databaseURL: 'https://spectre-c0e66.firebaseio.com',
-    storageBucket: 'spectre-c0e66.appspot.com',
-    messagingSenderId: '799400168925',
+    apiKey: 'AIzaSyCuh2sVwKQcaLSTyW9EKXplIdW6b22ZPk4',
+    authDomain: 'spectre-cc13b.firebaseapp.com',
+    databaseURL: 'https://spectre-cc13b.firebaseio.com',
+    projectId: 'spectre-cc13b',
+    storageBucket: 'spectre-cc13b.appspot.com',
+    messagingSenderId: '783992202847',
 };
 firebase.initializeApp(config);
 
