@@ -5,7 +5,7 @@ const _Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic space="space-xs-50 space-lg-80">
-                <header className="text-center">
+                <header>
                     <h1>Dashboard</h1>
                 </header>
             </Basic>
