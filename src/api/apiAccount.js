@@ -1,13 +1,13 @@
 import delay from './delay'; // remove later and remove delay from all functions
-import { ref, firebaseAuth } from './firebase'; // remove and replace
+import { authentication } from './firebase'; // remove and replace
 
 class apiAccount {
     // Check
-    static accountCheck() {
-        return new Promise((resolve, reject) => {
+    static accountCheck = () =>
+        new Promise((resolve, reject) =>
             setTimeout(() => {
                 // remove
-                const unsub = firebaseAuth().onAuthStateChanged(
+                const unsub = authentication.onAuthStateChanged(
                     // we need a similar function in Azure Search
                     (user) => {
                         unsub();
@@ -21,37 +21,20 @@ class apiAccount {
                     (error) => reject(error),
                 );
                 console.log('Account checked.'); // remove
-            }, delay);
-        });
-    }
-    // Save
-    static accountSave(user) {
-        return ref
-            .child(`user/${user.uid}/account`)
-            .set({
-                key: user.uid,
-                email: user.email,
-            })
-            .then(() => user);
-    }
+            }, delay),
+        );
+
     // Register
-    static accountRegister(user) {
-        return firebaseAuth()
-            .createUserWithEmailAndPassword(user.email, user.password)
-            .then(this.accountSave);
-    }
+    static accountRegister = (user) => authentication.createUserWithEmailAndPassword(user.email, user.password);
+
     // Reset Password
-    static accountResetPassword(user) {
-        return firebaseAuth().sendPasswordResetEmail(user.email);
-    }
+    static accountResetPassword = (user) => authentication.sendPasswordResetEmail(user.email);
+
     // Log In
-    static accountLogIn(user) {
-        return firebaseAuth().signInWithEmailAndPassword(user.email, user.password);
-    }
+    static accountLogIn = (user) => authentication.signInWithEmailAndPassword(user.email, user.password);
+
     // Log Out
-    static accountLogOut() {
-        return firebaseAuth().signOut();
-    }
+    static accountLogOut = () => authentication.signOut();
 }
 
 export default apiAccount;
