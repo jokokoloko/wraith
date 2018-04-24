@@ -116,6 +116,7 @@ $triangle-position: 15px;
 .navbar .navbar-nav > li.active > button:focus {
 	background-color: $color-transparent;
 	color: $color-brand-blue-300;
+	cursor: default;
 	}
 .navbar .navbar-brand,
 .navbar .navbar-text,
