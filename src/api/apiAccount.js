@@ -5,10 +5,10 @@ class apiAccount {
     // Check
     static accountCheck = () =>
         new Promise((resolve, reject) =>
+            // remove setTimeout
             setTimeout(() => {
-                // remove
+                // we need a similar function in Azure Search
                 const unsub = authentication.onAuthStateChanged(
-                    // we need a similar function in Azure Search
                     (user) => {
                         unsub();
                         resolve(user);
