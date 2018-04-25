@@ -12,11 +12,9 @@ class apiAccount {
                     (user) => {
                         unsub();
                         resolve(user);
-                        if (user) {
-                            console.log(`User: ${user.email}`); // remove
-                        } else {
-                            console.log('User: guest'); // remove
-                        }
+                        user
+                            ? console.log(`User: ${user.email}`) // remove
+                            : console.log('User: guest'); // remove
                     },
                     (error) => reject(error),
                 );
