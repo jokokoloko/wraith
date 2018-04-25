@@ -18,17 +18,12 @@ export const accountCheckSuccess = () => ({
 });
 
 export const accountCheck = () => (dispatch) => {
-    dispatch(ajaxCallBegin()); // used to display a preloader before calls (optional)
+    dispatch(ajaxCallBegin());
     return apiAccount
         .accountCheck()
         .then((user) => {
-            // function from API (requires return)
-            if (user) {
-                dispatch(accountLogInSuccess(user));
-                toastr.success(`Welcome ${user.email}!`);
-            } else {
-                dispatch(accountLogOutSuccess());
-            }
+            user ? dispatch(accountLogInSuccess(user)) : dispatch(accountLogOutSuccess());
+            user && toastr.success(`Welcome ${user.email}!`);
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
@@ -39,41 +34,36 @@ export const accountCheck = () => (dispatch) => {
 };
 
 // Register
-export const accountRegister = (user) => (dispatch) =>
-    apiAccount
+export const accountRegister = (user) => (dispatch) => {
+    toastr.warning('Registering...'); // possibly remove
+    return apiAccount
         .accountRegister(user)
-        .then(() => {
-            // function from API (requires return)
-            dispatch(accountCheck());
-            toastr.warning('Registering...'); // possibly remove
-        })
+        .then(() => dispatch(accountCheck()))
         .catch((error) => {
             toastr.error(error.message);
             throw error;
         });
+};
 
 // Log In
-export const accountLogIn = (user) => (dispatch) =>
-    apiAccount
+export const accountLogIn = (user) => (dispatch) => {
+    toastr.warning('Logging in...'); // possibly remove
+    return apiAccount
         .accountLogIn(user)
-        .then(() => {
-            // function from API (requires return)
-            dispatch(accountCheck());
-            toastr.warning('Logging in...'); // possibly remove
-        })
+        .then(() => dispatch(accountCheck()))
         .catch((error) => {
             toastr.error(error.message);
             throw error;
         });
+};
 
 // Log Out
 export const accountLogOut = () => (dispatch) =>
     apiAccount
         .accountLogOut()
         .then(() => {
-            // function from API (requires return)
             dispatch(accountCheck());
-            toastr.warning('Logging out...'); // possibly remove
+            toastr.info('Logout successful.');
         })
         .catch((error) => {
             toastr.error(error.message);
@@ -81,17 +71,11 @@ export const accountLogOut = () => (dispatch) =>
         });
 
 // Reset Password
-export const accountResetPassword = (user) => (dispatch) => {
-    dispatch(ajaxCallBegin()); // used to display a preloader before calls (optional)
-    return apiAccount
+export const accountResetPassword = (user) => (dispatch) =>
+    apiAccount
         .accountResetPassword(user)
-        .then(() => {
-            // function from API (requires return)
-            toastr.info(`Sent password reset email to ${user.email}`);
-        })
+        .then(() => toastr.info(`Sent password reset email to ${user.email}`))
         .catch((error) => {
-            dispatch(ajaxCallError(error));
             toastr.error(error.message);
             throw error;
         });
-};
