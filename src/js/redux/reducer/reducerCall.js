@@ -1,16 +1,9 @@
 import initial from '../initial';
 import { CALL_BEGIN, CALL_ERROR, ACCOUNT_CHECK_SUCCESS } from '../type';
 
-function actionTypeEndsInSuccess(type) {
-    if (type === ACCOUNT_CHECK_SUCCESS) return false;
-    return type.substring(type.length - 8) === '_SUCCESS';
-}
+const actionTypeEndsInSuccess = (type) => (type === ACCOUNT_CHECK_SUCCESS ? false : type.substring(type.length - 8) === '_SUCCESS');
 
-export default function reducerCall(state = initial.call, action) {
-    if (action.type === CALL_BEGIN) {
-        return state + 1;
-    } else if (action.type === CALL_ERROR || actionTypeEndsInSuccess(action.type)) {
-        return state - 1;
-    }
-    return state;
-}
+const reducerCall = (state = initial.call, action) =>
+    action.type === CALL_BEGIN ? state + 1 : action.type === CALL_ERROR || actionTypeEndsInSuccess(action.type) ? state - 1 : state;
+
+export default reducerCall;
