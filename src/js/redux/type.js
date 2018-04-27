@@ -1,6 +1,6 @@
-// Ajax
-export const AJAX_CALL_BEGIN = 'AJAX_CALL_BEGIN';
-export const AJAX_CALL_ERROR = 'AJAX_CALL_ERROR';
+// Call
+export const CALL_BEGIN = 'CALL_BEGIN';
+export const CALL_ERROR = 'CALL_ERROR';
 
 // Account
 export const ACCOUNT_LOG_IN_SUCCESS = 'ACCOUNT_LOG_IN_SUCCESS';

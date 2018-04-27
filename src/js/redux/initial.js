@@ -1,5 +1,5 @@
 export default {
-    ajax: 0,
+    call: 0,
     account: {
         initialized: false,
         authenticated: false,

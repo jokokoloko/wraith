@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import ajax from './reducer/reducerAjax';
+import call from './reducer/reducerCall';
 import account from './reducer/reducerAccount';
 
 const combine = combineReducers({
-    ajax,
+    call,
     account,
 });
 

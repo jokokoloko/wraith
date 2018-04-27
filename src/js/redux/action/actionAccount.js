@@ -1,5 +1,5 @@
 import toastr from 'toastr';
-import { ajaxCallBegin, ajaxCallError } from './actionAjax';
+import { callBegin, callError } from './actionCall';
 import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
 import apiAccount from '../../../api/apiAccount';
 
@@ -18,7 +18,7 @@ export const accountCheckSuccess = () => ({
 });
 
 export const accountCheck = () => (dispatch) => {
-    dispatch(ajaxCallBegin());
+    dispatch(callBegin());
     return apiAccount
         .accountCheck()
         .then((user) => {
@@ -27,7 +27,7 @@ export const accountCheck = () => (dispatch) => {
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
-            dispatch(ajaxCallError(error));
+            dispatch(callError(error));
             toastr.error(error.message);
             throw error;
         });
