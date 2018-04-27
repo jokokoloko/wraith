@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { PrivateRoute, PublicRoute } from '../access';
-import { findByKey } from '../filter';
 import * as path from '../path';
 import * as actions from '../redux/action/actionAccount';
 import _Private from './_Private';
@@ -62,14 +61,11 @@ class Root extends Component {
 Root.propTypes = {
     actions: PropTypes.objectOf(PropTypes.func).isRequired,
     account: PropTypes.objectOf(PropTypes.any).isRequired,
-    profile: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 function mapStateToProps(state) {
-    const profile = findByKey(state.users, state.account.key);
     return {
         account: state.account,
-        profile,
     };
 }
 
