@@ -4,7 +4,4 @@ export default {
         initialized: false,
         authenticated: false,
     },
-    users: [],
-    posts: [],
-    reviews: {},
 };
