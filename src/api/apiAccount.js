@@ -1,5 +1,5 @@
 import delay from './delay'; // remove later and remove delay from all functions
-import { authentication } from './firebase'; // remove and replace
+import { authentication, users } from './firebase';
 
 class apiAccount {
     // Check
@@ -23,7 +23,17 @@ class apiAccount {
         );
 
     // Register
-    static accountRegister = (user) => authentication.createUserWithEmailAndPassword(user.email, user.password);
+    static accountRegister = (user) =>
+        authentication.createUserWithEmailAndPassword(user.email, user.password).then(
+            (user) =>
+                users
+                    .add({
+                        uid: user.uid,
+                        email: user.email,
+                    })
+                    .then((user) => console.log('Added user with ID:', user.id)) // remove
+                    .catch((error) => console.error('Error adding user:', error)), // remove
+        );
 
     // Reset Password
     static accountResetPassword = (user) => authentication.sendPasswordResetEmail(user.email);
