@@ -1,16 +1,18 @@
 import React from 'react';
-import Basic from './section/Basic';
+import { Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import _UserHome from './_UserHome';
+import _Empty from './_404';
 
-const _User = () => (
-    <main id="main" role="main">
-        <div className="container-fluid">
-            <Basic space="space-xs-50 space-lg-80">
-                <header>
-                    <h1>Users</h1>
-                </header>
-            </Basic>
-        </div>
-    </main>
+const _User = ({ match }) => (
+    <Switch>
+        <Route path={`${match.path}`} component={_UserHome} exact />
+        <Route component={_Empty} />
+    </Switch>
 );
+
+_User.propTypes = {
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
+};
 
 export default _User;
