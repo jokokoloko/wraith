@@ -17,11 +17,11 @@ Redux `4.0.0`
 ## Prerequisites
 
 *   Install [node.js](http://nodejs.org/)
-*   Clone the repo: https://github.com/jokokoloko/spectre.git
+*   Clone the repository: https://github.com/jokokoloko/spectre.git
 
 ## Installation
 
-Go to the spectre repo on your local machine and install the packages:
+Go to the spectre repository on your local machine and install the packages:
 
 ```sh
 npm install
