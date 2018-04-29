@@ -51,8 +51,4 @@ export const slugify = (text) => {
 };
 
 // Array
-export const arrayToObject = (array, keyField) =>
-    array.reduce((object, item) => {
-        object[item[keyField]] = item;
-        return object;
-    }, {});
+export const arrayToObject = (array, keyField) => Object.assign({}, ...array.map((item) => ({ [item[keyField]]: item })));
