@@ -49,3 +49,10 @@ export const slugify = (text) => {
             .trim()
     );
 };
+
+// Array
+export const arrayToObject = (array, keyField) =>
+    array.reduce((object, item) => {
+        object[item[keyField]] = item;
+        return object;
+    }, {});
