@@ -4,4 +4,5 @@ export default {
         initialized: false,
         authenticated: false,
     },
+    users: [],
 };
