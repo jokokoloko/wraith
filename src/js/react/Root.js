@@ -65,9 +65,9 @@ Root.propTypes = {
     account: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps({ account }) {
     return {
-        account: state.account,
+        account,
     };
 }
 
