@@ -4,6 +4,7 @@ import { authentication, users } from './firebase';
 class apiAccount {
     // Check
     static accountCheck = () =>
+        // remove Promise (maybe)
         new Promise((resolve, reject) =>
             // remove setTimeout
             setTimeout(() => {
