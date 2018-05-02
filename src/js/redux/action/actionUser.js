@@ -15,10 +15,10 @@ export const usersLoadSuccess = (users) => ({
     users,
 });
 
-export const usersLoad = () => (dispatch) => {
+export const usersLoad = (open) => (dispatch) => {
     dispatch(callBegin());
     return apiUser
-        .usersLoad()
+        .usersLoad(open)
         .then((users) => dispatch(usersLoadSuccess(users)))
         .catch((error) => {
             dispatch(callError(error));
