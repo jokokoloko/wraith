@@ -10,6 +10,7 @@ import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
 import Test from './Test'; // remove
+import Team from './Team';
 import About from './About';
 import Home from './Home';
 import Empty from './404';
@@ -48,6 +49,7 @@ class Root extends Component {
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path="/test" component={Test} />
+                        <Route path={path.Team} component={Team} />
                         <Route path={path.About} component={About} />
                         <Route path={path.Root} component={Home} exact />
                         <Route component={Empty} />

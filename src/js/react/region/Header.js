@@ -37,6 +37,11 @@ const Header = ({ location, authenticated, onLogOut }) => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink className="nav-link" activeClassName="active" to={path.Team}>
+                                    Team
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink className="nav-link" activeClassName="active" to={path.Register}>
                                     Register
                                 </NavLink>
