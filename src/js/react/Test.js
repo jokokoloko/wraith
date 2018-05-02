@@ -1,34 +1,19 @@
 import React, { Component } from 'react';
 import Basic from './section/Basic';
-import { users } from '../../api/firebase';
-import { arrayToObject } from '../function';
+import apiUser from '../../api/apiUser';
 
 class Test extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            usersArrayPrivate: [],
+            users: [],
         };
     }
     componentDidMount() {
-        users.onSnapshot(
-            (snapshot) => {
-                const usersArrayPrivate = snapshot.docs.map((user) => user.data());
-                const usersArrayPublic = snapshot.docs.map((user) => ({
-                    id: user.id,
-                }));
-                this.setState({
-                    usersArrayPrivate,
-                    usersArrayPublic,
-                    usersObjectPrivate: arrayToObject(usersArrayPrivate, 'uid'),
-                    usersObjectPublic: arrayToObject(usersArrayPublic, 'id'),
-                });
-            },
-            (error) => console.error('Error getting users:', error), // remove
-        );
+        apiUser.usersWatch((users) => console.log('Test:', users));
     }
     render() {
-        const { usersArrayPrivate } = this.state;
+        const { users } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -37,10 +22,10 @@ class Test extends Component {
                             <h1>Test</h1>
                         </header>
                     </Basic>
-                    {usersArrayPrivate.length > 0 && (
+                    {users.length > 0 && (
                         <Basic space="space-xs-50 space-lg-80">
                             <section>
-                                <ul>{usersArrayPrivate.map((user, index) => <li key={index}>{user.email}</li>)}</ul>
+                                <ul>{users.map((user, index) => <li key={index}>{user.email}</li>)}</ul>
                             </section>
                         </Basic>
                     )}
