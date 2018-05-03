@@ -25,10 +25,7 @@ class Root extends Component {
         this.onLogOut = this.onLogOut.bind(this);
     }
     componentDidMount() {
-        this.removeListener = this.props.actions.accountCheck();
-    }
-    componentWillUnmount() {
-        this.removeListener();
+        this.props.actions.accountCheck();
     }
     onLogOut() {
         this.props.actions.accountLogOut();

@@ -6,11 +6,11 @@ class apiAccount {
         new Promise((resolve, reject) => {
             const unsubscribe = authentication.onAuthStateChanged(
                 (user) => {
-                    unsubscribe();
+                    unsubscribe(); // this shouldn't be run during registering, logging in, and logging out.
                     resolve(user);
                     user
-                        ? console.log(`User: ${user.email}`) // remove
-                        : console.log('User: guest'); // remove
+                        ? console.log(`User: ${user.email}`) // this shouldn't run twice when unsubscribe() is removed
+                        : console.log('User: guest'); // this shouldn't run twice when unsubscribe() is removed
                 },
                 (error) => reject(error),
             );
