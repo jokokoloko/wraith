@@ -4,9 +4,9 @@ class apiAccount {
     // Check
     static accountCheck = () =>
         new Promise((resolve, reject) => {
-            const unsub = authentication.onAuthStateChanged(
+            const unsubscribe = authentication.onAuthStateChanged(
                 (user) => {
-                    unsub();
+                    unsubscribe();
                     resolve(user);
                     user
                         ? console.log(`User: ${user.email}`) // remove
