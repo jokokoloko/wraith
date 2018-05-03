@@ -1,27 +1,21 @@
-import delay from './delay'; // remove later and remove delay from all functions
 import { authentication, users } from './firebase';
 
 class apiAccount {
     // Check
     static accountCheck = () =>
-        // remove Promise (maybe)
-        new Promise((resolve, reject) =>
-            // remove setTimeout
-            setTimeout(() => {
-                // we need a similar function in Azure Search
-                const unsub = authentication.onAuthStateChanged(
-                    (user) => {
-                        unsub();
-                        resolve(user);
-                        user
-                            ? console.log(`User: ${user.email}`) // remove
-                            : console.log('User: guest'); // remove
-                    },
-                    (error) => reject(error),
-                );
-                console.log('Account checked.'); // remove
-            }, delay),
-        );
+        new Promise((resolve, reject) => {
+            const unsub = authentication.onAuthStateChanged(
+                (user) => {
+                    unsub();
+                    resolve(user);
+                    user
+                        ? console.log(`User: ${user.email}`) // remove
+                        : console.log('User: guest'); // remove
+                },
+                (error) => reject(error),
+            );
+            console.log('Account checked.'); // remove
+        });
 
     // Register
     static accountRegister = (user) =>
