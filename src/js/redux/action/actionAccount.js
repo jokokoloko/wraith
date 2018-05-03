@@ -3,6 +3,8 @@ import { callBegin, callError } from './actionCall';
 import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
 import apiAccount from '../../../api/apiAccount';
 
+toastr.options.positionClass = 'toast-top-center';
+
 // Check
 export const accountLogInSuccess = (user) => ({
     type: ACCOUNT_LOG_IN_SUCCESS,

@@ -83,3 +83,20 @@
 	border-color: #8dff1c !important;
 	display: block;
 	}
+
+/* =========================== */
+/* ==========!TOASTR========== */
+/* =========================== */
+
+/* ----------!TOAST---------- */
+#toast-container.toast-top-center {
+	margin-top: 55px;
+	}
+#toast-container.toast-top-center > div {
+	margin-bottom: 5px;
+	width: 340px;
+	}
+#toast-container .toast-message {
+	font-size: 20px;
+	line-height: 20px;
+	}

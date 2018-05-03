@@ -3,6 +3,8 @@ import { callBegin, callError } from './actionCall';
 import { USER_ADD_SUCCESS, USERS_LOAD_SUCCESS, USERS_WATCH_SUCCESS } from '../type';
 import apiUser from '../../../api/apiUser';
 
+toastr.options.positionClass = 'toast-top-center';
+
 // Save
 export const userAddSuccess = (user) => ({
     type: USER_ADD_SUCCESS,
