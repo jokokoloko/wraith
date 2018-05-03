@@ -26,7 +26,13 @@ class apiAccount {
                         uid: user.uid,
                         email: user.email,
                     })
-                    .then((user) => console.log('Added user with ID:', user.id)) // remove
+                    .then((user) => {
+                        users.doc(user.id).update({
+                            id: user.id,
+                            created: new Date(),
+                        });
+                        console.log('Added user with ID:', user.id); // remove
+                    })
                     .catch((error) => console.error('Error adding user:', error)), // remove
         );
 
