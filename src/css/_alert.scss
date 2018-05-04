@@ -84,19 +84,17 @@
 	display: block;
 	}
 
-/* =========================== */
-/* ==========!TOASTR========== */
-/* =========================== */
+/* ========================== */
+/* ==========!TOAST========== */
+/* ========================== */
 
-/* ----------!TOAST---------- */
+/* ----------!MAIN---------- */
 #toast-container.toast-top-center {
 	margin-top: 55px;
 	}
 #toast-container.toast-top-center > div {
 	margin-bottom: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	width: 340px;
-	}
-#toast-container .toast-message {
-	font-size: 20px;
-	line-height: 20px;
 	}

@@ -105,6 +105,25 @@ $dashboard-void-lg: 210px;
 .dashboard #toolbar .toolbar-nav > li > a:hover {
     background-color: $color-charcoal;
     }
+.dashboard #toolbar .toolbar-nav > li > a.active,
+.dashboard #toolbar .toolbar-nav > li > a.active:active,
+.dashboard #toolbar .toolbar-nav > li > a.active:hover,
+.dashboard #toolbar .toolbar-nav > li > a.active:focus,
+.dashboard #toolbar .toolbar-nav > li > button.active,
+.dashboard #toolbar .toolbar-nav > li > button.active:active,
+.dashboard #toolbar .toolbar-nav > li > button.active:hover,
+.dashboard #toolbar .toolbar-nav > li > button.active:focus,
+.dashboard #toolbar .toolbar-nav > li.active > a,
+.dashboard #toolbar .toolbar-nav > li.active > a:active,
+.dashboard #toolbar .toolbar-nav > li.active > a:hover,
+.dashboard #toolbar .toolbar-nav > li.active > a:focus,
+.dashboard #toolbar .toolbar-nav > li.active > button,
+.dashboard #toolbar .toolbar-nav > li.active > button:active,
+.dashboard #toolbar .toolbar-nav > li.active > button:hover,
+.dashboard #toolbar .toolbar-nav > li.active > button:focus {
+	background-color: $color-brand-blue-300;
+	cursor: default;
+	}
 
 /* ========================= */
 /* ==========!PAGE========== */
