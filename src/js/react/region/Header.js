@@ -58,7 +58,7 @@ const Header = ({ location, authenticated, onLogOut }) => {
                             </li>
                         </ul>
                     )}
-                    <Account authenticated={authenticated} onLogOut={onLogOut} />
+                    <Account location={location} authenticated={authenticated} onLogOut={onLogOut} />
                 </nav>
             </div>
         </header>

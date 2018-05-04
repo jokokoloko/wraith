@@ -2,15 +2,21 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
 import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
 
-const Account = ({ authenticated, onLogOut }) =>
-    authenticated === true ? (
+const Account = ({ location, authenticated, onLogOut }) => {
+    const _Private = location.pathname.includes(path._Private);
+    return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
-                <NavLink className="nav-link to-dashboard" activeClassName="active" to={path._Private}>
-                    <FontAwesomeIcon icon={faTachometer} />
+                <NavLink
+                    className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
+                    activeClassName="active"
+                    to={_Private ? path.Root : path._Private}
+                exact>
+                    <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
             <li className="nav-item">
@@ -29,8 +35,10 @@ const Account = ({ authenticated, onLogOut }) =>
             </Link>
         </div>
     );
+};
 
 Account.propTypes = {
+    location: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
     // profile: PropTypes.objectOf(PropTypes.any).isRequired,
     onLogOut: PropTypes.func.isRequired,

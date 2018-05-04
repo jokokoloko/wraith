@@ -118,6 +118,12 @@ $triangle-position: 15px;
 	color: $color-brand-blue-300;
 	cursor: default;
 	}
+.navbar .navbar-nav > li > a.no-focus:active,
+.navbar .navbar-nav > li > a.no-focus:focus,
+.navbar .navbar-nav > li > button.no-focus:active,
+.navbar .navbar-nav > li > button.no-focus:focus {
+	background-color: $color-transparent;
+	}
 .navbar .navbar-brand,
 .navbar .navbar-text,
 .navbar .navbar-search,
