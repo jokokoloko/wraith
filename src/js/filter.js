@@ -34,20 +34,20 @@ export const findIndexByUID = (array, uid) => {
     return index; // returns the index number of the object within the array or -1 if no match
 };
 
-// Key
-export const filterByKey = (array, key) => {
-    const objects = array.filter((object) => object.key === key); // scans whole array and can return multiple objects
+// Slug
+export const filterBySlug = (array, slug) => {
+    const objects = array.filter((object) => object.slug === slug); // scans whole array and can return multiple objects
     if (objects.length > 0) return objects; // returns a new array containing all the matching objects
     return []; // returns an empty array if no matches
 };
 
-export const findByKey = (array, key) => {
-    const object = array.find((object) => object.key === key); // scans array until it finds an exact match and then stops, ignoring any remaining objects in the array
+export const findBySlug = (array, slug) => {
+    const object = array.find((object) => object.slug === slug); // scans array until it finds an exact match and then stops, ignoring any remaining objects in the array
     if (object) return object; // only returns one object
     return {}; // returns an empty object if no match
 };
 
-export const findIndexByKey = (array, key) => {
-    const index = array.findIndex((object) => object.key === key);
+export const findIndexBySlug = (array, slug) => {
+    const index = array.findIndex((object) => object.slug === slug);
     return index; // returns the index number of the object within the array or -1 if no match
 };
