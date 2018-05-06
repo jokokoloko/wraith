@@ -16,6 +16,13 @@ const Toolbar = ({ match }) => (
                 </NavLink>
             </li>
             <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to={`${match.path}${path._Profile}`} exact>
+                    Profile
+                </NavLink>
+            </li>
+        </ul>
+        <ul className="toolbar-nav nav flex-column">
+            <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" to={`${match.path}${path._User}`}>
                     Users
                 </NavLink>

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as path from '../path';
 import _Post from './_Post';
 import _User from './_User';
+import _Profile from './_Profile';
 import _Home from './_Home';
 import _Empty from './_404';
 import Toolbar from './region/Toolbar';
@@ -15,6 +16,7 @@ const _Private = ({ match }) => (
         <Switch>
             <Route path={`${match.path}${path._Post}`} component={_Post} />
             <Route path={`${match.path}${path._User}`} component={_User} />
+            <Route path={`${match.path}${path._Profile}`} component={_Profile} />
             <Route path={`${match.path}`} component={_Home} exact />
             <Route component={_Empty} />
         </Switch>
