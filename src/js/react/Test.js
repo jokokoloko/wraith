@@ -10,7 +10,11 @@ class Test extends Component {
         };
     }
     componentDidMount() {
-        apiUser.usersWatch((users) => console.log('Test:', users));
+        apiUser.usersWatch().then((users) =>
+            this.setState({
+                users,
+            }),
+        );
     }
     render() {
         const { users } = this.state;
