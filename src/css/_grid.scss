@@ -32,74 +32,74 @@
 .gutter-xs-0 {
 	margin: 0;
 	}
-.gutter-xs-0 > [class^="col"] {
+.gutter-xs-0 > * {
 	padding: 0;
 	}
 .gutter-xs-10 {
 	margin: -5px;
 	}
-.gutter-xs-10 > [class^="col"] {
+.gutter-xs-10 > * {
 	padding: 5px;
 	}
 .gutter-xs-20 {
 	margin: -10px;
 	}
-.gutter-xs-20 > [class^="col"] {
+.gutter-xs-20 > * {
 	padding: 10px;
 	}
 .gutter-xs-30 {
 	margin: -15px;
 	}
-.gutter-xs-30 > [class^="col"] {
+.gutter-xs-30 > * {
 	padding: 15px;
 	}
 .gutter-xs-50 {
 	margin: -25px;
 	}
-.gutter-xs-50 > [class^="col"] {
+.gutter-xs-50 > * {
 	padding: 25px;
 	}
 .gutter-xs-80 {
 	margin: -40px;
 	}
-.gutter-xs-80 > [class^="col"] {
+.gutter-xs-80 > * {
 	padding: 40px;
 	}
 @include media-breakpoint-up(sm) {
 	.gutter-sm-0 {
 		margin: 0;
 		}
-	.gutter-sm-0 > [class^="col"] {
+	.gutter-sm-0 > * {
 		padding: 0;
 		}
 	.gutter-sm-10 {
 		margin: -5px;
 		}
-	.gutter-sm-10 > [class^="col"] {
+	.gutter-sm-10 > * {
 		padding: 5px;
 		}
 	.gutter-sm-20 {
 		margin: -10px;
 		}
-	.gutter-sm-20 > [class^="col"] {
+	.gutter-sm-20 > * {
 		padding: 10px;
 		}
 	.gutter-sm-30 {
 		margin: -15px;
 		}
-	.gutter-sm-30 > [class^="col"] {
+	.gutter-sm-30 > * {
 		padding: 15px;
 		}
 	.gutter-sm-50 {
 		margin: -25px;
 		}
-	.gutter-sm-50 > [class^="col"] {
+	.gutter-sm-50 > * {
 		padding: 25px;
 		}
 	.gutter-sm-80 {
 		margin: -40px;
 		}
-	.gutter-sm-80 > [class^="col"] {
+	.gutter-sm-80 > * {
 		padding: 40px;
 		}
 	}
@@ -107,37 +107,37 @@
 	.gutter-md-0 {
 		margin: 0;
 		}
-	.gutter-md-0 > [class^="col"] {
+	.gutter-md-0 > * {
 		padding: 0;
 		}
 	.gutter-md-10 {
 		margin: -5px;
 		}
-	.gutter-md-10 > [class^="col"] {
+	.gutter-md-10 > * {
 		padding: 5px;
 		}
 	.gutter-md-20 {
 		margin: -10px;
 		}
-	.gutter-md-20 > [class^="col"] {
+	.gutter-md-20 > * {
 		padding: 10px;
 		}
 	.gutter-md-30 {
 		margin: -15px;
 		}
-	.gutter-md-30 > [class^="col"] {
+	.gutter-md-30 > * {
 		padding: 15px;
 		}
 	.gutter-md-50 {
 		margin: -25px;
 		}
-	.gutter-md-50 > [class^="col"] {
+	.gutter-md-50 > * {
 		padding: 25px;
 		}
 	.gutter-md-80 {
 		margin: -40px;
 		}
-	.gutter-md-80 > [class^="col"] {
+	.gutter-md-80 > * {
 		padding: 40px;
 		}
 	}
@@ -145,37 +145,37 @@
 	.gutter-lg-0 {
 		margin: 0;
 		}
-	.gutter-lg-0 > [class^="col"] {
+	.gutter-lg-0 > * {
 		padding: 0;
 		}
 	.gutter-lg-10 {
 		margin: -5px;
 		}
-	.gutter-lg-10 > [class^="col"] {
+	.gutter-lg-10 > * {
 		padding: 5px;
 		}
 	.gutter-lg-20 {
 		margin: -10px;
 		}
-	.gutter-lg-20 > [class^="col"] {
+	.gutter-lg-20 > * {
 		padding: 10px;
 		}
 	.gutter-lg-30 {
 		margin: -15px;
 		}
-	.gutter-lg-30 > [class^="col"] {
+	.gutter-lg-30 > * {
 		padding: 15px;
 		}
 	.gutter-lg-50 {
 		margin: -25px;
 		}
-	.gutter-lg-50 > [class^="col"] {
+	.gutter-lg-50 > * {
 		padding: 25px;
 		}
 	.gutter-lg-80 {
 		margin: -40px;
 		}
-	.gutter-lg-80 > [class^="col"] {
+	.gutter-lg-80 > * {
 		padding: 40px;
 		}
 	}
