@@ -124,6 +124,10 @@ $dashboard-void-lg: 210px;
 	background-color: $color-brand-blue-300;
 	cursor: default;
 	}
+.dashboard #toolbar .toolbar-nav + .toolbar-nav {
+    border-top: 1px solid $color-charcoal;
+    margin-top: 15px;
+    }
 
 /* ========================= */
 /* ==========!PAGE========== */
