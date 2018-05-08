@@ -4,16 +4,13 @@ class apiProfile {
     // Load
     static profileLoad = (account) =>
         users
-            .where('uid', '==', account.uid)
+            .doc(account.uid)
             .get()
-            .then((snapshot) => {
-                console.log(`Users: ${snapshot.size}`); // remove
-                snapshot.forEach((user) => console.log(user.id, '=>', user.data())); // remove
-                const result = snapshot.docs.map((user) => user.data());
-                console.log('Result:', result[0]); // remove
-                return result[0]; // monitor and investigate whether or not this is the best solution
+            .then((user) => {
+                user.exists ? console.log('Profile:', user.data()) : console.log('No such user!'); // remove
+                return user.data();
             })
-            .catch((error) => console.error('Error getting users', error)); // remove
+            .catch((error) => console.error('Error getting user', error)); // remove
 }
 
 export default apiProfile;
