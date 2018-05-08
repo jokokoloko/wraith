@@ -6,9 +6,7 @@ import * as path from '../../path';
 
 const Compass = ({ location }) => {
     let page = location.pathname;
-    if (page === path.Root) {
-        page = 'home';
-    }
+    page === path.Root && (page = 'home');
     document.body.className = `${classify(`${client.BRAND} ${page}`)}`;
     return null;
 };

@@ -18,24 +18,24 @@ class Image extends Component {
                 loaded: true,
                 error: false,
             });
-            if (this.props.onLoad) {
-                this.props.onLoad(image);
-            }
+            this.props.onLoad && this.props.onLoad(image);
         };
         image.onerror = (error) => {
             this.setState({
                 loaded: false,
                 error: true,
             });
-            if (this.props.onError) {
-                this.props.onError(error);
-            }
+            this.props.onError && this.props.onError(error);
         };
     }
     render() {
         const { loaded, error } = this.state;
         const { position, source, alternate } = this.props;
-        return loaded === false ? <Loader position="exact-center" error={error} /> : <img className={`img-fluid ${position}`} src={source} alt={alternate} />;
+        return loaded === false ? (
+            <Loader position="exact-center" error={error} />
+        ) : (
+            <img className={`img-fluid ${position}`} src={source} alt={alternate} />
+        );
     }
 }
 
