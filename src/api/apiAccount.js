@@ -22,17 +22,12 @@ class apiAccount {
         authentication.createUserWithEmailAndPassword(account.email, account.password).then(
             (account) =>
                 users
-                    .add({
-                        uid: account.uid,
+                    .doc(account.uid)
+                    .set({
                         email: account.email,
+                        created: new Date(),
                     })
-                    .then((user) => {
-                        users.doc(user.id).update({
-                            id: user.id,
-                            created: new Date(),
-                        });
-                        console.log('Added user with ID:', account.id); // remove
-                    })
+                    .then(() => console.log('Added user with ID:', account.uid)) // remove
                     .catch((error) => console.error('Error adding user:', error)), // remove
         );
 
