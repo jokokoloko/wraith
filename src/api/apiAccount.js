@@ -5,12 +5,12 @@ class apiAccount {
     static accountCheck = () =>
         new Promise((resolve, reject) => {
             const unsubscribe = authentication.onAuthStateChanged(
-                (user) => {
+                (account) => {
                     unsubscribe(); // this shouldn't be run during registering, logging in, and logging out.
-                    resolve(user);
-                    user
-                        ? console.log(`User: ${user.email}`) // this shouldn't run twice when unsubscribe() is removed
-                        : console.log('User: guest'); // this shouldn't run twice when unsubscribe() is removed
+                    resolve(account);
+                    account
+                        ? console.log(`Account: ${account.email}`) // this shouldn't run twice when unsubscribe() is removed
+                        : console.log('Account: guest'); // this shouldn't run twice when unsubscribe() is removed
                 },
                 (error) => reject(error),
             );
@@ -18,29 +18,29 @@ class apiAccount {
         });
 
     // Register
-    static accountRegister = (user) =>
-        authentication.createUserWithEmailAndPassword(user.email, user.password).then(
-            (user) =>
+    static accountRegister = (account) =>
+        authentication.createUserWithEmailAndPassword(account.email, account.password).then(
+            (account) =>
                 users
                     .add({
-                        uid: user.uid,
-                        email: user.email,
+                        uid: account.uid,
+                        email: account.email,
                     })
                     .then((user) => {
                         users.doc(user.id).update({
                             id: user.id,
                             created: new Date(),
                         });
-                        console.log('Added user with ID:', user.id); // remove
+                        console.log('Added user with ID:', account.id); // remove
                     })
                     .catch((error) => console.error('Error adding user:', error)), // remove
         );
 
     // Reset Password
-    static accountResetPassword = (user) => authentication.sendPasswordResetEmail(user.email);
+    static accountResetPassword = (account) => authentication.sendPasswordResetEmail(account.email);
 
     // Log In
-    static accountLogIn = (user) => authentication.signInWithEmailAndPassword(user.email, user.password);
+    static accountLogIn = (account) => authentication.signInWithEmailAndPassword(account.email, account.password);
 
     // Log Out
     static accountLogOut = () => authentication.signOut();

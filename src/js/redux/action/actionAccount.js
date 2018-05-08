@@ -6,9 +6,9 @@ import apiAccount from '../../../api/apiAccount';
 toastr.options.positionClass = 'toast-top-center';
 
 // Check
-export const accountLogInSuccess = (user) => ({
+export const accountLogInSuccess = (account) => ({
     type: ACCOUNT_LOG_IN_SUCCESS,
-    user,
+    account,
 });
 
 export const accountLogOutSuccess = () => ({
@@ -23,9 +23,9 @@ export const accountCheck = () => (dispatch) => {
     dispatch(callBegin());
     return apiAccount
         .accountCheck()
-        .then((user) => {
-            user ? dispatch(accountLogInSuccess(user)) : dispatch(accountLogOutSuccess());
-            user && toastr.success(`Welcome ${user.email}!`);
+        .then((account) => {
+            account ? dispatch(accountLogInSuccess(account)) : dispatch(accountLogOutSuccess());
+            account && toastr.info('Account checked.'); // possibly remove
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
@@ -36,10 +36,10 @@ export const accountCheck = () => (dispatch) => {
 };
 
 // Register
-export const accountRegister = (user) => (dispatch) => {
+export const accountRegister = (account) => (dispatch) => {
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
-        .accountRegister(user)
+        .accountRegister(account)
         .then(() => dispatch(accountCheck()))
         .catch((error) => {
             toastr.error(error.message);
@@ -48,10 +48,10 @@ export const accountRegister = (user) => (dispatch) => {
 };
 
 // Log In
-export const accountLogIn = (user) => (dispatch) => {
+export const accountLogIn = (account) => (dispatch) => {
     toastr.warning('Logging in...'); // possibly remove
     return apiAccount
-        .accountLogIn(user)
+        .accountLogIn(account)
         .then(() => dispatch(accountCheck()))
         .catch((error) => {
             toastr.error(error.message);
@@ -73,10 +73,10 @@ export const accountLogOut = () => (dispatch) =>
         });
 
 // Reset Password
-export const accountResetPassword = (user) => (dispatch) =>
+export const accountResetPassword = (account) => (dispatch) =>
     apiAccount
-        .accountResetPassword(user)
-        .then(() => toastr.info(`Sent password reset email to ${user.email}`))
+        .accountResetPassword(account)
+        .then(() => toastr.info(`Sent password reset email to ${account.email}`))
         .catch((error) => {
             toastr.error(error.message);
             throw error;

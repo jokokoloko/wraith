@@ -6,8 +6,8 @@ export default function reducerAccount(state = initial.account, action) {
         case ACCOUNT_LOG_IN_SUCCESS:
             return Object.assign({}, state, {
                 authenticated: true,
-                uid: action.user.uid,
-                email: action.user.email,
+                uid: action.account.uid,
+                email: action.account.email,
             });
         case ACCOUNT_LOG_OUT_SUCCESS:
             return Object.assign({}, state, {
