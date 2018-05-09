@@ -4,5 +4,6 @@ export default {
         initialized: false,
         authenticated: false,
     },
+    profile: {},
     users: [],
 };
