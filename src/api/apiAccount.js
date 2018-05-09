@@ -24,6 +24,7 @@ class apiAccount {
                 users
                     .doc(account.uid)
                     .set({
+                        id: account.uid,
                         email: account.email,
                         created: new Date(),
                     })
