@@ -25,10 +25,12 @@ class Root extends Component {
         this.onLogOut = this.onLogOut.bind(this);
     }
     componentDidMount() {
-        this.props.actions.accountCheck();
+        const { actions } = this.props;
+        actions.accountCheck(); // todo: add way to unsubscribe from listener
     }
     onLogOut() {
-        this.props.actions.accountLogOut();
+        const { actions } = this.props;
+        actions.accountLogOut();
     }
     render() {
         const { account, profile } = this.props;

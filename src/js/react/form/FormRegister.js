@@ -30,6 +30,7 @@ class FormRegister extends Component {
         });
     }
     onSubmit(event) {
+        const { actions } = this.props;
         const { account } = this.state;
         event.preventDefault();
         if (!this.isValid()) {
@@ -38,7 +39,7 @@ class FormRegister extends Component {
         this.setState({
             status: true,
         });
-        this.props.actions.accountRegister(account).catch((error) => {
+        actions.accountRegister(account).catch((error) => {
             this.setState({
                 status: false,
             });

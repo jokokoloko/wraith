@@ -8,7 +8,8 @@ import Loader from './unit/Loader';
 
 class _UserHome extends Component {
     componentDidMount() {
-        this.props.actions.usersLoad(true);
+        const { actions } = this.props;
+        actions.usersLoad(true);
     }
     render() {
         const { loading, users } = this.props;

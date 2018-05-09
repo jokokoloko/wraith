@@ -22,8 +22,9 @@ class FormLogin extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     onResetPassword() {
+        const { actions } = this.props;
         const { account } = this.state;
-        this.props.actions.accountResetPassword(account);
+        actions.accountResetPassword(account);
     }
     onChange(event) {
         const { account } = this.state;
@@ -35,6 +36,7 @@ class FormLogin extends Component {
         });
     }
     onSubmit(event) {
+        const { actions } = this.props;
         const { account } = this.state;
         event.preventDefault();
         if (!this.isValid()) {
@@ -43,7 +45,7 @@ class FormLogin extends Component {
         this.setState({
             status: true,
         });
-        this.props.actions.accountLogIn(account).catch((error) => {
+        actions.accountLogIn(account).catch((error) => {
             this.setState({
                 status: false,
             });
