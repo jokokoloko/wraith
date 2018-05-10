@@ -2,7 +2,6 @@
 export const _Post = '/post';
 export const _User = '/user';
 export const _Profile = '/profile';
-export const _ProfileCreate = '/create';
 export const _Private = '/dashboard';
 
 // Public
