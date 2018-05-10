@@ -9,9 +9,7 @@ const Header = ({ location, authenticated, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
-    if (_Private) {
-        container = 'container-fluid';
-    }
+    _Private && (container = 'container-fluid');
     return (
         <header id="header" className={`navbar navbar-expand-lg navbar-${type}-top ${type} ${type}-top`} role="banner">
             <div className={container}>
