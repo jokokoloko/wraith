@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import { callBegin, callError } from './actionCall';
+import { profileLoad } from './actionProfile';
 import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
 import apiAccount from '../../../api/apiAccount';
 
@@ -25,7 +26,7 @@ export const accountCheck = () => (dispatch) => {
         .accountCheck()
         .then((account) => {
             account ? dispatch(accountLogInSuccess(account)) : dispatch(accountLogOutSuccess());
-            account && toastr.info('Account checked.'); // possibly remove
+            account && dispatch(profileLoad(account));
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {

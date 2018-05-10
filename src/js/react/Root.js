@@ -64,13 +64,14 @@ class Root extends Component {
 
 Root.propTypes = {
     account: PropTypes.objectOf(PropTypes.any).isRequired,
-    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ account }) {
+function mapStateToProps({ account, profile }) {
     return {
         account,
+        profile,
     };
 }
 

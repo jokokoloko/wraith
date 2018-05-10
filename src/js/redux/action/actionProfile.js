@@ -15,10 +15,12 @@ export const profileLoad = (account) => (dispatch) => {
     dispatch(callBegin());
     return apiProfile
         .profileLoad(account)
-        .then((profile) => {
-            dispatch(profileLoadSuccess(profile));
-            profile && toastr.success(`Welcome ${profile.email}!`); // possibly remove
-        })
+        .then(
+            (profile) =>
+                profile &&
+                dispatch(profileLoadSuccess(profile)) &&
+                toastr.success(`Welcome ${profile.nameFirst ? profile.nameFirst : profile.email}!`),
+        )
         .catch((error) => {
             dispatch(callError(error));
             toastr.error(error.message);
