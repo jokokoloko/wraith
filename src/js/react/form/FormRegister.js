@@ -10,10 +10,7 @@ class FormRegister extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: {
-                email: '',
-                password: '',
-            },
+            account: {},
             errors: {},
             status: false,
         };
