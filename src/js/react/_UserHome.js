@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../redux/action/actionUser';
 import PropTypes from 'prop-types';
+import * as actionUser from '../redux/action/actionUser';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
 class _UserHome extends Component {
     componentDidMount() {
-        const { actions } = this.props;
-        actions.usersLoad(true);
+        const { actionUser } = this.props;
+        actionUser.usersLoad(true);
     }
     render() {
         const { loading, users } = this.props;
@@ -49,6 +49,7 @@ _UserHome.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     loading: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
+    actionUser: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapStateToProps({ call, users }) {
@@ -60,7 +61,7 @@ function mapStateToProps({ call, users }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch),
+        actionUser: bindActionCreators(actionUser, dispatch),
     };
 }
 

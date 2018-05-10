@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { PrivateRoute, PublicRoute } from '../access';
 import * as path from '../path';
-import * as actions from '../redux/action/actionAccount';
+import * as actionAccount from '../redux/action/actionAccount';
 import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
@@ -25,12 +25,12 @@ class Root extends Component {
         this.onLogOut = this.onLogOut.bind(this);
     }
     componentDidMount() {
-        const { actions } = this.props;
-        actions.accountCheck(); // todo: add way to unsubscribe from listener
+        const { actionAccount } = this.props;
+        actionAccount.accountCheck(); // todo: add way to unsubscribe from listener
     }
     onLogOut() {
-        const { actions } = this.props;
-        actions.accountLogOut();
+        const { actionAccount } = this.props;
+        actionAccount.accountLogOut();
     }
     render() {
         const { account, profile } = this.props;
@@ -63,8 +63,9 @@ class Root extends Component {
 }
 
 Root.propTypes = {
-    actions: PropTypes.objectOf(PropTypes.func).isRequired,
     account: PropTypes.objectOf(PropTypes.any).isRequired,
+    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapStateToProps({ account }) {
@@ -75,7 +76,7 @@ function mapStateToProps({ account }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch),
+        actionAccount: bindActionCreators(actionAccount, dispatch),
     };
 }
 

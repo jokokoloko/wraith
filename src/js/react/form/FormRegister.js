@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as actions from '../../redux/action/actionAccount';
+import * as actionAccount from '../../redux/action/actionAccount';
 import InputAction from '../input/InputAction';
 import InputText from '../input/InputText';
 
@@ -27,7 +27,7 @@ class FormRegister extends Component {
         });
     }
     onSubmit(event) {
-        const { actions } = this.props;
+        const { actionAccount } = this.props;
         const { account } = this.state;
         event.preventDefault();
         if (!this.isValid()) {
@@ -36,7 +36,7 @@ class FormRegister extends Component {
         this.setState({
             status: true,
         });
-        actions.accountRegister(account).catch((error) => {
+        actionAccount.accountRegister(account).catch((error) => {
             this.setState({
                 status: false,
             });
@@ -104,12 +104,12 @@ class FormRegister extends Component {
 }
 
 FormRegister.propTypes = {
-    actions: PropTypes.objectOf(PropTypes.func).isRequired,
+    actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch),
+        actionAccount: bindActionCreators(actionAccount, dispatch),
     };
 }
 

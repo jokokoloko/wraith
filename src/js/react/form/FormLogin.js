@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as actions from '../../redux/action/actionAccount';
+import * as actionAccount from '../../redux/action/actionAccount';
 import InputAction from '../input/InputAction';
 import InputText from '../input/InputText';
 
@@ -19,9 +19,9 @@ class FormLogin extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     onResetPassword() {
-        const { actions } = this.props;
+        const { actionAccount } = this.props;
         const { account } = this.state;
-        actions.accountResetPassword(account);
+        actionAccount.accountResetPassword(account);
     }
     onChange(event) {
         const { account } = this.state;
@@ -33,7 +33,7 @@ class FormLogin extends Component {
         });
     }
     onSubmit(event) {
-        const { actions } = this.props;
+        const { actionAccount } = this.props;
         const { account } = this.state;
         event.preventDefault();
         if (!this.isValid()) {
@@ -42,7 +42,7 @@ class FormLogin extends Component {
         this.setState({
             status: true,
         });
-        actions.accountLogIn(account).catch((error) => {
+        actionAccount.accountLogIn(account).catch((error) => {
             this.setState({
                 status: false,
             });
@@ -127,12 +127,12 @@ class FormLogin extends Component {
 }
 
 FormLogin.propTypes = {
-    actions: PropTypes.objectOf(PropTypes.func).isRequired,
+    actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(actions, dispatch),
+        actionAccount: bindActionCreators(actionAccount, dispatch),
     };
 }
 
