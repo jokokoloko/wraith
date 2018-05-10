@@ -34,8 +34,7 @@ class Root extends Component {
     }
     render() {
         const { account, profile } = this.props;
-        let authenticated = false;
-        account.authenticated && account.uid && (authenticated = true);
+        const authenticated = account.authenticated;
         return account.initialized === false ? (
             <Loader position="exact-center fixed" label="Initializing" />
         ) : (

@@ -7,9 +7,8 @@ import apiAccount from '../../../api/apiAccount';
 toastr.options.positionClass = 'toast-top-center';
 
 // Check
-export const accountLogInSuccess = (account) => ({
+export const accountLogInSuccess = () => ({
     type: ACCOUNT_LOG_IN_SUCCESS,
-    account,
 });
 
 export const accountLogOutSuccess = () => ({
@@ -25,7 +24,7 @@ export const accountCheck = () => (dispatch) => {
     return apiAccount
         .accountCheck()
         .then((account) => {
-            account ? dispatch(accountLogInSuccess(account)) : dispatch(accountLogOutSuccess());
+            account ? dispatch(accountLogInSuccess()) : dispatch(accountLogOutSuccess());
             account && dispatch(profileLoad(account));
             dispatch(accountCheckSuccess());
         })
