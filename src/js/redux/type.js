@@ -1,7 +1,3 @@
-// Call
-export const CALL_BEGIN = 'CALL_BEGIN';
-export const CALL_ERROR = 'CALL_ERROR';
-
 // Account
 export const ACCOUNT_LOG_IN_SUCCESS = 'ACCOUNT_LOG_IN_SUCCESS';
 export const ACCOUNT_LOG_OUT_SUCCESS = 'ACCOUNT_LOG_OUT_SUCCESS';
@@ -12,7 +8,6 @@ export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS';
 
 // User
 export const USERS_LOAD_SUCCESS = 'USERS_LOAD_SUCCESS';
-export const USERS_WATCH_SUCCESS = 'USERS_WATCH_SUCCESS';
 
 // Post
 export const POST_VIEW = 'POST_VIEW';

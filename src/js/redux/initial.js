@@ -1,5 +1,5 @@
 export default {
-    call: 0,
+    call: [],
     account: {
         initialized: false,
         authenticated: false,

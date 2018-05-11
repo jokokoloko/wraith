@@ -1,5 +1,4 @@
 import toastr from 'toastr';
-import { callBegin, callError } from './actionCall';
 import { profileLoad } from './actionProfile';
 import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
 import apiAccount from '../../../api/apiAccount';
@@ -20,7 +19,6 @@ export const accountCheckSuccess = () => ({
 });
 
 export const accountCheck = () => (dispatch) => {
-    dispatch(callBegin());
     return apiAccount
         .accountCheck()
         .then((account) => {
@@ -29,7 +27,6 @@ export const accountCheck = () => (dispatch) => {
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
-            dispatch(callError(error));
             toastr.error(error.message);
             throw error;
         });
