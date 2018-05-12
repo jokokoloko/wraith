@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { USERS_LOAD_REQUEST } from '../redux/type';
+import { findByString } from '../filter';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
 
-const Team = ({ loading, users }) => {
+const Team = ({ loadingUsers, users }) => {
     const item = 'user';
     const loopUser = users.map((user, index) => {
         const count = index + 1;
@@ -28,7 +30,7 @@ const Team = ({ loading, users }) => {
 
                 <Feed space="space-xs-50 space-lg-80" item={item}>
                     <section className="text-center">
-                        {loading ? (
+                        {loadingUsers ? (
                             <Loader position="exact-center fixed" label="Loading users" />
                         ) : users.length > 0 ? (
                             <div className="row gutter-xs-30 gutter-lg-50">{loopUser}</div>
@@ -48,13 +50,13 @@ const Team = ({ loading, users }) => {
 
 Team.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    loading: PropTypes.bool.isRequired,
+    loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-function mapStateToProps({ call, users }) {
+function mapStateToProps({ calls, users }) {
     return {
-        loading: call > 0,
+        loadingUsers: findByString(calls, USERS_LOAD_REQUEST),
         users,
     };
 }
