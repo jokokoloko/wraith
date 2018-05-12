@@ -1,3 +1,6 @@
+// findByString - scans array looking for an exact match to the string passed in, returning true if a match is found and false if no match
+export const findByString = (array, string) => (array.find((element) => element === string) ? true : false);
+
 // findByProperty - scans array until it finds an exact match and then stops, ignoring any remaining objects in the array
 export const findByProperty = (array, name, value) => {
     const object = array.find((object) => object[name] === value); // returns undefined if no match
