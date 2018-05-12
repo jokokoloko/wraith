@@ -1,5 +1,5 @@
-import initial from '../initial';
 import { USERS_LOAD_SUCCESS } from '../type';
+import initial from '../initial';
 
 export default function reducerUser(state = initial.users, action) {
     switch (action.type) {

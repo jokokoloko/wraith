@@ -1,6 +1,6 @@
 import toastr from 'toastr';
-import { PROFILE_LOAD_SUCCESS } from '../type';
 import apiProfile from '../../../api/apiProfile';
+import { PROFILE_LOAD_SUCCESS } from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
 
