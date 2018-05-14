@@ -9,7 +9,8 @@ import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
-import Test from './Test'; // remove
+import TestCall from './TestCall'; // remove
+import TestWatch from './TestWatch'; // remove
 import Team from './Team';
 import About from './About';
 import Home from './Home';
@@ -48,7 +49,8 @@ class Root extends Component {
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <Route path="/test" component={Test} />
+                        <Route path="/test/call" component={TestCall} />
+                        <Route path="/test/watch" component={TestWatch} />
                         <Route path={path.Team} component={Team} />
                         <Route path={path.About} component={About} />
                         <Route path={path.Root} component={Home} exact />

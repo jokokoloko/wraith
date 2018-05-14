@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Basic from './section/Basic';
 import apiUser from '../../api/apiUser';
 
-class Test extends Component {
+class TestWatch extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ class Test extends Component {
                 <div className="container-fluid">
                     <Basic space="space-xs-50 space-lg-80">
                         <header className="text-center">
-                            <h1>Test</h1>
+                            <h1>Test - Watch</h1>
                         </header>
                     </Basic>
                     {users.length > 0 && (
@@ -39,4 +39,4 @@ class Test extends Component {
     }
 }
 
-export default Test;
+export default TestWatch;
