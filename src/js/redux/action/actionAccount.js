@@ -1,7 +1,7 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
 import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
-import { profileLoad } from './actionProfile';
+import { profileLoad, profileVoid } from './actionProfile';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -22,8 +22,8 @@ export const accountCheck = () => (dispatch) => {
     return apiAccount
         .accountCheck()
         .then((account) => {
+            account ? dispatch(profileLoad(account)) : dispatch(profileVoid());
             account ? dispatch(accountLogInSuccess()) : dispatch(accountLogOutSuccess());
-            account && dispatch(profileLoad(account));
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
