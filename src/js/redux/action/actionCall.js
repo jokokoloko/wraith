@@ -1,6 +1,6 @@
 import { CALLS_VOID } from '../type';
 
-// Load
+// Void
 export const callsVoid = () => ({
     type: CALLS_VOID,
 });

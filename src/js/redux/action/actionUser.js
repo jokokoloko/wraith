@@ -1,6 +1,6 @@
 import toastr from 'toastr';
 import apiUser from '../../../api/apiUser';
-import { USERS_LOAD_REQUEST, USERS_LOAD_SUCCESS, USERS_LOAD_FAILURE } from '../type';
+import { USERS_LOAD_REQUEST, USERS_LOAD_SUCCESS, USERS_LOAD_FAILURE, USERS_VOID } from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -30,3 +30,8 @@ export const usersLoad = (open) => (dispatch) => {
             throw error;
         });
 };
+
+// Void
+export const usersVoid = () => ({
+    type: USERS_VOID,
+});
