@@ -1,6 +1,6 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
-import { ACCOUNT_ON, ACCOUNT_OFF, ACCOUNT_CHECK_SUCCESS } from '../type';
+import { ACCOUNT_ON, ACCOUNT_OFF, ACCOUNT_CHECK_REQUEST, ACCOUNT_CHECK_SUCCESS, ACCOUNT_CHECK_FAILURE } from '../type';
 import { profileLoad, profileVoid } from './actionProfile';
 
 toastr.options.positionClass = 'toast-top-center';
@@ -14,11 +14,21 @@ export const accountOff = () => ({
     type: ACCOUNT_OFF,
 });
 
+export const accountCheckRequest = () => ({
+    type: ACCOUNT_CHECK_REQUEST,
+});
+
 export const accountCheckSuccess = () => ({
     type: ACCOUNT_CHECK_SUCCESS,
 });
 
+export const accountCheckFailure = (error) => ({
+    type: ACCOUNT_CHECK_FAILURE,
+    error,
+});
+
 export const accountCheck = () => (dispatch) => {
+    dispatch(accountCheckRequest());
     return apiAccount
         .accountCheck()
         .then((account) => {
@@ -27,6 +37,7 @@ export const accountCheck = () => (dispatch) => {
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
+            dispatch(accountCheckFailure(error));
             toastr.error(error.message);
             throw error;
         });
