@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../redux/action/actionAccount';
+import { ACCOUNT_CHECK_REQUEST, PROFILE_LOAD_REQUEST } from '../redux/type';
+import { findByString } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
@@ -34,11 +36,11 @@ class Root extends Component {
         actionAccount.accountLogOut();
     }
     render() {
-        const { account, profile } = this.props;
+        const { loadingAccount, loadingProfile, account, profile } = this.props;
         let authenticated = false;
         account.authenticated && profile.id && (authenticated = true);
-        return account.initialized === false ? (
-            <Loader position="exact-center fixed" label="Initializing" />
+        return account.initialized === false || loadingAccount || loadingProfile ? (
+            <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
         ) : (
             <Router>
                 <Fragment>
@@ -65,13 +67,17 @@ class Root extends Component {
 }
 
 Root.propTypes = {
+    loadingAccount: PropTypes.bool.isRequired,
+    loadingProfile: PropTypes.bool.isRequired,
     account: PropTypes.objectOf(PropTypes.any).isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ account, profile }) {
+function mapStateToProps({ account, profile, calls }) {
     return {
+        loadingAccount: findByString(calls, ACCOUNT_CHECK_REQUEST),
+        loadingProfile: findByString(calls, PROFILE_LOAD_REQUEST),
         account,
         profile,
     };
