@@ -19,7 +19,7 @@ const TestCall = ({ loadingUsers, calls, users }) => {
             </article>
         );
     });
-    console.log(calls);
+    console.log('Calls:', calls);
     return (
         <main id="main" role="main">
             <div className="container-fluid">

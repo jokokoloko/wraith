@@ -1,17 +1,17 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
-import { ACCOUNT_LOG_IN_SUCCESS, ACCOUNT_LOG_OUT_SUCCESS, ACCOUNT_CHECK_SUCCESS } from '../type';
+import { ACCOUNT_ON, ACCOUNT_OFF, ACCOUNT_CHECK_SUCCESS } from '../type';
 import { profileLoad, profileVoid } from './actionProfile';
 
 toastr.options.positionClass = 'toast-top-center';
 
 // Check
-export const accountLogInSuccess = () => ({
-    type: ACCOUNT_LOG_IN_SUCCESS,
+export const accountOn = () => ({
+    type: ACCOUNT_ON,
 });
 
-export const accountLogOutSuccess = () => ({
-    type: ACCOUNT_LOG_OUT_SUCCESS,
+export const accountOff = () => ({
+    type: ACCOUNT_OFF,
 });
 
 export const accountCheckSuccess = () => ({
@@ -23,7 +23,7 @@ export const accountCheck = () => (dispatch) => {
         .accountCheck()
         .then((account) => {
             account ? dispatch(profileLoad(account)) : dispatch(profileVoid());
-            account ? dispatch(accountLogInSuccess()) : dispatch(accountLogOutSuccess());
+            account ? dispatch(accountOn()) : dispatch(accountOff());
             dispatch(accountCheckSuccess());
         })
         .catch((error) => {
@@ -37,7 +37,7 @@ export const accountRegister = (account) => (dispatch) => {
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
         .accountRegister(account)
-        .then(() => dispatch(accountCheck()))
+        .then(() => dispatch(accountCheck())) // rework when onAuthStateChanged() is correctly abstracted
         .catch((error) => {
             toastr.error(error.message);
             throw error;
@@ -49,7 +49,7 @@ export const accountLogIn = (account) => (dispatch) => {
     toastr.warning('Logging in...'); // possibly remove
     return apiAccount
         .accountLogIn(account)
-        .then(() => dispatch(accountCheck()))
+        .then(() => dispatch(accountCheck())) // rework when onAuthStateChanged() is correctly abstracted
         .catch((error) => {
             toastr.error(error.message);
             throw error;
@@ -61,7 +61,7 @@ export const accountLogOut = () => (dispatch) =>
     apiAccount
         .accountLogOut()
         .then(() => {
-            dispatch(accountCheck());
+            dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
             toastr.info('Logout successful.');
         })
         .catch((error) => {

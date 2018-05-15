@@ -1,6 +1,6 @@
 // Account
-export const ACCOUNT_LOG_IN_SUCCESS = 'ACCOUNT_LOG_IN_SUCCESS';
-export const ACCOUNT_LOG_OUT_SUCCESS = 'ACCOUNT_LOG_OUT_SUCCESS';
+export const ACCOUNT_ON = 'ACCOUNT_ON';
+export const ACCOUNT_OFF = 'ACCOUNT_OFF';
 export const ACCOUNT_CHECK_SUCCESS = 'ACCOUNT_CHECK_SUCCESS';
 
 // Profile
