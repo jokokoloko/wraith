@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputButton = ({ type, name, label, kind, size, display, onClick, status }) => (
+const InputButton = ({ type, name, label, kind, size, display, onClick, submitting }) => (
     <input
         type={type}
         className={`btn btn-${kind} btn-${size} btn-${display} btn-${name}`}
         name={name}
         onClick={onClick}
         value={label}
-        disabled={status}
+        disabled={submitting}
     />
 );
 
@@ -20,7 +20,7 @@ InputButton.propTypes = {
     size: PropTypes.string,
     display: PropTypes.string,
     onClick: PropTypes.func,
-    status: PropTypes.bool,
+    submitting: PropTypes.bool,
 };
 
 InputButton.defaultProps = {
@@ -31,7 +31,7 @@ InputButton.defaultProps = {
     size: 'md',
     display: 'initial',
     onClick: undefined,
-    status: false,
+    submitting: false,
 };
 
 export default InputButton;
