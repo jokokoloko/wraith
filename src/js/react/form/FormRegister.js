@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
-import InputAction from '../input/InputAction';
+import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
 class FormRegister extends Component {
@@ -88,10 +88,10 @@ class FormRegister extends Component {
                     error={errors.password}
                 />
                 <div className="form-group">
-                    <InputAction
+                    <InputButton
                         type="submit"
                         name="register"
-                        action={status ? 'Registering...' : 'Register'}
+                        label={status ? 'Registering...' : 'Register'}
                         kind="success"
                         size={size}
                         display="block"

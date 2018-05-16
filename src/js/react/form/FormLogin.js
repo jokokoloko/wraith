@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
-import InputAction from '../input/InputAction';
+import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
 class FormLogin extends Component {
@@ -96,10 +96,10 @@ class FormLogin extends Component {
                 <div className="form-row">
                     <div className="form-column col-lg">
                         <div className="form-group">
-                            <InputAction
+                            <InputButton
                                 type="submit"
                                 name="log-in"
-                                action={status ? 'Logging in...' : 'Log In'}
+                                label={status ? 'Logging in...' : 'Log In'}
                                 kind="primary"
                                 size={size}
                                 display="block"
@@ -109,10 +109,10 @@ class FormLogin extends Component {
                     </div>
                     <div className="form-column col-lg">
                         <div className="form-group text-right">
-                            <InputAction
+                            <InputButton
                                 type="button"
                                 name="reset-password"
-                                action="Forgot Password?"
+                                label="Forgot Password?"
                                 kind="link"
                                 size={size}
                                 display="block"
