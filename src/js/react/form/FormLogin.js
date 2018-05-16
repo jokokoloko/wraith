@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
+import { ACCOUNT_LOG_IN_REQUEST } from '../../redux/type';
+import { findByString } from '../../filter';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -12,7 +14,6 @@ class FormLogin extends Component {
         this.state = {
             account: {},
             errors: {},
-            status: false,
         };
         this.onResetPassword = this.onResetPassword.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -21,7 +22,7 @@ class FormLogin extends Component {
     onResetPassword() {
         const { actionAccount } = this.props;
         const { account } = this.state;
-        actionAccount.accountResetPassword(account);
+        this.isValid() && actionAccount.accountResetPassword(account);
     }
     onChange(event) {
         const { account } = this.state;
@@ -36,18 +37,7 @@ class FormLogin extends Component {
         const { actionAccount } = this.props;
         const { account } = this.state;
         event.preventDefault();
-        if (!this.isValid()) {
-            return;
-        }
-        this.setState({
-            status: true,
-        });
-        actionAccount.accountLogIn(account).catch((error) => {
-            this.setState({
-                status: false,
-            });
-            throw error;
-        });
+        this.isValid() && actionAccount.accountLogIn(account);
     }
     isValid() {
         const { account } = this.state;
@@ -70,7 +60,8 @@ class FormLogin extends Component {
     }
     render() {
         const size = 'lg';
-        const { account, errors, status } = this.state;
+        const { submitting } = this.props;
+        const { account, errors } = this.state;
         return (
             <form id="form-login" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
@@ -99,11 +90,11 @@ class FormLogin extends Component {
                             <InputButton
                                 type="submit"
                                 name="log-in"
-                                label={status ? 'Logging in...' : 'Log In'}
+                                label={submitting ? 'Logging in...' : 'Log In'}
                                 kind="primary"
                                 size={size}
                                 display="block"
-                                status={status}
+                                submitting={submitting}
                             />
                         </div>
                     </div>
@@ -127,8 +118,15 @@ class FormLogin extends Component {
 }
 
 FormLogin.propTypes = {
+    submitting: PropTypes.bool.isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
+
+function mapStateToProps({ calls }) {
+    return {
+        submitting: findByString(calls, ACCOUNT_LOG_IN_REQUEST),
+    };
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -136,4 +134,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(FormLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
