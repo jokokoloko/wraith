@@ -11,7 +11,6 @@ import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
-import TestCall from './TestCall'; // remove
 import TestWatch from './TestWatch'; // remove
 import Team from './Team';
 import About from './About';
@@ -36,9 +35,10 @@ class Root extends Component {
         actionAccount.accountLogOut();
     }
     render() {
-        const { loadingAccount, loadingProfile, account, profile } = this.props;
+        const { loadingAccount, loadingProfile, account, profile, calls } = this.props;
         let authenticated = false;
         account.authenticated && profile.id && (authenticated = true);
+        console.log('Calls:', calls); // remove
         return account.initialized === false || loadingAccount || loadingProfile ? (
             <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
         ) : (
@@ -51,7 +51,6 @@ class Root extends Component {
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <Route path="/test/call" component={TestCall} />
                         <Route path="/test/watch" component={TestWatch} />
                         <Route path={path.Team} component={Team} />
                         <Route path={path.About} component={About} />
@@ -80,6 +79,7 @@ function mapStateToProps({ account, profile, calls }) {
         loadingProfile: findByString(calls, PROFILE_LOAD_REQUEST),
         account,
         profile,
+        calls, // remove
     };
 }
 
