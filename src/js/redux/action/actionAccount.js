@@ -1,6 +1,15 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
-import { ACCOUNT_ON, ACCOUNT_OFF, ACCOUNT_CHECK_REQUEST, ACCOUNT_CHECK_SUCCESS, ACCOUNT_CHECK_FAILURE } from '../type';
+import {
+    ACCOUNT_ON,
+    ACCOUNT_OFF,
+    ACCOUNT_CHECK_REQUEST,
+    ACCOUNT_CHECK_SUCCESS,
+    ACCOUNT_CHECK_FAILURE,
+    ACCOUNT_LOG_IN_REQUEST,
+    ACCOUNT_LOG_IN_SUCCESS,
+    ACCOUNT_LOG_IN_FAILURE,
+} from '../type';
 import { profileLoad, profileVoid } from './actionProfile';
 
 toastr.options.positionClass = 'toast-top-center';
@@ -56,12 +65,30 @@ export const accountRegister = (account) => (dispatch) => {
 };
 
 // Log In
+export const accountLogInRequest = () => ({
+    type: ACCOUNT_LOG_IN_REQUEST,
+});
+
+export const accountLogInSuccess = () => ({
+    type: ACCOUNT_LOG_IN_SUCCESS,
+});
+
+export const accountLogInFailure = (error) => ({
+    type: ACCOUNT_LOG_IN_FAILURE,
+    error,
+});
+
 export const accountLogIn = (account) => (dispatch) => {
+    dispatch(accountLogInRequest());
     toastr.warning('Logging in...'); // possibly remove
     return apiAccount
         .accountLogIn(account)
-        .then(() => dispatch(accountCheck())) // rework when onAuthStateChanged() is correctly abstracted
+        .then(() => {
+            dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
+            dispatch(accountLogInSuccess());
+        })
         .catch((error) => {
+            dispatch(accountLogInFailure(error));
             toastr.error(error.message);
             throw error;
         });
