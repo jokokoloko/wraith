@@ -1,4 +1,5 @@
 import { users } from './firebase';
+import { usersWatchDispatch } from '../js/redux/action/actionUser';
 
 class apiUser {
     // Load
@@ -13,16 +14,15 @@ class apiUser {
             .catch((error) => console.error('Error getting users:', error)); // remove
 
     // Watch
-    static usersWatch = () =>
-        new Promise((resolve, reject) =>
-            users.onSnapshot(
-                (snapshot) => {
-                    console.log(`Users: ${snapshot.size} (watching)`); // remove
-                    snapshot.forEach((user) => console.log(user.id, '=>', user.data())); // remove
-                    resolve(snapshot.docs.map((user) => user.data()));
-                },
-                (error) => reject(error),
-            ),
+    static usersWatch = (dispatch) =>
+        users.onSnapshot(
+            (snapshot) => {
+                console.log(`Users: ${snapshot.size} (watching)`);
+                const users = snapshot.docs.map((user) => user.data());
+                console.log('users in here', users);
+                dispatch(usersWatchDispatch(users));
+            },
+            (error) => console.error('Error getting users:', error), // remove
         );
 }
 
