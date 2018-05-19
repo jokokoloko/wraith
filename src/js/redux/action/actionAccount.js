@@ -12,6 +12,9 @@ import {
     ACCOUNT_LOG_OUT_REQUEST,
     ACCOUNT_LOG_OUT_SUCCESS,
     ACCOUNT_LOG_OUT_FAILURE,
+    ACCOUNT_RESET_PASSWORD_REQUEST,
+    ACCOUNT_RESET_PASSWORD_SUCCESS,
+    ACCOUNT_RESET_PASSWORD_FAILURE,
 } from '../type';
 import { profileLoad, profileVoid } from './actionProfile';
 
@@ -128,11 +131,30 @@ export const accountLogOut = () => (dispatch) => {
 };
 
 // Reset Password
-export const accountResetPassword = (account) => (dispatch) =>
-    apiAccount
+export const accountResetPasswordRequest = () => ({
+    type: ACCOUNT_RESET_PASSWORD_REQUEST,
+});
+
+export const accountResetPasswordSuccess = () => ({
+    type: ACCOUNT_RESET_PASSWORD_SUCCESS,
+});
+
+export const accountResetPasswordFailure = (error) => ({
+    type: ACCOUNT_RESET_PASSWORD_FAILURE,
+    error,
+});
+
+export const accountResetPassword = (account) => (dispatch) => {
+    dispatch(accountResetPasswordRequest());
+    return apiAccount
         .accountResetPassword(account)
-        .then(() => toastr.info(`Sent password reset email to ${account.email}`))
+        .then(() => {
+            dispatch(accountResetPasswordSuccess());
+            toastr.info(`Sent password reset email to ${account.email}`);
+        })
         .catch((error) => {
+            dispatch(accountResetPasswordFailure(error));
             toastr.error(error.message);
             throw error;
         });
+};

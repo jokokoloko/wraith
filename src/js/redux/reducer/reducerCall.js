@@ -10,6 +10,9 @@ import {
     ACCOUNT_LOG_OUT_REQUEST,
     ACCOUNT_LOG_OUT_SUCCESS,
     ACCOUNT_LOG_OUT_FAILURE,
+    ACCOUNT_RESET_PASSWORD_REQUEST,
+    ACCOUNT_RESET_PASSWORD_SUCCESS,
+    ACCOUNT_RESET_PASSWORD_FAILURE,
     PROFILE_LOAD_REQUEST,
     PROFILE_LOAD_SUCCESS,
     PROFILE_LOAD_FAILURE,
@@ -37,6 +40,11 @@ export default function reducerCall(state = initial.calls, action) {
         case ACCOUNT_LOG_OUT_SUCCESS:
         case ACCOUNT_LOG_OUT_FAILURE:
             return state.filter((request) => request !== ACCOUNT_LOG_OUT_REQUEST);
+        case ACCOUNT_RESET_PASSWORD_REQUEST:
+            return state.concat(ACCOUNT_RESET_PASSWORD_REQUEST);
+        case ACCOUNT_RESET_PASSWORD_SUCCESS:
+        case ACCOUNT_RESET_PASSWORD_FAILURE:
+            return state.filter((request) => request !== ACCOUNT_RESET_PASSWORD_REQUEST);
         case PROFILE_LOAD_REQUEST:
             return state.concat(PROFILE_LOAD_REQUEST);
         case PROFILE_LOAD_SUCCESS:
