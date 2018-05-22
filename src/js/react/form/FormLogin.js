@@ -12,8 +12,8 @@ class FormLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: {},
-            errors: {},
+            form: {},
+            error: {},
         };
         this.onResetPassword = this.onResetPassword.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -21,47 +21,46 @@ class FormLogin extends Component {
     }
     onResetPassword() {
         const { actionAccount } = this.props;
-        const { account } = this.state;
-        this.isValid() && actionAccount.accountResetPassword(account);
+        const { form } = this.state;
+        this.isValid() && actionAccount.accountResetPassword(form);
     }
     onChange(event) {
-        const { account } = this.state;
+        const { form } = this.state;
         const target = event.target;
-        const input = target.name;
-        account[input] = target.type === 'checkbox' ? target.checked : target.value;
+        form[target.name] = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
-            account,
+            form,
         });
     }
     onSubmit(event) {
         const { actionAccount } = this.props;
-        const { account } = this.state;
+        const { form } = this.state;
         event.preventDefault();
-        this.isValid() && actionAccount.accountLogIn(account);
+        this.isValid() && actionAccount.accountLogIn(form);
     }
     isValid() {
-        const { account } = this.state;
-        const errors = {};
+        const { form } = this.state;
+        const error = {};
         const emailLength = 5;
         const passwordLength = 5;
         let valid = true;
-        if (account.email === undefined || account.email.length < emailLength) {
-            errors.email = `Email must be at least ${emailLength} characters.`;
+        if (form.email === undefined || form.email.length < emailLength) {
+            error.email = `Email must be at least ${emailLength} characters.`;
             valid = false;
         }
-        if (account.password === undefined || account.password.length < passwordLength) {
-            errors.password = `Password must be at least ${passwordLength} characters.`;
+        if (form.password === undefined || form.password.length < passwordLength) {
+            error.password = `Password must be at least ${passwordLength} characters.`;
             valid = false;
         }
         this.setState({
-            errors,
+            error,
         });
         return valid;
     }
     render() {
         const size = 'lg';
         const { submitting } = this.props;
-        const { account, errors } = this.state;
+        const { form, error } = this.state;
         return (
             <form id="form-login" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
@@ -71,8 +70,8 @@ class FormLogin extends Component {
                     placeholder="Email"
                     size={size}
                     onChange={this.onChange}
-                    value={account.email}
-                    error={errors.email}
+                    value={form.email}
+                    error={error.email}
                 />
                 <InputText
                     type="password"
@@ -81,8 +80,8 @@ class FormLogin extends Component {
                     placeholder="Password"
                     size={size}
                     onChange={this.onChange}
-                    value={account.password}
-                    error={errors.password}
+                    value={form.password}
+                    error={error.password}
                 />
                 <div className="form-row">
                     <div className="form-column col-lg">
