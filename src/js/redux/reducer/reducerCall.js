@@ -4,6 +4,9 @@ import {
     ACCOUNT_CHECK_REQUEST,
     ACCOUNT_CHECK_SUCCESS,
     ACCOUNT_CHECK_FAILURE,
+    ACCOUNT_REGISTER_REQUEST,
+    ACCOUNT_REGISTER_SUCCESS,
+    ACCOUNT_REGISTER_FAILURE,
     ACCOUNT_LOG_IN_REQUEST,
     ACCOUNT_LOG_IN_SUCCESS,
     ACCOUNT_LOG_IN_FAILURE,
@@ -30,6 +33,11 @@ export default function reducerCall(state = initial.calls, action) {
         case ACCOUNT_CHECK_SUCCESS:
         case ACCOUNT_CHECK_FAILURE:
             return state.filter((request) => request !== ACCOUNT_CHECK_REQUEST);
+        case ACCOUNT_REGISTER_REQUEST:
+            return state.concat(ACCOUNT_REGISTER_REQUEST);
+        case ACCOUNT_REGISTER_SUCCESS:
+        case ACCOUNT_REGISTER_FAILURE:
+            return state.filter((request) => request !== ACCOUNT_REGISTER_REQUEST);
         case ACCOUNT_LOG_IN_REQUEST:
             return state.concat(ACCOUNT_LOG_IN_REQUEST);
         case ACCOUNT_LOG_IN_SUCCESS:

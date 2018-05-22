@@ -6,6 +6,9 @@ import {
     ACCOUNT_CHECK_REQUEST,
     ACCOUNT_CHECK_SUCCESS,
     ACCOUNT_CHECK_FAILURE,
+    ACCOUNT_REGISTER_REQUEST,
+    ACCOUNT_REGISTER_SUCCESS,
+    ACCOUNT_REGISTER_FAILURE,
     ACCOUNT_LOG_IN_REQUEST,
     ACCOUNT_LOG_IN_SUCCESS,
     ACCOUNT_LOG_IN_FAILURE,
@@ -59,12 +62,30 @@ export const accountCheck = () => (dispatch) => {
 };
 
 // Register
+export const accountRegisterRequest = () => ({
+    type: ACCOUNT_REGISTER_REQUEST,
+});
+
+export const accountRegisterSuccess = () => ({
+    type: ACCOUNT_REGISTER_SUCCESS,
+});
+
+export const accountRegisterFailure = (error) => ({
+    type: ACCOUNT_REGISTER_FAILURE,
+    error,
+});
+
 export const accountRegister = (account) => (dispatch) => {
+    dispatch(accountRegisterRequest());
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
         .accountRegister(account)
-        .then(() => dispatch(accountCheck())) // rework when onAuthStateChanged() is correctly abstracted
+        .then(() => {
+            dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
+            dispatch(accountRegisterSuccess());
+        })
         .catch((error) => {
+            dispatch(accountRegisterFailure(error));
             toastr.error(error.message);
             throw error;
         });
