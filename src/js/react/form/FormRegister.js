@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
+import { ACCOUNT_REGISTER_REQUEST } from '../../redux/type';
+import { findByString } from '../../filter';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -12,7 +14,6 @@ class FormRegister extends Component {
         this.state = {
             form: {},
             error: {},
-            status: false,
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -29,18 +30,7 @@ class FormRegister extends Component {
         const { actionAccount } = this.props;
         const { form } = this.state;
         event.preventDefault();
-        if (!this.isValid()) {
-            return;
-        }
-        this.setState({
-            status: true,
-        });
-        actionAccount.accountRegister(form).catch((error) => {
-            this.setState({
-                status: false,
-            });
-            throw error;
-        });
+        this.isValid() && actionAccount.accountRegister(form);
     }
     isValid() {
         const { form } = this.state;
@@ -63,7 +53,8 @@ class FormRegister extends Component {
     }
     render() {
         const size = 'lg';
-        const { form, error, status } = this.state;
+        const { submitting } = this.props;
+        const { form, error } = this.state;
         return (
             <form id="form-register" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
@@ -90,11 +81,11 @@ class FormRegister extends Component {
                     <InputButton
                         type="submit"
                         name="register"
-                        label={status ? 'Registering...' : 'Register'}
+                        label={submitting ? 'Registering...' : 'Register'}
                         kind="success"
                         size={size}
                         display="block"
-                        status={status}
+                        submitting={submitting}
                     />
                 </div>
             </form>
@@ -103,8 +94,15 @@ class FormRegister extends Component {
 }
 
 FormRegister.propTypes = {
+    submitting: PropTypes.bool.isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
+
+function mapStateToProps({ calls }) {
+    return {
+        submitting: findByString(calls, ACCOUNT_REGISTER_REQUEST),
+    };
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -112,4 +110,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(FormRegister);
+export default connect(mapStateToProps, mapDispatchToProps)(FormRegister);
