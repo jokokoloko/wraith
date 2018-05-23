@@ -1,6 +1,13 @@
 import toastr from 'toastr';
 import apiUser from '../../../api/apiUser';
-import { USERS_LOAD_REQUEST, USERS_LOAD_SUCCESS, USERS_LOAD_FAILURE, USERS_WATCH_SUCCESS, USERS_VOID } from '../type';
+import {
+    USERS_LOAD_REQUEST,
+    USERS_LOAD_SUCCESS,
+    USERS_LOAD_FAILURE,
+    USERS_WATCH_SUCCESS,
+    USERS_WATCH_ERROR,
+    USERS_VOID,
+} from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -24,6 +31,11 @@ export const usersWatchSuccess = (users) => ({
     users,
 });
 
+export const usersWatchError = (error) => ({
+    type: USERS_WATCH_ERROR,
+    error,
+});
+
 export const usersLoad = (open) => (dispatch) => {
     dispatch(usersLoadRequest());
     return apiUser
@@ -42,7 +54,6 @@ export const usersWatch = () => (dispatch) => {
 
 export const usersWatchDispatch = (users) => (dispatch) => {
     dispatch(usersWatchSuccess(users));
-    console.log('my users: ', users);
 };
 
 // Void
