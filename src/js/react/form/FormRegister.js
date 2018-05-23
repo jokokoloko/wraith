@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
+import { ACCOUNT_REGISTER_REQUEST } from '../../redux/type';
+import { findByString } from '../../filter';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -10,61 +12,49 @@ class FormRegister extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: {},
-            errors: {},
-            status: false,
+            form: {},
+            error: {},
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
     onChange(event) {
-        const { account } = this.state;
+        const { form } = this.state;
         const target = event.target;
-        const input = target.name;
-        account[input] = target.type === 'checkbox' ? target.checked : target.value;
+        form[target.name] = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
-            account,
+            form,
         });
     }
     onSubmit(event) {
         const { actionAccount } = this.props;
-        const { account } = this.state;
+        const { form } = this.state;
         event.preventDefault();
-        if (!this.isValid()) {
-            return;
-        }
-        this.setState({
-            status: true,
-        });
-        actionAccount.accountRegister(account).catch((error) => {
-            this.setState({
-                status: false,
-            });
-            throw error;
-        });
+        this.isValid() && actionAccount.accountRegister(form);
     }
     isValid() {
-        const { account } = this.state;
-        const errors = {};
+        const { form } = this.state;
+        const error = {};
         const emailLength = 5;
         const passwordLength = 5;
         let valid = true;
-        if (account.email === undefined || account.email.length < emailLength) {
-            errors.email = `Email must be at least ${emailLength} characters.`;
+        if (form.email === undefined || form.email.length < emailLength) {
+            error.email = `Email must be at least ${emailLength} characters.`;
             valid = false;
         }
-        if (account.password === undefined || account.password.length < passwordLength) {
-            errors.password = `Password must be at least ${passwordLength} characters.`;
+        if (form.password === undefined || form.password.length < passwordLength) {
+            error.password = `Password must be at least ${passwordLength} characters.`;
             valid = false;
         }
         this.setState({
-            errors,
+            error,
         });
         return valid;
     }
     render() {
         const size = 'lg';
-        const { account, errors, status } = this.state;
+        const { submitting } = this.props;
+        const { form, error } = this.state;
         return (
             <form id="form-register" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
@@ -74,8 +64,8 @@ class FormRegister extends Component {
                     placeholder="Email"
                     size={size}
                     onChange={this.onChange}
-                    value={account.email}
-                    error={errors.email}
+                    value={form.email}
+                    error={error.email}
                 />
                 <InputText
                     type="password"
@@ -84,18 +74,18 @@ class FormRegister extends Component {
                     placeholder="Password"
                     size={size}
                     onChange={this.onChange}
-                    value={account.password}
-                    error={errors.password}
+                    value={form.password}
+                    error={error.password}
                 />
                 <div className="form-group">
                     <InputButton
                         type="submit"
                         name="register"
-                        label={status ? 'Registering...' : 'Register'}
+                        label={submitting ? 'Registering...' : 'Register'}
                         kind="success"
                         size={size}
                         display="block"
-                        status={status}
+                        submitting={submitting}
                     />
                 </div>
             </form>
@@ -104,8 +94,15 @@ class FormRegister extends Component {
 }
 
 FormRegister.propTypes = {
+    submitting: PropTypes.bool.isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
+
+function mapStateToProps({ calls }) {
+    return {
+        submitting: findByString(calls, ACCOUNT_REGISTER_REQUEST),
+    };
+}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -113,4 +110,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(FormRegister);
+export default connect(mapStateToProps, mapDispatchToProps)(FormRegister);

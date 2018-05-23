@@ -6,9 +6,18 @@ import {
     ACCOUNT_CHECK_REQUEST,
     ACCOUNT_CHECK_SUCCESS,
     ACCOUNT_CHECK_FAILURE,
+    ACCOUNT_REGISTER_REQUEST,
+    ACCOUNT_REGISTER_SUCCESS,
+    ACCOUNT_REGISTER_FAILURE,
     ACCOUNT_LOG_IN_REQUEST,
     ACCOUNT_LOG_IN_SUCCESS,
     ACCOUNT_LOG_IN_FAILURE,
+    ACCOUNT_LOG_OUT_REQUEST,
+    ACCOUNT_LOG_OUT_SUCCESS,
+    ACCOUNT_LOG_OUT_FAILURE,
+    ACCOUNT_RESET_PASSWORD_REQUEST,
+    ACCOUNT_RESET_PASSWORD_SUCCESS,
+    ACCOUNT_RESET_PASSWORD_FAILURE,
 } from '../type';
 import { profileLoad, profileVoid } from './actionProfile';
 
@@ -53,12 +62,30 @@ export const accountCheck = () => (dispatch) => {
 };
 
 // Register
+export const accountRegisterRequest = () => ({
+    type: ACCOUNT_REGISTER_REQUEST,
+});
+
+export const accountRegisterSuccess = () => ({
+    type: ACCOUNT_REGISTER_SUCCESS,
+});
+
+export const accountRegisterFailure = (error) => ({
+    type: ACCOUNT_REGISTER_FAILURE,
+    error,
+});
+
 export const accountRegister = (account) => (dispatch) => {
+    dispatch(accountRegisterRequest());
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
         .accountRegister(account)
-        .then(() => dispatch(accountCheck())) // rework when onAuthStateChanged() is correctly abstracted
+        .then(() => {
+            dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
+            dispatch(accountRegisterSuccess());
+        })
         .catch((error) => {
+            dispatch(accountRegisterFailure(error));
             toastr.error(error.message);
             throw error;
         });
@@ -95,24 +122,60 @@ export const accountLogIn = (account) => (dispatch) => {
 };
 
 // Log Out
-export const accountLogOut = () => (dispatch) =>
-    apiAccount
+export const accountLogOutRequest = () => ({
+    type: ACCOUNT_LOG_OUT_REQUEST,
+});
+
+export const accountLogOutSuccess = () => ({
+    type: ACCOUNT_LOG_OUT_SUCCESS,
+});
+
+export const accountLogOutFailure = (error) => ({
+    type: ACCOUNT_LOG_OUT_FAILURE,
+    error,
+});
+
+export const accountLogOut = () => (dispatch) => {
+    dispatch(accountLogOutRequest());
+    return apiAccount
         .accountLogOut()
         .then(() => {
             dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
+            dispatch(accountLogOutSuccess());
             toastr.info('Logout successful.');
         })
         .catch((error) => {
+            dispatch(accountLogOutFailure(error));
             toastr.error(error.message);
             throw error;
         });
+};
 
 // Reset Password
-export const accountResetPassword = (account) => (dispatch) =>
-    apiAccount
+export const accountResetPasswordRequest = () => ({
+    type: ACCOUNT_RESET_PASSWORD_REQUEST,
+});
+
+export const accountResetPasswordSuccess = () => ({
+    type: ACCOUNT_RESET_PASSWORD_SUCCESS,
+});
+
+export const accountResetPasswordFailure = (error) => ({
+    type: ACCOUNT_RESET_PASSWORD_FAILURE,
+    error,
+});
+
+export const accountResetPassword = (account) => (dispatch) => {
+    dispatch(accountResetPasswordRequest());
+    return apiAccount
         .accountResetPassword(account)
-        .then(() => toastr.info(`Sent password reset email to ${account.email}`))
+        .then(() => {
+            dispatch(accountResetPasswordSuccess());
+            toastr.info(`Sent password reset email to ${account.email}`);
+        })
         .catch((error) => {
+            dispatch(accountResetPasswordFailure(error));
             toastr.error(error.message);
             throw error;
         });
+};

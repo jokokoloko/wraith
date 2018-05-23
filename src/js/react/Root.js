@@ -16,9 +16,9 @@ import Team from './Team';
 import About from './About';
 import Home from './Home';
 import Empty from './404';
-import Compass from './region/Compass';
 import Header from './region/Header';
 import Footer from './region/Footer';
+import Compass from './widget/Compass';
 import Loader from './unit/Loader';
 
 class Root extends Component {
