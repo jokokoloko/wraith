@@ -7,7 +7,6 @@ import { USERS_LOAD_REQUEST } from '../redux/type';
 import { findByString } from '../filter';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
-import apiUser from '../../api/apiUser';
 
 class _UserHome extends Component {
     componentDidMount() {
