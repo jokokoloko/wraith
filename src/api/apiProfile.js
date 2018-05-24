@@ -1,6 +1,9 @@
 import { users } from './firebase';
 
 class apiProfile {
+    // Edit
+    static profileEdit = (profile) => users.doc(profile.id).update(profile);
+
     // Load
     static profileLoad = (account) =>
         users

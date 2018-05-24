@@ -16,6 +16,9 @@ import {
     ACCOUNT_RESET_PASSWORD_REQUEST,
     ACCOUNT_RESET_PASSWORD_SUCCESS,
     ACCOUNT_RESET_PASSWORD_FAILURE,
+    PROFILE_EDIT_REQUEST,
+    PROFILE_EDIT_SUCCESS,
+    PROFILE_EDIT_FAILURE,
     PROFILE_LOAD_REQUEST,
     PROFILE_LOAD_SUCCESS,
     PROFILE_LOAD_FAILURE,
@@ -53,6 +56,11 @@ export default function reducerCall(state = initial.calls, action) {
         case ACCOUNT_RESET_PASSWORD_SUCCESS:
         case ACCOUNT_RESET_PASSWORD_FAILURE:
             return state.filter((request) => request !== ACCOUNT_RESET_PASSWORD_REQUEST);
+        case PROFILE_EDIT_REQUEST:
+            return state.concat(PROFILE_EDIT_REQUEST);
+        case PROFILE_EDIT_SUCCESS:
+        case PROFILE_EDIT_FAILURE:
+            return state.filter((request) => request !== PROFILE_EDIT_REQUEST);
         case PROFILE_LOAD_REQUEST:
             return state.concat(PROFILE_LOAD_REQUEST);
         case PROFILE_LOAD_SUCCESS:

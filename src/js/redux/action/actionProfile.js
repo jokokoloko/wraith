@@ -1,8 +1,46 @@
 import toastr from 'toastr';
 import apiProfile from '../../../api/apiProfile';
-import { PROFILE_LOAD_REQUEST, PROFILE_LOAD_SUCCESS, PROFILE_LOAD_FAILURE, PROFILE_VOID } from '../type';
+import {
+    PROFILE_EDIT_REQUEST,
+    PROFILE_EDIT_SUCCESS,
+    PROFILE_EDIT_FAILURE,
+    PROFILE_LOAD_REQUEST,
+    PROFILE_LOAD_SUCCESS,
+    PROFILE_LOAD_FAILURE,
+    PROFILE_VOID,
+} from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
+
+// Edit
+export const profileEditRequest = () => ({
+    type: PROFILE_EDIT_REQUEST,
+});
+
+export const profileEditSuccess = (profile) => ({
+    type: PROFILE_EDIT_SUCCESS,
+    profile,
+});
+
+export const profileEditFailure = (error) => ({
+    type: PROFILE_EDIT_FAILURE,
+    error,
+});
+
+export const profileEdit = (profile) => (dispatch) => {
+    dispatch(profileEditRequest());
+    return apiProfile
+        .profileEdit(profile)
+        .then(() => {
+            dispatch(profileEditSuccess(profile));
+            toastr.success('Profile updated!');
+        })
+        .catch((error) => {
+            dispatch(profileEditFailure(error));
+            toastr.error(error.message);
+            throw error;
+        });
+};
 
 // Load
 export const profileLoadRequest = () => ({
