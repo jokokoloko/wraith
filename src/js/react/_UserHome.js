@@ -11,7 +11,7 @@ import Loader from './unit/Loader';
 class _UserHome extends Component {
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersWatch();
+        actionUser.usersLoad(true);
     }
     render() {
         const { loadingUsers, users } = this.props;
@@ -48,7 +48,6 @@ class _UserHome extends Component {
 }
 
 _UserHome.propTypes = {
-    match: PropTypes.objectOf(PropTypes.any).isRequired,
     loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionUser: PropTypes.objectOf(PropTypes.func).isRequired,

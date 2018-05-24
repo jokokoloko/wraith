@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import * as actionUser from '../redux/action/actionUser';
+import { USERS_LOAD_REQUEST } from '../redux/type';
+import { findByString } from '../filter';
 import Basic from './section/Basic';
-import apiUser from '../../api/apiUser';
+import Loader from './unit/Loader';
 
 class TestWatch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [],
-        };
-    }
     componentDidMount() {
-        apiUser.usersWatch().then((users) =>
-            this.setState({
-                users,
-            }),
-        );
+        const { actionUser } = this.props;
+        actionUser.usersWatch();
     }
     render() {
-        const { users } = this.state;
+        const { loadingUsers, users } = this.props;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -26,17 +23,47 @@ class TestWatch extends Component {
                             <h1>Test - Watch</h1>
                         </header>
                     </Basic>
-                    {users.length > 0 && (
-                        <Basic space="space-xs-50 space-lg-80">
-                            <section>
-                                <ul>{users.map((user, index) => <li key={index}>{user.email}</li>)}</ul>
-                            </section>
-                        </Basic>
-                    )}
+
+                    <Basic space="space-xs-50 space-lg-80">
+                        <section className="text-center">
+                            {loadingUsers ? (
+                                <Loader position="exact-center fixed" label="Loading users" />
+                            ) : users.length > 0 ? (
+                                <ul className="list-unstyled">
+                                    {users.map((user, index) => (
+                                        <li key={user.id} className={`item-${index + 1}`}>
+                                            {user.email}
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="empty">No users.</p>
+                            )}
+                        </section>
+                    </Basic>
                 </div>
             </main>
         );
     }
 }
 
-export default TestWatch;
+TestWatch.propTypes = {
+    loadingUsers: PropTypes.bool.isRequired,
+    users: PropTypes.arrayOf(PropTypes.object).isRequired,
+    actionUser: PropTypes.objectOf(PropTypes.func).isRequired,
+};
+
+function mapStateToProps({ calls, users }) {
+    return {
+        loadingUsers: findByString(calls, USERS_LOAD_REQUEST),
+        users,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actionUser: bindActionCreators(actionUser, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestWatch);
