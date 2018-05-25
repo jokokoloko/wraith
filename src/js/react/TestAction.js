@@ -24,8 +24,11 @@ const TestAction = ({ profile, actionProfile }) => (
 function mapStateToProps({ profile }) {
     return {
         profile: Object.assign({}, profile, {
-            nameFirst: 'Jonathan',
-            nameLast: 'Howland',
+            handle: 'jokokoloko',
+            name: {
+                first: 'Jonathan',
+                last: 'Howland',
+            },
         }),
     };
 }
