@@ -36,7 +36,7 @@ export const slugify = (text) => {
             // Replace & with 'and'
             .replace(/&/g, '-and-')
             // Remove all non-word chars
-            .replace(/[^\w]+/g, '')
+            .replace(/[^\w-]+/g, '')
             // Replace multiple - with single -
             .replace(/--+/g, '-')
             // Replace something with single -
