@@ -63,7 +63,7 @@ export const profileLoad = (account) => (dispatch) => {
         .profileLoad(account)
         .then((profile) => {
             dispatch(profileLoadSuccess(profile));
-            toastr.success(`Welcome ${profile.name.first ? profile.name.first : profile.email}!`);
+            toastr.success(`Welcome ${profile.email}!`);
         })
         .catch((error) => {
             dispatch(profileLoadFailure(error));
