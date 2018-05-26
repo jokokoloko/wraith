@@ -7,6 +7,7 @@ class FormProfile extends Component {
         this.state = {
             form: {
                 name: {},
+                address: {},
             },
             error: {},
         };
@@ -17,8 +18,8 @@ class FormProfile extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        const object = 'name';
-        name === 'first' || name === 'last' ? (form[object][name] = value) : (form[name] = value);
+        const object = target.dataset.object;
+        object ? (form[object][name] = value) : (form[name] = value);
         this.setState({
             form,
         });
@@ -54,6 +55,7 @@ class FormProfile extends Component {
                     onChange={this.onChange}
                     value={form.name.first}
                     error={error.first}
+                    object="name"
                 />
                 <InputText
                     name="last"
@@ -63,6 +65,27 @@ class FormProfile extends Component {
                     onChange={this.onChange}
                     value={form.name.last}
                     error={error.last}
+                    object="name"
+                />
+                <InputText
+                    name="street"
+                    label="Street"
+                    placeholder="Street"
+                    size={size}
+                    onChange={this.onChange}
+                    value={form.address.street}
+                    error={error.street}
+                    object="address"
+                />
+                <InputText
+                    name="city"
+                    label="City"
+                    placeholder="City"
+                    size={size}
+                    onChange={this.onChange}
+                    value={form.address.city}
+                    error={error.city}
+                    object="address"
                 />
             </form>
         );
