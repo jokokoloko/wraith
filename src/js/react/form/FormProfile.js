@@ -17,22 +17,11 @@ class FormProfile extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        name === 'first' || name === 'last'
-            ? this.setState({
-                  form: {
-                      ...form,
-                      name: {
-                          ...form.name,
-                          [name]: value,
-                      },
-                  },
-              })
-            : this.setState({
-                  form: {
-                      ...form,
-                      [name]: value,
-                  },
-              });
+        const object = 'name';
+        name === 'first' || name === 'last' ? (form[object][name] = value) : (form[name] = value);
+        this.setState({
+            form,
+        });
     }
     render() {
         const size = 'lg';

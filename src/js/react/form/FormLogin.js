@@ -29,11 +29,9 @@ class FormLogin extends Component {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
+        form[name] = value;
         this.setState({
-            form: {
-                ...form,
-                [name]: value,
-            },
+            form,
         });
     }
     onSubmit(event) {
