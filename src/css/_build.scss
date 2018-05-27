@@ -308,10 +308,14 @@ $triangle-position: 15px;
 /* ----------!BODY---------- */
 #body {
 	@include color($color-body);
+	}
+
+/* ----------!ROOT---------- */
+#root {
 	padding-top: $header-height-xs;
 	}
 @include media-breakpoint-up(lg) {
-	#body {
+	#root {
 		padding-top: $header-height-lg;
 		}
 	}
