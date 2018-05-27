@@ -4,8 +4,9 @@ import {
     USERS_LOAD_REQUEST,
     USERS_LOAD_SUCCESS,
     USERS_LOAD_FAILURE,
+    USERS_WATCH_REQUEST,
     USERS_WATCH_SUCCESS,
-    USERS_WATCH_ERROR,
+    USERS_WATCH_FAILURE,
     USERS_VOID,
 } from '../type';
 
@@ -26,13 +27,17 @@ export const usersLoadFailure = (error) => ({
     error,
 });
 
+export const usersWatchRequest = () => ({
+    type: USERS_WATCH_REQUEST,
+});
+
 export const usersWatchSuccess = (users) => ({
     type: USERS_WATCH_SUCCESS,
     users,
 });
 
 export const usersWatchError = (error) => ({
-    type: USERS_WATCH_ERROR,
+    type: USERS_WATCH_FAILURE,
     error,
 });
 
@@ -49,11 +54,8 @@ export const usersLoad = (open) => (dispatch) => {
 };
 
 export const usersWatch = () => (dispatch) => {
+    dispatch(usersWatchRequest());
     return apiUser.usersWatch(dispatch);
-};
-
-export const usersWatchDispatch = (users) => (dispatch) => {
-    dispatch(usersWatchSuccess(users));
 };
 
 // Void
