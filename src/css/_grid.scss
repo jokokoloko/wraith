@@ -65,6 +65,12 @@
 .gutter-80 > * {
 	padding: 40px;
 	}
+.gutter-130 {
+	margin: -65px;
+	}
+.gutter-130 > * {
+	padding: 65px;
+	}
 @include media-breakpoint-up(sm) {
 	.gutter-sm-0 {
 		margin: 0;
@@ -101,6 +107,12 @@
 		}
 	.gutter-sm-80 > * {
 		padding: 40px;
+		}
+	.gutter-sm-130 {
+		margin: -65px;
+		}
+	.gutter-sm-130 > * {
+		padding: 65px;
 		}
 	}
 @include media-breakpoint-up(md) {
@@ -140,6 +152,12 @@
 	.gutter-md-80 > * {
 		padding: 40px;
 		}
+	.gutter-md-130 {
+		margin: -65px;
+		}
+	.gutter-md-130 > * {
+		padding: 65px;
+		}
 	}
 @include media-breakpoint-up(lg) {
 	.gutter-lg-0 {
@@ -177,5 +195,11 @@
 		}
 	.gutter-lg-80 > * {
 		padding: 40px;
+		}
+	.gutter-lg-130 {
+		margin: -65px;
+		}
+	.gutter-lg-130 > * {
+		padding: 65px;
 		}
 	}
