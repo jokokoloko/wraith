@@ -27,20 +27,6 @@ export const usersLoadFailure = (error) => ({
     error,
 });
 
-export const usersWatchRequest = () => ({
-    type: USERS_WATCH_REQUEST,
-});
-
-export const usersWatchSuccess = (users) => ({
-    type: USERS_WATCH_SUCCESS,
-    users,
-});
-
-export const usersWatchError = (error) => ({
-    type: USERS_WATCH_FAILURE,
-    error,
-});
-
 export const usersLoad = (open) => (dispatch) => {
     dispatch(usersLoadRequest());
     return apiUser
@@ -52,6 +38,21 @@ export const usersLoad = (open) => (dispatch) => {
             throw error;
         });
 };
+
+// Watch
+export const usersWatchRequest = () => ({
+    type: USERS_WATCH_REQUEST,
+});
+
+export const usersWatchSuccess = (users) => ({
+    type: USERS_WATCH_SUCCESS,
+    users,
+});
+
+export const usersWatchFailure = (error) => ({
+    type: USERS_WATCH_FAILURE,
+    error,
+});
 
 export const usersWatch = () => (dispatch) => {
     dispatch(usersWatchRequest());

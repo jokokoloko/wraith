@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
-import { USERS_LOAD_REQUEST } from '../redux/type';
+import { USERS_WATCH_REQUEST } from '../redux/type';
 import { findByString } from '../filter';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
@@ -55,7 +55,7 @@ TestWatch.propTypes = {
 
 function mapStateToProps({ calls, users }) {
     return {
-        loadingUsers: findByString(calls, USERS_LOAD_REQUEST),
+        loadingUsers: findByString(calls, USERS_WATCH_REQUEST),
         users,
     };
 }

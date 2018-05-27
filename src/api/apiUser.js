@@ -1,5 +1,5 @@
 import { users } from './firebase';
-import { usersWatchSuccess, usersWatchError } from '../js/redux/action/actionUser';
+import { usersWatchSuccess, usersWatchFailure } from '../js/redux/action/actionUser';
 
 class apiUser {
     // Load
@@ -21,7 +21,7 @@ class apiUser {
                 dispatch(usersWatchSuccess(users));
             },
             (error) => {
-                dispatch(usersWatchError(error));
+                dispatch(usersWatchFailure(error));
                 console.error('Error getting users:', error); // remove
             },
         );

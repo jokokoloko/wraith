@@ -25,6 +25,9 @@ import {
     USERS_LOAD_REQUEST,
     USERS_LOAD_SUCCESS,
     USERS_LOAD_FAILURE,
+    USERS_WATCH_REQUEST,
+    USERS_WATCH_SUCCESS,
+    USERS_WATCH_FAILURE,
 } from '../type';
 
 export default function reducerCall(state = initial.calls, action) {
@@ -71,6 +74,11 @@ export default function reducerCall(state = initial.calls, action) {
         case USERS_LOAD_SUCCESS:
         case USERS_LOAD_FAILURE:
             return state.filter((request) => request !== USERS_LOAD_REQUEST);
+        case USERS_WATCH_REQUEST:
+            return state.concat(USERS_WATCH_REQUEST);
+        case USERS_WATCH_SUCCESS:
+        case USERS_WATCH_FAILURE:
+            return state.filter((request) => request !== USERS_WATCH_REQUEST);
         default:
             return state;
     }
