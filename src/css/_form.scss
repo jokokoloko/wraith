@@ -162,3 +162,17 @@ input[type="tel"]:focus,
 	font-size: 20px;
 	line-height: 30px;
 	}
+
+/* ========================== */
+/* ==========!SPACE========== */
+/* ========================== */
+
+/* ----------!GUTTER---------- */
+.form-gutter-20 {
+	margin-left: -10px;
+	margin-right: -10px;
+	}
+.form-gutter-20 > .form-column {
+	padding-left: 10px;
+	padding-right: 10px;
+	}

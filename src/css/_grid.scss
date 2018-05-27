@@ -29,40 +29,40 @@
 	}
 
 /* ----------!GUTTER---------- */
-.gutter-xs-0 {
+.gutter-0 {
 	margin: 0;
 	}
-.gutter-xs-0 > * {
+.gutter-0 > * {
 	padding: 0;
 	}
-.gutter-xs-10 {
+.gutter-10 {
 	margin: -5px;
 	}
-.gutter-xs-10 > * {
+.gutter-10 > * {
 	padding: 5px;
 	}
-.gutter-xs-20 {
+.gutter-20 {
 	margin: -10px;
 	}
-.gutter-xs-20 > * {
+.gutter-20 > * {
 	padding: 10px;
 	}
-.gutter-xs-30 {
+.gutter-30 {
 	margin: -15px;
 	}
-.gutter-xs-30 > * {
+.gutter-30 > * {
 	padding: 15px;
 	}
-.gutter-xs-50 {
+.gutter-50 {
 	margin: -25px;
 	}
-.gutter-xs-50 > * {
+.gutter-50 > * {
 	padding: 25px;
 	}
-.gutter-xs-80 {
+.gutter-80 {
 	margin: -40px;
 	}
-.gutter-xs-80 > * {
+.gutter-80 > * {
 	padding: 40px;
 	}
 @include media-breakpoint-up(sm) {
