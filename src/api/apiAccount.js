@@ -26,7 +26,9 @@ class apiAccount {
                     .set({
                         id: account.uid,
                         email: account.email,
-                        created: new Date(),
+                        time: {
+                            created: new Date(),
+                        },
                     })
                     .then(() => console.log('Added user with ID:', account.uid)) // remove
                     .catch((error) => console.error('Error adding user:', error)), // remove

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionProfile from '../../redux/action/actionProfile';
+import { PROFILE_EDIT_REQUEST } from '../../redux/type';
+import { findByString } from '../../filter';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 import Avatar from '../unit/Avatar';
@@ -22,25 +24,52 @@ class FormProfile extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+    componentDidMount() {
+        const form = {
+            ...this.state.form,
+            ...this.props.profile,
+        };
+        this.setState({
+            form,
+        });
+    }
     onChange(event) {
-        const { form } = this.state;
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         const object = target.dataset.object;
-        object ? (form[object][name] = value) : (form[name] = value);
+        let form = {
+            ...this.state.form,
+            [name]: value,
+        };
+        if (object) {
+            form = {
+                ...this.state.form,
+                [object]: {
+                    ...this.state.form[object],
+                    [name]: value,
+                },
+            };
+        }
         this.setState({
             form,
         });
     }
     onSubmit(event) {
         const { actionProfile } = this.props;
-        const { form } = this.state;
+        const form = {
+            ...this.state.form,
+            time: {
+                ...this.state.form.time,
+                edited: new Date(),
+            },
+        };
         event.preventDefault();
         actionProfile.profileEdit(form);
     }
     render() {
         const size = 'lg';
+        const { submitting } = this.props;
         const { form, error } = this.state;
         return (
             <form id="form-profile" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
@@ -199,7 +228,7 @@ class FormProfile extends Component {
                                         className="address"
                                         itemProp="address"
                                         itemType="http://schema.org/PostalAddress"
-                                    itemScope>
+                                        itemScope>
                                         <FontAwesomeIcon icon={faMapMarkerAlt} />
                                         {form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>
@@ -240,11 +269,12 @@ class FormProfile extends Component {
                                 </address>
                                 <InputButton
                                     type="submit"
-                                    name="log-in"
-                                    label="Save"
+                                    name="save"
+                                    label={submitting ? 'Saving...' : 'Save'}
                                     kind="success"
                                     size={size}
                                     display="block"
+                                    submitting={submitting}
                                 />
                             </div>
                         </div>
@@ -256,12 +286,14 @@ class FormProfile extends Component {
 }
 
 FormProfile.propTypes = {
+    submitting: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     actionProfile: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile }) {
+function mapStateToProps({ profile, calls }) {
     return {
+        submitting: findByString(calls, PROFILE_EDIT_REQUEST),
         profile,
     };
 }
