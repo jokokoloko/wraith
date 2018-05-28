@@ -4,9 +4,26 @@
 
 /* ----------!PANEL---------- */
 .card-panel {
-	background-color: $color-smoke;
-	border: 0 none $color-transparent;
+	background-color: $color-white;
+	border-color: $color-smoke;
 	}
 .card-panel .card-body {
-	padding: 30px;
+	padding: 29px;
+	}
+.card-panel .card-body svg {
+	margin-right: 8px;
+	}
+.card-panel .card-body .avatar {
+	height: 230px;
+	}
+.card-panel .card-body .avatar + .name-full,
+.card-panel .card-body .handle + .contact {
+	padding-top: 30px;
+	}
+.card-panel .card-body .handle {
+	@extend [class*="xs-15"];
+	@extend .h-xs-15;
+	}
+.card-panel .card-body .btn {
+	margin-top: 80px;
 	}
