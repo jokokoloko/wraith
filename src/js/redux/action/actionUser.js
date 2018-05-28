@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import apiUser from '../../../api/apiUser';
+import { users } from '../../../api/firebase';
 import {
     USERS_LOAD_REQUEST,
     USERS_LOAD_SUCCESS,
@@ -54,9 +55,19 @@ export const usersWatchFailure = (error) => ({
     error,
 });
 
-export const usersWatch = () => (dispatch) => {
+export const usersWatch = (open) => (dispatch) => {
     dispatch(usersWatchRequest());
-    return apiUser.usersWatch(dispatch);
+    return users.onSnapshot(
+        (snapshot) => {
+            const users = snapshot.docs.map((user) => (open ? user.data() : { id: user.id }));
+            dispatch(usersWatchSuccess(users));
+        },
+        (error) => {
+            dispatch(usersWatchFailure(error));
+            toastr.error(error.message);
+            throw error;
+        },
+    );
 };
 
 // Void

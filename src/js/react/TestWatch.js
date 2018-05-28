@@ -11,7 +11,7 @@ import Loader from './unit/Loader';
 class TestWatch extends Component {
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersWatch();
+        actionUser.usersWatch(true);
     }
     render() {
         const { loadingUsers, users } = this.props;
