@@ -108,6 +108,10 @@ input[type="tel"]:focus,
 	color: $color-brand-blue-200;
 	box-shadow: 0 0 0 3px rgba(0, 125, 255, 0.25);
 	}
+.form-control::placeholder {
+	color: $color-smoke;
+	opacity: 1;
+	}
 
 /* ============================== */
 /* ==========!BOOTSTRAP========== */
