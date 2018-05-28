@@ -203,60 +203,36 @@ class FormProfile extends Component {
                                         <FontAwesomeIcon icon={faMapMarkerAlt} />
                                         {form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>
-                                                <span itemProp="addressLocality">
-                                                    {form.address.city ? form.address.city : 'City'}
-                                                </span>
+                                                <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
-                                                <span itemProp="addressRegion">
-                                                    {form.address.state ? form.address.state : 'State'}
-                                                </span>
+                                                <span itemProp="addressRegion">{form.address.state}</span>
                                                 {', '}
-                                                <span itemProp="addressCountry">
-                                                    {form.address.country ? form.address.country : 'Country'}
-                                                </span>
+                                                <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
                                         ) : form.address.city && form.address.state ? (
                                             <Fragment>
-                                                <span itemProp="addressLocality">
-                                                    {form.address.city ? form.address.city : 'City'}
-                                                </span>
+                                                <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
-                                                <span itemProp="addressRegion">
-                                                    {form.address.state ? form.address.state : 'State'}
-                                                </span>
+                                                <span itemProp="addressRegion">{form.address.state}</span>
                                             </Fragment>
                                         ) : form.address.city && form.address.country ? (
                                             <Fragment>
-                                                <span itemProp="addressLocality">
-                                                    {form.address.city ? form.address.city : 'City'}
-                                                </span>
+                                                <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
-                                                <span itemProp="addressCountry">
-                                                    {form.address.country ? form.address.country : 'Country'}
-                                                </span>
+                                                <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
                                         ) : form.address.state && form.address.country ? (
                                             <Fragment>
-                                                <span itemProp="addressRegion">
-                                                    {form.address.state ? form.address.state : 'State'}
-                                                </span>
+                                                <span itemProp="addressRegion">{form.address.state}</span>
                                                 {', '}
-                                                <span itemProp="addressCountry">
-                                                    {form.address.country ? form.address.country : 'Country'}
-                                                </span>
+                                                <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
                                         ) : form.address.city ? (
-                                            <span itemProp="addressLocality">
-                                                {form.address.city ? form.address.city : 'City'}
-                                            </span>
+                                            <span itemProp="addressLocality">{form.address.city}</span>
                                         ) : form.address.state ? (
-                                            <span itemProp="addressRegion">
-                                                {form.address.state ? form.address.state : 'State'}
-                                            </span>
+                                            <span itemProp="addressRegion">{form.address.state}</span>
                                         ) : form.address.country ? (
-                                            <span itemProp="addressCountry">
-                                                {form.address.country ? form.address.country : 'Country'}
-                                            </span>
+                                            <span itemProp="addressCountry">{form.address.country}</span>
                                         ) : (
                                             'Location'
                                         )}
