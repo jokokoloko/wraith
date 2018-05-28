@@ -6,7 +6,10 @@ React ES6 Starter Application
 
 React `16.3.2`</br >
 React Router `4.2.2`</br >
-Redux `4.0.0`
+Redux `4.0.0`</br >
+Firebase `4.13.1`</br >
+Font Awesome `1.1.6`</br >
+Bootstrap `4.1.0`
 
 ## Database
 
@@ -21,20 +24,27 @@ Redux `4.0.0`
 
 ## Installation
 
-Go to the spectre repository on your local machine and install the packages:
+First, you must register Font Awesome:
 
 ```sh
-npm install
+$ npm config set "@fortawesome:registry" https://npm.fontawesome.com
+$ npm config set "//npm.fontawesome.com/:_authToken" 8516A1CE-3B7B-48A0-BF42-4CA83CD66816
+```
+
+Next, go to the spectre repository on your local machine and install the packages:
+
+```sh
+$ npm install
 ```
 
 Then start the application:
 
 ```sh
-npm start
+$ npm start
 ```
 
 To build for production:
 
 ```sh
-npm run build
+$ npm run build
 ```
