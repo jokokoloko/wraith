@@ -73,6 +73,9 @@ class FormProfile extends Component {
         //         },
         //     });
 
+        // const { form } = this.state;
+        // object ? (form[object][name] = value) : (form[name] = value);
+
         this.setState({
             form,
         });
