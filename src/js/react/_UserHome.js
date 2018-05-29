@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -14,30 +15,60 @@ class _UserHome extends Component {
         actionUser.usersLoad(true);
     }
     render() {
+        const item = 'user';
         const { loadingUsers, users } = this.props;
+        const labelUser = ['#', 'Email', 'Handle', 'Action'];
+        const loopUser = users.map((user, index) => {
+            console.log('WTF?', user);
+            const count = index + 1;
+            return (
+                <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
+                    <th scope="row">{count}</th>
+                    <td>{user.email}</td>
+                    <td>{user.handle ? user.handle : '-'}</td>
+                    <td>
+                        <Link to={`/user/${user.slug}`}>View</Link>
+                    </td>
+                </tr>
+            );
+        });
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic container="container-fluid" space="space-xs-50 space-lg-80">
-                        <header>
+                        <header className="node-xs-50">
                             <h1>Users</h1>
                         </header>
-                    </Basic>
 
-                    <Basic container="container-fluid" space="space-xs-50 space-lg-80">
-                        <section>
+                        <section className="node-xs-50">
                             {loadingUsers ? (
                                 <Loader position="exact-center fixed" label="Loading users" />
-                            ) : users.length > 0 ? (
-                                <ul className="list-unstyled">
-                                    {users.map((user, index) => (
-                                        <li key={user.id} className={`item-${index + 1}`}>
-                                            {user.email}
-                                        </li>
-                                    ))}
-                                </ul>
                             ) : (
-                                <p className="empty">No users.</p>
+                                <table className={`table table-responsive table-bordered table-striped table-hover table-${item}`}>
+                                    <thead>
+                                        <tr>
+                                            {labelUser.map((name, index) => {
+                                                const count = index + 1;
+                                                return (
+                                                    <th key={`label-${count}`} className={`column-${count}`} scope="col">
+                                                        {name}
+                                                    </th>
+                                                );
+                                            })}
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {users.length > 0 ? (
+                                            loopUser
+                                        ) : (
+                                            <tr className={`${item} ${item}-empty`}>
+                                                <th scope="row">0</th>
+                                                <td>{`No ${item}s`}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                             )}
                         </section>
                     </Basic>
