@@ -8,13 +8,10 @@ import faTimesCircle from '@fortawesome/fontawesome-pro-regular/faTimesCircle';
 const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) => {
     const fieldClass = 'form-control';
     let wrapperClass = 'form-group';
-    if (error && error.length > 0) {
-        wrapperClass += ' has-error';
-    }
+    error && error.length > 0 && (wrapperClass += ' has-error');
     return (
-        // add Font Awesome icons to buttons
         <div className={wrapperClass}>
-            <label className="sr-only" htmlFor={name}>
+            <label htmlFor={name} className="sr-only">
                 {label}
             </label>
             <div className={`input-group input-group-${size}`}>

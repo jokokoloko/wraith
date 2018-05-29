@@ -46,14 +46,12 @@ class FormLogin extends Component {
         const emailLength = 5;
         const passwordLength = 5;
         let valid = true;
-        if (form.email === undefined || form.email.length < emailLength) {
-            error.email = `Email must be at least ${emailLength} characters.`;
-            valid = false;
-        }
-        if (form.password === undefined || form.password.length < passwordLength) {
-            error.password = `Password must be at least ${passwordLength} characters.`;
-            valid = false;
-        }
+        (form.email === undefined || form.email.length < emailLength) &&
+            (error.email = `Email must be at least ${emailLength} characters.`) &&
+            (valid = false);
+        (form.password === undefined || form.password.length < passwordLength) &&
+            (error.password = `Password must be at least ${passwordLength} characters.`) &&
+            (valid = false);
         this.setState({
             error,
         });
