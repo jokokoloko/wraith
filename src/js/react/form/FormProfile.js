@@ -7,6 +7,7 @@ import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt'
 import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
 import { findByString } from '../../filter';
+import { slugify } from '../../function';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 import Avatar from '../unit/Avatar';
@@ -50,6 +51,12 @@ class FormProfile extends Component {
             })) &&
             (form[object][name] = value);
 
+        this.setState({
+            form: Object.assign({}, form, {
+                slug: slugify(`${form.name.first} ${form.name.last}`),
+            }),
+        });
+
         // let form = Object.assign({}, this.state.form, {
         //     [name]: value,
         // });
@@ -59,6 +66,12 @@ class FormProfile extends Component {
         //             [name]: value,
         //         }),
         //     }));
+        //
+        // this.setState({
+        //     form: Object.assign({}, form, {
+        //         slug: slugify(`${form.name.first} ${form.name.last}`),
+        //     }),
+        // });
 
         // let form = {
         //     ...this.state.form,
@@ -72,13 +85,20 @@ class FormProfile extends Component {
         //             [name]: value,
         //         },
         //     });
+        //
+        // this.setState({
+        //     form: {
+        //         ...form,
+        //         slug: slugify(`${form.name.first} ${form.name.last}`),
+        //     },
+        // });
 
         // const { form } = this.state;
         // object ? (form[object][name] = value) : (form[name] = value);
-
-        this.setState({
-            form,
-        });
+        //
+        // this.setState({
+        //     form,
+        // });
     }
     onSubmit(event) {
         const { actionProfile } = this.props;
