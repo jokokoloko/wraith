@@ -1,3 +1,8 @@
+// General
+export const REQUEST = '_REQUEST';
+export const SUCCESS = '_SUCCESS';
+export const FAILURE = '_FAILURE';
+
 // Account
 export const ACCOUNT_ON = 'ACCOUNT_ON';
 export const ACCOUNT_OFF = 'ACCOUNT_OFF';
