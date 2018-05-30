@@ -15,8 +15,9 @@ class _UserHome extends Component {
         actionUser.usersLoad(true);
     }
     render() {
-        const item = 'user';
         const { loadingUsers, users } = this.props;
+        const item = 'user';
+        const empty = '-';
         const labelUser = ['#', 'Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
         const loopUser = users.map((user, index) => {
             const count = index + 1;
@@ -24,11 +25,11 @@ class _UserHome extends Component {
                 <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
                     <th scope="row">{count}</th>
                     <td>{user.email}</td>
-                    <td>{user.name && user.name.first ? user.name.first : '-'}</td>
-                    <td>{user.name && user.name.last ? user.name.last : '-'}</td>
-                    <td>{user.handle ? user.handle : '-'}</td>
-                    <td>{user.address && user.address.city ? user.address.city : '-'}</td>
-                    <td>{user.address && user.address.state ? user.address.state : '-'}</td>
+                    <td>{user.name && user.name.first ? user.name.first : empty}</td>
+                    <td>{user.name && user.name.last ? user.name.last : empty}</td>
+                    <td>{user.handle ? user.handle : empty}</td>
+                    <td>{user.address && user.address.city ? user.address.city : empty}</td>
+                    <td>{user.address && user.address.state ? user.address.state : empty}</td>
                     <td>
                         <Link to={`/user/${user.slug}`}>View</Link>
                     </td>
