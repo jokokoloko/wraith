@@ -175,6 +175,15 @@ button,
 	margin: 0;
 	}
 
+/* ----------!TABLE---------- */
+.table td,
+.table th {
+	@extend .p-xs-15;
+	}
+.table th {
+	font-weight: $font-weight-2;
+	}
+
 /* =========================== */
 /* ==========!WIDGET========== */
 /* =========================== */

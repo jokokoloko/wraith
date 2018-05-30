@@ -17,15 +17,18 @@ class _UserHome extends Component {
     render() {
         const item = 'user';
         const { loadingUsers, users } = this.props;
-        const labelUser = ['#', 'Email', 'Handle', 'Action'];
+        const labelUser = ['#', 'Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
         const loopUser = users.map((user, index) => {
-            console.log('WTF?', user);
             const count = index + 1;
             return (
                 <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
                     <th scope="row">{count}</th>
                     <td>{user.email}</td>
+                    <td>{user.name && user.name.first ? user.name.first : '-'}</td>
+                    <td>{user.name && user.name.last ? user.name.last : '-'}</td>
                     <td>{user.handle ? user.handle : '-'}</td>
+                    <td>{user.address && user.address.city ? user.address.city : '-'}</td>
+                    <td>{user.address && user.address.state ? user.address.state : '-'}</td>
                     <td>
                         <Link to={`/user/${user.slug}`}>View</Link>
                     </td>
@@ -44,31 +47,33 @@ class _UserHome extends Component {
                             {loadingUsers ? (
                                 <Loader position="exact-center fixed" label="Loading users" />
                             ) : (
-                                <table className={`table table-responsive table-bordered table-striped table-hover table-${item}`}>
-                                    <thead>
-                                        <tr>
-                                            {labelUser.map((name, index) => {
-                                                const count = index + 1;
-                                                return (
-                                                    <th key={`label-${count}`} className={`column-${count}`} scope="col">
-                                                        {name}
-                                                    </th>
-                                                );
-                                            })}
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {users.length > 0 ? (
-                                            loopUser
-                                        ) : (
-                                            <tr className={`${item} ${item}-empty`}>
-                                                <th scope="row">0</th>
-                                                <td>{`No ${item}s`}</td>
+                                <div className="table-container table-responsive-sm">
+                                    <table className={`table table-striped table-bordered table-style table-size-80 table-${item}`}>
+                                        <thead>
+                                            <tr>
+                                                {labelUser.map((name, index) => {
+                                                    const count = index + 1;
+                                                    return (
+                                                        <th key={`label-${count}`} className={`label label-${count}`} scope="col">
+                                                            {name}
+                                                        </th>
+                                                    );
+                                                })}
                                             </tr>
-                                        )}
-                                    </tbody>
-                                </table>
+                                        </thead>
+
+                                        <tbody>
+                                            {users.length > 0 ? (
+                                                loopUser
+                                            ) : (
+                                                <tr className={`${item} ${item}-empty`}>
+                                                    <th scope="row">0</th>
+                                                    <td>{`No ${item}s`}</td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             )}
                         </section>
                     </Basic>
