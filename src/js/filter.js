@@ -19,5 +19,8 @@ export const excludeByProperty = (array, name, value) => array.filter((object) =
 // checkStatus - checks the "status" portion of an action type string
 export const checkStatus = (string) => string.substr(-7);
 
+// addStatus - adds the given "status" portion of an action type string
+export const addStatus = (string, status) => string.concat('_', status);
+
 // removeStatus - removes the "status" portion of an action type string
 export const removeStatus = (string) => string.substring(0, string.length - 8);
