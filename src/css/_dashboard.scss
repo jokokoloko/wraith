@@ -2,8 +2,8 @@
 /* ==========!GRID========== */
 /* ========================= */
 
-$dashboard-void-sm: 80px;
-$dashboard-void-md: 130px;
+$dashboard-void-sm: 0;
+$dashboard-void-md: 0;
 $dashboard-void-lg: 210px;
 
 /* ----------!VOID---------- */
@@ -61,12 +61,14 @@ $dashboard-void-lg: 210px;
 /* ========================== */
 
 /* ----------!GUTTER---------- */
-.dashboard .block .container-fluid,
-.dashboard #header .container-fluid,
-.dashboard #footer .container-fluid {
-    padding-left: 50px;
-    padding-right: 20px;
-    }
+@include media-breakpoint-up(lg) {
+    .dashboard .block .container-fluid,
+    .dashboard #header .container-fluid,
+    .dashboard #footer .container-fluid {
+        padding-left: 50px;
+        padding-right: 20px;
+        }
+	}
 
 /* =========================== */
 /* ==========!REGION========== */

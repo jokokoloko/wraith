@@ -5,7 +5,7 @@ import * as client from '../../client';
 import * as path from '../../path';
 
 const Toolbar = ({ match }) => (
-    <aside id="toolbar">
+    <aside id="toolbar" className="d-none d-lg-block">
         <Link className="toolbar-brand" title={client.BRAND} rel="home" to={path.Root}>
             {client.BRAND}
         </Link>
