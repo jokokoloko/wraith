@@ -7,8 +7,8 @@ const Hero = ({ container, height, align, space, tint, color, id, source, altern
         {source && <Image position="fit exact-center" source={source} alternate={alternate} />}
 
         {children && (
-            <div className={`table relative ${space} ${tint}`}>
-                <div className="cell">
+            <div className={`display-table relative ${space} ${tint}`}>
+                <div className="display-cell">
                     <div className="zone">
                         <div className={container}>{children}</div>
                     </div>
