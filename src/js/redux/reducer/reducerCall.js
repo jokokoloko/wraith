@@ -1,21 +1,17 @@
 import initial from '../initial';
-import {
-    CALLS_VOID,
-    REQUEST,
-    SUCCESS,
-    FAILURE,
-} from '../type';
+import { REQUEST, SUCCESS, FAILURE, CALLS_VOID } from '../type';
+import { checkStatus, removeStatus } from '../../filter';
 
 export default function reducerCall(state = initial.calls, action) {
-    let type = action.type.substring(0, action.type.length-8);
-    let typeResponse = action.type.substr(-8);
+    let status = checkStatus(action.type);
+    let call = removeStatus(action.type);
 
-    if (type === CALLS_VOID) {
+    if (action.type === CALLS_VOID) {
         return initial.calls;
-    } else if (typeResponse === REQUEST) {
-        return state.concat(type);
-    } else if (typeResponse === SUCCESS || typeResponse === FAILURE) {
-        return state.filter((request) => request !== type);
+    } else if (status === REQUEST) {
+        return state.concat(call);
+    } else if (status === SUCCESS || status === FAILURE) {
+        return state.filter((request) => request !== call);
     } else {
         return state;
     }

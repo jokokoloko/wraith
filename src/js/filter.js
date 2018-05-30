@@ -15,3 +15,9 @@ export const includeByProperty = (array, name, value) => array.filter((object) =
 
 // excludeByProperty - returns a new array containing all the original objects except for any objects matching the property (used to remove an object from an array)
 export const excludeByProperty = (array, name, value) => array.filter((object) => object[name] !== value);
+
+// checkStatus - checks the "status" portion of an action type string
+export const checkStatus = (string) => string.substr(-7);
+
+// removeStatus - removes the "status" portion of an action type string
+export const removeStatus = (string) => string.substring(0, string.length - 8);

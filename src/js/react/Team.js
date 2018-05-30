@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { USERS_LOAD_REQUEST } from '../redux/type';
-import { findByString } from '../filter';
+import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
@@ -56,7 +56,7 @@ Team.propTypes = {
 
 function mapStateToProps({ calls, users }) {
     return {
-        loadingUsers: findByString(calls, USERS_LOAD_REQUEST),
+        loadingUsers: findByString(calls, removeStatus(USERS_LOAD_REQUEST)),
         users,
     };
 }

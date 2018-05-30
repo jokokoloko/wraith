@@ -6,7 +6,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
-import { findByString } from '../../filter';
+import { findByString, removeStatus } from '../../filter';
 import { slugify } from '../../function';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
@@ -282,11 +282,7 @@ class FormProfile extends Component {
                                 </h2>
                                 <h3 className="handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
                                 <address className="contact" itemType="http://schema.org/Organization" itemScope>
-                                    <p
-                                        className="address"
-                                        itemProp="address"
-                                        itemType="http://schema.org/PostalAddress"
-                                        itemScope>
+                                    <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                         <FontAwesomeIcon icon={faMapMarkerAlt} />
                                         {form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>
@@ -351,7 +347,7 @@ FormProfile.propTypes = {
 
 function mapStateToProps({ profile, calls }) {
     return {
-        submitting: findByString(calls, PROFILE_EDIT_REQUEST),
+        submitting: findByString(calls, removeStatus(PROFILE_EDIT_REQUEST)),
         profile,
     };
 }

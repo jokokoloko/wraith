@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../redux/action/actionAccount';
 import { ACCOUNT_CHECK_REQUEST, PROFILE_LOAD_REQUEST } from '../redux/type';
-import { findByString } from '../filter';
+import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
@@ -77,8 +77,8 @@ Root.propTypes = {
 
 function mapStateToProps({ account, profile, calls }) {
     return {
-        loadingAccount: findByString(calls, ACCOUNT_CHECK_REQUEST),
-        loadingProfile: findByString(calls, PROFILE_LOAD_REQUEST),
+        loadingAccount: findByString(calls, removeStatus(ACCOUNT_CHECK_REQUEST)),
+        loadingProfile: findByString(calls, removeStatus(PROFILE_LOAD_REQUEST)),
         account,
         profile,
         calls, // remove

@@ -1,7 +1,7 @@
-// General
-export const REQUEST = '_REQUEST';
-export const SUCCESS = '_SUCCESS';
-export const FAILURE = '_FAILURE';
+// Status
+export const REQUEST = 'REQUEST';
+export const SUCCESS = 'SUCCESS';
+export const FAILURE = 'FAILURE';
 
 // Account
 export const ACCOUNT_ON = 'ACCOUNT_ON';

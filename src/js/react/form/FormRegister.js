@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
 import { ACCOUNT_REGISTER_REQUEST } from '../../redux/type';
-import { findByString } from '../../filter';
+import { findByString, removeStatus } from '../../filter';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -100,7 +100,7 @@ FormRegister.propTypes = {
 
 function mapStateToProps({ calls }) {
     return {
-        submitting: findByString(calls, ACCOUNT_REGISTER_REQUEST),
+        submitting: findByString(calls, removeStatus(ACCOUNT_REGISTER_REQUEST)),
     };
 }
 
