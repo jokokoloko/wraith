@@ -1,6 +1,7 @@
 import { authentication, users } from './firebase';
 
 class apiAccount {
+    console.log("hi henry");
     // Check
     static accountCheck = () =>
         new Promise((resolve, reject) => {
