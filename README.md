@@ -31,6 +31,8 @@ $ npm config set "@fortawesome:registry" https://npm.fontawesome.com
 $ npm config set "//npm.fontawesome.com/:_authToken" 8516A1CE-3B7B-48A0-BF42-4CA83CD66816
 ```
 
+If you want to use Redux DevTools to debug Redux, download the Chrome extension here: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=en
+
 Next, go to the spectre repository on your local machine and install the packages:
 
 ```sh
