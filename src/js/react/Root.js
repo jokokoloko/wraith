@@ -37,9 +37,11 @@ class Root extends Component {
     }
     render() {
         const { loadingAccount, loadingProfile, account, profile, calls } = this.props;
-        let authenticated = false;
-        account.authenticated && profile.id && (authenticated = true);
+        const authenticated = account.authenticated && profile.id && profile.email ? true : false;
+
         console.log('Calls:', calls); // remove
+        console.log('Authenticated:', authenticated); // remove
+
         return account.initialized === false || loadingAccount || loadingProfile ? (
             <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
         ) : (
