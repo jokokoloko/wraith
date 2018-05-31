@@ -24,7 +24,10 @@ class _UserHome extends Component {
             return (
                 <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
                     <th scope="row">{count}</th>
-                    <td>{user.email}</td>
+                    <td>
+                        <span className={`status status-${user.status}`}>&#9679;</span>
+                        {user.email}
+                    </td>
                     <td>{user.name && user.name.first ? user.name.first : empty}</td>
                     <td>{user.name && user.name.last ? user.name.last : empty}</td>
                     <td>{user.handle ? user.handle : empty}</td>

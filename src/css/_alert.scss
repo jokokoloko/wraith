@@ -25,14 +25,12 @@
 	}
 
 /* ----------!DEFAULT---------- */
-.status,
 .strength {
 	background-color: #eee !important;
 	border: 1px solid #ddd !important;
 	position: relative;
 	color: #000;
 	}
-.status,
 .strength {
 	border: 0 none $color-transparent !important;
 	margin: 50px 0 0;
@@ -54,7 +52,6 @@
 	}
 
 /* ----------!FAILURE---------- */
-.status.error,
 .strength.short {
 	background-color: #ffa0a0 !important;
 	border-color: #f04040 !important;
@@ -77,7 +74,6 @@
 	}
 
 /* ----------!SUCCESS---------- */
-.status,
 .strength.strong {
 	background-color: #c3ff88 !important;
 	border-color: #8dff1c !important;
