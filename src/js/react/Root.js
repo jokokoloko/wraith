@@ -32,8 +32,8 @@ class Root extends Component {
         actionAccount.accountCheck(); // todo: add way to unsubscribe from listener
     }
     onLogOut() {
-        const { actionAccount } = this.props;
-        actionAccount.accountLogOut();
+        const { profile, actionAccount } = this.props;
+        actionAccount.accountLogOut(profile);
     }
     render() {
         const { loadingAccount, loadingProfile, account, profile, calls } = this.props;

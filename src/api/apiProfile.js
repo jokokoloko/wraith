@@ -4,6 +4,13 @@ class apiProfile {
     // Edit
     static profileEdit = (profile) => users.doc(profile.id).update(profile);
 
+    // Status
+    static profileStatus = (id, status) =>
+        users.doc(id).update({
+            [`time.${status}`]: new Date(),
+            status,
+        });
+
     // Load
     static profileLoad = (account) =>
         users

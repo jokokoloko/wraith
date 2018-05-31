@@ -4,6 +4,9 @@ import {
     PROFILE_EDIT_REQUEST,
     PROFILE_EDIT_SUCCESS,
     PROFILE_EDIT_FAILURE,
+    PROFILE_STATUS_REQUEST,
+    PROFILE_STATUS_SUCCESS,
+    PROFILE_STATUS_FAILURE,
     PROFILE_LOAD_REQUEST,
     PROFILE_LOAD_SUCCESS,
     PROFILE_LOAD_FAILURE,
@@ -42,6 +45,35 @@ export const profileEdit = (profile) => (dispatch) => {
         });
 };
 
+// Status
+export const profileStatusRequest = () => ({
+    type: PROFILE_STATUS_REQUEST,
+});
+
+export const profileStatusSuccess = () => ({
+    type: PROFILE_STATUS_SUCCESS,
+});
+
+export const profileStatusFailure = () => ({
+    type: PROFILE_STATUS_FAILURE,
+});
+
+export const profileStatus = (id, status) => (dispatch) => {
+    console.log('===== profileStatus BEGIN ====='); // remove
+    dispatch(profileStatusRequest());
+    return apiProfile
+        .profileStatus(id, status)
+        .then(() => {
+            dispatch(profileStatusSuccess());
+            console.log('===== profileStatus END ====='); // remove
+        })
+        .catch((error) => {
+            dispatch(profileStatusFailure(error));
+            toastr.error(error.message);
+            throw error;
+        });
+};
+
 // Load
 export const profileLoadRequest = () => ({
     type: PROFILE_LOAD_REQUEST,
@@ -58,12 +90,14 @@ export const profileLoadFailure = (error) => ({
 });
 
 export const profileLoad = (account) => (dispatch) => {
+    console.log('===== profileLoad BEGIN ====='); // remove
     dispatch(profileLoadRequest());
     return apiProfile
         .profileLoad(account)
         .then((profile) => {
             dispatch(profileLoadSuccess(profile));
             toastr.success(`Welcome ${profile.name && profile.name.first ? profile.name.first : profile.email}!`);
+            console.log('===== profileLoad END ====='); // remove
         })
         .catch((error) => {
             dispatch(profileLoadFailure(error));

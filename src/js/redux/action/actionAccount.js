@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
+import { ONLINE, OFFLINE } from '../../data';
 import {
     ACCOUNT_ON,
     ACCOUNT_OFF,
@@ -19,7 +20,7 @@ import {
     ACCOUNT_RESET_PASSWORD_SUCCESS,
     ACCOUNT_RESET_PASSWORD_FAILURE,
 } from '../type';
-import { profileLoad, profileVoid } from './actionProfile';
+import { profileStatus, profileLoad, profileVoid } from './actionProfile';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -49,6 +50,10 @@ export const accountCheck = () => (dispatch) => {
     dispatch(accountCheckRequest());
     return apiAccount
         .accountCheck()
+        .then((account) => {
+            account && dispatch(profileStatus(account.uid, ONLINE)); // todo: make profileStatus always finish before profileLoad starts
+            return account;
+        })
         .then((account) => {
             account ? dispatch(profileLoad(account)) : dispatch(profileVoid());
             account ? dispatch(accountOn()) : dispatch(accountOff());
@@ -135,11 +140,12 @@ export const accountLogOutFailure = (error) => ({
     error,
 });
 
-export const accountLogOut = () => (dispatch) => {
+export const accountLogOut = (profile) => (dispatch) => {
     dispatch(accountLogOutRequest());
     return apiAccount
         .accountLogOut()
         .then(() => {
+            dispatch(profileStatus(profile.id, OFFLINE));
             dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
             dispatch(accountLogOutSuccess());
             toastr.info('Logout successful.');
