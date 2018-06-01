@@ -38,6 +38,7 @@ class FormProfile extends Component {
         });
     }
     onChange(event) {
+        const { profile } = this.props;
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -53,7 +54,7 @@ class FormProfile extends Component {
 
         this.setState({
             form: Object.assign({}, form, {
-                slug: slugify(`${form.name.first} ${form.name.last}`),
+                slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
             }),
         });
 
@@ -69,7 +70,7 @@ class FormProfile extends Component {
         //
         // this.setState({
         //     form: Object.assign({}, form, {
-        //         slug: slugify(`${form.name.first} ${form.name.last}`),
+        //         slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
         //     }),
         // });
 
@@ -89,7 +90,7 @@ class FormProfile extends Component {
         // this.setState({
         //     form: {
         //         ...form,
-        //         slug: slugify(`${form.name.first} ${form.name.last}`),
+        //         slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
         //     },
         // });
 

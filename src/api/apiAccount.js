@@ -1,4 +1,5 @@
 import { authentication, users } from './firebase';
+import { generateID } from '../js/function';
 
 class apiAccount {
     // Check
@@ -24,8 +25,9 @@ class apiAccount {
                 users
                     .doc(account.uid)
                     .set({
-                        id: account.uid,
                         email: account.email,
+                        id: account.uid,
+                        slug: generateID(account.uid).toLowerCase(),
                         time: {
                             created: new Date(),
                         },
