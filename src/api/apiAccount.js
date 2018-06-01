@@ -1,5 +1,6 @@
 import { authentication, users } from './firebase';
 import { generateID } from '../js/function';
+import { ONLINE, FRESH } from '../js/data';
 
 class apiAccount {
     // Check
@@ -28,7 +29,9 @@ class apiAccount {
                         email: account.email,
                         id: account.uid,
                         slug: generateID(account.uid).toLowerCase(),
+                        status: FRESH,
                         time: {
+                            [ONLINE]: new Date(),
                             created: new Date(),
                         },
                     })
@@ -40,7 +43,18 @@ class apiAccount {
     static accountResetPassword = (account) => authentication.sendPasswordResetEmail(account.email);
 
     // Log In
-    static accountLogIn = (account) => authentication.signInWithEmailAndPassword(account.email, account.password);
+    static accountLogIn = (account) =>
+        authentication.signInWithEmailAndPassword(account.email, account.password).then(
+            (account) =>
+                users
+                    .doc(account.uid)
+                    .update({
+                        [`time.${ONLINE}`]: new Date(),
+                        status: ONLINE,
+                    })
+                    .then(() => console.log('Logged in user with ID:', account.uid)) // remove
+                    .catch((error) => console.error('Error logging in user:', error)), // remove
+        );
 
     // Log Out
     static accountLogOut = () => authentication.signOut();

@@ -59,13 +59,11 @@ export const profileStatusFailure = () => ({
 });
 
 export const profileStatus = (id, status) => (dispatch) => {
-    console.log('===== profileStatus BEGIN ====='); // remove
     dispatch(profileStatusRequest());
     return apiProfile
         .profileStatus(id, status)
         .then(() => {
             dispatch(profileStatusSuccess());
-            console.log('===== profileStatus END ====='); // remove
         })
         .catch((error) => {
             dispatch(profileStatusFailure(error));

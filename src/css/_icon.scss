@@ -23,6 +23,7 @@
 .status-offline {
 	color: $color-smoke;
 	}
-.status-online {
+.status-online,
+.status-fresh {
 	color: $color-brand-green-400;
 	}

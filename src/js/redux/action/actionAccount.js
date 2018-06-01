@@ -1,6 +1,6 @@
 import toastr from 'toastr';
 import apiAccount from '../../../api/apiAccount';
-import { ONLINE, OFFLINE } from '../../data';
+import { OFFLINE } from '../../data';
 import {
     ACCOUNT_ON,
     ACCOUNT_OFF,
@@ -51,10 +51,6 @@ export const accountCheck = () => (dispatch) => {
     return apiAccount
         .accountCheck()
         .then((account) => {
-            account && dispatch(profileStatus(account.uid, ONLINE)); // todo: make profileStatus always finish before profileLoad starts
-            return account;
-        })
-        .then((account) => {
             account ? dispatch(profileLoad(account)) : dispatch(profileVoid());
             account ? dispatch(accountOn()) : dispatch(accountOff());
             dispatch(accountCheckSuccess());
@@ -81,6 +77,7 @@ export const accountRegisterFailure = (error) => ({
 });
 
 export const accountRegister = (account) => (dispatch) => {
+    console.log('===== accountRegister BEGIN ====='); // remove
     dispatch(accountRegisterRequest());
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
@@ -88,6 +85,7 @@ export const accountRegister = (account) => (dispatch) => {
         .then(() => {
             dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
             dispatch(accountRegisterSuccess());
+            console.log('===== accountRegister END ====='); // remove
         })
         .catch((error) => {
             dispatch(accountRegisterFailure(error));
@@ -111,6 +109,7 @@ export const accountLogInFailure = (error) => ({
 });
 
 export const accountLogIn = (account) => (dispatch) => {
+    console.log('===== accountLogIn BEGIN ====='); // remove
     dispatch(accountLogInRequest());
     toastr.warning('Logging in...'); // possibly remove
     return apiAccount
@@ -118,6 +117,7 @@ export const accountLogIn = (account) => (dispatch) => {
         .then(() => {
             dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
             dispatch(accountLogInSuccess());
+            console.log('===== accountLogIn END ====='); // remove
         })
         .catch((error) => {
             dispatch(accountLogInFailure(error));
