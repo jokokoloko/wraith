@@ -48,5 +48,3 @@ To build for production:
 ```sh
 $ npm run build
 ```
-
-## hola!

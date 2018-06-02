@@ -58,13 +58,11 @@ export const profileStatusFailure = () => ({
     type: PROFILE_STATUS_FAILURE,
 });
 
-export const profileStatus = (id, status) => (dispatch) => {
+export const profileStatus = (profile, status) => (dispatch) => {
     dispatch(profileStatusRequest());
     return apiProfile
-        .profileStatus(id, status)
-        .then(() => {
-            dispatch(profileStatusSuccess());
-        })
+        .profileStatus(profile, status)
+        .then(() => dispatch(profileStatusSuccess()))
         .catch((error) => {
             dispatch(profileStatusFailure(error));
             toastr.error(error.message);

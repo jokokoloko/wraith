@@ -5,8 +5,8 @@ class apiProfile {
     static profileEdit = (profile) => users.doc(profile.id).update(profile);
 
     // Status
-    static profileStatus = (id, status) =>
-        users.doc(id).update({
+    static profileStatus = (profile, status) =>
+        users.doc(profile.id).update({
             [`time.${status}`]: new Date(),
             status,
         });

@@ -1,6 +1,6 @@
 import { authentication, users } from './firebase';
 import { generateID } from '../js/function';
-import { ONLINE, FRESH } from '../js/data';
+import { FRESH, ONLINE, OFFLINE } from '../js/data';
 
 class apiAccount {
     // Check
@@ -49,15 +49,26 @@ class apiAccount {
                 users
                     .doc(account.uid)
                     .update({
-                        [`time.${ONLINE}`]: new Date(),
                         status: ONLINE,
+                        [`time.${ONLINE}`]: new Date(),
                     })
                     .then(() => console.log('Logged in user with ID:', account.uid)) // remove
                     .catch((error) => console.error('Error logging in user:', error)), // remove
         );
 
-    // Log Out DOM DOM DOM &&&&&&& HENRY
-    static accountLogOut = () => authentication.signOut();
+    // Log Out
+    static accountLogOut = (profile) =>
+        authentication.signOut().then(
+            () =>
+                users
+                    .doc(profile.id)
+                    .update({
+                        status: OFFLINE,
+                        [`time.${OFFLINE}`]: new Date(),
+                    })
+                    .then(() => console.log('Logged out user with ID:', profile.id)) // remove
+                    .catch((error) => console.error('Error logging out user:', error)), // remove
+        );
 }
 
 export default apiAccount;
