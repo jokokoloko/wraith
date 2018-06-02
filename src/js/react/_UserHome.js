@@ -28,11 +28,11 @@ class _UserHome extends Component {
                         <span className={`status status-${user.status}`}>&#9679;</span>
                         {user.email}
                     </td>
-                    <td>{user.name && user.name.first ? user.name.first : empty}</td>
-                    <td>{user.name && user.name.last ? user.name.last : empty}</td>
-                    <td>{user.handle ? user.handle : empty}</td>
-                    <td>{user.address && user.address.city ? user.address.city : empty}</td>
-                    <td>{user.address && user.address.state ? user.address.state : empty}</td>
+                    <td>{(user.name && user.name.first) || empty}</td>
+                    <td>{(user.name && user.name.last) || empty}</td>
+                    <td>{user.handle || empty}</td>
+                    <td>{(user.address && user.address.city) || empty}</td>
+                    <td>{(user.address && user.address.state) || empty}</td>
                     <td>
                         <Link to={`/user/${user.slug}`}>View</Link>
                     </td>
@@ -52,13 +52,19 @@ class _UserHome extends Component {
                                 <Loader position="exact-center fixed" label="Loading users" />
                             ) : (
                                 <div className="table-container table-responsive-sm">
-                                    <table className={`table table-striped table-bordered table-style table-size-80 table-${item}`}>
+                                    <table
+                                        className={`table table-striped table-bordered table-style table-size-80 table-${item}`}
+                                    >
                                         <thead>
                                             <tr>
                                                 {labelUser.map((name, index) => {
                                                     const count = index + 1;
                                                     return (
-                                                        <th key={`label-${count}`} className={`label label-${count}`} scope="col">
+                                                        <th
+                                                            key={`label-${count}`}
+                                                            className={`label label-${count}`}
+                                                            scope="col"
+                                                        >
                                                             {name}
                                                         </th>
                                                     );
