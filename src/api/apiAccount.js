@@ -56,7 +56,7 @@ class apiAccount {
                     .catch((error) => console.error('Error logging in user:', error)), // remove
         );
 
-    // Log Out DOM DOM DOM
+    // Log Out DOM DOM DOM &&&&&&& HENRY
     static accountLogOut = () => authentication.signOut();
 }
 
