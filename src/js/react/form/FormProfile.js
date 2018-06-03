@@ -26,13 +26,10 @@ class FormProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const form = Object.assign({}, this.state.form, this.props.profile);
-
-        // const form = {
-        //     ...this.state.form,
-        //     ...this.props.profile,
-        // };
-
+        const form = {
+            ...this.state.form,
+            ...this.props.profile,
+        };
         this.setState({
             form,
         });
@@ -43,86 +40,34 @@ class FormProfile extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         const object = target.dataset.object;
-
-        let form = Object.assign({}, this.state.form);
-        form[name] = value;
+        let form = {
+            ...this.state.form,
+            [name]: value,
+        };
         object &&
-            (form = Object.assign({}, this.state.form, {
-                [object]: Object.assign({}, this.state.form[object]),
-            })) &&
-            (form[object][name] = value);
-
+            (form = {
+                ...this.state.form,
+                [object]: {
+                    ...this.state.form[object],
+                    [name]: value,
+                },
+            });
         this.setState({
-            form: Object.assign({}, form, {
+            form: {
+                ...form,
                 slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
-            }),
+            },
         });
-
-        // let form = Object.assign({}, this.state.form, {
-        //     [name]: value,
-        // });
-        // object &&
-        //     (form = Object.assign({}, this.state.form, {
-        //         [object]: Object.assign({}, this.state.form[object], {
-        //             [name]: value,
-        //         }),
-        //     }));
-        //
-        // this.setState({
-        //     form: Object.assign({}, form, {
-        //         slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
-        //     }),
-        // });
-
-        // let form = {
-        //     ...this.state.form,
-        //     [name]: value,
-        // };
-        // object &&
-        //     (form = {
-        //         ...this.state.form,
-        //         [object]: {
-        //             ...this.state.form[object],
-        //             [name]: value,
-        //         },
-        //     });
-        //
-        // this.setState({
-        //     form: {
-        //         ...form,
-        //         slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
-        //     },
-        // });
-
-        // const { form } = this.state;
-        // object ? (form[object][name] = value) : (form[name] = value);
-        //
-        // this.setState({
-        //     form,
-        // });
     }
     onSubmit(event) {
         const { actionProfile } = this.props;
-
-        const form = Object.assign({}, this.state.form, {
-            time: Object.assign({}, this.state.form.time),
-        });
-        form.time.edited = new Date();
-
-        // const form = Object.assign({}, this.state.form, {
-        //     time: Object.assign({}, this.state.form.time, {
-        //         edited: new Date(),
-        //     }),
-        // });
-
-        // const form = {
-        //     ...this.state.form,
-        //     time: {
-        //         ...this.state.form.time,
-        //         edited: new Date(),
-        //     },
-        // };
-
+        const form = {
+            ...this.state.form,
+            time: {
+                ...this.state.form.time,
+                edited: new Date(),
+            },
+        };
         event.preventDefault();
         actionProfile.profileEdit(form);
     }
