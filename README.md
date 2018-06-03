@@ -45,7 +45,7 @@ To run the application for development:
 $ npm start
 ```
 
-If you want to use Redux DevTools to debug Redux during development, download the Chrome extension here: [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=en)
+If you want to use Redux DevTools to debug Redux, download the Chrome extension here: [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=en)
 
 ## Production
 
