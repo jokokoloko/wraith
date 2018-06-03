@@ -86,14 +86,12 @@ export const profileLoadFailure = (error) => ({
 });
 
 export const profileLoad = () => (dispatch) => {
-    console.log('===== profileLoad BEGIN ====='); // remove
     dispatch(profileLoadRequest());
     return apiProfile
         .profileLoad()
         .then((profile) => {
             dispatch(profileLoadSuccess(profile));
             toastr.success(`Welcome ${profile.name && profile.name.first ? profile.name.first : profile.email}!`);
-            console.log('===== profileLoad END ====='); // remove
         })
         .catch((error) => {
             dispatch(profileLoadFailure(error));

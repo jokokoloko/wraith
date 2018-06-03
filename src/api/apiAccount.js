@@ -16,7 +16,6 @@ class apiAccount {
                 },
                 (error) => reject(error),
             );
-            console.log('Account checked.'); // remove
         });
 
     // Register

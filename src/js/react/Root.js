@@ -36,12 +36,8 @@ class Root extends Component {
         actionAccount.accountLogOut();
     }
     render() {
-        const { loadingAccount, loadingProfile, account, profile, calls } = this.props;
+        const { loadingAccount, loadingProfile, account, profile } = this.props;
         const authenticated = account.authenticated && profile.id && profile.email ? true : false;
-
-        console.log('Calls:', calls); // remove
-        console.log('Authenticated:', authenticated); // remove
-
         return account.initialized === false || loadingAccount || loadingProfile ? (
             <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
         ) : (
@@ -83,7 +79,6 @@ function mapStateToProps({ account, profile, calls }) {
         loadingProfile: findByString(calls, removeStatus(PROFILE_LOAD_REQUEST)),
         account,
         profile,
-        calls, // remove
     };
 }
 
