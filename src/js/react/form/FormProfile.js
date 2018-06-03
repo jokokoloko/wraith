@@ -39,18 +39,18 @@ class FormProfile extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         const object = target.dataset.object;
-        let form = {
-            ...this.state.form,
-            [name]: value,
-        };
-        object &&
-            (form = {
-                ...this.state.form,
-                [object]: {
-                    ...this.state.form[object],
-                    [name]: value,
-                },
-            });
+        const form = object
+            ? {
+                  ...this.state.form,
+                  [object]: {
+                      ...this.state.form[object],
+                      [name]: value,
+                  },
+              }
+            : {
+                  ...this.state.form,
+                  [name]: value,
+              };
         this.setState({
             form,
         });
