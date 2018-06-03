@@ -11,9 +11,16 @@ Firebase `5.0.4`</br >
 Font Awesome `1.1.8`</br >
 Bootstrap `4.1.0`
 
-## Database
+## Platform
 
-[Firebase](https://firebase.google.com/) has been added as a temporary dependency for testing authentication with React, React Router, and Redux.
+This application is built using [Firebase](https://firebase.google.com/) as its mobile development platform.
+
+The Firebase services that are currently being used:
+
+[Authentication](https://firebase.google.com/docs/auth)</br >
+[Cloud Firestore](https://firebase.google.com/docs/firestore)
+
+Comparisons with other platforms:
 
 [Firebase vs. Azure Search](http://db-engines.com/en/system/Firebase+Realtime+Database%3BMicrosoft+Azure+Search)
 
