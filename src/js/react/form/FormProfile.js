@@ -35,7 +35,6 @@ class FormProfile extends Component {
         });
     }
     onChange(event) {
-        const { profile } = this.props;
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -53,20 +52,20 @@ class FormProfile extends Component {
                 },
             });
         this.setState({
-            form: {
-                ...form,
-                slug: form.name.first && form.name.last ? slugify(`${form.name.first} ${form.name.last}`) : profile.slug,
-            },
+            form,
         });
     }
     onSubmit(event) {
-        const { actionProfile } = this.props;
+        const { profile, actionProfile } = this.props;
+        const { name } = this.state.form;
+        const slug = name.first && name.last ? slugify(`${name.first} ${name.last}`) : profile.slug;
         const form = {
             ...this.state.form,
             time: {
                 ...this.state.form.time,
                 edited: new Date(),
             },
+            slug,
         };
         event.preventDefault();
         actionProfile.profileEdit(form);
