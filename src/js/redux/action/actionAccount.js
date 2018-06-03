@@ -50,7 +50,7 @@ export const accountCheck = () => (dispatch) => {
     return apiAccount
         .accountCheck()
         .then((account) => {
-            account ? dispatch(profileLoad(account)) : dispatch(profileVoid());
+            account ? dispatch(profileLoad()) : dispatch(profileVoid());
             account ? dispatch(accountOn()) : dispatch(accountOff());
             dispatch(accountCheckSuccess());
         })
@@ -139,10 +139,10 @@ export const accountLogOutFailure = (error) => ({
     error,
 });
 
-export const accountLogOut = (profile) => (dispatch) => {
+export const accountLogOut = () => (dispatch) => {
     dispatch(accountLogOutRequest());
     return apiAccount
-        .accountLogOut(profile)
+        .accountLogOut()
         .then(() => {
             dispatch(accountCheck()); // rework when onAuthStateChanged() is correctly abstracted
             dispatch(accountLogOutSuccess());

@@ -1,5 +1,6 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore'; // add this to use Firestore (possibly only necessary while in beta)
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 const config = {
     apiKey: 'AIzaSyCuh2sVwKQcaLSTyW9EKXplIdW6b22ZPk4',

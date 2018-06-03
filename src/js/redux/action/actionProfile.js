@@ -58,10 +58,10 @@ export const profileStatusFailure = () => ({
     type: PROFILE_STATUS_FAILURE,
 });
 
-export const profileStatus = (profile, status) => (dispatch) => {
+export const profileStatus = (status) => (dispatch) => {
     dispatch(profileStatusRequest());
     return apiProfile
-        .profileStatus(profile, status)
+        .profileStatus(status)
         .then(() => dispatch(profileStatusSuccess()))
         .catch((error) => {
             dispatch(profileStatusFailure(error));
@@ -85,11 +85,11 @@ export const profileLoadFailure = (error) => ({
     error,
 });
 
-export const profileLoad = (account) => (dispatch) => {
+export const profileLoad = () => (dispatch) => {
     console.log('===== profileLoad BEGIN ====='); // remove
     dispatch(profileLoadRequest());
     return apiProfile
-        .profileLoad(account)
+        .profileLoad()
         .then((profile) => {
             dispatch(profileLoadSuccess(profile));
             toastr.success(`Welcome ${profile.name && profile.name.first ? profile.name.first : profile.email}!`);

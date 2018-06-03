@@ -22,53 +22,50 @@ class apiAccount {
     // Register
     static accountRegister = (account) =>
         authentication.createUserWithEmailAndPassword(account.email, account.password).then(
-            (account) =>
+            () =>
                 users
-                    .doc(account.uid)
+                    .doc(authentication.currentUser.uid)
                     .set({
-                        email: account.email,
-                        id: account.uid,
-                        slug: generateID(account.uid).toLowerCase(),
+                        email: authentication.currentUser.email,
+                        id: authentication.currentUser.uid,
+                        slug: generateID(authentication.currentUser.uid).toLowerCase(),
                         status: FRESH,
                         time: {
                             [ONLINE]: new Date(),
                             created: new Date(),
                         },
                     })
-                    .then(() => console.log('Added user with ID:', account.uid)) // remove
+                    .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
                     .catch((error) => console.error('Error adding user:', error)), // remove
         );
-
-    // Reset Password
-    static accountResetPassword = (account) => authentication.sendPasswordResetEmail(account.email);
 
     // Log In
     static accountLogIn = (account) =>
         authentication.signInWithEmailAndPassword(account.email, account.password).then(
-            (account) =>
+            () =>
                 users
-                    .doc(account.uid)
+                    .doc(authentication.currentUser.uid)
                     .update({
                         status: ONLINE,
                         [`time.${ONLINE}`]: new Date(),
                     })
-                    .then(() => console.log('Logged in user with ID:', account.uid)) // remove
+                    .then(() => console.log('Logged in user with ID:', authentication.currentUser.uid)) // remove
                     .catch((error) => console.error('Error logging in user:', error)), // remove
         );
 
     // Log Out
-    static accountLogOut = (profile) =>
-        authentication.signOut().then(
-            () =>
-                users
-                    .doc(profile.id)
-                    .update({
-                        status: OFFLINE,
-                        [`time.${OFFLINE}`]: new Date(),
-                    })
-                    .then(() => console.log('Logged out user with ID:', profile.id)) // remove
-                    .catch((error) => console.error('Error logging out user:', error)), // remove
-        );
+    static accountLogOut = () =>
+        users
+            .doc(authentication.currentUser.uid)
+            .update({
+                status: OFFLINE,
+                [`time.${OFFLINE}`]: new Date(),
+            })
+            .then(() => authentication.signOut().then(() => console.log('Logged out user.'))) // remove
+            .catch((error) => console.error('Error logging out user:', error)); // remove
+
+    // Reset Password
+    static accountResetPassword = (account) => authentication.sendPasswordResetEmail(account.email);
 }
 
 export default apiAccount;

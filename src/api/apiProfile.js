@@ -1,20 +1,20 @@
-import { users } from './firebase';
+import { authentication, users } from './firebase';
 
 class apiProfile {
     // Edit
-    static profileEdit = (profile) => users.doc(profile.id).update(profile);
+    static profileEdit = (profile) => users.doc(authentication.currentUser.uid).update(profile);
 
     // Status
-    static profileStatus = (profile, status) =>
-        users.doc(profile.id).update({
+    static profileStatus = (status) =>
+        users.doc(authentication.currentUser.uid).update({
             [`time.${status}`]: new Date(),
             status,
         });
 
     // Load
-    static profileLoad = (account) =>
+    static profileLoad = () =>
         users
-            .doc(account.uid)
+            .doc(authentication.currentUser.uid)
             .get()
             .then((user) => {
                 user.exists ? console.log('Profile:', user.data()) : console.log('No such user!'); // remove
