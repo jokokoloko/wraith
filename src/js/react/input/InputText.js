@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputText = ({ type, name, label, placeholder, size, onChange, value, error, object }) => {
+const InputText = ({ type, name, label, placeholder, size, onChange, value, error, group }) => {
     const fieldClass = `form-control form-control-${size}`;
     let wrapperClass = 'form-group';
     error && error.length > 0 && (wrapperClass += ' has-error');
@@ -19,7 +19,7 @@ const InputText = ({ type, name, label, placeholder, size, onChange, value, erro
                     onChange={onChange}
                     value={value}
                     autoComplete="on"
-                    data-object={object}
+                    data-group={group}
                 />
             ) : (
                 <input
@@ -31,7 +31,7 @@ const InputText = ({ type, name, label, placeholder, size, onChange, value, erro
                     onChange={onChange}
                     value={value}
                     autoComplete="on"
-                    data-object={object}
+                    data-group={group}
                 />
             )}
             {error && (
@@ -52,7 +52,7 @@ InputText.propTypes = {
     onChange: PropTypes.func.isRequired,
     value: PropTypes.string,
     error: PropTypes.string,
-    object: PropTypes.string,
+    group: PropTypes.string,
 };
 
 InputText.defaultProps = {

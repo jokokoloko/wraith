@@ -37,19 +37,19 @@ class FormProfile extends Component {
     onChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        const object = target.dataset.object;
-        const form = object
+        const field = target.name;
+        const group = target.dataset.group;
+        const form = group
             ? {
                   ...this.state.form,
-                  [object]: {
-                      ...this.state.form[object],
-                      [name]: value,
+                  [group]: {
+                      ...this.state.form[group],
+                      [field]: value,
                   },
               }
             : {
                   ...this.state.form,
-                  [name]: value,
+                  [field]: value,
               };
         this.setState({
             form,
@@ -88,7 +88,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.name.first}
                                     error={error.first}
-                                    object="name"
+                                    group="name"
                                 />
                             </div>
                             <div className="form-column col-lg">
@@ -100,7 +100,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.name.last}
                                     error={error.last}
-                                    object="name"
+                                    group="name"
                                 />
                             </div>
                         </div>
@@ -138,7 +138,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.street}
                                     error={error.street}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                             <div className="form-column col-lg-2">
@@ -150,7 +150,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.unit}
                                     error={error.unit}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                         </div>
@@ -164,7 +164,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.city}
                                     error={error.city}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                             <div className="form-column col-lg-3">
@@ -176,7 +176,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.state}
                                     error={error.state}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                             <div className="form-column col-lg-3">
@@ -188,7 +188,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.country}
                                     error={error.country}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                             <div className="form-column col-lg-2">
@@ -200,7 +200,7 @@ class FormProfile extends Component {
                                     onChange={this.onChange}
                                     value={form.address.zip}
                                     error={error.zip}
-                                    object="address"
+                                    group="address"
                                 />
                             </div>
                         </div>
