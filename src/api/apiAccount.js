@@ -1,6 +1,6 @@
 import { authentication, users } from './firebase';
 import { generateID } from '../js/function';
-import { FRESH, ONLINE, OFFLINE } from '../js/data';
+import { FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
     // Check
@@ -28,6 +28,7 @@ class apiAccount {
                         email: authentication.currentUser.email,
                         id: authentication.currentUser.uid,
                         slug: generateID(authentication.currentUser.uid).toLowerCase(),
+                        role: MEMBER,
                         status: FRESH,
                         time: {
                             [ONLINE]: new Date(),
