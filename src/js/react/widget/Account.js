@@ -5,6 +5,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
 import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
+import Dropdown from '../unit/Dropdown';
 
 const Account = ({ location, authenticated, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
@@ -15,15 +16,19 @@ const Account = ({ location, authenticated, onLogOut }) => {
                     className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
                     activeClassName="active"
                     to={_Private ? path.Root : path._Private}
-                exact>
+                    exact>
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
-            <li className="nav-item">
-                <button type="button" className="nav-btn btn on-log-out" onClick={onLogOut} role="menuitem" tabIndex="-1">
+            <Dropdown>
+                <Link className="dropdown-item" to={`${path._Private}${path._Profile}`}>
+                    Profile
+                </Link>
+                <div className="dropdown-divider" />
+                <button type="button" className="dropdown-item on-log-out" onClick={onLogOut}>
                     Log Out
                 </button>
-            </li>
+            </Dropdown>
         </ul>
     ) : (
         <div className="navbar-action ml-auto account account-guest">
