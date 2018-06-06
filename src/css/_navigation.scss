@@ -2,36 +2,6 @@
 /* ==========!NAVIGATION========== */
 /* =============================== */
 
-/* ----------!DROPDOWN---------- */
-.dropdown-menu {
-	margin-top: 0;
-	padding: 10px 0;
-	min-width: 210px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-    		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-	}
-.dropdown-menu,
-.dropdown-menu .dropdown-divider {
-	border-color: $color-smoke;
-	}
-.dropdown-menu .dropdown-divider {
-	margin: 10px 0;
-	}
-.dropdown-menu .dropdown-item {
-	padding: 0 19px;
-	font-size: 20px;
-	font-weight: 300;
-	line-height: 30px;
-	color: $color-metal;
-	cursor: pointer;
-	}
-.dropdown-menu .dropdown-item:active,
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus {
-	background-color: $color-ghost;
-	color: $color-metal;
-	}
-
 /* ----------!NAVBAR---------- */
 .navbar {
 	padding: 0;

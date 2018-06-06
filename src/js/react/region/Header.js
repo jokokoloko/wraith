@@ -5,7 +5,7 @@ import * as client from '../../client';
 import * as path from '../../path';
 import Account from '../widget/Account';
 
-const Header = ({ location, authenticated, onLogOut }) => {
+const Header = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
@@ -56,7 +56,7 @@ const Header = ({ location, authenticated, onLogOut }) => {
                             </li>
                         </ul>
                     )}
-                    <Account location={location} authenticated={authenticated} onLogOut={onLogOut} />
+                    <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />
                 </nav>
             </div>
         </header>
@@ -66,7 +66,7 @@ const Header = ({ location, authenticated, onLogOut }) => {
 Header.propTypes = {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
-    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     onLogOut: PropTypes.func.isRequired,
 };
 

@@ -7,7 +7,7 @@ import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
 import Dropdown from '../unit/Dropdown';
 
-const Account = ({ location, authenticated, onLogOut }) => {
+const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
@@ -16,11 +16,21 @@ const Account = ({ location, authenticated, onLogOut }) => {
                     className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
                     activeClassName="active"
                     to={_Private ? path.Root : path._Private}
-                    exact>
+                exact>
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
-            <Dropdown>
+            <Dropdown label="Account">
+                {profile.name &&
+                    (profile.name.first || profile.name.last) && (
+                        <strong className="dropdown-header">
+                            {profile.name.first && profile.name.last
+                                ? `${profile.name.first} ${profile.name.last}`
+                                : profile.name.first ? `${profile.name.first}` : profile.name.last ? `${profile.name.last}` : 'Name'}
+                        </strong>
+                    )}
+                <p className="dropdown-text">{profile.email}</p>
+                <div className="dropdown-divider" />
                 <Link className="dropdown-item" to={`${path._Private}${path._Profile}`}>
                     Profile
                 </Link>
@@ -45,7 +55,7 @@ const Account = ({ location, authenticated, onLogOut }) => {
 Account.propTypes = {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
-    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     onLogOut: PropTypes.func.isRequired,
 };
 
