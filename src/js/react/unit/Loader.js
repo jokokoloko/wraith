@@ -19,8 +19,8 @@ class Loader extends Component {
         clearInterval(this.interval);
     }
     render() {
-        const { frame } = this.state;
         const { amount, position, label, error } = this.props;
+        const { frame } = this.state;
         let text = '';
         if (error) {
             text = 'x';
