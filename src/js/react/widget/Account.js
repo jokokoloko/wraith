@@ -5,10 +5,24 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
 import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
+import Avatar from '../unit/Avatar';
 import Dropdown from '../unit/Dropdown';
 
 const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
+    const avatar = (
+        <Avatar
+            position="fit exact-center"
+            source={profile.avatar ? profile.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+            alternate={
+                profile.name && profile.name.first && profile.name.last
+                    ? `${profile.name.first} ${profile.name.last}`
+                    : profile.name && profile.name.first
+                        ? `${profile.name.first}`
+                        : profile.name && profile.name.last ? `${profile.name.last}` : profile.handle ? profile.handle : 'Avatar'
+            }
+        />
+    );
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
@@ -20,7 +34,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
-            <Dropdown name="account" label="Account" alignment="right">
+            <Dropdown name="account" label={avatar} alignment="right">
                 {profile.name &&
                     (profile.name.first || profile.name.last) && (
                         <strong className="dropdown-header">

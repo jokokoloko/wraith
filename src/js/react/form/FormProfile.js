@@ -210,14 +210,14 @@ class FormProfile extends Component {
                         <div className="card card-panel">
                             <div className="card-body">
                                 <Avatar
-                                    position="fit"
+                                    position="fit exact-center"
                                     source={form.avatar ? form.avatar : 'http://via.placeholder.com/800?text=Avatar'}
                                     alternate={
-                                        form.name.first && form.name.last
+                                        form.name && form.name.first && form.name.last
                                             ? `${form.name.first} ${form.name.last}`
-                                            : form.name.first
+                                            : form.name && form.name.first
                                                 ? `${form.name.first}`
-                                                : form.name.last ? `${form.name.last}` : form.handle ? form.handle : 'Avatar'
+                                                : form.name && form.name.last ? `${form.name.last}` : form.handle ? form.handle : 'Avatar'
                                     }
                                 />
                                 <h2 className="name-full">
