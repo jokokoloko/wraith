@@ -32,7 +32,7 @@ class Loader extends Component {
                 dots -= 1;
             }
         }
-        return <div className={`loader ${position}`}>{label ? `${label}${text}` : text}</div>;
+        return <div className={`loader loader-${label ? 'label' : 'default'} ${position}`}>{label ? `${label}${text}` : text}</div>;
     }
 }
 
