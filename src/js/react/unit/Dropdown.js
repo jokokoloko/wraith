@@ -28,9 +28,11 @@ class Dropdown extends Component {
                     onClick={this.onClick}>
                     {label}
                 </button>
-                <div className={`dropdown-menu dropdown-menu-${alignment} ${toggle ? `show` : `hide`}`} aria-labelledby={`${name}-dropdown`}>
-                    {children}
-                </div>
+                {toggle && (
+                    <div className={`dropdown-menu dropdown-menu-${alignment} show`} aria-labelledby={`${name}-dropdown`}>
+                        {children}
+                    </div>
+                )}
             </li>
         );
     }
