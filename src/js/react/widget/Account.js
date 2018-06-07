@@ -16,11 +16,11 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                     className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
                     activeClassName="active"
                     to={_Private ? path.Root : path._Private}
-                exact>
+                    exact>
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
-            <Dropdown label="Account">
+            <Dropdown name="account" label="Account" alignment="right">
                 {profile.name &&
                     (profile.name.first || profile.name.last) && (
                         <strong className="dropdown-header">

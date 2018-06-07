@@ -15,20 +15,20 @@ class Dropdown extends Component {
         }));
     }
     render() {
-        const { label, children } = this.props;
+        const { name, label, alignment, children } = this.props;
         const { toggle } = this.state;
         return (
             <li className={`nav-item dropdown ${toggle ? `show` : `hide`}`}>
                 <button
                     type="button"
-                    id="account-dropdown"
+                    id={`${name}-dropdown`}
                     className="nav-btn btn dropdown-toggle"
                     aria-haspopup="true"
                     aria-expanded={toggle ? true : false}
                     onClick={this.onClick}>
                     {label}
                 </button>
-                <div className={`dropdown-menu dropdown-menu-right ${toggle ? `show` : `hide`}`} aria-labelledby="account-dropdown">
+                <div className={`dropdown-menu dropdown-menu-${alignment} ${toggle ? `show` : `hide`}`} aria-labelledby={`${name}-dropdown`}>
                     {children}
                 </div>
             </li>
@@ -37,12 +37,15 @@ class Dropdown extends Component {
 }
 
 Dropdown.propTypes = {
+    name: PropTypes.string.isRequired,
     label: PropTypes.string,
+    alignment: PropTypes.string,
     children: PropTypes.node.isRequired,
 };
 
 Dropdown.defaultProps = {
     label: 'Dropdown',
+    alignment: 'left',
 };
 
 export default Dropdown;
