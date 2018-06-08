@@ -8,17 +8,30 @@ class Dropdown extends Component {
             toggle: false,
         };
         this.onClick = this.onClick.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+    }
+    componentDidMount() {
+        document.addEventListener('click', this.onBlur);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('click', this.onBlur);
     }
     onClick() {
         this.setState((prevState) => ({
             toggle: !prevState.toggle,
         }));
     }
+    onBlur(event) {
+        !this.isDropdown.contains(event.target) &&
+            this.setState({
+                toggle: false,
+            });
+    }
     render() {
         const { name, label, alignment, caret, children } = this.props;
         const { toggle } = this.state;
         return (
-            <li className={`nav-item dropdown ${toggle ? `show` : `hide`}`}>
+            <li className={`nav-item dropdown ${toggle ? `show` : `hide`}`} ref={(isDropdown) => (this.isDropdown = isDropdown)}>
                 <button
                     type="button"
                     id={`${name}-dropdown`}
