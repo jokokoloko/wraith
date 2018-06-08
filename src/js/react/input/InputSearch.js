@@ -5,7 +5,7 @@ import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt'
 import faSearch from '@fortawesome/fontawesome-pro-regular/faSearch';
 import faTimesCircle from '@fortawesome/fontawesome-pro-regular/faTimesCircle';
 
-const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) => {
+const InputSearch = ({ name, label, placeholder, size, onReset, value, error, group, reference }) => {
     const fieldClass = 'form-control';
     let wrapperClass = 'form-group';
     error && error.length > 0 && (wrapperClass += ' has-error');
@@ -23,6 +23,8 @@ const InputSearch = ({ name, label, placeholder, size, onReset, value, error }) 
                     placeholder={placeholder}
                     value={value}
                     autoComplete="on"
+                    data-group={group}
+                    ref={reference}
                 />
                 <div className="input-group-append">
                     <button type="reset" className="btn btn-outline-secondary btn-icon btn-reset" onClick={onReset}>
@@ -55,6 +57,8 @@ InputSearch.propTypes = {
     // onSearch: PropTypes.func.isRequired,
     value: PropTypes.string,
     error: PropTypes.string,
+    group: PropTypes.string,
+    reference: PropTypes.object,
 };
 
 InputSearch.defaultProps = {
@@ -62,6 +66,8 @@ InputSearch.defaultProps = {
     onReset: undefined,
     value: '',
     error: undefined,
+    group: undefined,
+    reference: undefined,
 };
 
 export default InputSearch;

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -22,6 +22,7 @@ class FormProfile extends Component {
             },
             error: {},
         };
+        this.isFocus = createRef();
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -33,6 +34,7 @@ class FormProfile extends Component {
         this.setState({
             form,
         });
+        !form.name.first && this.isFocus.current.focus();
     }
     onChange(event) {
         const target = event.target;
@@ -89,6 +91,7 @@ class FormProfile extends Component {
                                     value={form.name.first}
                                     error={error.first}
                                     group="name"
+                                    reference={this.isFocus}
                                 />
                             </div>
                             <div className="form-column col-lg">
