@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Dropdown extends Component {
@@ -9,6 +10,15 @@ class Dropdown extends Component {
         };
         this.onClick = this.onClick.bind(this);
         this.onBlur = this.onBlur.bind(this);
+    }
+    componentDidUpdate(prevProps) {
+        this.props.location.pathname !== prevProps.location.pathname &&
+            this.setState(
+                {
+                    toggle: false,
+                },
+                () => document.removeEventListener('click', this.onBlur),
+            );
     }
     componentWillUnmount() {
         document.removeEventListener('click', this.onBlur);
@@ -68,4 +78,4 @@ Dropdown.defaultProps = {
     caret: false,
 };
 
-export default Dropdown;
+export default withRouter(Dropdown);
