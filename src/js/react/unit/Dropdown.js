@@ -10,22 +10,25 @@ class Dropdown extends Component {
         this.onClick = this.onClick.bind(this);
         this.onBlur = this.onBlur.bind(this);
     }
-    componentDidMount() {
-        document.addEventListener('click', this.onBlur);
-    }
     componentWillUnmount() {
         document.removeEventListener('click', this.onBlur);
     }
     onClick() {
-        this.setState((prevState) => ({
-            toggle: !prevState.toggle,
-        }));
+        this.setState(
+            (prevState) => ({
+                toggle: !prevState.toggle,
+            }),
+            () => (this.state.toggle ? document.addEventListener('click', this.onBlur) : document.removeEventListener('click', this.onBlur)),
+        );
     }
     onBlur(event) {
         !this.isDropdown.contains(event.target) &&
-            this.setState({
-                toggle: false,
-            });
+            this.setState(
+                {
+                    toggle: false,
+                },
+                () => document.removeEventListener('click', this.onBlur),
+            );
     }
     render() {
         const { name, label, alignment, caret, children } = this.props;
