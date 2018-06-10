@@ -1,6 +1,6 @@
 # Spectre
 
-React ES6 Starter Application - test repo
+React ES6 Starter Application
 
 ## Stack
 
