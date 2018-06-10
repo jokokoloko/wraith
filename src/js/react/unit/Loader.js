@@ -19,8 +19,8 @@ class Loader extends Component {
         clearInterval(this.interval);
     }
     render() {
-        const { frame } = this.state;
         const { amount, position, label, error } = this.props;
+        const { frame } = this.state;
         let text = '';
         if (error) {
             text = 'x';
@@ -32,7 +32,7 @@ class Loader extends Component {
                 dots -= 1;
             }
         }
-        return <div className={`loader ${position}`}>{label ? `${label}${text}` : text}</div>;
+        return <div className={`loader loader-${label ? 'label' : 'default'} ${position}`}>{label ? `${label}${text}` : text}</div>;
     }
 }
 

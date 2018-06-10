@@ -5,25 +5,50 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
 import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
 import * as path from '../../path';
+import Avatar from '../unit/Avatar';
+import Dropdown from '../unit/Dropdown';
 
-const Account = ({ location, authenticated, onLogOut }) => {
+const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
+    const avatar = (
+        <Avatar
+            position="fit exact-center"
+            source={profile.avatar ? profile.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+            alternate={
+                profile.name && profile.name.first && profile.name.last
+                    ? `${profile.name.first} ${profile.name.last}`
+                    : profile.name && profile.name.first
+                        ? `${profile.name.first}`
+                        : profile.name && profile.name.last ? `${profile.name.last}` : profile.handle ? profile.handle : 'Avatar'
+            }
+        />
+    );
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
-                <NavLink
-                    className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
-                    activeClassName="active"
-                    to={_Private ? path.Root : path._Private}
-                exact>
+                <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
-            <li className="nav-item">
-                <button type="button" className="nav-btn btn on-log-out" onClick={onLogOut} role="menuitem" tabIndex="-1">
+            <Dropdown name="account" label={avatar} alignment="right">
+                {profile.name &&
+                    (profile.name.first || profile.name.last) && (
+                        <strong className="dropdown-header">
+                            {profile.name.first && profile.name.last
+                                ? `${profile.name.first} ${profile.name.last}`
+                                : profile.name.first ? `${profile.name.first}` : profile.name.last ? `${profile.name.last}` : 'Name'}
+                        </strong>
+                    )}
+                <p className="dropdown-text">{profile.email}</p>
+                <div className="dropdown-divider" />
+                <NavLink className="dropdown-item" to={`${path._Private}${path._Profile}`}>
+                    Profile
+                </NavLink>
+                <div className="dropdown-divider" />
+                <button type="button" className="dropdown-item on-log-out" onClick={onLogOut}>
                     Log Out
                 </button>
-            </li>
+            </Dropdown>
         </ul>
     ) : (
         <div className="navbar-action ml-auto account account-guest">
@@ -40,7 +65,7 @@ const Account = ({ location, authenticated, onLogOut }) => {
 Account.propTypes = {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
-    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     onLogOut: PropTypes.func.isRequired,
 };
 

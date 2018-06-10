@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -15,9 +15,13 @@ class FormLogin extends Component {
             form: {},
             error: {},
         };
+        this.isFocus = createRef();
         this.onResetPassword = this.onResetPassword.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+    componentDidMount() {
+        this.isFocus.current.focus();
     }
     onResetPassword() {
         const { actionAccount } = this.props;
@@ -83,6 +87,7 @@ class FormLogin extends Component {
                     onChange={this.onChange}
                     value={form.email}
                     error={error.email}
+                    reference={this.isFocus}
                 />
                 <InputText
                     type="password"

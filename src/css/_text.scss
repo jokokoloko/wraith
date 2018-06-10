@@ -165,8 +165,11 @@ button,
 /* ----------!LOADER---------- */
 .loader {
 	@extend .p-xs-15;
-	margin: 0;
 	height: auto;
+	font-weight: $font-weight-1;
+	}
+.loader-label {
+	margin: 0;
 	}
 
 /* ----------!TOAST---------- */

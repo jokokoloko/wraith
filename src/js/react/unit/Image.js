@@ -29,8 +29,8 @@ class Image extends Component {
         };
     }
     render() {
-        const { loaded, error } = this.state;
         const { position, source, alternate } = this.props;
+        const { loaded, error } = this.state;
         return loaded === false ? (
             <Loader position="exact-center" error={error} />
         ) : (

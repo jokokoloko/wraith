@@ -2,44 +2,58 @@
 /* ==========!NAVIGATION========== */
 /* =============================== */
 
-$triangle-size: 6px;
-$triangle-color: $color-metal;
-$triangle-position: 15px;
-
 /* ----------!DROPDOWN---------- */
-.dropdown-menu {
-	background-color: $color-metal;
+.dropdown .dropdown-toggle.no-caret::after {
+	content: normal;
 	}
-.dropdown-menu:after {
-	border-left: $triangle-size solid $color-transparent;
-	border-right: $triangle-size solid $color-transparent;
-	border-bottom: $triangle-size solid $triangle-color;
-	margin-top: (-$triangle-size);
-	right: $triangle-position;
+.dropdown .dropdown-toggle .avatar {
+	width: 30px;
+	height: 30px;
 	}
-.dropdown-menu > li + li {
-	border-top: 1px solid $color-charcoal;
+.dropdown .dropdown-menu {
+	margin-top: -10px;
+	padding: 9px 0;
+	min-width: 210px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 	}
-.dropdown-menu > li > a {
-	@extend .p-xs-10;
-	background-color: $color-transparent;
+.dropdown .dropdown-menu,
+.dropdown .dropdown-menu .dropdown-divider {
+	border-color: $color-smoke;
+	}
+.dropdown .dropdown-menu .dropdown-divider {
+	margin: 9px 0 10px;
+	}
+.dropdown .dropdown-menu .dropdown-header,
+.dropdown .dropdown-menu .dropdown-text,
+.dropdown .dropdown-menu .dropdown-item {
 	margin: 0;
-	font-weight: $font-weight-2;
-	line-height: $line-height-text;
-	color: $color-aluminium;
+	padding: 0 19px;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 30px;
 	}
-.dropdown-menu > li > a:active,
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-	background-color: $color-tin;
-	color: $color-white;
+.dropdown .dropdown-menu .dropdown-header,
+.dropdown .dropdown-menu .dropdown-text {
+	color: $color-smoke;
 	}
-.dropdown-menu > li.active > a,
-.dropdown-menu > li.active > a:active,
-.dropdown-menu > li.active > a:hover,
-.dropdown-menu > li.active > a:focus {
-	background-color: $color-blue-300;
+.dropdown .dropdown-menu .dropdown-item {
+	color: $color-metal;
+	cursor: pointer;
+	}
+.dropdown .dropdown-menu .dropdown-item:active,
+.dropdown .dropdown-menu .dropdown-item:hover,
+.dropdown .dropdown-menu .dropdown-item:focus {
+	background-color: $color-ghost;
+	color: $color-metal;
+	}
+.dropdown .dropdown-menu .dropdown-item.active,
+.dropdown .dropdown-menu .dropdown-item.active:active,
+.dropdown .dropdown-menu .dropdown-item.active:hover,
+.dropdown .dropdown-menu .dropdown-item.active:focus {
+	background-color: $color-brand-blue-300;
 	color: $color-white;
+	cursor: default;
 	}
 
 /* ----------!NAVBAR---------- */
@@ -152,13 +166,9 @@ $triangle-position: 15px;
 		padding-bottom: (($header-height-lg - $line-height-toggle) / 2);
 		}
 	}
-.navbar .navbar-nav > li.dropdown > .dropdown-menu {
-	min-width: 340px;
-	}
 
 /* ----------!OFFCANVAS---------- */
-.offcanvas-menu .nav > li > a,
-.offcanvas-menu .nav > li.dropdown > .dropdown-menu > li > a, {
+.offcanvas-menu .nav > li > a {
 	@extend .p-xs-15;
 	background-color: $color-transparent;
 	margin: 0;
@@ -187,13 +197,6 @@ $triangle-position: 15px;
 	background-color: $color-transparent;
 	color: $color-blue-300;
 	}
-.offcanvas-menu .nav > li.dropdown > a > .caret {
-	border-top-color: $color-metal !important;
-	border-bottom-color: $color-metal !important;
-	}
-.offcanvas-menu .nav > li.dropdown > .dropdown-menu > li > a {
-	padding-left: $line-height-text;
-	}
 
 /* =========================== */
 /* ==========!BUTTON========== */
@@ -216,11 +219,7 @@ $triangle-position: 15px;
 .btn-default:active:hover,
 .btn-default:active:focus,
 .btn-default:hover,
-.btn-default:focus,
-.open > .dropdown-toggle.btn-default,
-.open > .dropdown-toggle.btn-default.focus,
-.open > .dropdown-toggle.btn-default:hover,
-.open > .dropdown-toggle.btn-default:focus {
+.btn-default:focus {
 	@include color($color-button-default-hover);
 	}
 .btn-link {
@@ -242,11 +241,7 @@ $triangle-position: 15px;
 .btn-hollow:active:hover,
 .btn-hollow:active:focus,
 .btn-hollow:hover,
-.btn-hollow:focus,
-.open > .dropdown-toggle.btn-hollow,
-.open > .dropdown-toggle.btn-hollow.focus,
-.open > .dropdown-toggle.btn-hollow:hover,
-.open > .dropdown-toggle.btn-hollow:focus {
+.btn-hollow:focus {
 	@include color($color-button-hollow-hover);
 	}
 
@@ -288,7 +283,7 @@ $triangle-position: 15px;
 	top: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 9999;
+	z-index: 10;
 	}
 #form-search .input-group-append .btn-location,
 #form-search .input-group-append .btn-reset {

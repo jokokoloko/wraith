@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -15,8 +15,12 @@ class FormRegister extends Component {
             form: {},
             error: {},
         };
+        this.isFocus = createRef();
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+    componentDidMount() {
+        this.isFocus.current.focus();
     }
     onChange(event) {
         const target = event.target;
@@ -77,6 +81,7 @@ class FormRegister extends Component {
                     onChange={this.onChange}
                     value={form.email}
                     error={error.email}
+                    reference={this.isFocus}
                 />
                 <InputText
                     type="password"

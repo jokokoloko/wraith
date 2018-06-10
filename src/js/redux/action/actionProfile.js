@@ -33,9 +33,9 @@ export const profileEditFailure = (error) => ({
 export const profileEdit = (profile) => (dispatch) => {
     dispatch(profileEditRequest());
     return apiProfile
-        .profileEdit(profile)
+        .profileEdit(profile) // issue: check to see if this can return profile in callback function in case writing to firestore fails
         .then(() => {
-            dispatch(profileEditSuccess(profile));
+            dispatch(profileEditSuccess(profile)); // issue: pass in profile from firestore api call
             toastr.success('Profile updated!');
         })
         .catch((error) => {

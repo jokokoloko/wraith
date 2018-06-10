@@ -5,7 +5,7 @@ import * as client from '../../client';
 import * as path from '../../path';
 import Account from '../widget/Account';
 
-const Header = ({ location, authenticated, onLogOut }) => {
+const Header = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
@@ -30,33 +30,33 @@ const Header = ({ location, authenticated, onLogOut }) => {
                     {!_Private && (
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.About}>
+                                <NavLink className="nav-link" to={path.About}>
                                     About
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Team}>
+                                <NavLink className="nav-link" to={path.Team}>
                                     Team
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Register}>
+                                <NavLink className="nav-link" to={path.Register}>
                                     Register
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Login}>
+                                <NavLink className="nav-link" to={path.Login}>
                                     Login
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path._Private}>
+                                <NavLink className="nav-link" to={path._Private}>
                                     Dashboard
                                 </NavLink>
                             </li>
                         </ul>
                     )}
-                    <Account location={location} authenticated={authenticated} onLogOut={onLogOut} />
+                    <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />
                 </nav>
             </div>
         </header>
@@ -66,7 +66,7 @@ const Header = ({ location, authenticated, onLogOut }) => {
 Header.propTypes = {
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
-    // profile: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     onLogOut: PropTypes.func.isRequired,
 };
 

@@ -109,8 +109,9 @@ $dashboard-void-lg: 210px;
 .dashboard #toolbar .toolbar-nav {
     padding-top: 14px;
     }
-.dashboard #toolbar .toolbar-nav > li > a:focus,
-.dashboard #toolbar .toolbar-nav > li > a:hover {
+.dashboard #toolbar .toolbar-nav > li > a:active,
+.dashboard #toolbar .toolbar-nav > li > a:hover,
+.dashboard #toolbar .toolbar-nav > li > a:focus {
     background-color: $color-charcoal;
     }
 .dashboard #toolbar .toolbar-nav > li > a.active,
