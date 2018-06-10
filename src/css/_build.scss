@@ -47,6 +47,14 @@
 	background-color: $color-ghost;
 	color: $color-metal;
 	}
+.dropdown .dropdown-menu .dropdown-item.active,
+.dropdown .dropdown-menu .dropdown-item.active:active,
+.dropdown .dropdown-menu .dropdown-item.active:hover,
+.dropdown .dropdown-menu .dropdown-item.active:focus {
+	background-color: $color-brand-blue-300;
+	color: $color-white;
+	cursor: default;
+	}
 
 /* ----------!NAVBAR---------- */
 .navbar .navbar-brand,

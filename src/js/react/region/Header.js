@@ -30,27 +30,27 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
                     {!_Private && (
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.About}>
+                                <NavLink className="nav-link" to={path.About}>
                                     About
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Team}>
+                                <NavLink className="nav-link" to={path.Team}>
                                     Team
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Register}>
+                                <NavLink className="nav-link" to={path.Register}>
                                     Register
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path.Login}>
+                                <NavLink className="nav-link" to={path.Login}>
                                     Login
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" activeClassName="active" to={path._Private}>
+                                <NavLink className="nav-link" to={path._Private}>
                                     Dashboard
                                 </NavLink>
                             </li>

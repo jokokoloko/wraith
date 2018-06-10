@@ -11,24 +11,24 @@ const Toolbar = ({ match }) => (
         </Link>
         <ul className="toolbar-nav nav flex-column">
             <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to={`${match.path}`} exact>
+                <NavLink className="nav-link" to={`${match.path}`} exact>
                     Dashboard
                 </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to={`${match.path}${path._Profile}`} exact>
+                <NavLink className="nav-link" to={`${match.path}${path._Profile}`}>
                     Profile
                 </NavLink>
             </li>
         </ul>
         <ul className="toolbar-nav nav flex-column">
             <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to={`${match.path}${path._User}`}>
+                <NavLink className="nav-link" to={`${match.path}${path._User}`}>
                     Users
                 </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to={`${match.path}${path._Post}`}>
+                <NavLink className="nav-link" to={`${match.path}${path._Post}`}>
                     Posts
                 </NavLink>
             </li>

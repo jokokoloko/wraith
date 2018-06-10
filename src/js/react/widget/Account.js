@@ -26,11 +26,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
-                <NavLink
-                    className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
-                    activeClassName="active"
-                    to={_Private ? path.Root : path._Private}
-                    exact>
+                <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
                     <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
                 </NavLink>
             </li>
@@ -45,9 +41,9 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                     )}
                 <p className="dropdown-text">{profile.email}</p>
                 <div className="dropdown-divider" />
-                <Link className="dropdown-item" to={`${path._Private}${path._Profile}`}>
+                <NavLink className="dropdown-item" to={`${path._Private}${path._Profile}`}>
                     Profile
-                </Link>
+                </NavLink>
                 <div className="dropdown-divider" />
                 <button type="button" className="dropdown-item on-log-out" onClick={onLogOut}>
                     Log Out
