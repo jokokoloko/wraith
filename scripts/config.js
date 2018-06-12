@@ -1,11 +1,11 @@
 //Add config data here to be used in scripts.
 
 exports.firestore = {
-    dbUrl: 'https://teamgg-12e72.firebaseio.com',
+    dbUrl: 'https://invade-blue.firebaseio.com',
 };
 
 exports.riot = {
     baseUrl: 'https://na1.api.riotgames.com/lol',
-    apiKey: 'RGAPI-0c605ede-6984-4460-9121-b8297b316100',
+    apiKey: 'RGAPI-bc079119-92b2-4083-8e3f-20c8220c8504',
     locale: 'en_US',
 };

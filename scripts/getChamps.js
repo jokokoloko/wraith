@@ -1,7 +1,8 @@
 var admin = require('firebase-admin');
 var axios = require('axios');
+var qs = require('qs');
 var config = require('./config.js');
-var serviceAccount = require('./key/teamgg-12e72-firebase-adminsdk-x3bx3-a296db3ecb.json');
+var serviceAccount = require('./key/invade-blue-firebase-adminsdk-qm1p1-fbc073da7b.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -23,10 +24,14 @@ function updateChampList() {
                 locale: config.riot.locale,
                 api_key: config.riot.apiKey,
                 dataById: true,
+                champListData: ['image', 'info'],
+            },
+            paramsSerializer: function(params) {
+                return qs.stringify(params, { arrayFormat: 'repeat' });
             },
         })
         .then((response) => {
-            // console.log(response.data);
+            // console.log(response);
             var champData = response.data.data;
             var col = db.collection('champions');
             Object.entries(champData).forEach((champ) => {
