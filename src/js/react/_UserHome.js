@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
 import { USERS_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
+import * as path from '../path';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
@@ -34,7 +35,7 @@ class _UserHome extends Component {
                     <td>{(user.address && user.address.city) || empty}</td>
                     <td>{(user.address && user.address.state) || empty}</td>
                     <td>
-                        <Link to={`/user/${user.slug}`}>View</Link>
+                        <Link to={`${path.Root}${user.slug}`}>View</Link>
                     </td>
                 </tr>
             );
@@ -52,19 +53,13 @@ class _UserHome extends Component {
                                 <Loader position="exact-center fixed" label="Loading users" />
                             ) : (
                                 <div className="table-container table-responsive-sm">
-                                    <table
-                                        className={`table table-striped table-bordered table-style table-size-80 table-${item}`}
-                                    >
+                                    <table className={`table table-striped table-bordered table-style table-size-80 table-${item}`}>
                                         <thead>
                                             <tr>
                                                 {labelUser.map((name, index) => {
                                                     const count = index + 1;
                                                     return (
-                                                        <th
-                                                            key={`label-${count}`}
-                                                            className={`label label-${count}`}
-                                                            scope="col"
-                                                        >
+                                                        <th key={`label-${count}`} className={`label label-${count}`} scope="col">
                                                             {name}
                                                         </th>
                                                     );
@@ -112,4 +107,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(_UserHome);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(_UserHome);

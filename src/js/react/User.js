@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { USERS_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
+import * as path from '../path';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
+import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 const User = ({ loadingUsers, users }) => {
@@ -12,9 +15,35 @@ const User = ({ loadingUsers, users }) => {
     const loopUser = users.map((user, index) => {
         const count = index + 1;
         return (
-            <article key={user.id} id={user.id} className={`${item} ${item}-${count} col`}>
-                <header>
-                    <h3>{user.id}</h3>
+            <article key={user.id} id={user.id} className={`${item} ${item}-${count} col-lg-3`}>
+                <header className="card card-panel">
+                    <Link className="card-body" to={`${path.Root}${user.slug}`}>
+                        <Avatar
+                            position="fit exact-center"
+                            source={user.avatar ? user.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+                            alternate={
+                                user.name && user.name.first && user.name.last
+                                    ? `${user.name.first} ${user.name.last}`
+                                    : user.name && user.name.first
+                                        ? `${user.name.first}`
+                                        : user.name && user.name.last
+                                            ? `${user.name.last}`
+                                            : user.handle
+                                                ? user.handle
+                                                : 'Avatar'
+                            }
+                        />
+                        <h2 className="name-full">
+                            {user.name && user.name.first && user.name.last
+                                ? `${user.name.first} ${user.name.last}`
+                                : user.name && user.name.first
+                                    ? `${user.name.first}`
+                                    : user.name && user.name.last
+                                        ? `${user.name.last}`
+                                        : 'Name'}
+                        </h2>
+                        <h3 className="handle">@{user.handle ? `${user.handle}` : 'handle'}</h3>
+                    </Link>
                 </header>
             </article>
         );

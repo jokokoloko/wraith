@@ -216,17 +216,25 @@ class FormProfile extends Component {
                                     position="fit exact-center"
                                     source={form.avatar ? form.avatar : 'http://via.placeholder.com/800?text=Avatar'}
                                     alternate={
-                                        form.name && form.name.first && form.name.last
+                                        form.name.first && form.name.last
                                             ? `${form.name.first} ${form.name.last}`
-                                            : form.name && form.name.first
+                                            : form.name.first
                                                 ? `${form.name.first}`
-                                                : form.name && form.name.last ? `${form.name.last}` : form.handle ? form.handle : 'Avatar'
+                                                : form.name.last
+                                                    ? `${form.name.last}`
+                                                    : form.handle
+                                                        ? form.handle
+                                                        : 'Avatar'
                                     }
                                 />
                                 <h2 className="name-full">
                                     {form.name.first && form.name.last
                                         ? `${form.name.first} ${form.name.last}`
-                                        : form.name.first ? `${form.name.first}` : form.name.last ? `${form.name.last}` : 'Name'}
+                                        : form.name.first
+                                            ? `${form.name.first}`
+                                            : form.name.last
+                                                ? `${form.name.last}`
+                                                : 'Name'}
                                 </h2>
                                 <h3 className="handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
                                 <address className="contact" itemType="http://schema.org/Organization" itemScope>
@@ -306,4 +314,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormProfile);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FormProfile);
