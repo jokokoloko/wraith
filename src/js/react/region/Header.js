@@ -35,8 +35,8 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to={path.Team}>
-                                    Team
+                                <NavLink className="nav-link" to={path.User}>
+                                    Users
                                 </NavLink>
                             </li>
                             <li className="nav-item">

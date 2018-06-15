@@ -7,7 +7,7 @@ import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
 
-const Team = ({ loadingUsers, users }) => {
+const User = ({ loadingUsers, users }) => {
     const item = 'user';
     const loopUser = users.map((user, index) => {
         const count = index + 1;
@@ -24,7 +24,7 @@ const Team = ({ loadingUsers, users }) => {
             <div className="container-fluid">
                 <Basic space="space-xs-50 space-lg-80">
                     <header className="text-center">
-                        <h1>Team</h1>
+                        <h1>Users</h1>
                     </header>
                 </Basic>
 
@@ -48,7 +48,7 @@ const Team = ({ loadingUsers, users }) => {
     );
 };
 
-Team.propTypes = {
+User.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -61,4 +61,4 @@ function mapStateToProps({ calls, users }) {
     };
 }
 
-export default connect(mapStateToProps)(Team);
+export default connect(mapStateToProps)(User);

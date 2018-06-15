@@ -13,8 +13,8 @@ import Login from './Login';
 import Register from './Register';
 import TestAction from './TestAction'; // remove
 import TestWatch from './TestWatch'; // remove
-import Team from './Team';
 import About from './About';
+import User from './User';
 import Home from './Home';
 import Empty from './404';
 import Header from './region/Header';
@@ -52,8 +52,8 @@ class Root extends Component {
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path="/test/action" component={TestAction} />
                         <Route path="/test/watch" component={TestWatch} />
-                        <Route path={path.Team} component={Team} />
                         <Route path={path.About} component={About} />
+                        <Route path={path.User} component={User} />
                         <Route path={path.Root} component={Home} exact />
                         <Route component={Empty} />
                     </Switch>
@@ -88,4 +88,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Root);

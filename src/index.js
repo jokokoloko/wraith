@@ -9,7 +9,7 @@ import '../node_modules/toastr/build/toastr.min.css'; // 6 kb
 import './css/theme.css';
 
 const store = configureStore();
-store.dispatch(usersLoad());
+store.dispatch(usersLoad(true));
 
 ReactDOM.render(
     <Provider store={store}>
