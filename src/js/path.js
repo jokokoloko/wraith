@@ -9,4 +9,5 @@ export const Login = '/login';
 export const Register = '/register';
 export const About = '/about';
 export const User = '/user';
+export const UserView = '/:slug';
 export const Root = '/';

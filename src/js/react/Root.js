@@ -15,6 +15,7 @@ import TestAction from './TestAction'; // remove
 import TestWatch from './TestWatch'; // remove
 import About from './About';
 import User from './User';
+import UserView from './UserView';
 import Home from './Home';
 import Empty from './404';
 import Header from './region/Header';
@@ -54,6 +55,7 @@ class Root extends Component {
                         <Route path="/test/watch" component={TestWatch} />
                         <Route path={path.About} component={About} />
                         <Route path={path.User} component={User} />
+                        <Route path={path.UserView} component={UserView} />
                         <Route path={path.Root} component={Home} exact />
                         <Route component={Empty} />
                     </Switch>
