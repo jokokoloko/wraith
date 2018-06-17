@@ -4,6 +4,7 @@ export default {
         authenticated: false,
     },
     profile: {},
+    composition: {},
     calls: [],
     users: [],
     champions: [],
