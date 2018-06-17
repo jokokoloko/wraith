@@ -78,7 +78,6 @@ const User = ({ loadingUsers, users }) => {
 };
 
 User.propTypes = {
-    match: PropTypes.objectOf(PropTypes.any).isRequired,
     loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
