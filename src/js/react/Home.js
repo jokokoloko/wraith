@@ -1,17 +1,13 @@
 import React from 'react';
 import Basic from './section/Basic';
-import FormSearch from './form/FormSearch';
+import ChampionGrid from './widget/ChampionGrid';
 
 const Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic space="space-xs-50 space-lg-80">
-                <header className="text-center">
-                    <h1>Home</h1>
-                </header>
-
                 <section>
-                    <FormSearch />
+                    <ChampionGrid />
                 </section>
             </Basic>
         </div>

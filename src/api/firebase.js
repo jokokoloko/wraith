@@ -3,12 +3,12 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const config = {
-    apiKey: 'AIzaSyCuh2sVwKQcaLSTyW9EKXplIdW6b22ZPk4',
-    authDomain: 'spectre-cc13b.firebaseapp.com',
-    databaseURL: 'https://spectre-cc13b.firebaseio.com',
-    projectId: 'spectre-cc13b',
-    storageBucket: 'spectre-cc13b.appspot.com',
-    messagingSenderId: '783992202847',
+    apiKey: 'AIzaSyDzKR2q6lZuEG62Uge7nAddXOA33mvACjc',
+    authDomain: 'invade-blue.firebaseapp.com',
+    databaseURL: 'https://invade-blue.firebaseio.com',
+    projectId: 'invade-blue',
+    storageBucket: 'invade-blue.appspot.com',
+    messagingSenderId: '305383624349',
 };
 firebase.initializeApp(config);
 
@@ -18,3 +18,4 @@ firestore.settings(settings);
 
 export const authentication = firebase.auth();
 export const users = firestore.collection('users');
+export const champions = firestore.collection("champions").orderBy("name", "asc");

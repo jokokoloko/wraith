@@ -6,4 +6,5 @@ export default {
     profile: {},
     calls: [],
     users: [],
+    champions: [],
 };
