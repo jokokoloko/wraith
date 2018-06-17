@@ -62,7 +62,7 @@ const User = ({ loadingUsers, users }) => {
                         {loadingUsers ? (
                             <Loader position="exact-center fixed" label="Loading users" />
                         ) : users.length > 0 ? (
-                            <div className="row gutter-xs-30 gutter-lg-50">{loopUser}</div>
+                            <div className="row gutter-lg-80">{loopUser}</div>
                         ) : (
                             <article className="empty">
                                 <header>
