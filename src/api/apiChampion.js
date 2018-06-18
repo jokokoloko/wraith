@@ -7,8 +7,8 @@ class apiChampion {
             .get()
             .then((snapshot) => {
                 console.log(`Champions: ${snapshot.size}`); // remove
-                snapshot.forEach((champion) => console.log(champion.id, '=>', champion.data())); // remove
-                return snapshot.docs.map((champion) => (champion.data()));
+                // snapshot.forEach((champion) => console.log(champion.id, '=>', champion.data())); // remove
+                return snapshot.docs.map((champion) => champion.data());
             })
             .catch((error) => console.error('Error getting champions:', error)); // remove
 
@@ -18,7 +18,7 @@ class apiChampion {
             (snapshot) => {
                 console.log(`Champions: ${snapshot.size} (watching)`); // remove
                 snapshot.forEach((champion) => console.log(champion.id, '=>', champion.data())); // remove
-                return snapshot.docs.map((champion) => (champion.data()));
+                return snapshot.docs.map((champion) => champion.data());
             },
             (error) => console.error('Error getting champions:', error), // remove
         );
