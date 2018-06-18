@@ -4,7 +4,6 @@ import profile from './reducer/reducerProfile';
 import calls from './reducer/reducerCall';
 import users from './reducer/reducerUser';
 import champions from './reducer/reducerChampion';
-import composition from './reducer/reducerComposition';
 
 export default combineReducers({
     account,
@@ -12,5 +11,4 @@ export default combineReducers({
     calls,
     users,
     champions,
-    composition,
 });

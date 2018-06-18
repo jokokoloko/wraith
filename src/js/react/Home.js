@@ -1,13 +1,13 @@
 import React from 'react';
 import Basic from './section/Basic';
-import ChampionSelect from './widget/ChampionSelect';
+import ChampionGrid from './widget/ChampionGrid';
 
 const Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic space="space-xs-50 space-lg-80">
                 <section>
-                    <ChampionSelect />
+                    <ChampionGrid />
                 </section>
             </Basic>
         </div>
