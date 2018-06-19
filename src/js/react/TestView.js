@@ -10,7 +10,7 @@ import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 
 const TestView = ({ user }) =>
-    user.id ? (
+    user.id ? ( // issue: when not authenticated, refreshing a UserView page briefly displays 404 component (possibly due to mounting too quickly/soon)
         <main id="main" role="main">
             <div className="container-fluid">
                 <Basic space="space-xs-50 space-lg-80">
