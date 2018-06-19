@@ -74,6 +74,11 @@ $dashboard-void-lg: 210px;
 /* ==========!REGION========== */
 /* =========================== */
 
+/* ----------!HEADER---------- */
+.dashboard #header {
+    border-bottom: 1px solid $color-smoke;
+	}
+
 /* ----------!TOOLBAR---------- */
 .dashboard #toolbar {
     background-color: $color-metal;
