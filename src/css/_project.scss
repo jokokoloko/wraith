@@ -1,3 +1,15 @@
+/* =============================== */
+/* ==========!NAVIGATION========== */
+/* =============================== */
+
+/* ----------!NAVBAR---------- */
+.navbar .navbar-brand:active,
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+	background-color: $color-transparent;
+	color: $color-metal;
+	}
+
 /* ============================= */
 /* ==========!CHAMPION========== */
 /* ============================= */

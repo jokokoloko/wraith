@@ -1,2 +1,2 @@
 // Identity
-export const BRAND = 'Spectre';
+export const BRAND = 'invade.blue';

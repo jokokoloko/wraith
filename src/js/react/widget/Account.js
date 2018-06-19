@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
@@ -19,7 +19,11 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                     ? `${profile.name.first} ${profile.name.last}`
                     : profile.name && profile.name.first
                         ? `${profile.name.first}`
-                        : profile.name && profile.name.last ? `${profile.name.last}` : profile.handle ? profile.handle : 'Avatar'
+                        : profile.name && profile.name.last
+                            ? `${profile.name.last}`
+                            : profile.handle
+                                ? profile.handle
+                                : 'Avatar'
             }
         />
     );
@@ -36,7 +40,11 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                         <strong className="dropdown-header">
                             {profile.name.first && profile.name.last
                                 ? `${profile.name.first} ${profile.name.last}`
-                                : profile.name.first ? `${profile.name.first}` : profile.name.last ? `${profile.name.last}` : 'Name'}
+                                : profile.name.first
+                                    ? `${profile.name.first}`
+                                    : profile.name.last
+                                        ? `${profile.name.last}`
+                                        : 'Name'}
                         </strong>
                     )}
                 <p className="dropdown-text">{profile.email}</p>
@@ -51,14 +59,18 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
             </Dropdown>
         </ul>
     ) : (
-        <div className="navbar-action ml-auto account account-guest">
-            <Link className="btn btn-lg btn-success btn-initial to-register" to={path.Register}>
-                Register
-            </Link>
-            <Link className="btn btn-lg btn-primary btn-initial to-login" to={path.Login}>
-                Log In
-            </Link>
-        </div>
+        <ul className="navbar-nav ml-auto account account-guest">
+            <li className="nav-item">
+                <NavLink className="nav-link to-register" to={path.Register}>
+                    Register
+                </NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link to-login" to={path.Login}>
+                    Log In
+                </NavLink>
+            </li>
+        </ul>
     );
 };
 
