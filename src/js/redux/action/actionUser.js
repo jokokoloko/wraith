@@ -28,10 +28,10 @@ export const usersLoadFailure = (error) => ({
     error,
 });
 
-export const usersLoad = (open) => (dispatch) => {
+export const usersLoad = () => (dispatch) => {
     dispatch(usersLoadRequest());
     return apiUser
-        .usersLoad(open)
+        .usersLoad()
         .then((users) => dispatch(usersLoadSuccess(users)))
         .catch((error) => {
             dispatch(usersLoadFailure(error));
@@ -55,11 +55,11 @@ export const usersWatchFailure = (error) => ({
     error,
 });
 
-export const usersWatch = (open) => (dispatch) => {
+export const usersWatch = () => (dispatch) => {
     dispatch(usersWatchRequest());
     return users.onSnapshot(
         (snapshot) => {
-            const users = snapshot.docs.map((user) => (open ? user.data() : { id: user.id }));
+            const users = snapshot.docs.map((user) => user.data());
             dispatch(usersWatchSuccess(users));
         },
         (error) => {
