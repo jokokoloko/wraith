@@ -37,3 +37,42 @@
 .champion-grid .champion .champion-image + .champion-name {
     padding-top: 10px;
     }
+/* ----------!TEAM COMP---------- */
+
+.team-selection h3 {
+  padding-bottom: 16px; 
+  }
+
+.team-selection h4 {
+  padding-bottom: 16px; 
+  }
+
+.team-composition {
+  padding-left: 0px;
+  list-style-type: none; 
+  }
+
+.champion-selection {
+  border: 1px solid black;
+  height: 64px;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-left: 10px; 
+  }
+
+.champion-selection.highlight {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1); 
+  }
+
+.champion-selection .champion-image {
+  width: 50px;
+  padding-right: 10px; 
+  }
+
+.champion-selection .champion-lane {
+  text-transform: capitalize;
+  padding-right: 10px; 
+  }

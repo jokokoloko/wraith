@@ -21,7 +21,7 @@ class TeamComposition extends Component {
 	}
 
 	render() {
-		const lanes = this.state.lanes;
+		const { lanes, selectedLane, selectedChampion } = this.state;
         const loopLanes = lanes.map((lane, index) => {
         	const champion = lane.champion;
         	const position = lane.position;
@@ -49,8 +49,7 @@ class TeamComposition extends Component {
 	            );
         	}
         }, this);
-
-        const { selectedLane } = this.state;
+        
         return (
         	<div className="team-selection">
 	        	<h3>Team Composition</h3>
