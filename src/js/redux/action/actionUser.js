@@ -1,15 +1,7 @@
 import toastr from 'toastr';
 import apiUser from '../../../api/apiUser';
 import { users } from '../../../api/firebase';
-import {
-    USERS_LOAD_REQUEST,
-    USERS_LOAD_SUCCESS,
-    USERS_LOAD_FAILURE,
-    USERS_WATCH_REQUEST,
-    USERS_WATCH_SUCCESS,
-    USERS_WATCH_FAILURE,
-    USERS_VOID,
-} from '../type';
+import { USERS_LOAD_REQUEST, USERS_LOAD_SUCCESS, USERS_LOAD_FAILURE, USERS_VOID } from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -28,46 +20,28 @@ export const usersLoadFailure = (error) => ({
     error,
 });
 
-export const usersLoad = () => (dispatch) => {
+export const usersLoad = (watch) => (dispatch) => {
     dispatch(usersLoadRequest());
-    return apiUser
-        .usersLoad()
-        .then((users) => dispatch(usersLoadSuccess(users)))
-        .catch((error) => {
-            dispatch(usersLoadFailure(error));
-            toastr.error(error.message);
-            throw error;
-        });
-};
-
-// Watch
-export const usersWatchRequest = () => ({
-    type: USERS_WATCH_REQUEST,
-});
-
-export const usersWatchSuccess = (users) => ({
-    type: USERS_WATCH_SUCCESS,
-    users,
-});
-
-export const usersWatchFailure = (error) => ({
-    type: USERS_WATCH_FAILURE,
-    error,
-});
-
-export const usersWatch = () => (dispatch) => {
-    dispatch(usersWatchRequest());
-    return users.onSnapshot(
-        (snapshot) => {
-            const users = snapshot.docs.map((user) => user.data());
-            dispatch(usersWatchSuccess(users));
-        },
-        (error) => {
-            dispatch(usersWatchFailure(error));
-            toastr.error(error.message);
-            throw error;
-        },
-    );
+    return watch
+        ? users.onSnapshot(
+              (snapshot) => {
+                  const users = snapshot.docs.map((user) => user.data());
+                  dispatch(usersLoadSuccess(users));
+              },
+              (error) => {
+                  dispatch(usersLoadFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              },
+          )
+        : apiUser
+              .usersLoad()
+              .then((users) => dispatch(usersLoadSuccess(users)))
+              .catch((error) => {
+                  dispatch(usersLoadFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              });
 };
 
 // Void

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
-import { USERS_WATCH_REQUEST } from '../redux/type';
+import { USERS_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
@@ -11,7 +11,7 @@ import Loader from './unit/Loader';
 class TestWatch extends Component {
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersWatch(true);
+        actionUser.usersLoad();
     }
     render() {
         const { loadingUsers, users } = this.props;
@@ -55,7 +55,7 @@ TestWatch.propTypes = {
 
 function mapStateToProps({ calls, users }) {
     return {
-        loadingUsers: findByString(calls, removeStatus(USERS_WATCH_REQUEST)),
+        loadingUsers: findByString(calls, removeStatus(USERS_LOAD_REQUEST)),
         users,
     };
 }
