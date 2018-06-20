@@ -32,7 +32,7 @@ class TestWatch extends Component {
                                 <ul className="list-unstyled">
                                     {users.map((user, index) => (
                                         <li key={user.id} className={`item-${index + 1}`}>
-                                            {user.email}
+                                            {user.email} <strong>@{user.handle || 'handle'}</strong>
                                         </li>
                                     ))}
                                 </ul>
@@ -66,4 +66,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestWatch);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(TestWatch);

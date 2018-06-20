@@ -13,7 +13,7 @@ import Loader from './unit/Loader';
 class _UserHome extends Component {
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersLoad(true);
+        actionUser.usersLoad();
     }
     render() {
         const { loadingUsers, users } = this.props;
