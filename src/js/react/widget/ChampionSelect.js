@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import Loader from '../unit/Loader';
+import TeamComposition from './TeamComposition';
 
 class ChampionSelect extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class ChampionSelect extends Component {
         return (
             <div className="row">
                 <div className="col-4">
-                    <h3>{`Selected: ${selected.name ? selected.name : ''}`}</h3>
+                    <TeamComposition selectedChampion={selected} ></TeamComposition>
                 </div>
 
                 <div className="col-8">
