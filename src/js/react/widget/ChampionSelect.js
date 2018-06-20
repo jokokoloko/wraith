@@ -10,13 +10,51 @@ class ChampionSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: {},
+            selectedChampion: {},
+            selectedLane: "top",
+            teamComposition: {
+                id: "",
+                user: "",
+                top: {},
+                jungle: {},
+                middle: {},
+                bottom: {},
+                support: {},
+                title: "",
+                description: "",
+            },
+            lanes: [
+                { key: 0, position: "top",      champion: {} },
+                { key: 1, position: "jungle",   champion: {} },
+                { key: 2, position: "middle",   champion: {} },
+                { key: 3, position: "bottom",   champion: {} },
+                { key: 4, position: "support",  champion: {} },
+            ],
         };
         this.selectChampion = this.selectChampion.bind(this);
+        this.selectLane = this.selectLane.bind(this);
     }
-    selectChampion(selected) {
+    selectChampion(selectedChampion) {
+        let newState = {
+            selectedChampion,
+        };
+
+        let selectedLane = this.state.selectedLane;
+        if (selectedChampion && selectedLane) {
+            let lane = this.state.lanes.find((lane) => {
+                return lane.position == selectedLane;
+            });
+
+            let newLanes = this.state.lanes.slice(0);
+            newLanes[lane.key]["champion"] = selectedChampion;
+            newState["lanes"] = newLanes;
+        }
+
+        this.setState(newState);
+    }
+    selectLane(selectedLane) {
         this.setState({
-            selected,
+            selectedLane,
         });
     }
     render() {
@@ -38,11 +76,11 @@ class ChampionSelect extends Component {
                 </li>
             );
         });
-        const { selected } = this.state;
+        const { lanes, selectedLane, selectedChampion } = this.state;
         return (
             <div className="row">
                 <div className="col-4">
-                    <TeamComposition selectedChampion={selected} ></TeamComposition>
+                    <TeamComposition lanes={lanes} selectLane={this.selectLane} selectedLane={selectedLane} selectedChampion={selectedChampion} />
                 </div>
 
                 <div className="col-8">
