@@ -3,21 +3,6 @@ import { generateID } from '../js/function';
 import { FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
-    // Check
-    static accountCheck = () =>
-        new Promise((resolve, reject) => {
-            const unsubscribe = authentication.onAuthStateChanged(
-                (account) => {
-                    unsubscribe(); // this shouldn't be run during registering, logging in, and logging out.
-                    resolve(account);
-                    account
-                        ? console.log(`Account: ${account.email}`) // this shouldn't run twice when unsubscribe() is removed
-                        : console.log('Account: guest'); // this shouldn't run twice when unsubscribe() is removed
-                },
-                (error) => reject(error),
-            );
-        });
-
     // Register
     static accountRegister = (account) =>
         authentication.createUserWithEmailAndPassword(account.email, account.password).then(

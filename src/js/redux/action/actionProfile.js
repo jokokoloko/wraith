@@ -91,7 +91,7 @@ export const profileLoad = () => (dispatch) => {
         .profileLoad()
         .then((profile) => {
             dispatch(profileLoadSuccess(profile));
-            toastr.success(`Welcome ${profile.name && profile.name.first ? profile.name.first : profile.email}!`);
+            toastr.success(`Welcome ${(profile.name && profile.name.first) || profile.email}!`);
         })
         .catch((error) => {
             dispatch(profileLoadFailure(error));
