@@ -31,7 +31,10 @@ class Root extends Component {
     }
     componentDidMount() {
         const { actionAccount } = this.props;
-        actionAccount.accountCheck(); // todo: add way to unsubscribe from listener
+        this.accountCheckEnd = actionAccount.accountCheck();
+    }
+    componentWillUnmount() {
+        this.accountCheckEnd();
     }
     onLogOut() {
         const { actionAccount } = this.props;
