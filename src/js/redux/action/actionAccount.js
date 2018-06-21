@@ -50,11 +50,15 @@ export const accountCheck = () => (dispatch) => {
     dispatch(accountCheckRequest());
     return authentication.onAuthStateChanged(
         (account) => {
-            account
-                ? console.log(`Account: ${account.email}`) // remove
-                : console.log('Account: guest'); // remove
-            account ? dispatch(profileLoad()) : dispatch(profileVoid());
-            account ? dispatch(accountOn()) : dispatch(accountOff());
+            if (account) {
+                dispatch(profileLoad());
+                dispatch(accountOn());
+                console.log(`Account: ${account.email}`); // remove
+            } else {
+                dispatch(profileVoid());
+                dispatch(accountOff());
+                console.log('Account: guest'); // remove
+            }
             dispatch(accountCheckSuccess());
         },
         (error) => {
