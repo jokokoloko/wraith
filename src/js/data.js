@@ -1,3 +1,7 @@
+// Collection
+export const SLUGS = 'slugs';
+export const USERS = 'users';
+
 // User - Status
 export const FRESH = 'fresh';
 export const ONLINE = 'online';

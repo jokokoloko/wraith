@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { SLUGS, USERS } from '../js/data';
 
 const config = {
     apiKey: 'AIzaSyCuh2sVwKQcaLSTyW9EKXplIdW6b22ZPk4',
@@ -17,4 +18,5 @@ const settings = { timestampsInSnapshots: true }; // Patch for Date error (possi
 firestore.settings(settings);
 
 export const authentication = firebase.auth();
-export const users = firestore.collection('users');
+export const slugs = firestore.collection(SLUGS);
+export const users = firestore.collection(USERS);

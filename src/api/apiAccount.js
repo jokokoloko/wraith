@@ -1,28 +1,35 @@
-import { authentication, users } from './firebase';
+import { authentication, slugs, users } from './firebase';
 import { generateID } from '../js/function';
-import { FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
+import { USERS, FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
     // Register
     static accountRegister = (account) =>
-        authentication.createUserWithEmailAndPassword(account.email, account.password).then(
-            () =>
-                users
-                    .doc(authentication.currentUser.uid)
-                    .set({
-                        email: authentication.currentUser.email,
-                        id: authentication.currentUser.uid,
-                        slug: generateID(authentication.currentUser.uid).toLowerCase(),
-                        role: MEMBER,
-                        status: FRESH,
-                        time: {
-                            [ONLINE]: new Date(),
-                            created: new Date(),
-                        },
-                    })
-                    .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
-                    .catch((error) => console.error('Error adding user:', error)), // remove
-        );
+        authentication.createUserWithEmailAndPassword(account.email, account.password).then(() => {
+            users
+                .doc(authentication.currentUser.uid)
+                .set({
+                    email: authentication.currentUser.email,
+                    id: authentication.currentUser.uid,
+                    role: MEMBER,
+                    status: FRESH,
+                    time: {
+                        [ONLINE]: new Date(),
+                        created: new Date(),
+                    },
+                })
+                .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
+                .catch((error) => console.error('Error adding user:', error)); // remove
+            slugs
+                .doc(authentication.currentUser.uid)
+                .set({
+                    id: authentication.currentUser.uid,
+                    collection: USERS,
+                    slug: generateID(authentication.currentUser.uid).toLowerCase(),
+                })
+                .then(() => console.log('Added slug with ID:', authentication.currentUser.uid)) // remove
+                .catch((error) => console.error('Error adding slug:', error)); // remove
+        });
 
     // Log In
     static accountLogIn = (account) =>
