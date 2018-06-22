@@ -1,5 +1,5 @@
-import { authentication, slugs, users } from './firebase';
-import { generateID } from '../js/function';
+import apiSlug from './apiSlug';
+import { authentication, users } from './firebase';
 import { USERS, FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
@@ -20,15 +20,7 @@ class apiAccount {
                 })
                 .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
                 .catch((error) => console.error('Error adding user:', error)); // remove
-            slugs
-                .doc(authentication.currentUser.uid)
-                .set({
-                    id: authentication.currentUser.uid,
-                    collection: USERS,
-                    slug: generateID(authentication.currentUser.uid).toLowerCase(),
-                })
-                .then(() => console.log('Added slug with ID:', authentication.currentUser.uid)) // remove
-                .catch((error) => console.error('Error adding slug:', error)); // remove
+            apiSlug.slugAdd(authentication.currentUser.uid, USERS);
         });
 
     // Log In
