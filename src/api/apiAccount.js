@@ -1,11 +1,13 @@
 import apiSlug from './apiSlug';
 import { authentication, users } from './firebase';
+import { generateID } from '../js/function';
 import { USERS, FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
     // Register
     static accountRegister = (account) =>
         authentication.createUserWithEmailAndPassword(account.email, account.password).then(() => {
+            const slug = generateID(authentication.currentUser.uid).toLowerCase();
             users
                 .doc(authentication.currentUser.uid)
                 .set({
@@ -17,10 +19,13 @@ class apiAccount {
                         [ONLINE]: new Date(),
                         created: new Date(),
                     },
+                    slug,
                 })
-                .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
+                .then(() => {
+                    apiSlug.slugAdd(authentication.currentUser.uid, slug, USERS);
+                    console.log('Added user with ID:', authentication.currentUser.uid); // remove
+                })
                 .catch((error) => console.error('Error adding user:', error)); // remove
-            apiSlug.slugAdd(authentication.currentUser.uid, USERS);
         });
 
     // Log In

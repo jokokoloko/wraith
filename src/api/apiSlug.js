@@ -1,18 +1,23 @@
 import { slugs } from './firebase';
-import { generateID } from '../js/function';
 
 class apiSlug {
     // Add
-    static slugAdd = (id, collection) =>
+    static slugAdd = (id, slug, collection) =>
         slugs
             .doc(id)
             .set({
-                slug: generateID(id).toLowerCase(),
                 id,
+                slug,
                 collection,
             })
             .then(() => console.log('Added slug with ID:', id)) // remove
             .catch((error) => console.error('Error adding slug:', error)); // remove
+
+    // Edit
+    static slugEdit = (id, slug) =>
+        slugs.doc(id).update({
+            slug,
+        });
 }
 
 export default apiSlug;
