@@ -2,22 +2,16 @@ import { slugs } from './firebase';
 
 class apiSlug {
     // Add
-    static slugAdd = (id, slug, collection) =>
+    static slugAdd = (id, collection, reference) =>
         slugs
             .doc(id)
             .set({
                 id,
-                slug,
                 collection,
+                reference,
             })
-            .then(() => console.log('Added slug with ID:', id)) // remove
+            .then(() => console.log('Added slug:', id)) // remove
             .catch((error) => console.error('Error adding slug:', error)); // remove
-
-    // Edit
-    static slugEdit = (id, slug) =>
-        slugs.doc(id).update({
-            slug,
-        });
 }
 
 export default apiSlug;

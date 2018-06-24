@@ -1,5 +1,6 @@
 import apiSlug from './apiSlug';
 import { authentication, users } from './firebase';
+import { USERS } from '../js/data';
 
 class apiProfile {
     // Edit
@@ -7,7 +8,7 @@ class apiProfile {
         users
             .doc(authentication.currentUser.uid)
             .update(profile)
-            .then(() => apiSlug.slugEdit(authentication.currentUser.uid, profile.slug))
+            .then(() => apiSlug.slugAdd(profile.slug, USERS, authentication.currentUser.uid))
             .catch((error) => console.error('Error updating profile', error)); // remove
 
     // Status
