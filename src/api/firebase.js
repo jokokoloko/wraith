@@ -13,10 +13,11 @@ const config = {
 };
 firebase.initializeApp(config);
 
-const firestore = firebase.firestore();
-const settings = { timestampsInSnapshots: true }; // Patch for Date error (possibly only necessary while in beta)
-firestore.settings(settings);
-
 export const authentication = firebase.auth();
+export const firestore = firebase.firestore();
+
+const settings = { timestampsInSnapshots: true }; // Patch for Date error (possibly only necessary while in beta)
+firestore.settings(settings); // Currently only needed for the patch above
+
 export const slugs = firestore.collection(SLUGS);
 export const users = firestore.collection(USERS);
