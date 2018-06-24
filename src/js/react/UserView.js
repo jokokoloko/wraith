@@ -1,12 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import apiUser from '../../api/apiUser';
-import { findByProperty } from '../filter';
-import Empty from './404';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
@@ -20,27 +16,28 @@ class UserView extends Component {
         };
     }
     componentDidMount() {
-        const { id } = this.props; // issue: when not authenticated, refreshing a UserView page gets stuck on loading (possibly due to mounting too quickly/soon)
-        id &&
-            apiUser.userLoad(id).then((user) =>
+        const { match } = this.props;
+        const slug = match.params.slug;
+        setTimeout(() => {
+            apiUser.userLoad(slug).then((user) =>
                 this.setState({
                     loadingUser: false,
                     user,
                 }),
             );
+        }, 5000); // remove
     }
     render() {
-        const { id } = this.props;
         const { loadingUser, user } = this.state;
-        return id ? (
+        return loadingUser ? (
+            <Loader position="exact-center fixed" label="Loading user" />
+        ) : (
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic space="space-xs-50 space-lg-80">
-                        <div className="row gutter-lg-80">
-                            <div className="col-lg-3">
-                                {loadingUser ? (
-                                    <Loader position="exact-center fixed" label="Loading user" />
-                                ) : (
+                        {user ? (
+                            <div className="row gutter-lg-80">
+                                <div className="col-lg-3">
                                     <header className="card card-panel">
                                         <div className="card-body">
                                             <Avatar
@@ -110,28 +107,22 @@ class UserView extends Component {
                                             </address>
                                         </div>
                                     </header>
-                                )}
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <header className="empty text-center">
+                                <h1>404 - User</h1>
+                            </header>
+                        )}
                     </Basic>
                 </div>
             </main>
-        ) : (
-            <Route component={Empty} />
         );
     }
 }
 
 UserView.propTypes = {
-    id: PropTypes.string,
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-function mapStateToProps({ users }, { match }) {
-    const slug = match.params.slug;
-    const user = findByProperty(users, 'slug', slug);
-    return {
-        id: user.id,
-    };
-}
-
-export default connect(mapStateToProps)(UserView);
+export default UserView;
