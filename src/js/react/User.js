@@ -17,7 +17,7 @@ const User = ({ loadingUsers, users }) => {
         return (
             <article key={user.id} id={user.id} className={`${item} ${item}-${count} col-lg-3`}>
                 <header className="card card-panel">
-                    <Link className="card-body" to={`${path.Root}${user.id}`}>
+                    <Link className="card-body" to={`${path.Root}${user.slug}`}>
                         <Avatar
                             position="fit exact-center"
                             source={user.avatar ? user.avatar : 'http://via.placeholder.com/800?text=Avatar'}

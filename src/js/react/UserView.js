@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import apiView from '../../api/apiView';
-import { USERS as collection } from '../data';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
@@ -19,7 +18,7 @@ class UserView extends Component {
     componentDidMount() {
         const { match } = this.props;
         setTimeout(() => {
-            apiView.viewLoad(match.params.slug, collection).then((view) =>
+            apiView.viewLoad(match.params.slug).then((view) =>
                 this.setState({
                     loadingView: false,
                     view,
