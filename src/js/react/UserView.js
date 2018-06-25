@@ -1,40 +1,30 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
-import apiView from '../../api/apiView';
+import * as actionView from '../redux/action/actionView';
+import { VIEW_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 class UserView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingView: true,
-            view: {},
-        };
-    }
     componentDidMount() {
-        const { match } = this.props;
-        setTimeout(() => {
-            apiView.viewLoad(match.params.slug).then((view) =>
-                this.setState({
-                    loadingView: false,
-                    view,
-                }),
-            );
-        }, 3000); // remove
+        const { match, actionView } = this.props;
+        actionView.viewLoad(match.params.slug);
     }
     render() {
-        const { loadingView, view } = this.state;
+        const { loadingView, view } = this.props;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic space="space-xs-50 space-lg-80">
-                        {view ? (
+                        {view.id ? (
                             <div className="row gutter-lg-80">
                                 <div className="col-lg-3">
                                     <header className="card card-panel">
@@ -122,6 +112,25 @@ class UserView extends Component {
 
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingView: PropTypes.bool.isRequired,
+    view: PropTypes.objectOf(PropTypes.any).isRequired,
+    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-export default UserView;
+function mapStateToProps({ view, calls }) {
+    return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
+        view,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actionView: bindActionCreators(actionView, dispatch),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(UserView);

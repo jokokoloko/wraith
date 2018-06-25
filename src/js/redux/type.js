@@ -34,6 +34,12 @@ export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS';
 export const PROFILE_LOAD_FAILURE = 'PROFILE_LOAD_FAILURE';
 export const PROFILE_VOID = 'PROFILE_VOID';
 
+// View
+export const VIEW_LOAD_REQUEST = 'VIEW_LOAD_REQUEST';
+export const VIEW_LOAD_SUCCESS = 'VIEW_LOAD_SUCCESS';
+export const VIEW_LOAD_FAILURE = 'VIEW_LOAD_FAILURE';
+export const VIEW_VOID = 'VIEW_VOID';
+
 // Call
 export const CALLS_VOID = 'CALLS_VOID';
 
