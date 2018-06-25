@@ -11,9 +11,6 @@ import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
-import TestAction from './TestAction'; // remove
-import TestWatch from './TestWatch'; // remove
-import TestView from './TestView'; // remove
 import About from './About';
 import User from './User';
 import UserView from './UserView';
@@ -55,9 +52,6 @@ class Root extends Component {
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <Route path="/test/action" component={TestAction} />
-                        <Route path="/test/watch" component={TestWatch} />
-                        <Route path="/test/:slug" component={TestView} />
                         <Route path={path.About} component={About} />
                         <Route path={path.User} component={User} />
                         <Route path={path.UserView} component={UserView} />
