@@ -23,10 +23,7 @@ export const viewLoad = (slug, collection) => (dispatch) => {
     dispatch(viewLoadRequest());
     return apiView
         .viewLoad(slug, collection)
-        .then((view) => {
-            dispatch(viewLoadSuccess(view));
-            view && toastr.info(`Viewing: ${view.id}!`); // remove
-        })
+        .then((view) => dispatch(viewLoadSuccess(view)))
         .catch((error) => {
             dispatch(viewLoadFailure(error));
             toastr.error(error.message);

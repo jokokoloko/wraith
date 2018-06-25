@@ -5,19 +5,28 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionView from '../redux/action/actionView';
-import { VIEW_LOAD_REQUEST } from '../redux/type';
-import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 class UserView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loadingView: true,
+        };
+    }
     componentDidMount() {
         const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.slug);
+        actionView.viewLoad(match.params.slug).then(() =>
+            this.setState({
+                loadingView: false,
+            }),
+        );
     }
     render() {
-        const { loadingView, view } = this.props;
+        const { view } = this.props;
+        const { loadingView } = this.state;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
@@ -112,14 +121,12 @@ class UserView extends Component {
 
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    loadingView: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls }) {
+function mapStateToProps({ view }) {
     return {
-        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         view,
     };
 }
