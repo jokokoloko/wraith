@@ -6,9 +6,9 @@
 .navbar .navbar-brand:active,
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-	background-color: $color-transparent;
-	color: $color-metal;
-	}
+    background-color: $color-transparent;
+    color: $color-metal;
+}
 
 /* ============================= */
 /* ==========!CHAMPION========== */
@@ -18,22 +18,22 @@
 .champion-grid {
     height: 550px;
     overflow-y: scroll;
-    }
+}
 .champion-grid .champion {
     max-width: 120px;
-    }
+}
 .champion-grid .champion .champion-profile {
     width: 80px;
     cursor: pointer;
-    }
+}
 .champion-grid .champion .champion-image {
     width: 48px;
     height: 48px;
-    }
+}
 .champion-grid .champion .champion-name {
     @extend [class*="xs-10"];
     @extend .p-xs-10;
-    }
+}
 .champion-grid .champion .champion-image + .champion-name {
     padding-top: 10px;
-    }
+}

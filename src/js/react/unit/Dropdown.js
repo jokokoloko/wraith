@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -8,6 +8,7 @@ class Dropdown extends Component {
         this.state = {
             toggle: false,
         };
+        this.isDropdown = createRef();
         this.onClick = this.onClick.bind(this);
         this.onBlur = this.onBlur.bind(this);
     }
@@ -32,7 +33,7 @@ class Dropdown extends Component {
         );
     }
     onBlur(event) {
-        !this.isDropdown.contains(event.target) &&
+        !this.isDropdown.current.contains(event.target) &&
             this.setState(
                 {
                     toggle: false,
@@ -44,7 +45,7 @@ class Dropdown extends Component {
         const { name, label, alignment, caret, children } = this.props;
         const { toggle } = this.state;
         return (
-            <li className={`nav-item dropdown ${toggle ? `show` : `hide`}`} ref={(isDropdown) => (this.isDropdown = isDropdown)}>
+            <li className={`nav-item dropdown ${toggle ? `show` : `hide`}`} ref={this.isDropdown}>
                 <button
                     type="button"
                     id={`${name}-dropdown`}

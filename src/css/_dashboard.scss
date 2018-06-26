@@ -10,42 +10,42 @@ $dashboard-void-lg: 210px;
 @include media-breakpoint-up(sm) {
     .dashboard .void {
         margin-right: $dashboard-void-sm;
-        }
+    }
     .dashboard #header,
     .dashboard #main,
     .dashboard #footer {
         margin-left: $dashboard-void-sm;
-        }
+    }
     .dashboard #toolbar {
         width: $dashboard-void-sm;
-        }
-	}
+    }
+}
 @include media-breakpoint-up(md) {
     .dashboard .void {
         margin-right: $dashboard-void-md;
-        }
+    }
     .dashboard #header,
     .dashboard #main,
     .dashboard #footer {
         margin-left: $dashboard-void-md;
-        }
+    }
     .dashboard #toolbar {
         width: $dashboard-void-md;
-        }
-	}
+    }
+}
 @include media-breakpoint-up(lg) {
     .dashboard .void {
         margin-right: $dashboard-void-lg;
-        }
+    }
     .dashboard #header,
     .dashboard #main,
     .dashboard #footer {
         margin-left: $dashboard-void-lg;
-        }
+    }
     .dashboard #toolbar {
         width: $dashboard-void-lg;
-        }
-	}
+    }
+}
 
 /* ========================== */
 /* ==========!BASIC========== */
@@ -54,7 +54,7 @@ $dashboard-void-lg: 210px;
 /* ----------!MAIN---------- */
 .dashboard {
     background-color: $color-phantom;
-    }
+}
 
 /* ========================== */
 /* ==========!SPACE========== */
@@ -67,8 +67,8 @@ $dashboard-void-lg: 210px;
     .dashboard #footer .container-fluid {
         padding-left: 50px;
         padding-right: 50px;
-        }
-	}
+    }
+}
 
 /* =========================== */
 /* ==========!REGION========== */
@@ -76,8 +76,8 @@ $dashboard-void-lg: 210px;
 
 /* ----------!HEADER---------- */
 .dashboard #header {
-    border-bottom: 1px solid $color-smoke;
-	}
+    border-bottom: 1px solid $color-smoke !important;
+}
 
 /* ----------!TOOLBAR---------- */
 .dashboard #toolbar {
@@ -88,37 +88,37 @@ $dashboard-void-lg: 210px;
     left: 0;
     bottom: 0;
     overflow: hidden;
-    }
+}
 .dashboard #toolbar .toolbar-brand,
 .dashboard #toolbar .toolbar-text,
 .dashboard #toolbar .toolbar-nav > li > a {
-	@extend .p-xs-15;
-	background-color: $color-transparent;
-	margin: 0;
+    @extend .p-xs-15;
+    background-color: $color-transparent;
+    margin: 0;
     padding: 10px 20px;
     font-weight: $font-weight-2;
     line-height: $line-height-text;
     color: $color-white;
     display: block;
-	}
+}
 .dashboard #toolbar .toolbar-brand {
     border-bottom: 1px solid $color-charcoal;
-    }
+}
 @include media-breakpoint-up(lg) {
-	.dashboard #toolbar .toolbar-brand {
-	    @extend .p-lg-20;
+    .dashboard #toolbar .toolbar-brand {
+        @extend .p-lg-20;
         padding-top: (($header-height-lg - $line-height-text) / 2);
         padding-bottom: (($header-height-lg - $line-height-text) / 2);
-		}
-	}
+    }
+}
 .dashboard #toolbar .toolbar-nav {
     padding-top: 14px;
-    }
+}
 .dashboard #toolbar .toolbar-nav > li > a:active,
 .dashboard #toolbar .toolbar-nav > li > a:hover,
 .dashboard #toolbar .toolbar-nav > li > a:focus {
     background-color: $color-charcoal;
-    }
+}
 .dashboard #toolbar .toolbar-nav > li > a.active,
 .dashboard #toolbar .toolbar-nav > li > a.active:active,
 .dashboard #toolbar .toolbar-nav > li > a.active:hover,
@@ -135,13 +135,13 @@ $dashboard-void-lg: 210px;
 .dashboard #toolbar .toolbar-nav > li.active > button:active,
 .dashboard #toolbar .toolbar-nav > li.active > button:hover,
 .dashboard #toolbar .toolbar-nav > li.active > button:focus {
-	background-color: $color-brand-blue-300;
-	cursor: default;
-	}
+    background-color: $color-brand-blue-300;
+    cursor: default;
+}
 .dashboard #toolbar .toolbar-nav + .toolbar-nav {
     border-top: 1px solid $color-charcoal;
     margin-top: 15px;
-    }
+}
 
 /* ========================== */
 /* ==========!TABLE========== */
@@ -150,11 +150,11 @@ $dashboard-void-lg: 210px;
 /* ----------!USER---------- */
 .dashboard .table-user .label:first-child {
     width: 5%;
-    }
+}
 .dashboard .table-user .label:last-child {
     width: 10%;
-    }
+}
 .dashboard .table-user .label-3,
 .dashboard .table-user .label-4 {
     width: 15%;
-    }
+}
