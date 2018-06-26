@@ -2,7 +2,7 @@ import initial from '../initial';
 import { REQUEST, SUCCESS, FAILURE, CALLS_VOID } from '../type';
 import { checkStatus, removeStatus } from '../../filter';
 
-export default function reducerCall(state = initial.calls, action) {
+export default function(state = initial.calls, action) {
     const type = action.type === CALLS_VOID ? CALLS_VOID : checkStatus(action.type);
     const call = removeStatus(action.type);
     switch (type) {

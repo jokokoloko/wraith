@@ -1,28 +1,32 @@
+import apiSlug from './apiSlug';
 import { authentication, users } from './firebase';
-import { generateID } from '../js/function';
-import { FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
+import { generateSlug } from '../js/function';
+import { USERS, FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
     // Register
     static accountRegister = (account) =>
-        authentication.createUserWithEmailAndPassword(account.email, account.password).then(
-            () =>
-                users
-                    .doc(authentication.currentUser.uid)
-                    .set({
-                        email: authentication.currentUser.email,
-                        id: authentication.currentUser.uid,
-                        slug: generateID(authentication.currentUser.uid).toLowerCase(),
-                        role: MEMBER,
-                        status: FRESH,
-                        time: {
-                            [ONLINE]: new Date(),
-                            created: new Date(),
-                        },
-                    })
-                    .then(() => console.log('Added user with ID:', authentication.currentUser.uid)) // remove
-                    .catch((error) => console.error('Error adding user:', error)), // remove
-        );
+        authentication.createUserWithEmailAndPassword(account.email, account.password).then(() => {
+            const slug = generateSlug();
+            users
+                .doc(authentication.currentUser.uid)
+                .set({
+                    email: authentication.currentUser.email,
+                    id: authentication.currentUser.uid,
+                    role: MEMBER,
+                    status: FRESH,
+                    time: {
+                        [ONLINE]: new Date(),
+                        created: new Date(),
+                    },
+                    slug,
+                })
+                .then(() => {
+                    apiSlug.slugAdd(slug, USERS, authentication.currentUser.uid);
+                    console.log('Added user:', authentication.currentUser.uid); // remove
+                })
+                .catch((error) => console.error('Error adding user:', error)); // remove
+        });
 
     // Log In
     static accountLogIn = (account) =>
