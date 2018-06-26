@@ -16,10 +16,7 @@ class FormProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            form: {
-                name: {},
-                address: {},
-            },
+            form: {},
             error: {},
         };
         this.isFocus = createRef();
@@ -34,7 +31,7 @@ class FormProfile extends Component {
         this.setState({
             form,
         });
-        !form.name.first && this.isFocus.current.focus();
+        (!form.name && this.isFocus.current.focus()) || (form.name && !form.name.first && this.isFocus.current.focus());
     }
     onChange(event) {
         const target = event.target;
@@ -88,7 +85,7 @@ class FormProfile extends Component {
                                     placeholder="First Name"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.name.first}
+                                    value={form.name && form.name.first}
                                     error={error.first}
                                     group="name"
                                     reference={this.isFocus}
@@ -101,7 +98,7 @@ class FormProfile extends Component {
                                     placeholder="Last Name"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.name.last}
+                                    value={form.name && form.name.last}
                                     error={error.last}
                                     group="name"
                                 />
@@ -139,7 +136,7 @@ class FormProfile extends Component {
                                     placeholder="Street"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.street}
+                                    value={form.address && form.address.street}
                                     error={error.street}
                                     group="address"
                                 />
@@ -151,7 +148,7 @@ class FormProfile extends Component {
                                     placeholder="Unit"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.unit}
+                                    value={form.address && form.address.unit}
                                     error={error.unit}
                                     group="address"
                                 />
@@ -165,7 +162,7 @@ class FormProfile extends Component {
                                     placeholder="City"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.city}
+                                    value={form.address && form.address.city}
                                     error={error.city}
                                     group="address"
                                 />
@@ -177,7 +174,7 @@ class FormProfile extends Component {
                                     placeholder="State"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.state}
+                                    value={form.address && form.address.state}
                                     error={error.state}
                                     group="address"
                                 />
@@ -189,7 +186,7 @@ class FormProfile extends Component {
                                     placeholder="Country"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.country}
+                                    value={form.address && form.address.country}
                                     error={error.country}
                                     group="address"
                                 />
@@ -201,7 +198,7 @@ class FormProfile extends Component {
                                     placeholder="Zip"
                                     size={size}
                                     onChange={this.onChange}
-                                    value={form.address.zip}
+                                    value={form.address && form.address.zip}
                                     error={error.zip}
                                     group="address"
                                 />
@@ -216,11 +213,11 @@ class FormProfile extends Component {
                                     position="fit exact-center"
                                     source={form.avatar ? form.avatar : 'http://via.placeholder.com/800?text=Avatar'}
                                     alternate={
-                                        form.name.first && form.name.last
+                                        form.name && form.name.first && form.name.last
                                             ? `${form.name.first} ${form.name.last}`
-                                            : form.name.first
+                                            : form.name && form.name.first
                                                 ? `${form.name.first}`
-                                                : form.name.last
+                                                : form.name && form.name.last
                                                     ? `${form.name.last}`
                                                     : form.handle
                                                         ? form.handle
@@ -228,11 +225,11 @@ class FormProfile extends Component {
                                     }
                                 />
                                 <h2 className="name-full">
-                                    {form.name.first && form.name.last
+                                    {form.name && form.name.first && form.name.last
                                         ? `${form.name.first} ${form.name.last}`
-                                        : form.name.first
+                                        : form.name && form.name.first
                                             ? `${form.name.first}`
-                                            : form.name.last
+                                            : form.name && form.name.last
                                                 ? `${form.name.last}`
                                                 : 'Name'}
                                 </h2>
@@ -240,7 +237,7 @@ class FormProfile extends Component {
                                 <address className="contact" itemType="http://schema.org/Organization" itemScope>
                                     <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                         <FontAwesomeIcon icon={faMapMarkerAlt} />
-                                        {form.address.city && form.address.state && form.address.country ? (
+                                        {form.address && form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>
                                                 <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
@@ -248,29 +245,29 @@ class FormProfile extends Component {
                                                 {', '}
                                                 <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
-                                        ) : form.address.city && form.address.state ? (
+                                        ) : form.address && form.address.city && form.address.state ? (
                                             <Fragment>
                                                 <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
                                                 <span itemProp="addressRegion">{form.address.state}</span>
                                             </Fragment>
-                                        ) : form.address.city && form.address.country ? (
+                                        ) : form.address && form.address.city && form.address.country ? (
                                             <Fragment>
                                                 <span itemProp="addressLocality">{form.address.city}</span>
                                                 {', '}
                                                 <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
-                                        ) : form.address.state && form.address.country ? (
+                                        ) : form.address && form.address.state && form.address.country ? (
                                             <Fragment>
                                                 <span itemProp="addressRegion">{form.address.state}</span>
                                                 {', '}
                                                 <span itemProp="addressCountry">{form.address.country}</span>
                                             </Fragment>
-                                        ) : form.address.city ? (
+                                        ) : form.address && form.address.city ? (
                                             <span itemProp="addressLocality">{form.address.city}</span>
-                                        ) : form.address.state ? (
+                                        ) : form.address && form.address.state ? (
                                             <span itemProp="addressRegion">{form.address.state}</span>
-                                        ) : form.address.country ? (
+                                        ) : form.address && form.address.country ? (
                                             <span itemProp="addressCountry">{form.address.country}</span>
                                         ) : (
                                             'Location'
