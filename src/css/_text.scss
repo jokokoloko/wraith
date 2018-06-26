@@ -152,6 +152,12 @@ button,
 	display: block;
 	}
 
+/* ----------!CARD---------- */
+.card-panel .card-body {
+	font-weight: $font-weight-1 !important;
+	color: $color-metal !important;
+	}
+
 /* ----------!COPYRIGHT---------- */
 .copyright,
 .copyright > a {
