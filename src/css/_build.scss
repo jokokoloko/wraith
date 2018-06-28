@@ -328,6 +328,7 @@
 /* ----------!HEADER---------- */
 #header {
 	@include color($color-header);
+	border-bottom: 1px solid;
 	}
 #header .logo {
     width: 30px;
@@ -403,13 +404,13 @@
 /* ----------!WIDE---------- */
 @include media-breakpoint-up(hg) {
 	.container {
-	    max-width: 1280px;
+	    max-width: 1380px;
 		}
 	}
 
 /* ----------!CINEMA---------- */
 @include media-breakpoint-up(gt) {
 	.container {
-	    max-width: 1440px;
+	    max-width: 1560px;
 		}
 	}
