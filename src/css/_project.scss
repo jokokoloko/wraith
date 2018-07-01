@@ -76,3 +76,10 @@
     text-transform: capitalize;
     padding-right: 10px;
 }
+
+/*----------- !Team View --------------*/
+.champ-row-bg {
+    background: #474747;
+    background: -webkit-linear-gradient(left, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
+    background: linear-gradient(to right, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
+}
