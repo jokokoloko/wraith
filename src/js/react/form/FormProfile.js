@@ -2,8 +2,6 @@ import React, { Component, Fragment, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
@@ -236,7 +234,6 @@ class FormProfile extends Component {
                                 <h3 className="handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
                                 <address className="contact" itemType="http://schema.org/Organization" itemScope>
                                     <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
-                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
                                         {form.address && form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>
                                                 <span itemProp="addressLocality">{form.address.city}</span>

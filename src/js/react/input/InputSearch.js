@@ -1,9 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
-import faSearch from '@fortawesome/fontawesome-pro-regular/faSearch';
-import faTimesCircle from '@fortawesome/fontawesome-pro-regular/faTimesCircle';
 
 const InputSearch = ({ name, label, placeholder, size, onReset, value, error, group, reference }) => {
     const fieldClass = 'form-control';
@@ -28,13 +24,13 @@ const InputSearch = ({ name, label, placeholder, size, onReset, value, error, gr
                 />
                 <div className="input-group-append">
                     <button type="reset" className="btn btn-outline-secondary btn-icon btn-reset" onClick={onReset}>
-                        <FontAwesomeIcon icon={faTimesCircle} />
+                        Reset
                     </button>
                     <button type="button" className="btn btn-outline-secondary btn-icon btn-location">
-                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+                        Location
                     </button>
                     <button type="submit" className="btn btn-info btn-icon btn-search">
-                        <FontAwesomeIcon icon={faSearch} />
+                        Search
                     </button>
                 </div>
             </div>

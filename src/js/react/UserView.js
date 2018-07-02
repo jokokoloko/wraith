@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionView from '../redux/action/actionView';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
@@ -65,7 +63,6 @@ class UserView extends Component {
                                             <h3 className="handle">@{view.handle ? `${view.handle}` : 'handle'}</h3>
                                             <address className="contact" itemType="http://schema.org/Organization" itemScope>
                                                 <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
-                                                    <FontAwesomeIcon icon={faMapMarkerAlt} />
                                                     {view.address && view.address.city && view.address.state && view.address.country ? (
                                                         <Fragment>
                                                             <span itemProp="addressLocality">{view.address.city}</span>
