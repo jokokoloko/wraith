@@ -117,6 +117,23 @@ p + .btn {
 .btn + .btn {
 	margin-left: 20px; // 20px spacing
 	}
+.d-flex h1 + button,
+.d-flex h2 + button,
+.d-flex h3 + button,
+.d-flex h4 + button,
+.d-flex h5 + button,
+.d-flex h6 + button,
+.d-flex p + button,
+.d-flex h1 + .btn,
+.d-flex h2 + .btn,
+.d-flex h3 + .btn,
+.d-flex h4 + .btn,
+.d-flex h5 + .btn,
+.d-flex h6 + .btn,
+.d-flex p + .btn {
+	margin-top: 0; // 30px spacing
+	margin-left: 20px; // 20px spacing
+	}
 
 /* ----------!MEDIA---------- */
 blockquote + p,
