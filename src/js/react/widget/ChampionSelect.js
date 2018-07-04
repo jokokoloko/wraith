@@ -6,6 +6,7 @@ import { findByString, removeStatus } from "../../filter";
 import Loader from "../unit/Loader";
 import TeamComposition from "./TeamComposition";
 import FormTeamComp from "../form/FormTeamComp";
+import InputText from '../input/InputText';
 
 class ChampionSelect extends Component {
     constructor(props) {
@@ -31,9 +32,13 @@ class ChampionSelect extends Component {
                 { key: 3, position: "bottom", champion: {} },
                 { key: 4, position: "support", champion: {} },
             ],
+            filters: {
+                name: ''
+            }
         };
         this.selectChampion = this.selectChampion.bind(this);
         this.selectLane = this.selectLane.bind(this);
+        this.onFiltersChange = this.onFiltersChange.bind(this);
     }
     selectChampion(selectedChampion) {
         let newState = {
@@ -58,9 +63,25 @@ class ChampionSelect extends Component {
             selectedLane,
         });
     }
+
+    onFiltersChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const filters = {
+            ...this.state.filters,
+            name: value
+        }
+        this.setState({
+            filters,
+        });
+
+    }
     render() {
         const { loadingChampions, champions } = this.props;
         const item = "champion";
+        const { lanes, selectedLane, selectedChampion, filters } = this.state;
+        const size = 'sm';
+
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
             const sprite = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/sprite/${champion.image.sprite}`;
@@ -68,8 +89,13 @@ class ChampionSelect extends Component {
                 backgroundImage: `url('${sprite}')`,
                 backgroundPosition: `-${champion.image.x}px -${champion.image.y}px`,
             };
+            //basically hide the li if spelling matches
+            const displayClass = champion.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0 ?
+                                    'd-flex' :
+                                    'd-none';
             return (
-                <li key={champion.id} id={champion.id} className={`${item} ${item}-${count} col d-flex justify-content-center`}>
+                <li key={champion.id} id={champion.id}
+                    className={`${item} ${item}-${count} col ${displayClass} justify-content-center`}>
                     <div className="champion-profile d-flex flex-column align-items-center" onClick={() => this.selectChampion(champion)}>
                         <div className="champion-image" style={style} />
                         <h3 className="champion-name">{champion.name}</h3>
@@ -77,7 +103,7 @@ class ChampionSelect extends Component {
                 </li>
             );
         });
-        const { lanes, selectedLane, selectedChampion } = this.state;
+
         return (
             <div className="row">
                 <div className="col-3">
@@ -90,6 +116,14 @@ class ChampionSelect extends Component {
                 </div>
 
                 <div className="col-6">
+                    <div class="filters-bar">
+                        <InputText name="title"
+                            label="Champion Name"
+                            placeholder="Champion Name"
+                            onChange={this.onFiltersChange}
+                            value={filters.name}
+                            size={size} />
+                    </div>
                     {loadingChampions ? (
                         <Loader label="Loading champions" />
                     ) : (
