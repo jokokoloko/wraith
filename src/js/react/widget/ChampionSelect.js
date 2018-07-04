@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
-import { findByString, removeStatus } from '../../filter';
-import Loader from '../unit/Loader';
-import TeamComposition from './TeamComposition';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { CHAMPIONS_LOAD_REQUEST } from "../../redux/type";
+import { findByString, removeStatus } from "../../filter";
+import Loader from "../unit/Loader";
+import TeamComposition from "./TeamComposition";
+import FormTeamComp from "../form/FormTeamComp";
 
 class ChampionSelect extends Component {
     constructor(props) {
@@ -24,11 +25,11 @@ class ChampionSelect extends Component {
                 description: "",
             },
             lanes: [
-                { key: 0, position: "top",      champion: {} },
-                { key: 1, position: "jungle",   champion: {} },
-                { key: 2, position: "middle",   champion: {} },
-                { key: 3, position: "bottom",   champion: {} },
-                { key: 4, position: "support",  champion: {} },
+                { key: 0, position: "top", champion: {} },
+                { key: 1, position: "jungle", champion: {} },
+                { key: 2, position: "middle", champion: {} },
+                { key: 3, position: "bottom", champion: {} },
+                { key: 4, position: "support", champion: {} },
             ],
         };
         this.selectChampion = this.selectChampion.bind(this);
@@ -59,7 +60,7 @@ class ChampionSelect extends Component {
     }
     render() {
         const { loadingChampions, champions } = this.props;
-        const item = 'champion';
+        const item = "champion";
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
             const sprite = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/sprite/${champion.image.sprite}`;
@@ -79,17 +80,27 @@ class ChampionSelect extends Component {
         const { lanes, selectedLane, selectedChampion } = this.state;
         return (
             <div className="row">
-                <div className="col-4">
-                    <TeamComposition lanes={lanes} selectLane={this.selectLane} selectedLane={selectedLane} selectedChampion={selectedChampion} />
+                <div className="col-3">
+                    <TeamComposition
+                        lanes={lanes}
+                        selectLane={this.selectLane}
+                        selectedLane={selectedLane}
+                        selectedChampion={selectedChampion}
+                    />
                 </div>
 
-                <div className="col-8">
+                <div className="col-6">
                     {loadingChampions ? (
                         <Loader label="Loading champions" />
                     ) : (
                         <ul className="champion-grid row gutter-30 text-center">{loopChampion}</ul>
                     )}
+                    <section className="form-section">
+                        <FormTeamComp />
+                    </section>
                 </div>
+
+                <div className="col-3">Champion info here!</div>
             </div>
         );
     }
