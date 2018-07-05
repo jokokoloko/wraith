@@ -222,7 +222,7 @@ class FormProfile extends Component {
                                                         : 'Avatar'
                                     }
                                 />
-                                <h2 className="name-full">
+                                <h2 className="card-headline name-full">
                                     {form.name && form.name.first && form.name.last
                                         ? `${form.name.first} ${form.name.last}`
                                         : form.name && form.name.first
@@ -231,8 +231,8 @@ class FormProfile extends Component {
                                                 ? `${form.name.last}`
                                                 : 'Name'}
                                 </h2>
-                                <h3 className="handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
-                                <address className="contact" itemType="http://schema.org/Organization" itemScope>
+                                <h3 className="card-tagline handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
+                                <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                     <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                         {form.address && form.address.city && form.address.state && form.address.country ? (
                                             <Fragment>

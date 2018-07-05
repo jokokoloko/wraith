@@ -33,7 +33,7 @@ const User = ({ loadingUsers, users }) => {
                                                 : 'Avatar'
                             }
                         />
-                        <h2 className="name-full">
+                        <h2 className="card-headline name-full">
                             {user.name && user.name.first && user.name.last
                                 ? `${user.name.first} ${user.name.last}`
                                 : user.name && user.name.first
@@ -42,7 +42,7 @@ const User = ({ loadingUsers, users }) => {
                                         ? `${user.name.last}`
                                         : 'Name'}
                         </h2>
-                        <h3 className="handle">@{user.handle ? `${user.handle}` : 'handle'}</h3>
+                        <h3 className="card-tagline handle">@{user.handle ? `${user.handle}` : 'handle'}</h3>
                     </Link>
                 </header>
             </article>

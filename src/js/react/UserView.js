@@ -51,7 +51,7 @@ class UserView extends Component {
                                                                     : 'Avatar'
                                                 }
                                             />
-                                            <h2 className="name-full">
+                                            <h2 className="card-headline name-full">
                                                 {view.name && view.name.first && view.name.last
                                                     ? `${view.name.first} ${view.name.last}`
                                                     : view.name && view.name.first
@@ -60,8 +60,8 @@ class UserView extends Component {
                                                             ? `${view.name.last}`
                                                             : 'Name'}
                                             </h2>
-                                            <h3 className="handle">@{view.handle ? `${view.handle}` : 'handle'}</h3>
-                                            <address className="contact" itemType="http://schema.org/Organization" itemScope>
+                                            <h3 className="card-tagline handle">@{view.handle ? `${view.handle}` : 'handle'}</h3>
+                                            <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                                 <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                                     {view.address && view.address.city && view.address.state && view.address.country ? (
                                                         <Fragment>
