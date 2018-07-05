@@ -210,15 +210,6 @@ button,
 /* ==========!COMPONENT========== */
 /* ============================== */
 
-/* ----------!ACCORDION---------- */
-.accordion .card-list .card .card-header .card-title {
-	@extend .h-xs-20;
-	margin: 0;
-	}
-.accordion .card-list .card .card-header .card-title .arrow {
-	font-weight: $font-weight-3;
-	}
-
 /* ----------!CAROUSEL---------- */
 .carousel h1 {
 	@extend [class*="xs-40"];

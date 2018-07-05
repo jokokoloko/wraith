@@ -262,11 +262,6 @@ p + .instagram-media {
 /* ==========!COMPONENT========== */
 /* ============================== */
 
-/* ----------!ACCORDION---------- */
-.accordion .card-list .card + .card {
-    margin-top: 15px; // 15px spacing
-	}
-
 /* ----------!HERO---------- */
 .hero h1 + p {
 	padding-top: 24px; // 30px spacing
@@ -274,40 +269,4 @@ p + .instagram-media {
 .hero h2 + p,
 .hero h3 + p {
 	padding-top: 23px; // 30px spacing
-	}
-
-/* ============================= */
-/* ==========!TEMPLATE========== */
-/* ============================= */
-
-/* ----------!ARCHIVE---------- */
-.archive .hentry + .hentry,
-.blog .hentry + .hentry,
-.search .hentry + .hentry {
-	padding-top: 50px; // 50px spacing
-	}
-
-/* ----------!SINGLE---------- */
-@include media-breakpoint-up(lg) {
-	.single figure + header,
-	.single figure + section,
-	.single figure + footer,
-	.single header + figure,
-	.single header + section,
-	.single header + footer,
-	.single section + figure,
-	.single section + footer,
-	.single footer + figure {
-		padding-top: 50px; // 50px spacing
-		}
-	}
-.single .hentry figure img + .wp-caption-text {
-	padding-top: 15px; // 15px spacing
-	}
-.single .hentry .headline + .tagline {
-	padding-top: 26px; // 30px spacing
-	}
-.single .hentry .headline + .meta,
-.single .hentry .tagline + .meta {
-	padding-top: 28px; // 30px spacing
 	}
