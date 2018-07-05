@@ -38,7 +38,7 @@ class UserView extends Component {
                                         <div className="card-body">
                                             <Avatar
                                                 position="fit exact-center"
-                                                source={view.avatar ? view.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+                                                source={view.avatar || 'http://via.placeholder.com/800?text=Avatar'}
                                                 alternate={
                                                     view.name && view.name.first && view.name.last
                                                         ? `${view.name.first} ${view.name.last}`
@@ -60,7 +60,7 @@ class UserView extends Component {
                                                             ? `${view.name.last}`
                                                             : 'Name'}
                                             </h2>
-                                            <h3 className="card-tagline handle">@{view.handle ? `${view.handle}` : 'handle'}</h3>
+                                            <h3 className="card-tagline handle">@{view.handle || 'handle'}</h3>
                                             <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                                 <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                                     {view.address && view.address.city && view.address.state && view.address.country ? (

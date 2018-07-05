@@ -209,7 +209,7 @@ class FormProfile extends Component {
                             <div className="card-body">
                                 <Avatar
                                     position="fit exact-center"
-                                    source={form.avatar ? form.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+                                    source={form.avatar || 'http://via.placeholder.com/800?text=Avatar'}
                                     alternate={
                                         form.name && form.name.first && form.name.last
                                             ? `${form.name.first} ${form.name.last}`
@@ -231,7 +231,7 @@ class FormProfile extends Component {
                                                 ? `${form.name.last}`
                                                 : 'Name'}
                                 </h2>
-                                <h3 className="card-tagline handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
+                                <h3 className="card-tagline handle">@{form.handle || 'handle'}</h3>
                                 <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                     <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                         {form.address && form.address.city && form.address.state && form.address.country ? (

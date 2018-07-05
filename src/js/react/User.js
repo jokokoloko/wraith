@@ -20,7 +20,7 @@ const User = ({ loadingUsers, users }) => {
                     <Link className="card-body" to={`${path.Root}${user.slug}`}>
                         <Avatar
                             position="fit exact-center"
-                            source={user.avatar ? user.avatar : 'http://via.placeholder.com/800?text=Avatar'}
+                            source={user.avatar || 'http://via.placeholder.com/800?text=Avatar'}
                             alternate={
                                 user.name && user.name.first && user.name.last
                                     ? `${user.name.first} ${user.name.last}`
@@ -42,7 +42,7 @@ const User = ({ loadingUsers, users }) => {
                                         ? `${user.name.last}`
                                         : 'Name'}
                         </h2>
-                        <h3 className="card-tagline handle">@{user.handle ? `${user.handle}` : 'handle'}</h3>
+                        <h3 className="card-tagline handle">@{user.handle || 'handle'}</h3>
                     </Link>
                 </header>
             </article>
