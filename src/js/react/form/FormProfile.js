@@ -72,7 +72,7 @@ class FormProfile extends Component {
         const { submitting } = this.props;
         const { form, error } = this.state;
         return (
-            <form id="form-profile" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
+            <form id="form-profile" className={`form form-${size}`} onSubmit={this.onSubmit}>
                 <div className="row gutter-lg-80">
                     <div className="col-lg-9">
                         <div className="form-row form-gutter-20">
