@@ -278,7 +278,7 @@ class FormProfile extends Component {
                                     kind="success"
                                     size={size}
                                     display="block"
-                                    submitting={submitting}
+                                    disabled={submitting}
                                 />
                             </div>
                         </div>

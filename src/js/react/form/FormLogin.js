@@ -109,7 +109,7 @@ class FormLogin extends Component {
                                 kind="primary"
                                 size={size}
                                 display="block"
-                                submitting={submitting}
+                                disabled={submitting}
                             />
                         </div>
                     </div>
@@ -149,4 +149,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FormLogin);

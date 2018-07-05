@@ -101,7 +101,7 @@ class FormRegister extends Component {
                         kind="success"
                         size={size}
                         display="block"
-                        submitting={submitting}
+                        disabled={submitting}
                     />
                 </div>
             </form>
@@ -126,4 +126,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormRegister);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FormRegister);
