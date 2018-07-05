@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as path from '../path';
 import Basic from './section/Basic';
+import FormPost from './form/FormPost';
 
 const _PostEdit = ({ location }) => {
     const page = location.pathname === path._Private + path._Post + path._PostAdd ? 'Add' : 'Edit';
@@ -14,7 +15,7 @@ const _PostEdit = ({ location }) => {
                     </header>
 
                     <section className="node-xs-50">
-                        <h2>FormPost</h2>
+                        <FormPost />
                     </section>
                 </Basic>
             </div>
