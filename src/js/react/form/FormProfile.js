@@ -58,10 +58,6 @@ class FormProfile extends Component {
         const slug = name.first && name.last ? slugify(`${name.first} ${name.last}`) : profile.slug;
         const form = {
             ...this.state.form,
-            time: {
-                ...this.state.form.time,
-                edited: new Date(),
-            },
             slug,
         };
         event.preventDefault();

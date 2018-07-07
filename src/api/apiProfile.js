@@ -4,11 +4,14 @@ import { USERS } from '../js/data';
 
 class apiProfile {
     // Edit
-    static profileEdit = (profile) =>
+    static profileEdit = (form) =>
         users
             .doc(authentication.currentUser.uid)
-            .update(profile)
-            .then(() => apiSlug.slugAdd(profile.slug, USERS, authentication.currentUser.uid))
+            .update({
+                ...form,
+                'time.edited': new Date(),
+            })
+            .then(() => apiSlug.slugAdd(form.slug, USERS, authentication.currentUser.uid))
             .catch((error) => console.error('Error updating profile', error)); // remove
 
     // Status
