@@ -61,18 +61,36 @@ class FormPost extends Component {
         const { form, error } = this.state;
         return (
             <form id="form-post" className={`form form-${size}`} onSubmit={this.onSubmit}>
-                <div className="row gutter-lg-80">
-                    <div className="col-lg-9">
-                        <InputText
-                            name="title"
-                            label="Title"
-                            placeholder="Title"
-                            size={size}
-                            onChange={this.onChange}
-                            value={form.title}
-                            error={error.title}
-                            reference={this.isFocus}
-                        />
+                <div className="row gutter-80">
+                    <div className="col-lg">
+                        <div className="form-row node-xs-50">
+                            <div className="form-column col">
+                                <InputText
+                                    name="title"
+                                    label="Title"
+                                    placeholder="Title"
+                                    size={size}
+                                    onChange={this.onChange}
+                                    value={form.title}
+                                    error={error.title}
+                                    reference={this.isFocus}
+                                />
+                            </div>
+                        </div>
+                        <div className="form-row node-xs-50">
+                            <div className="form-column col">
+                                <InputText
+                                    type="area"
+                                    name="content"
+                                    label="Content"
+                                    placeholder="Content"
+                                    size={size}
+                                    onChange={this.onChange}
+                                    value={form.content}
+                                    error={error.content}
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-lg-3">

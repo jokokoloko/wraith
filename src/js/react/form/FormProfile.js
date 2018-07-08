@@ -69,8 +69,8 @@ class FormProfile extends Component {
         const { form, error } = this.state;
         return (
             <form id="form-profile" className={`form form-${size}`} onSubmit={this.onSubmit}>
-                <div className="row gutter-lg-80">
-                    <div className="col-lg-9">
+                <div className="row gutter-80">
+                    <div className="col-lg">
                         <div className="form-row form-gutter-20">
                             <div className="form-column col-lg">
                                 <InputText
