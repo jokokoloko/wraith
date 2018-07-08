@@ -18,25 +18,26 @@ const testData = {
 
 function updateChampList() {
     var batch = db.batch();
+    var { riot } = config;
     return axios
-        .get(`${config.riot.baseUrl}/static-data/v3/champions`, {
-            params: {
-                locale: config.riot.locale,
-                api_key: config.riot.apiKey,
-                dataById: true,
-                champListData: ['image', 'info'],
-            },
-            paramsSerializer: function(params) {
-                return qs.stringify(params, { arrayFormat: 'repeat' });
-            },
-        })
+        .get(`${riot.staticData.base}/${riot.staticData.version}/data/${riot.locale}/champion.json`)
         .then((response) => {
-            // console.log(response);
             var champData = response.data.data;
             var col = db.collection('champions');
             Object.entries(champData).forEach((champ) => {
-                let item = col.doc(champ[0]);
-                batch.set(item, champ[1]);
+                //the id per entry is the champ name, but we want the champKey
+                const entryData = champ[1];
+                const dataCopy = { ...champ[1] };
+                //switch key and id.
+                dataCopy.id = entryData.key;
+                dataCopy.key = entryData.id;
+                //turn tags into object format
+                dataCopy.tags = {};
+                entryData.tags.forEach((tag) => {
+                    dataCopy.tags[tag] = true;
+                })
+                const item = col.doc(dataCopy.id);
+                batch.set(item, dataCopy);
             });
             batch.commit();
         })

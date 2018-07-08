@@ -116,13 +116,24 @@ class ChampionSelect extends Component {
                 </div>
 
                 <div className="col-6">
-                    <div class="filters-bar">
-                        <InputText name="title"
-                            label="Champion Name"
-                            placeholder="Champion Name"
-                            onChange={this.onFiltersChange}
-                            value={filters.name}
-                            size={size} />
+                    <div className="container filters-bar">
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="lane-icon bg-top-icon"></div>
+                                <div className="lane-icon bg-jungle-icon"></div>
+                                <div className="lane-icon bg-mid-icon"></div>
+                                <div className="lane-icon bg-bot-icon"></div>
+                                <div className="lane-icon bg-support-icon"></div>
+                            </div>
+                            <div className="col-6">
+                                <InputText name="title"
+                                    label="Champion Name"
+                                    placeholder="Champion Name"
+                                    onChange={this.onFiltersChange}
+                                    value={filters.name}
+                                    size={size} />
+                            </div>
+                        </div>
                     </div>
                     {loadingChampions ? (
                         <Loader label="Loading champions" />

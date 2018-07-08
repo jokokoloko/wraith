@@ -6,6 +6,10 @@ exports.firestore = {
 
 exports.riot = {
     baseUrl: 'https://na1.api.riotgames.com/lol',
-    apiKey: 'RGAPI-bc079119-92b2-4083-8e3f-20c8220c8504',
+    apiKey: 'RGAPI-09491b7f-de6d-42b0-9ed8-c755e33a160e',
     locale: 'en_US',
+    staticData: {
+        base: 'https://ddragon.leagueoflegends.com/cdn',
+        version: '8.13.1'
+    }
 };

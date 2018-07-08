@@ -42,8 +42,9 @@ $padding-md: 10px;
 }
 /* ----------!TEAM COMP---------- */
 .filters-bar {
-    padding: $padding-md;
-    width: 50%;
+    // padding: $padding-md;
+    // width: 50%;
+    height: 50px;
 }
 
 .team-selection {
@@ -79,6 +80,45 @@ $padding-md: 10px;
 
 .form-section {
     margin-top: 45px;
+}
+
+/* lane sprite, move this later */
+$lane-sprite: '../img/lane-sprite.svg';
+$lane-icon-size: 34px;
+
+@mixin generate-icon($url, $xIdx, $yIdx, $size) {
+    background: url($url) ($xIdx*$size) (-$yIdx*$size);
+}
+
+.bg-bot-icon {
+    @include generate-icon($lane-sprite, 0, 0, $lane-icon-size);
+}
+
+.bg-fill-icon {
+    @include generate-icon($lane-sprite, 0, 1, $lane-icon-size);
+}
+
+.bg-jungle-icon {
+    @include generate-icon($lane-sprite, 0, 2, $lane-icon-size);
+}
+
+.bg-mid-icon {
+    @include generate-icon($lane-sprite, 0, 3, $lane-icon-size);
+}
+
+.bg-support-icon {
+    @include generate-icon($lane-sprite, 0, 4, $lane-icon-size);
+}
+
+.bg-top-icon {
+    @include generate-icon($lane-sprite, 0, 5, $lane-icon-size);
+}
+
+.lane-icon {
+    width: $lane-icon-size;
+    height: $lane-icon-size;
+    background-size: cover;
+    display: inline-block;
 }
 
 /*----------- !Team View --------------*/
