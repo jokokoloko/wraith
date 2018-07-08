@@ -1,4 +1,6 @@
 import React, { Component, createRef } from 'react';
+import apiPost from '../../../api/apiPost';
+import { slugify } from '../../function';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -45,7 +47,14 @@ class FormPost extends Component {
         });
     }
     onSubmit(event) {
+        const { title } = this.state.form;
+        const slug = slugify(title);
+        const form = {
+            ...this.state.form,
+            slug,
+        };
         event.preventDefault();
+        apiPost.postAdd(form);
     }
     render() {
         const size = 'lg';

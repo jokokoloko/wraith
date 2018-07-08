@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { SLUGS, USERS } from '../js/data';
+import { SLUGS, USERS, POSTS } from '../js/data';
 
 const config = {
     apiKey: 'AIzaSyCuh2sVwKQcaLSTyW9EKXplIdW6b22ZPk4',
@@ -21,3 +21,4 @@ firestore.settings(settings); // Currently only needed for the patch above
 
 export const slugs = firestore.collection(SLUGS);
 export const users = firestore.collection(USERS);
+export const posts = firestore.collection(POSTS);

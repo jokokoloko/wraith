@@ -17,6 +17,17 @@ class apiProfile {
             })
             .catch((error) => console.error('Error updating profile', error)); // remove
 
+    // Author
+    static profileAuthor = (collection, reference) =>
+        users
+            .doc(authentication.currentUser.uid)
+            .update({
+                [`${collection}.${reference}`]: new Date(),
+                'time.authored': new Date(),
+            })
+            .then(() => console.log(`Authored a new document in ${collection}:`, reference)) // remove
+            .catch((error) => console.error(`Error authoring a new document in ${collection}:`, error)); // remove
+
     // Status
     static profileStatus = (status) =>
         users.doc(authentication.currentUser.uid).update({
