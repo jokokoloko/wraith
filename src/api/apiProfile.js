@@ -11,7 +11,10 @@ class apiProfile {
                 ...form,
                 'time.edited': new Date(),
             })
-            .then(() => apiSlug.slugAdd(form.slug, USERS, authentication.currentUser.uid))
+            .then(() => {
+                apiSlug.slugAdd(form.slug, USERS, authentication.currentUser.uid);
+                console.log('Updated profile:', authentication.currentUser.uid); // remove
+            })
             .catch((error) => console.error('Error updating profile', error)); // remove
 
     // Status
