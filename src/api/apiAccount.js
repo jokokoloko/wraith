@@ -5,8 +5,8 @@ import { USERS, FRESH, ONLINE, OFFLINE, MEMBER } from '../js/data';
 
 class apiAccount {
     // Register
-    static accountRegister = (account) =>
-        authentication.createUserWithEmailAndPassword(account.email, account.password).then(() => {
+    static accountRegister = (form) =>
+        authentication.createUserWithEmailAndPassword(form.email, form.password).then(() => {
             const slug = generateSlug();
             users
                 .doc(authentication.currentUser.uid)
@@ -29,8 +29,8 @@ class apiAccount {
         });
 
     // Log In
-    static accountLogIn = (account) =>
-        authentication.signInWithEmailAndPassword(account.email, account.password).then(
+    static accountLogIn = (form) =>
+        authentication.signInWithEmailAndPassword(form.email, form.password).then(
             () =>
                 users
                     .doc(authentication.currentUser.uid)
@@ -54,7 +54,7 @@ class apiAccount {
             .catch((error) => console.error('Error logging out user:', error)); // remove
 
     // Reset Password
-    static accountResetPassword = (account) => authentication.sendPasswordResetEmail(account.email);
+    static accountResetPassword = (form) => authentication.sendPasswordResetEmail(form.email);
 }
 
 export default apiAccount;
