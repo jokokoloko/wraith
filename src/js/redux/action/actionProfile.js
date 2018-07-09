@@ -30,12 +30,12 @@ export const profileEditFailure = (error) => ({
     error,
 });
 
-export const profileEdit = (profile) => (dispatch) => {
+export const profileEdit = (form) => (dispatch) => {
     dispatch(profileEditRequest());
     return apiProfile
-        .profileEdit(profile) // issue: check to see if this can return profile in callback function in case writing to firestore fails
+        .profileEdit(form) // issue: check to see if this can return profile in callback function in case writing to firestore fails
         .then(() => {
-            dispatch(profileEditSuccess(profile)); // issue: pass in profile from firestore api call
+            dispatch(profileEditSuccess(form)); // issue: pass in profile from firestore api call
             toastr.success('Profile updated!');
         })
         .catch((error) => {
