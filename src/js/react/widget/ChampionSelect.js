@@ -119,11 +119,12 @@ class ChampionSelect extends Component {
                     <div className="container filters-bar">
                         <div className="row">
                             <div className="col-6">
-                                <div className="lane-icon bg-top-icon"></div>
-                                <div className="lane-icon bg-jungle-icon"></div>
-                                <div className="lane-icon bg-mid-icon"></div>
-                                <div className="lane-icon bg-bot-icon"></div>
-                                <div className="lane-icon bg-support-icon"></div>
+                                <div className="role-icon bg-tank-icon"></div>
+                                <div className="role-icon bg-mage-icon"></div>
+                                <div className="role-icon bg-assasin-icon"></div>
+                                <div className="role-icon bg-fighter-icon"></div>
+                                <div className="role-icon bg-marksman-icon"></div>
+                                <div className="role-icon bg-support-icon"></div>
                             </div>
                             <div className="col-6">
                                 <InputText name="title"

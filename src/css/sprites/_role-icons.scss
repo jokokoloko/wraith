@@ -1,0 +1,35 @@
+@import "css/mixins/_generate-icon.scss";
+
+$role-sprite: "../img/role-sprite.svg";
+$role-icon-size: 35px;
+
+.role-icon {
+    width: $role-icon-size;
+    height: $role-icon-size;
+    display: inline-block;
+
+    &.bg-tank-icon {
+        @include generate-icon($role-sprite, 0, 0, $role-icon-size);
+    }
+
+    &.bg-mage-icon {
+        @include generate-icon($role-sprite, 0, 1, $role-icon-size);
+    }
+
+    &.bg-assasin-icon {
+        @include generate-icon($role-sprite, 0, 2, $role-icon-size);
+    }
+
+    &.bg-fighter-icon {
+        @include generate-icon($role-sprite, 0, 3, $role-icon-size);
+    }
+
+    &.bg-marksman-icon {
+        @include generate-icon($role-sprite, 0, 4, $role-icon-size);
+    }
+
+    &.bg-support-icon {
+        @include generate-icon($role-sprite, 0, 5, $role-icon-size);
+    }
+
+}

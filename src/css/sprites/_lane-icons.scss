@@ -1,0 +1,35 @@
+@import "css/mixins/_generate-icon.scss";
+
+$lane-sprite: "../img/lane-sprite.svg";
+$lane-icon-size: 34px;
+
+.bg-bot-icon {
+    @include generate-icon($lane-sprite, 0, 0, $lane-icon-size);
+}
+
+.bg-fill-icon {
+    @include generate-icon($lane-sprite, 0, 1, $lane-icon-size);
+}
+
+.bg-jungle-icon {
+    @include generate-icon($lane-sprite, 0, 2, $lane-icon-size);
+}
+
+.bg-mid-icon {
+    @include generate-icon($lane-sprite, 0, 3, $lane-icon-size);
+}
+
+.bg-support-icon {
+    @include generate-icon($lane-sprite, 0, 4, $lane-icon-size);
+}
+
+.bg-top-icon {
+    @include generate-icon($lane-sprite, 0, 5, $lane-icon-size);
+}
+
+.lane-icon {
+    width: $lane-icon-size;
+    height: $lane-icon-size;
+    background-size: cover;
+    display: inline-block;
+}

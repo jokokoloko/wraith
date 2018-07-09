@@ -1,0 +1,6 @@
+@mixin generate-icon($url, $xIdx, $yIdx, $size) {
+    background-image: url($url);
+    background-position: ($xIdx*$size) (-$yIdx*$size);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
