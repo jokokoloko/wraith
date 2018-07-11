@@ -20,9 +20,9 @@ export const profileEditRequest = () => ({
     type: PROFILE_EDIT_REQUEST,
 });
 
-export const profileEditSuccess = (profile) => ({
+export const profileEditSuccess = (form) => ({
     type: PROFILE_EDIT_SUCCESS,
-    profile,
+    form,
 });
 
 export const profileEditFailure = (error) => ({
