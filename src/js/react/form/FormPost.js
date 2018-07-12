@@ -1,6 +1,13 @@
 import React, { Component, createRef } from 'react';
-import apiPost from '../../../api/apiPost';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import * as actionPost from '../../redux/action/actionPost';
+import { POST_ADD_REQUEST } from '../../redux/type';
+import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
+import * as path from '../../path';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
@@ -47,6 +54,7 @@ class FormPost extends Component {
         });
     }
     onSubmit(event) {
+        const { history, actionPost } = this.props;
         const { title, content } = this.state.form;
         const slug = slugify(title);
         const excerpt = excerptify(content, 210);
@@ -56,10 +64,11 @@ class FormPost extends Component {
             excerpt,
         };
         event.preventDefault();
-        apiPost.postAdd(form);
+        actionPost.postAdd(form).then(() => history.push(`${path._Private}${path._Post}`));
     }
     render() {
         const size = 'lg';
+        const { submitting } = this.props;
         const { form, error } = this.state;
         return (
             <form id="form-post" className={`form form-${size}`} onSubmit={this.onSubmit}>
@@ -102,11 +111,11 @@ class FormPost extends Component {
                                 <InputButton
                                     type="submit"
                                     name="save"
-                                    label={false ? 'Publishing...' : 'Publish'}
+                                    label={submitting ? 'Publishing...' : 'Publish'}
                                     kind="success"
                                     size={size}
                                     display="block"
-                                    disabled={false}
+                                    disabled={submitting}
                                 />
                             </div>
                         </div>
@@ -117,4 +126,27 @@ class FormPost extends Component {
     }
 }
 
-export default FormPost;
+FormPost.propTypes = {
+    history: PropTypes.objectOf(PropTypes.any).isRequired,
+    submitting: PropTypes.bool.isRequired,
+    actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
+};
+
+function mapStateToProps({ calls }) {
+    return {
+        submitting: findByString(calls, removeStatus(POST_ADD_REQUEST)),
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actionPost: bindActionCreators(actionPost, dispatch),
+    };
+}
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(FormPost),
+);

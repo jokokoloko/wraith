@@ -8,7 +8,7 @@ class apiPost {
     // Add
     static postAdd = (form) => {
         const id = generateID();
-        posts
+        return posts
             .doc(id)
             .set({
                 ...form,
