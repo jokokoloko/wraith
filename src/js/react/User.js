@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { USERS_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
-import * as path from '../path';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Avatar from './unit/Avatar';
@@ -17,7 +16,7 @@ const User = ({ loadingUsers, users }) => {
         return (
             <article key={user.id} id={user.id} className={`${item} ${item}-${count} col-lg-3`}>
                 <header className="card card-panel">
-                    <Link className="card-body" to={`${path.Root}${user.slug}`}>
+                    <Link className="card-body" to={`/${user.slug}`}>
                         <Avatar
                             position="fit exact-center"
                             source={user.avatar || 'http://via.placeholder.com/800?text=Avatar'}

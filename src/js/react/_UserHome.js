@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
-import * as path from '../path';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
@@ -44,7 +43,7 @@ class _UserHome extends Component {
                     <td>{(user.address && user.address.city) || empty}</td>
                     <td>{(user.address && user.address.state) || empty}</td>
                     <td>
-                        <Link to={`${path.Root}${user.slug}`}>View</Link>
+                        <Link to={`/${user.slug}`}>View</Link>
                     </td>
                 </tr>
             );
@@ -83,6 +82,12 @@ class _UserHome extends Component {
                                                 <tr className={`${item} ${item}-empty`}>
                                                     <th scope="row">0</th>
                                                     <td>{`No ${item}s`}</td>
+                                                    <td>{empty}</td>
+                                                    <td>{empty}</td>
+                                                    <td>{empty}</td>
+                                                    <td>{empty}</td>
+                                                    <td>{empty}</td>
+                                                    <td>{empty}</td>
                                                 </tr>
                                             )}
                                         </tbody>
