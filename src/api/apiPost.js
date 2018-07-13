@@ -26,6 +26,17 @@ class apiPost {
             })
             .catch((error) => console.error('Error adding post:', error)); // remove
     };
+
+    // Load
+    static postsLoad = () =>
+        posts
+            .get()
+            .then((snapshot) => {
+                console.log(`Posts: ${snapshot.size}`); // remove
+                // snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
+                return snapshot.docs.map((post) => post.data());
+            })
+            .catch((error) => console.error('Error getting posts:', error)); // remove
 }
 
 export default apiPost;
