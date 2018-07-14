@@ -30,7 +30,7 @@ class _PostHome extends Component {
         const empty = '-';
         const labelPost = ['#', 'Title', 'Author', 'Action'];
         const loopPost = posts.map((post, index) => {
-            const count = index + 1;
+            const count = posts.length - index;
             return (
                 <tr key={post.id} id={post.id} className={`${item} ${item}-${count}`}>
                     <th scope="row">{count}</th>

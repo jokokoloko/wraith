@@ -12,7 +12,7 @@ import Loader from './unit/Loader';
 const User = ({ loadingUsers, users }) => {
     const item = 'user';
     const loopUser = users.map((user, index) => {
-        const count = index + 1;
+        const count = users.length - index;
         return (
             <article key={user.id} id={user.id} className={`${item} ${item}-${count} col-lg-3`}>
                 <header className="card card-panel">

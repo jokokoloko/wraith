@@ -29,7 +29,7 @@ class _UserHome extends Component {
         const empty = '-';
         const labelUser = ['#', 'Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
         const loopUser = users.map((user, index) => {
-            const count = index + 1;
+            const count = users.length - index;
             return (
                 <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
                     <th scope="row">{count}</th>
