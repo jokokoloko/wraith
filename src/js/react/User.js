@@ -50,18 +50,18 @@ const User = ({ loadingUsers, users }) => {
     return (
         <main id="main" role="main">
             <div className="container-fluid">
-                <Basic space="space-xs-50 space-lg-80">
+                <Basic space="space-xs-30 space-lg-80">
                     <header className="text-center">
                         <h1>Users</h1>
                     </header>
                 </Basic>
 
-                <Feed space="space-xs-50 space-lg-80" item={item}>
+                <Feed space="space-xs-20 space-lg-80" item={item}>
                     <section className="text-center">
                         {loadingUsers ? (
                             <Loader position="exact-center fixed" label="Loading users" />
                         ) : users.length > 0 ? (
-                            <div className="row gutter-lg-80">{loopUser}</div>
+                            <div className="row gutter-20 gutter-lg-80">{loopUser}</div>
                         ) : (
                             <article className="empty">
                                 <header>
