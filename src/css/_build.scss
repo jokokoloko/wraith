@@ -313,10 +313,12 @@
 /* ----------!ROOT---------- */
 #root {
 	padding-top: $header-height-xs;
+	padding-bottom: $footer-height-xs;
 	}
 @include media-breakpoint-up(lg) {
 	#root {
 		padding-top: $header-height-lg;
+		padding-bottom: $footer-height-lg;
 		}
 	}
 
@@ -360,8 +362,12 @@
 #footer {
 	@include color($color-footer);
 	}
+#footer .copyright {
+	margin-left: -15px !important;
+	}
 @include media-breakpoint-up(lg) {
 	#footer .copyright {
+		margin-left: auto !important;
 		margin-right: -15px !important;
 		}
 	}
