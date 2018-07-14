@@ -61,7 +61,7 @@ export const postsLoadFailure = (error) => ({
 export const postsLoad = (watch) => (dispatch) => {
     dispatch(postsLoadRequest());
     return watch
-        ? posts.onSnapshot(
+        ? posts.orderBy('time.created', 'desc').onSnapshot(
               (snapshot) => {
                   const posts = snapshot.docs.map((post) => post.data());
                   dispatch(postsLoadSuccess(posts));

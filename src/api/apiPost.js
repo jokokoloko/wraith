@@ -30,6 +30,7 @@ class apiPost {
     // Load
     static postsLoad = () =>
         posts
+            .orderBy('time.created', 'desc')
             .get()
             .then((snapshot) => {
                 console.log(`Posts: ${snapshot.size}`); // remove

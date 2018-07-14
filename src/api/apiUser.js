@@ -4,6 +4,7 @@ class apiUser {
     // Load
     static usersLoad = () =>
         users
+            .orderBy('time.created', 'desc')
             .get()
             .then((snapshot) => {
                 console.log(`Users: ${snapshot.size}`); // remove
