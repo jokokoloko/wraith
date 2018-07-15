@@ -16,13 +16,9 @@ class apiPost {
                 },
             })
             .then((post) => {
-                posts
-                    .doc(post.id)
-                    .update({
-                        id: post.id,
-                    })
-                    .then(() => console.log('Added "id" property to post:', post.id)) // remove
-                    .catch((error) => console.error('Error adding "id" property to post:', error)); // remove
+                post.update({
+                    id: post.id,
+                });
                 apiProfile.profileAuthor(POSTS, post.id);
                 apiSlug.slugAdd(form.slug, POSTS, post.id);
                 console.log('Added post:', post.id); // remove
