@@ -33,11 +33,14 @@ class ChampionSelect extends Component {
                 { key: 4, position: "support", champion: {} },
             ],
             filters: {
-                name: ''
-            }
+                name: '',
+                role: ''
+            },
+            roles: ['Tank', 'Mage', 'Assassin', 'Fighter', 'Marksman', 'Support']
         };
         this.selectChampion = this.selectChampion.bind(this);
         this.selectLane = this.selectLane.bind(this);
+        this.filterRole = this.filterRole.bind(this);
         this.onFiltersChange = this.onFiltersChange.bind(this);
     }
     selectChampion(selectedChampion) {
@@ -64,6 +67,18 @@ class ChampionSelect extends Component {
         });
     }
 
+    filterRole(role) {
+        //capitalize the filter for now since that's how it is saved.
+        const newRole = this.state.filters.role === role ? '' : role
+        const filters = {
+            ...this.state.filters,
+            role: newRole
+        }
+        this.setState({
+            filters,
+        });
+    }
+
     onFiltersChange(event) {
         const target = event.target;
         const value = target.value;
@@ -74,13 +89,22 @@ class ChampionSelect extends Component {
         this.setState({
             filters,
         });
-
     }
+
     render() {
         const { loadingChampions, champions } = this.props;
         const item = "champion";
-        const { lanes, selectedLane, selectedChampion, filters } = this.state;
+        const { lanes, selectedLane, selectedChampion, filters, roles } = this.state;
         const size = 'sm';
+
+        const shouldDisplay = (champ) => {
+            //first filter by role
+            let roleMatch = true;
+            if (filters.role) {
+                roleMatch = champ.tags[filters.role];
+            }
+            return roleMatch && champ.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0;
+        }
 
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
@@ -89,10 +113,8 @@ class ChampionSelect extends Component {
                 backgroundImage: `url('${sprite}')`,
                 backgroundPosition: `-${champion.image.x}px -${champion.image.y}px`,
             };
-            //basically hide the li if spelling matches
-            const displayClass = champion.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0 ?
-                                    'd-flex' :
-                                    'd-none';
+            //basically show the <li> if filtering matches
+            const displayClass = shouldDisplay(champion) ? 'd-flex' : 'd-none';
             return (
                 <li key={champion.id} id={champion.id}
                     className={`${item} ${item}-${count} col ${displayClass} justify-content-center`}>
@@ -119,12 +141,15 @@ class ChampionSelect extends Component {
                     <div className="container filters-bar">
                         <div className="row">
                             <div className="col-6">
-                                <div className="role-icon bg-tank-icon"></div>
-                                <div className="role-icon bg-mage-icon"></div>
-                                <div className="role-icon bg-assasin-icon"></div>
-                                <div className="role-icon bg-fighter-icon"></div>
-                                <div className="role-icon bg-marksman-icon"></div>
-                                <div className="role-icon bg-support-icon"></div>
+                                {roles.map((role) => {
+                                    const selectedClass = filters.role === role ? 'selected' : '';
+                                    return (
+                                        <div key={role}
+                                            className={`role-icon bg-${role.toLowerCase()}-icon ${selectedClass}`}
+                                            onClick={() => this.filterRole(role)}>
+                                        </div>
+                                    )
+                                })}
                             </div>
                             <div className="col-6">
                                 <InputText name="title"

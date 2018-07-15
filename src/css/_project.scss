@@ -48,6 +48,14 @@ $padding-md: 10px;
     // padding: $padding-md;
     // width: 50%;
     height: 50px;
+
+    .role-icon {
+        margin-right: 6px;
+
+        &.selected {
+            border: 1px solid #007bff;
+        }
+    }
 }
 
 .team-selection {
