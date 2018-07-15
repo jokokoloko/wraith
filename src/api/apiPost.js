@@ -1,31 +1,33 @@
 import apiProfile from './apiProfile';
 import apiSlug from './apiSlug';
 import { authentication, posts } from './firebase';
-import { generateID } from '../js/function';
 import { POSTS, PUBLISHED } from '../js/data';
 
 class apiPost {
     // Add
-    static postAdd = (form) => {
-        const id = generateID();
-        return posts
-            .doc(id)
-            .set({
+    static postAdd = (form) =>
+        posts
+            .add({
                 ...form,
                 user: authentication.currentUser.uid,
                 status: PUBLISHED,
                 time: {
                     created: new Date(),
                 },
-                id,
             })
-            .then(() => {
-                apiProfile.profileAuthor(POSTS, id);
-                apiSlug.slugAdd(form.slug, POSTS, id);
-                console.log('Added post:', id); // remove
+            .then((post) => {
+                posts
+                    .doc(post.id)
+                    .update({
+                        id: post.id,
+                    })
+                    .then(() => console.log('Added "id" property to post:', post.id)) // remove
+                    .catch((error) => console.error('Error adding "id" property to post:', error)); // remove
+                apiProfile.profileAuthor(POSTS, post.id);
+                apiSlug.slugAdd(form.slug, POSTS, post.id);
+                console.log('Added post:', post.id); // remove
             })
             .catch((error) => console.error('Error adding post:', error)); // remove
-    };
 
     // Load
     static postsLoad = () =>
