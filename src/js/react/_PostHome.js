@@ -28,15 +28,16 @@ class _PostHome extends Component {
         const { loadingPosts } = this.state;
         const item = 'post';
         const empty = '-';
-        const labelPost = ['#', 'Title', 'Author', 'Action'];
+        const labelPost = ['Title', 'Author', 'Action'];
         const loopPost = posts.map((post, index) => {
             const count = posts.length - index;
             return (
                 <tr key={post.id} id={post.id} className={`${item} ${item}-${count}`}>
-                    <th scope="row">{count}</th>
-                    <td>{post.title || empty}</td>
-                    <td>{post.user || empty}</td>
-                    <td>
+                    <th className={`${item}-title`} scope="row">
+                        {post.title || empty}
+                    </th>
+                    <td className={`${item}-user`}>{post.user || empty}</td>
+                    <td className={`${item}-action`}>
                         <Link to={`${match.path}/${post.id}`}>Edit</Link> - <Link to={`${path.Post}/${post.slug}`}>View</Link>
                     </td>
                 </tr>
@@ -60,7 +61,7 @@ class _PostHome extends Component {
                                 <div className="table-container table-responsive-sm">
                                     <table className={`table table-striped table-bordered table-style table-size-80 table-${item}`}>
                                         <thead>
-                                            <tr>
+                                            <tr className="label-row">
                                                 {labelPost.map((name, index) => {
                                                     const count = index + 1;
                                                     return (
@@ -77,10 +78,9 @@ class _PostHome extends Component {
                                                 loopPost
                                             ) : (
                                                 <tr className={`${item} ${item}-empty`}>
-                                                    <th scope="row">0</th>
-                                                    <td>{`No ${item}s`}</td>
-                                                    <td>{empty}</td>
-                                                    <td>{empty}</td>
+                                                    <th className={`${item}-title`} scope="row">{`No ${item}s`}</th>
+                                                    <td className={`${item}-user`}>{empty}</td>
+                                                    <td className={`${item}-action`}>{empty}</td>
                                                 </tr>
                                             )}
                                         </tbody>

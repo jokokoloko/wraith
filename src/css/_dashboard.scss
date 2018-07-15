@@ -148,15 +148,12 @@ $dashboard-void-lg: 210px;
 /* ========================== */
 
 /* ----------!GENERAL---------- */
-.dashboard .table .label:first-child {
-    width: 5%;
-    }
 .dashboard .table .label:last-child {
     width: 10%;
     }
 
 /* ----------!USER---------- */
-.dashboard .table-user .label-3,
-.dashboard .table-user .label-4 {
+.dashboard .table-user .label-2,
+.dashboard .table-user .label-3 {
     width: 15%;
     }
