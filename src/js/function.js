@@ -50,7 +50,7 @@ export const slugify = (text) => {
     );
 };
 
-export const excerptify = (text, limit) => text.substr(0, text.lastIndexOf(' ', limit));
+export const excerptify = (text, limit) => (text.length > limit ? text.substr(0, text.lastIndexOf(' ', limit)) : text);
 
 // Array
 export const arrayToObject = (array, keyField) =>
