@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
+import * as path from '../path';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
@@ -23,16 +25,32 @@ class UserView extends Component {
         );
     }
     render() {
-        const { view } = this.props;
-        const { loadingView } = this.state;
+        const { view, posts } = this.props;
+        const { loadingView, loadingPosts } = this.state;
+        const item = 'post';
+        const loopPost = posts.map((post, index) => {
+            const count = posts.length - index;
+            return (
+                <article key={post.id} id={post.id} className={`${item} ${item}-${count} node-xs-20`}>
+                    <header className="card card-panel">
+                        <div className="card-body">
+                            <h3 className="card-headline">{post.title}</h3>
+                            <p>
+                                {post.excerpt}... <Link to={`${path.Post}/${post.slug}`}>Read More &rarr;</Link>
+                            </p>
+                        </div>
+                    </header>
+                </article>
+            );
+        });
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
             <main id="main" role="main">
                 <div className="container-fluid">
-                    <Basic space="space-xs-50 space-lg-80">
+                    <Basic space="space-xs-20 space-lg-80">
                         {view.id ? (
-                            <div className="row gutter-lg-80">
+                            <div className="row gutter-20 gutter-lg-80">
                                 <div className="col-lg-3">
                                     <header className="card card-panel">
                                         <div className="card-body">
@@ -51,7 +69,7 @@ class UserView extends Component {
                                                                     : 'Avatar'
                                                 }
                                             />
-                                            <h2 className="card-headline name-full">
+                                            <h1 className="card-headline name-full">
                                                 {view.name && view.name.first && view.name.last
                                                     ? `${view.name.first} ${view.name.last}`
                                                     : view.name && view.name.first
@@ -59,8 +77,8 @@ class UserView extends Component {
                                                         : view.name && view.name.last
                                                             ? `${view.name.last}`
                                                             : 'Name'}
-                                            </h2>
-                                            <h3 className="card-tagline handle">@{view.handle || 'handle'}</h3>
+                                            </h1>
+                                            <h2 className="card-tagline handle">@{view.handle || 'handle'}</h2>
                                             <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                                 <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                                     {view.address && view.address.city && view.address.state && view.address.country ? (
@@ -103,6 +121,20 @@ class UserView extends Component {
                                         </div>
                                     </header>
                                 </div>
+
+                                <div className="col">
+                                    {loadingPosts ? (
+                                        <Loader position="exact-center fixed" label="Loading posts" />
+                                    ) : posts.length > 0 ? (
+                                        loopPost
+                                    ) : (
+                                        <article className="empty">
+                                            <header>
+                                                <h3>{`No ${item}s`}</h3>
+                                            </header>
+                                        </article>
+                                    )}
+                                </div>
                             </div>
                         ) : (
                             <header className="empty text-center">
@@ -119,12 +151,14 @@ class UserView extends Component {
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
+    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view }) {
+function mapStateToProps({ view, posts }) {
     return {
         view,
+        posts,
     };
 }
 
