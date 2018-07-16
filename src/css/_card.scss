@@ -19,7 +19,11 @@
 	}
 .card-panel .card-body figure + .card-headline,
 .card-panel .card-body img + .card-headline,
-.card-panel .card-body .card-tagline + .card-meta {
+.card-panel .card-body .card-headline + .card-meta,
+.card-panel .card-body .card-headline + .card-statistic,
+.card-panel .card-body .card-tagline + .card-meta,
+.card-panel .card-body .card-tagline + .card-statistic,
+.card-panel .card-body .card-meta + .card-statistic {
 	padding-top: 30px; // 30px spacing
 	}
 .card-panel .card-body .card-headline + .card-tagline {
