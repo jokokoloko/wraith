@@ -56,6 +56,15 @@ h5 + p,
 h6 + p {
 	padding-top: 27px; // 30px spacing
 	}
+.d-flex h1 + p,
+.d-flex h2 + p,
+.d-flex h3 + p,
+.d-flex h4 + p,
+.d-flex h5 + p,
+.d-flex h6 + p,
+.d-flex p + p {
+	padding-top: 0; // 0 spacing
+	}
 
 /* ----------!LIST---------- */
 ol:not([class*="row"]):not([class*="nav"]):not([class*="navbar-nav"]):not([class*="dropdown-menu"]):not([class*="pager"]):not([class*="carousel-indicators"]) > li + li,

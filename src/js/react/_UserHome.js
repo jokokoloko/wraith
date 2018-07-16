@@ -51,8 +51,9 @@ class _UserHome extends Component {
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic container="container-fluid" space="space-xs-50 space-lg-80">
-                        <header className="node-xs-50">
+                        <header className="d-flex align-items-end node-xs-50">
                             <h1>Users</h1>
+                            <p className="ml-auto">Total: {users.length}</p>
                         </header>
 
                         <section className="node-xs-50">

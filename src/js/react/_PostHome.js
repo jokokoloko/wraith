@@ -47,11 +47,12 @@ class _PostHome extends Component {
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic container="container-fluid" space="space-xs-50 space-lg-80">
-                        <header className="d-flex node-xs-50">
+                        <header className="d-flex align-items-end node-xs-50">
                             <h1>Posts</h1>
                             <Link className="btn btn-default to-add" to={`${match.path}${path._PostAdd}`}>
                                 Add New
                             </Link>
+                            <p className="ml-auto">Total: {posts.length}</p>
                         </header>
 
                         <section className="node-xs-50">
