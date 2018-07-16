@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
+import apiPost from '../../api/apiPost';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
@@ -18,11 +19,12 @@ class UserView extends Component {
     }
     componentDidMount() {
         const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.slug).then(() =>
+        actionView.viewLoad(match.params.slug).then((user) => {
+            apiPost.postsLoadByUser(user.view.id);
             this.setState({
                 loadingView: false,
-            }),
-        );
+            });
+        });
     }
     render() {
         const { view, posts } = this.props;
@@ -118,6 +120,9 @@ class UserView extends Component {
                                                     )}
                                                 </p>
                                             </address>
+                                            <div className="card-statistic">
+                                                <p className="card-statistic-posts">Posts: {view.posts ? Object.keys(view.posts).length : 0}</p>
+                                            </div>
                                         </div>
                                     </header>
                                 </div>

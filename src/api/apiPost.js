@@ -36,6 +36,18 @@ class apiPost {
                 return snapshot.docs.map((post) => post.data());
             })
             .catch((error) => console.error('Error getting posts:', error)); // remove
+
+    static postsLoadByUser = (user) =>
+        posts
+            .where('user', '==', user)
+            // .orderBy('time.created', 'desc')
+            .get()
+            .then((snapshot) => {
+                console.log(`Posts by user: ${snapshot.size}`); // remove
+                snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
+                return snapshot.docs.map((post) => post.data());
+            })
+            .catch((error) => console.error('Error getting posts by user:', error)); // remove
 }
 
 export default apiPost;
