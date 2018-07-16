@@ -42,7 +42,7 @@ const PostHome = ({ loadingPosts, posts }) => {
                         ) : posts.length > 0 ? (
                             loopPost
                         ) : (
-                            <article className="empty">
+                            <article className="empty text-center">
                                 <header>
                                     <h3>{`No ${item}s`}</h3>
                                 </header>

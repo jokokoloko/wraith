@@ -57,13 +57,13 @@ const User = ({ loadingUsers, users }) => {
                 </Basic>
 
                 <Feed space="space-xs-20 space-lg-80" item={item}>
-                    <section className="text-center">
+                    <section>
                         {loadingUsers ? (
                             <Loader position="exact-center fixed" label="Loading users" />
                         ) : users.length > 0 ? (
-                            <div className="row gutter-20 gutter-lg-80">{loopUser}</div>
+                            <div className="row gutter-20 gutter-lg-80 text-center">{loopUser}</div>
                         ) : (
-                            <article className="empty">
+                            <article className="empty text-center">
                                 <header>
                                     <h3>{`No ${item}s`}</h3>
                                 </header>
