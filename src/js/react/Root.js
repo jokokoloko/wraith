@@ -12,6 +12,7 @@ import _Private from './_Private';
 import Login from './Login';
 import Register from './Register';
 import About from './About';
+import Post from './Post';
 import User from './User';
 import UserView from './UserView';
 import Home from './Home';
@@ -53,6 +54,7 @@ class Root extends Component {
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.About} component={About} />
+                        <Route path={path.Post} component={Post} />
                         <Route path={path.User} component={User} />
                         <Route path={path.UserView} component={UserView} />
                         <Route path={path.Root} component={Home} exact />
