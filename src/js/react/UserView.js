@@ -5,30 +5,20 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import apiPost from '../../api/apiPost';
+import { VIEW_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 class UserView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingView: true,
-        };
-    }
     componentDidMount() {
         const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.slug).then((user) => {
-            apiPost.postsLoadByUser(user.view.id);
-            this.setState({
-                loadingView: false,
-            });
-        });
+        actionView.viewLoad(match.params.slug).then((user) => apiPost.postsLoadByUser(user.view.id));
     }
     render() {
-        const { view, posts } = this.props;
-        const { loadingView, loadingPosts } = this.state;
+        const { loadingView, view, posts } = this.props;
         const item = 'post';
         const loopPost = posts.map((post, index) => {
             const count = posts.length - index;
@@ -128,7 +118,7 @@ class UserView extends Component {
                                 </div>
 
                                 <div className="col">
-                                    {loadingPosts ? (
+                                    {false ? (
                                         <Loader position="exact-center fixed" label="Loading posts" />
                                     ) : posts.length > 0 ? (
                                         loopPost
@@ -160,8 +150,9 @@ UserView.propTypes = {
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, posts }) {
+function mapStateToProps({ view, calls, posts }) {
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         view,
         posts,
     };
