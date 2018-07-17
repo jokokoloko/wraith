@@ -40,7 +40,7 @@ class apiPost {
     static postsLoadByUser = (user) =>
         posts
             .where('user', '==', user)
-            // .orderBy('time.created', 'desc')
+            .orderBy('time.created', 'desc')
             .get()
             .then((snapshot) => {
                 console.log(`Posts by user: ${snapshot.size}`); // remove
