@@ -19,17 +19,22 @@ class UserView extends Component {
         };
     }
     componentDidMount() {
-        const { match, actionView, actionPost } = this.props;
+        const { match, actionView } = this.props;
         actionView.viewLoad(match.params.slug).then((user) => {
-            actionPost.postsLoadByUser(user.view.id).then(() =>
-                this.setState({
-                    loadingPosts: false,
-                }),
-            );
             this.setState({
                 loadingView: false,
             });
         });
+    }
+    componentDidUpdate(prevProps) {
+        const { view, actionPost } = this.props;
+        view.id !== prevProps.view.id &&
+            view.posts !== prevProps.view.posts &&
+            actionPost.postsLoadByUser(view.id).then(() =>
+                this.setState({
+                    loadingPosts: false,
+                }),
+            );
     }
     render() {
         const { view, posts } = this.props;
