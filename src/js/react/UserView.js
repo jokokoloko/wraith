@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
-import apiPost from '../../api/apiPost';
+import * as actionPost from '../redux/action/actionPost';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
@@ -15,12 +15,17 @@ class UserView extends Component {
         super(props);
         this.state = {
             loadingView: true,
+            loadingPosts: true,
         };
     }
     componentDidMount() {
-        const { match, actionView } = this.props;
+        const { match, actionView, actionPost } = this.props;
         actionView.viewLoad(match.params.slug).then((user) => {
-            apiPost.postsLoadByUser(user.view.id);
+            actionPost.postsLoadByUser(user.view.id).then(() =>
+                this.setState({
+                    loadingPosts: false,
+                }),
+            );
             this.setState({
                 loadingView: false,
             });
@@ -158,6 +163,7 @@ UserView.propTypes = {
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
+    actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapStateToProps({ view, posts }) {
@@ -170,6 +176,7 @@ function mapStateToProps({ view, posts }) {
 function mapDispatchToProps(dispatch) {
     return {
         actionView: bindActionCreators(actionView, dispatch),
+        actionPost: bindActionCreators(actionPost, dispatch),
     };
 }
 

@@ -44,7 +44,7 @@ class apiPost {
             .get()
             .then((snapshot) => {
                 console.log(`Posts by user: ${snapshot.size}`); // remove
-                snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
+                // snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
                 return snapshot.docs.map((post) => post.data());
             })
             .catch((error) => console.error('Error getting posts by user:', error)); // remove

@@ -82,6 +82,18 @@ export const postsLoad = (watch) => (dispatch) => {
               });
 };
 
+export const postsLoadByUser = (user) => (dispatch) => {
+    dispatch(postsLoadRequest());
+    return apiPost
+        .postsLoadByUser(user)
+        .then((posts) => dispatch(postsLoadSuccess(posts)))
+        .catch((error) => {
+            dispatch(postsLoadFailure(error));
+            toastr.error(error.message);
+            throw error;
+        });
+};
+
 // Void
 export const postsVoid = () => ({
     type: POSTS_VOID,
