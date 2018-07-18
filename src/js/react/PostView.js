@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -31,9 +31,15 @@ class PostView extends Component {
                 <div className="container-fluid">
                     <Basic space="space-xs-20 space-lg-80">
                         {post.id ? (
-                            <header className="text-center">
-                                <h1>{post.title}</h1>
-                            </header>
+                            <Fragment>
+                                <header className="node-xs-50 node-lg-80">
+                                    <h1>{post.title}</h1>
+                                </header>
+
+                                <section className="node-xs-50 node-lg-80">
+                                    <p>{post.content}</p>
+                                </section>
+                            </Fragment>
                         ) : (
                             <header className="empty text-center">
                                 <h1>404 - Post</h1>
