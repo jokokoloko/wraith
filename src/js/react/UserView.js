@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import * as actionPost from '../redux/action/actionPost';
+import * as client from '../client';
 import * as logic from '../logic';
 import * as path from '../path';
 import Basic from './section/Basic';
@@ -64,7 +65,7 @@ class UserView extends Component {
                                         <div className="card-body">
                                             <Avatar
                                                 position="fit exact-center"
-                                                source={view.avatar || 'http://via.placeholder.com/800?text=Avatar'}
+                                                source={view.avatar || client.EMPTY_AVATAR}
                                                 alternate={logic.UserNameHandle(view, 'Avatar')}
                                             />
                                             {view.name &&

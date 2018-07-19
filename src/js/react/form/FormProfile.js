@@ -6,6 +6,7 @@ import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import { slugify } from '../../function';
+import * as client from '../../client';
 import * as logic from '../../logic';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
@@ -206,7 +207,7 @@ class FormProfile extends Component {
                             <div className="card-body">
                                 <Avatar
                                     position="fit exact-center"
-                                    source={form.avatar || 'http://via.placeholder.com/800?text=Avatar'}
+                                    source={form.avatar || client.EMPTY_AVATAR}
                                     alternate={logic.UserNameHandle(form, 'Avatar')}
                                 />
                                 <h2 className="card-headline name-full">{logic.UserName(form, 'Name')}</h2>

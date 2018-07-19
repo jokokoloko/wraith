@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
+import * as client from '../client';
 import * as logic from '../logic';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
@@ -37,7 +38,7 @@ class User extends Component {
                         <Link className="card-body" to={`/${user.slug}`}>
                             <Avatar
                                 position="fit exact-center"
-                                source={user.avatar || 'http://via.placeholder.com/800?text=Avatar'}
+                                source={user.avatar || client.EMPTY_AVATAR}
                                 alternate={logic.UserNameHandle(user, 'Avatar')}
                             />
                             {user.name &&

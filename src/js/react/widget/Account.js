@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import * as client from '../../client';
 import * as logic from '../../logic';
 import * as path from '../../path';
 import Avatar from '../unit/Avatar';
@@ -9,7 +10,7 @@ import Dropdown from '../unit/Dropdown';
 const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const avatar = profile.avatar ? (
-        <Avatar position="fit exact-center" source={profile.avatar} alternate={logic.UserNameHandle(profile, 'Avatar')} />
+        <Avatar position="fit exact-center" source={profile.avatar || client.EMPTY_AVATAR} alternate={logic.UserNameHandle(profile, 'Avatar')} />
     ) : (
         'Account'
     );
