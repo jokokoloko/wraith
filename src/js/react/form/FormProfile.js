@@ -55,7 +55,7 @@ class FormProfile extends Component {
     onSubmit(event) {
         const { profile, actionProfile } = this.props;
         const { name } = this.state.form;
-        const slug = name.first && name.last ? slugify(`${name.first} ${name.last}`) : profile.slug;
+        const slug = (name.first && name.last && slugify(`${name.first} ${name.last}`)) || profile.slug;
         const form = {
             ...this.state.form,
             slug,
