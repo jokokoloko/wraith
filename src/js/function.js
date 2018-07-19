@@ -53,11 +53,11 @@ export const slugify = (text) => {
 export const excerptify = (text, limit) => (text.length > limit ? text.substr(0, text.lastIndexOf(' ', limit)) : text);
 
 // Array
-export const arrayToObject = (array, keyField) =>
+export const arrayToObject = (array, key) =>
     Object.assign(
         {},
         ...array.map((item) => ({
-            [item[keyField]]: item,
+            [item[key]]: item,
         })),
     );
 
