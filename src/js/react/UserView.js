@@ -35,7 +35,7 @@ class UserView extends Component {
         });
     }
     render() {
-        const { view, posts } = this.props;
+        const { view: user, posts } = this.props;
         const { loadingView, loadingPosts } = this.state;
         const item = 'post';
         const loopPost = posts.map((post, index) => {
@@ -59,26 +59,26 @@ class UserView extends Component {
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic space="space-xs-20 space-lg-80">
-                        {view.id ? (
+                        {user.id ? (
                             <div className="row gutter-20 gutter-lg-80">
                                 <div className="col-lg-3">
                                     <header className="card card-panel">
                                         <div className="card-body">
                                             <Avatar
                                                 position="fit exact-center"
-                                                source={view.avatar || client.EMPTY_AVATAR}
-                                                alternate={logic.UserNameHandle(view, 'Avatar')}
+                                                source={user.avatar || client.EMPTY_AVATAR}
+                                                alternate={logic.UserNameHandle(user, 'Avatar')}
                                             />
-                                            {view.name &&
-                                                (view.name.first || view.name.last) && (
+                                            {user.name &&
+                                                (user.name.first || user.name.last) && (
                                                     <h1 className="user-name user-name-first user-name-last card-headline">
-                                                        {logic.UserName(view, 'Name')}
+                                                        {logic.UserName(user, 'Name')}
                                                     </h1>
                                                 )}
-                                            {view.handle && <h2 className="user-handle card-tagline">@{view.handle || 'handle'}</h2>}
-                                            <Contact className="user-contact card-meta" item={view} />
+                                            {user.handle && <h2 className="user-handle card-tagline">@{user.handle || 'handle'}</h2>}
+                                            <Contact className="user-contact card-meta" item={user} />
                                             <div className="card-statistic">
-                                                <p className="card-statistic-posts">Posts: {view.posts ? Object.keys(view.posts).length : 0}</p>
+                                                <p className="card-statistic-posts">Posts: {user.posts ? Object.keys(user.posts).length : 0}</p>
                                             </div>
                                         </div>
                                     </header>
