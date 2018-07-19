@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
+import * as logic from '../logic';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Avatar from './unit/Avatar';
@@ -37,28 +38,11 @@ class User extends Component {
                             <Avatar
                                 position="fit exact-center"
                                 source={user.avatar || 'http://via.placeholder.com/800?text=Avatar'}
-                                alternate={
-                                    user.name && user.name.first && user.name.last
-                                        ? `${user.name.first} ${user.name.last}`
-                                        : user.name && user.name.first
-                                            ? `${user.name.first}`
-                                            : user.name && user.name.last
-                                                ? `${user.name.last}`
-                                                : user.handle
-                                                    ? user.handle
-                                                    : 'Avatar'
-                                }
+                                alternate={logic.UserNameHandle(user, 'Avatar')}
                             />
-                            <h2 className="card-headline name-full">
-                                {user.name && user.name.first && user.name.last
-                                    ? `${user.name.first} ${user.name.last}`
-                                    : user.name && user.name.first
-                                        ? `${user.name.first}`
-                                        : user.name && user.name.last
-                                            ? `${user.name.last}`
-                                            : 'Name'}
-                            </h2>
-                            <h3 className="card-tagline handle">@{user.handle || 'handle'}</h3>
+                            {user.name &&
+                                (user.name.first || user.name.last) && <h2 className="card-headline name-full">{logic.UserName(user, 'Name')}</h2>}
+                            {user.handle && <h3 className="card-tagline handle">@{user.handle || 'handle'}</h3>}
                         </Link>
                     </header>
                 </article>

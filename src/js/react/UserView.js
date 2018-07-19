@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import * as actionPost from '../redux/action/actionPost';
+import * as logic from '../logic';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Avatar from './unit/Avatar';
@@ -64,28 +65,13 @@ class UserView extends Component {
                                             <Avatar
                                                 position="fit exact-center"
                                                 source={view.avatar || 'http://via.placeholder.com/800?text=Avatar'}
-                                                alternate={
-                                                    view.name && view.name.first && view.name.last
-                                                        ? `${view.name.first} ${view.name.last}`
-                                                        : view.name && view.name.first
-                                                            ? `${view.name.first}`
-                                                            : view.name && view.name.last
-                                                                ? `${view.name.last}`
-                                                                : view.handle
-                                                                    ? view.handle
-                                                                    : 'Avatar'
-                                                }
+                                                alternate={logic.UserNameHandle(view, 'Avatar')}
                                             />
-                                            <h1 className="card-headline name-full">
-                                                {view.name && view.name.first && view.name.last
-                                                    ? `${view.name.first} ${view.name.last}`
-                                                    : view.name && view.name.first
-                                                        ? `${view.name.first}`
-                                                        : view.name && view.name.last
-                                                            ? `${view.name.last}`
-                                                            : 'Name'}
-                                            </h1>
-                                            <h2 className="card-tagline handle">@{view.handle || 'handle'}</h2>
+                                            {view.name &&
+                                                (view.name.first || view.name.last) && (
+                                                    <h1 className="card-headline name-full">{logic.UserName(view, 'Name')}</h1>
+                                                )}
+                                            {view.handle && <h2 className="card-tagline handle">@{view.handle || 'handle'}</h2>}
                                             <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                                 <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
                                                     {view.address && view.address.city && view.address.state && view.address.country ? (

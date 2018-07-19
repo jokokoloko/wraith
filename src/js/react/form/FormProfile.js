@@ -6,6 +6,7 @@ import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import { slugify } from '../../function';
+import * as logic from '../../logic';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 import Avatar from '../unit/Avatar';
@@ -206,27 +207,9 @@ class FormProfile extends Component {
                                 <Avatar
                                     position="fit exact-center"
                                     source={form.avatar || 'http://via.placeholder.com/800?text=Avatar'}
-                                    alternate={
-                                        form.name && form.name.first && form.name.last
-                                            ? `${form.name.first} ${form.name.last}`
-                                            : form.name && form.name.first
-                                                ? `${form.name.first}`
-                                                : form.name && form.name.last
-                                                    ? `${form.name.last}`
-                                                    : form.handle
-                                                        ? form.handle
-                                                        : 'Avatar'
-                                    }
+                                    alternate={logic.UserNameHandle(form, 'Avatar')}
                                 />
-                                <h2 className="card-headline name-full">
-                                    {form.name && form.name.first && form.name.last
-                                        ? `${form.name.first} ${form.name.last}`
-                                        : form.name && form.name.first
-                                            ? `${form.name.first}`
-                                            : form.name && form.name.last
-                                                ? `${form.name.last}`
-                                                : 'Name'}
-                                </h2>
+                                <h2 className="card-headline name-full">{logic.UserName(form, 'Name')}</h2>
                                 <h3 className="card-tagline handle">@{form.handle || 'handle'}</h3>
                                 <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
                                     <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
