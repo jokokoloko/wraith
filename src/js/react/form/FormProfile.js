@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -10,6 +10,7 @@ import * as client from '../../client';
 import * as logic from '../../logic';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
+import Contact from '../widget/Contact';
 import Avatar from '../unit/Avatar';
 
 class FormProfile extends Component {
@@ -210,47 +211,9 @@ class FormProfile extends Component {
                                     source={form.avatar || client.EMPTY_AVATAR}
                                     alternate={logic.UserNameHandle(form, 'Avatar')}
                                 />
-                                <h2 className="card-headline name-full">{logic.UserName(form, 'Name')}</h2>
-                                <h3 className="card-tagline handle">@{form.handle || 'handle'}</h3>
-                                <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
-                                    <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
-                                        {form.address && form.address.city && form.address.state && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city && form.address.state ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.state && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city ? (
-                                            <span itemProp="addressLocality">{form.address.city}</span>
-                                        ) : form.address && form.address.state ? (
-                                            <span itemProp="addressRegion">{form.address.state}</span>
-                                        ) : form.address && form.address.country ? (
-                                            <span itemProp="addressCountry">{form.address.country}</span>
-                                        ) : (
-                                            'Location'
-                                        )}
-                                    </p>
-                                </address>
+                                <h2 className="user-name user-name-first user-name-last card-headline">{logic.UserName(form, 'Name')}</h2>
+                                <h3 className="user-handle card-tagline">@{form.handle || 'handle'}</h3>
+                                <Contact className="user-contact card-meta" item={form} />
                                 <InputButton
                                     type="submit"
                                     name="save"

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,6 +9,7 @@ import * as client from '../client';
 import * as logic from '../logic';
 import * as path from '../path';
 import Basic from './section/Basic';
+import Contact from './widget/Contact';
 import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
@@ -43,8 +44,8 @@ class UserView extends Component {
                 <article key={post.id} id={post.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <h3 className="card-headline">{post.title}</h3>
-                            <p>
+                            <h3 className="post-title card-headline">{post.title}</h3>
+                            <p className="post-excerpt">
                                 {post.excerpt}... <Link to={`${path.Post}/${post.slug}`}>Read More &rarr;</Link>
                             </p>
                         </div>
@@ -70,48 +71,12 @@ class UserView extends Component {
                                             />
                                             {view.name &&
                                                 (view.name.first || view.name.last) && (
-                                                    <h1 className="card-headline name-full">{logic.UserName(view, 'Name')}</h1>
+                                                    <h1 className="user-name user-name-first user-name-last card-headline">
+                                                        {logic.UserName(view, 'Name')}
+                                                    </h1>
                                                 )}
-                                            {view.handle && <h2 className="card-tagline handle">@{view.handle || 'handle'}</h2>}
-                                            <address className="card-meta contact" itemType="http://schema.org/Organization" itemScope>
-                                                <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
-                                                    {view.address && view.address.city && view.address.state && view.address.country ? (
-                                                        <Fragment>
-                                                            <span itemProp="addressLocality">{view.address.city}</span>
-                                                            {', '}
-                                                            <span itemProp="addressRegion">{view.address.state}</span>
-                                                            {', '}
-                                                            <span itemProp="addressCountry">{view.address.country}</span>
-                                                        </Fragment>
-                                                    ) : view.address && view.address.city && view.address.state ? (
-                                                        <Fragment>
-                                                            <span itemProp="addressLocality">{view.address.city}</span>
-                                                            {', '}
-                                                            <span itemProp="addressRegion">{view.address.state}</span>
-                                                        </Fragment>
-                                                    ) : view.address && view.address.city && view.address.country ? (
-                                                        <Fragment>
-                                                            <span itemProp="addressLocality">{view.address.city}</span>
-                                                            {', '}
-                                                            <span itemProp="addressCountry">{view.address.country}</span>
-                                                        </Fragment>
-                                                    ) : view.address && view.address.state && view.address.country ? (
-                                                        <Fragment>
-                                                            <span itemProp="addressRegion">{view.address.state}</span>
-                                                            {', '}
-                                                            <span itemProp="addressCountry">{view.address.country}</span>
-                                                        </Fragment>
-                                                    ) : view.address && view.address.city ? (
-                                                        <span itemProp="addressLocality">{view.address.city}</span>
-                                                    ) : view.address && view.address.state ? (
-                                                        <span itemProp="addressRegion">{view.address.state}</span>
-                                                    ) : view.address && view.address.country ? (
-                                                        <span itemProp="addressCountry">{view.address.country}</span>
-                                                    ) : (
-                                                        'Location'
-                                                    )}
-                                                </p>
-                                            </address>
+                                            {view.handle && <h2 className="user-handle card-tagline">@{view.handle || 'handle'}</h2>}
+                                            <Contact className="user-contact card-meta" item={view} />
                                             <div className="card-statistic">
                                                 <p className="card-statistic-posts">Posts: {view.posts ? Object.keys(view.posts).length : 0}</p>
                                             </div>
