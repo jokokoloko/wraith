@@ -33,8 +33,8 @@ class PostHome extends Component {
                 <article key={post.id} id={post.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <h3 className="card-headline">{post.title}</h3>
-                            <p>
+                            <h3 className="post-title card-headline">{post.title}</h3>
+                            <p className="post-excerpt">
                                 {post.excerpt}... <Link to={`${match.path}/${post.slug}`}>Read More &rarr;</Link>
                             </p>
                         </div>

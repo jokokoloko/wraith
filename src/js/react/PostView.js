@@ -33,11 +33,11 @@ class PostView extends Component {
                         {post.id ? (
                             <Fragment>
                                 <header className="node-xs-50 node-lg-80">
-                                    <h1>{post.title}</h1>
+                                    <h1 className="post-title">{post.title}</h1>
                                 </header>
 
                                 <section className="node-xs-50 node-lg-80">
-                                    <p>{post.content}</p>
+                                    <p className="post-content">{post.content}</p>
                                 </section>
                             </Fragment>
                         ) : (

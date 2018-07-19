@@ -42,8 +42,10 @@ class User extends Component {
                                 alternate={logic.UserNameHandle(user, 'Avatar')}
                             />
                             {user.name &&
-                                (user.name.first || user.name.last) && <h2 className="card-headline name-full">{logic.UserName(user, 'Name')}</h2>}
-                            {user.handle && <h3 className="card-tagline handle">@{user.handle || 'handle'}</h3>}
+                                (user.name.first || user.name.last) && (
+                                    <h2 className="user-name user-name-first user-name-last card-headline">{logic.UserName(user, 'Name')}</h2>
+                                )}
+                            {user.handle && <h3 className="user-handle card-tagline">@{user.handle || 'handle'}</h3>}
                         </Link>
                     </header>
                 </article>
