@@ -67,9 +67,9 @@ class FormPost extends Component {
         actionPost.postAdd(form).then(() => history.push(`${path._Private}${path._Post}`));
     }
     render() {
-        const size = 'lg';
         const { submitting } = this.props;
         const { form, error } = this.state;
+        const size = 'lg';
         return (
             <form id="form-post" className={`form form-${size}`} onSubmit={this.onSubmit}>
                 <div className="row gutter-80">

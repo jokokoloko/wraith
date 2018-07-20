@@ -73,9 +73,9 @@ class FormLogin extends Component {
         return valid;
     }
     render() {
-        const size = 'lg';
         const { submitting } = this.props;
         const { form, error } = this.state;
+        const size = 'lg';
         return (
             <form id="form-login" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText

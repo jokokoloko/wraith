@@ -67,9 +67,9 @@ class FormProfile extends Component {
         actionProfile.profileEdit(form);
     }
     render() {
-        const size = 'lg';
         const { submitting } = this.props;
         const { form, error } = this.state;
+        const size = 'lg';
         return (
             <form id="form-profile" className={`form form-${size}`} onSubmit={this.onSubmit}>
                 <div className="row gutter-80">
