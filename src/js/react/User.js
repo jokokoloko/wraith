@@ -32,6 +32,7 @@ class User extends Component {
         const item = 'user';
         const loopUser = users.map((user, index) => {
             const count = users.length - index;
+            const userName = logic.userName(user);
             return (
                 <article key={user.id} id={user.id} className={`${item} ${item}-${count} col-lg-3`}>
                     <header className="card card-panel">
@@ -39,12 +40,9 @@ class User extends Component {
                             <Avatar
                                 position="fit exact-center"
                                 source={user.avatar || client.EMPTY_AVATAR}
-                                alternate={logic.UserNameHandle(user, 'Avatar')}
+                                alternate={logic.userNameHandle(user, 'Avatar')}
                             />
-                            {user.name &&
-                                (user.name.first || user.name.last) && (
-                                    <h2 className="user-name user-name-first user-name-last card-headline">{logic.UserName(user, 'Name')}</h2>
-                                )}
+                            {userName && <h2 className="user-name user-name-first user-name-last card-headline">{userName}</h2>}
                             {user.handle && <h3 className="user-handle card-tagline">@{user.handle || 'handle'}</h3>}
                         </Link>
                     </header>

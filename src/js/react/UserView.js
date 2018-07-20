@@ -37,6 +37,7 @@ class UserView extends Component {
     render() {
         const { view: user, posts } = this.props;
         const { loadingView, loadingPosts } = this.state;
+        const userName = logic.userName(user);
         const item = 'post';
         const loopPost = posts.map((post, index) => {
             const count = posts.length - index;
@@ -67,14 +68,9 @@ class UserView extends Component {
                                             <Avatar
                                                 position="fit exact-center"
                                                 source={user.avatar || client.EMPTY_AVATAR}
-                                                alternate={logic.UserNameHandle(user, 'Avatar')}
+                                                alternate={logic.userNameHandle(user, 'Avatar')}
                                             />
-                                            {user.name &&
-                                                (user.name.first || user.name.last) && (
-                                                    <h1 className="user-name user-name-first user-name-last card-headline">
-                                                        {logic.UserName(user, 'Name')}
-                                                    </h1>
-                                                )}
+                                            {userName && <h1 className="user-name user-name-first user-name-last card-headline">{userName}</h1>}
                                             {user.handle && <h2 className="user-handle card-tagline">@{user.handle || 'handle'}</h2>}
                                             <Contact className="user-contact card-meta" item={user} />
                                             <div className="card-statistic">

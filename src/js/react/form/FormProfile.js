@@ -209,9 +209,9 @@ class FormProfile extends Component {
                                 <Avatar
                                     position="fit exact-center"
                                     source={form.avatar || client.EMPTY_AVATAR}
-                                    alternate={logic.UserNameHandle(form, 'Avatar')}
+                                    alternate={logic.userNameHandle(form, 'Avatar')}
                                 />
-                                <h2 className="user-name user-name-first user-name-last card-headline">{logic.UserName(form, 'Name')}</h2>
+                                <h2 className="user-name user-name-first user-name-last card-headline">{logic.userName(form, 'Name')}</h2>
                                 <h3 className="user-handle card-tagline">@{form.handle || 'handle'}</h3>
                                 <Contact className="user-contact card-meta" item={form} />
                                 <InputButton

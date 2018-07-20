@@ -9,8 +9,9 @@ import Dropdown from '../unit/Dropdown';
 
 const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
-    const avatar = profile.avatar ? (
-        <Avatar position="fit exact-center" source={profile.avatar || client.EMPTY_AVATAR} alternate={logic.UserNameHandle(profile, 'Avatar')} />
+    const profileName = logic.userName(profile);
+    const profileAvatar = profile.avatar ? (
+        <Avatar position="fit exact-center" source={profile.avatar || client.EMPTY_AVATAR} alternate={logic.userNameHandle(profile, 'Avatar')} />
     ) : (
         'Account'
     );
@@ -21,9 +22,8 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                     {_Private ? 'Home' : 'Dashboard'}
                 </NavLink>
             </li>
-            <Dropdown name="account" label={avatar} alignment="right">
-                {profile.name &&
-                    (profile.name.first || profile.name.last) && <strong className="dropdown-header">{logic.UserName(profile, 'Name')}</strong>}
+            <Dropdown name="account" label={profileAvatar} alignment="right">
+                {profileName && <strong className="dropdown-header">{profileName}</strong>}
                 <p className="dropdown-text">{profile.email}</p>
                 <div className="dropdown-divider" />
                 <NavLink className="dropdown-item" to={`${path._Private}${path._Profile}`}>
