@@ -269,7 +269,8 @@
 /* ----------!WIDTH---------- */
 @include media-breakpoint-up(lg) {
 	#form-register,
-	#form-login {
+	#form-login,
+	#form-reset-password {
 		width: 340px;
 		}
 	#form-search {

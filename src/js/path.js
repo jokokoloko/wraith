@@ -7,6 +7,7 @@ export const _Profile = '/profile';
 export const _Private = '/dashboard';
 
 // Public
+export const ResetPassword = '/reset-password';
 export const Login = '/login';
 export const Register = '/register';
 export const About = '/about';
