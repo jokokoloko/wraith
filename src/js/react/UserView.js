@@ -24,11 +24,12 @@ class UserView extends Component {
     componentDidMount() {
         const { match, actionView, actionPost } = this.props;
         actionView.viewLoad(match.params.slug).then((user) => {
-            actionPost.postsLoadByUser(user.view.id).then(() =>
-                this.setState({
-                    loadingPosts: false,
-                }),
-            );
+            user.view &&
+                actionPost.postsLoadByUser(user.view.id).then(() =>
+                    this.setState({
+                        loadingPosts: false,
+                    }),
+                );
             this.setState({
                 loadingView: false,
             });
