@@ -59,7 +59,7 @@ class FormProfile extends Component {
         });
     }
     onSubmit(event) {
-        const { profile, actionProfile } = this.props;
+        const { authenticated, profile, actionProfile } = this.props;
         const { name } = this.state.form;
         const slug = (name && name.first && name.last && slugify(`${name.first} ${name.last}`)) || profile.slug;
         const form = {
@@ -67,7 +67,7 @@ class FormProfile extends Component {
             slug,
         };
         event.preventDefault();
-        actionProfile.profileEdit(form);
+        authenticated && actionProfile.profileEdit(form);
     }
     render() {
         const { submitting } = this.props;
@@ -237,6 +237,7 @@ class FormProfile extends Component {
 
 FormProfile.propTypes = {
     submitting: PropTypes.bool.isRequired,
+    authenticated: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     actionProfile: PropTypes.objectOf(PropTypes.func).isRequired,
 };

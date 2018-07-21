@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import * as path from './path';
 
 export const PrivateArea = ({ component: Component, authenticated, ...rest }) => (
-    <Route {...rest} render={(props) => authenticated === true && <Component {...props} />} />
+    <Route {...rest} render={(props) => authenticated === true && <Component {...props} authenticated={authenticated} />} />
 );
 
 export const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
@@ -12,7 +12,7 @@ export const PrivateRoute = ({ component: Component, authenticated, ...rest }) =
         {...rest}
         render={(props) =>
             authenticated === true ? (
-                <Component {...props} />
+                <Component {...props} authenticated={authenticated} />
             ) : (
                 <Redirect
                     to={{
