@@ -32,6 +32,9 @@ class FormProfile extends Component {
         this.setState({
             form,
         });
+    }
+    componentDidUpdate() {
+        const { form } = this.state;
         (!form.name && this.isFocus.current.focus()) || (form.name && !form.name.first && this.isFocus.current.focus());
     }
     onChange(event) {
