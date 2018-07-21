@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as path from '../path';
 import Basic from './section/Basic';
 import FormPost from './form/FormPost';
 
-const _PostEdit = ({ location }) => {
-    const page = location.pathname === path._Private + path._Post + path._PostAdd ? 'Add' : 'Edit';
+const _PostEdit = ({ match }) => {
+    const page = match.params.id ? 'Edit' : 'Add';
     return (
         <main id="main" role="main">
             <div className="container-fluid">
@@ -24,7 +23,7 @@ const _PostEdit = ({ location }) => {
 };
 
 _PostEdit.propTypes = {
-    location: PropTypes.objectOf(PropTypes.any).isRequired,
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default _PostEdit;
