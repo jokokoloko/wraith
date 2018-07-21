@@ -132,8 +132,8 @@ class FormPost extends Component {
                                 <InputButton
                                     type="submit"
                                     name="save"
-                                    label={submitting ? 'Publishing...' : 'Publish'}
-                                    kind="success"
+                                    label={form.id && submitting ? 'Updating...' : form.id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
+                                    kind={form.id ? 'primary' : 'success'}
                                     size={size}
                                     display="block"
                                     disabled={submitting}
