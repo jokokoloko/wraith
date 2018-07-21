@@ -3,18 +3,22 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import * as actionView from '../../redux/action/actionView';
 import * as actionPost from '../../redux/action/actionPost';
 import { POST_ADD_REQUEST } from '../../redux/type';
+import { POSTS } from '../../data';
 import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
 import * as path from '../../path';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
+import Loader from '../unit/Loader';
 
 class FormPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loadingView: true,
             form: {},
             error: {},
         };
@@ -23,14 +27,26 @@ class FormPost extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const form = {
-            ...this.state.form,
-            ...this.props.post,
-        };
-        this.setState({
-            form,
-        });
-        !form.title && this.isFocus.current.focus();
+        const { match, actionView } = this.props;
+        match.params.id
+            ? actionView.viewLoad(match.params.id, POSTS).then(() => {
+                  const form = {
+                      ...this.state.form,
+                      ...this.props.view,
+                  };
+                  this.setState({
+                      loadingView: false,
+                      form,
+                  });
+              })
+            : this.setState({
+                  loadingView: false,
+              });
+    }
+    componentDidUpdate() {
+        const { match } = this.props;
+        const { form } = this.state;
+        !match.params.id && !form.title && this.isFocus.current.focus();
     }
     onChange(event) {
         const target = event.target;
@@ -68,9 +84,11 @@ class FormPost extends Component {
     }
     render() {
         const { submitting } = this.props;
-        const { form, error } = this.state;
+        const { loadingView, form, error } = this.state;
         const size = 'lg';
-        return (
+        return loadingView ? (
+            <Loader position="exact-center fixed" label="Loading view" />
+        ) : (
             <form id="form-post" className={`form form-${size}`} onSubmit={this.onSubmit}>
                 <div className="row gutter-80">
                     <div className="col-lg">
@@ -128,18 +146,23 @@ class FormPost extends Component {
 
 FormPost.propTypes = {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
     submitting: PropTypes.bool.isRequired,
+    view: PropTypes.objectOf(PropTypes.any).isRequired,
+    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ calls }) {
+function mapStateToProps({ view, calls }) {
     return {
         submitting: findByString(calls, removeStatus(POST_ADD_REQUEST)),
+        view,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
+        actionView: bindActionCreators(actionView, dispatch),
         actionPost: bindActionCreators(actionPost, dispatch),
     };
 }
