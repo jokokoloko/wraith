@@ -27,26 +27,29 @@ class FormPost extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const { match, actionView } = this.props;
+        const { history, match, actionView } = this.props;
         match.params.id
-            ? actionView.viewLoad(match.params.id, POSTS).then(() => {
-                  const form = {
-                      ...this.state.form,
-                      ...this.props.view,
-                  };
-                  this.setState({
-                      loadingView: false,
-                      form,
-                  });
+            ? actionView.viewLoad(match.params.id, POSTS).then((post) => {
+                  post.view
+                      ? this.setState({
+                            loadingView: false,
+                        })
+                      : history.push(`${path._Private}${path._Post}`);
               })
-            : this.setState({
-                  loadingView: false,
-              });
+            : this.setState(
+                  {
+                      loadingView: false,
+                  },
+                  () => this.isFocus.current.focus(),
+              );
     }
-    componentDidUpdate() {
-        const { match } = this.props;
-        const { form } = this.state;
-        !match.params.id && !form.title && this.isFocus.current.focus();
+    componentDidUpdate(prevProps) {
+        const { match, view } = this.props;
+        match.params.id &&
+            view !== prevProps.view &&
+            this.setState({
+                form: view,
+            });
     }
     onChange(event) {
         const target = event.target;
