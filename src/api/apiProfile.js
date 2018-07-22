@@ -13,9 +13,9 @@ class apiProfile {
             })
             .then(() => {
                 apiSlug.slugAdd(form.slug, USERS, authentication.currentUser.uid);
-                console.log('Updated profile:', authentication.currentUser.uid); // remove
+                console.log('Edited profile:', authentication.currentUser.uid); // remove
             })
-            .catch((error) => console.error('Error updating profile', error)); // remove
+            .catch((error) => console.error('Error editing profile', error)); // remove
 
     // Author
     static profileAuthor = (collection, reference) =>
