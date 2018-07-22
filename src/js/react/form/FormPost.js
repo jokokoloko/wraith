@@ -83,7 +83,7 @@ class FormPost extends Component {
             excerpt,
         };
         event.preventDefault();
-        actionPost.postSave(form).then(() => history.push(`${path._Private}${path._Post}`));
+        actionPost.postSave(form).then(() => !form.id && history.push(`${path._Private}${path._Post}`));
     }
     render() {
         const { submitting } = this.props;
