@@ -25,17 +25,12 @@ class FormProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const form = {
-            ...this.state.form,
-            ...this.props.profile,
-        };
-        this.setState({
-            form,
-        });
-    }
-    componentDidUpdate() {
-        const { form } = this.state;
-        (!form.name && this.isFocus.current.focus()) || (form.name && !form.name.first && this.isFocus.current.focus());
+        const { authenticated, profile } = this.props;
+        authenticated &&
+            this.setState({
+                form: profile,
+            });
+        (!profile.name && this.isFocus.current.focus()) || (profile.name && !profile.name.first && this.isFocus.current.focus());
     }
     onChange(event) {
         const target = event.target;
