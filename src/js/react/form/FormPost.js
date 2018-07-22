@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../../redux/action/actionView';
 import * as actionPost from '../../redux/action/actionPost';
-import { POST_ADD_REQUEST } from '../../redux/type';
+import { POST_SAVE_REQUEST } from '../../redux/type';
 import { POSTS } from '../../data';
 import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
@@ -83,7 +83,7 @@ class FormPost extends Component {
             excerpt,
         };
         event.preventDefault();
-        actionPost.postAdd(form).then(() => history.push(`${path._Private}${path._Post}`));
+        actionPost.postSave(form).then(() => history.push(`${path._Private}${path._Post}`));
     }
     render() {
         const { submitting } = this.props;
@@ -158,7 +158,7 @@ FormPost.propTypes = {
 
 function mapStateToProps({ view, calls }) {
     return {
-        submitting: findByString(calls, removeStatus(POST_ADD_REQUEST)),
+        submitting: findByString(calls, removeStatus(POST_SAVE_REQUEST)),
         view,
     };
 }

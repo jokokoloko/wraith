@@ -6,6 +6,7 @@ import { POSTS, PUBLISHED } from '../js/data';
 class apiPost {
     // Add
     static postAdd = (form) =>
+        authentication.currentUser.uid &&
         posts
             .add({
                 ...form,
@@ -24,6 +25,20 @@ class apiPost {
                 console.log('Added post:', post.id); // remove
             })
             .catch((error) => console.error('Error adding post:', error)); // remove
+
+    // Edit
+    static postEdit = (form) =>
+        posts
+            .doc(form.id)
+            .update({
+                ...form,
+                'time.edited': new Date(),
+            })
+            .then(() => {
+                apiSlug.slugAdd(form.slug, POSTS, form.id);
+                console.log('Edited post:', form.id); // remove
+            })
+            .catch((error) => console.error('Error editing post', error)); // remove
 
     // Load
     static postsLoad = () =>

@@ -2,9 +2,11 @@ import toastr from 'toastr';
 import apiPost from '../../../api/apiPost';
 import { posts } from '../../../api/firebase';
 import {
-    POST_ADD_REQUEST,
-    POST_ADD_SUCCESS,
-    POST_ADD_FAILURE,
+    POST_ADD,
+    POST_EDIT,
+    POST_SAVE_REQUEST,
+    POST_SAVE_SUCCESS,
+    POST_SAVE_FAILURE,
     POSTS_LOAD_REQUEST,
     POSTS_LOAD_SUCCESS,
     POSTS_LOAD_FAILURE,
@@ -13,34 +15,55 @@ import {
 
 toastr.options.positionClass = 'toast-top-center';
 
-// Add
-export const postAddRequest = () => ({
-    type: POST_ADD_REQUEST,
+// Save
+export const postAdd = () => ({
+    type: POST_ADD,
 });
 
-export const postAddSuccess = (form) => ({
-    type: POST_ADD_SUCCESS,
-    form,
+export const postEdit = () => ({
+    type: POST_EDIT,
 });
 
-export const postAddFailure = (error) => ({
-    type: POST_ADD_FAILURE,
+export const postSaveRequest = () => ({
+    type: POST_SAVE_REQUEST,
+});
+
+export const postSaveSuccess = () => ({
+    type: POST_SAVE_SUCCESS,
+});
+
+export const postSaveFailure = (error) => ({
+    type: POST_SAVE_FAILURE,
     error,
 });
 
-export const postAdd = (form) => (dispatch) => {
-    dispatch(postAddRequest());
-    return apiPost
-        .postAdd(form)
-        .then(() => {
-            dispatch(postAddSuccess(form));
-            toastr.success('Post published!');
-        })
-        .catch((error) => {
-            dispatch(postAddFailure(error));
-            toastr.error(error.message);
-            throw error;
-        });
+export const postSave = (form) => (dispatch) => {
+    dispatch(postSaveRequest());
+    return form.id
+        ? apiPost
+              .postEdit(form)
+              .then(() => {
+                  dispatch(postEdit(form));
+                  dispatch(postSaveSuccess());
+                  toastr.success('Post updated!');
+              })
+              .catch((error) => {
+                  dispatch(postSaveFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              })
+        : apiPost
+              .postAdd(form)
+              .then(() => {
+                  dispatch(postAdd(form));
+                  dispatch(postSaveSuccess());
+                  toastr.success('Post published!');
+              })
+              .catch((error) => {
+                  dispatch(postSaveFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              });
 };
 
 // Load
