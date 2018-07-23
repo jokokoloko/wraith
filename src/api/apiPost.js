@@ -6,7 +6,7 @@ import { POSTS, PUBLISHED } from '../js/data';
 class apiPost {
     // Add
     static postAdd = (form) =>
-        authentication.currentUser.uid &&
+        authentication.currentUser &&
         posts
             .add({
                 ...form,
@@ -28,6 +28,7 @@ class apiPost {
 
     // Edit
     static postEdit = (form) =>
+        authentication.currentUser.uid === form.user &&
         posts
             .doc(form.id)
             .update({

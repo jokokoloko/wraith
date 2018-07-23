@@ -5,6 +5,7 @@ import { USERS } from '../js/data';
 class apiProfile {
     // Edit
     static profileEdit = (form) =>
+        authentication.currentUser.uid === form.id &&
         users
             .doc(authentication.currentUser.uid)
             .update({
@@ -19,6 +20,7 @@ class apiProfile {
 
     // Author
     static profileAuthor = (collection, reference) =>
+        authentication.currentUser &&
         users
             .doc(authentication.currentUser.uid)
             .update({
@@ -30,6 +32,7 @@ class apiProfile {
 
     // Status
     static profileStatus = (status) =>
+        authentication.currentUser &&
         users.doc(authentication.currentUser.uid).update({
             [`time.${status}`]: new Date(),
             status,
@@ -37,6 +40,7 @@ class apiProfile {
 
     // Load
     static profileLoad = () =>
+        authentication.currentUser &&
         users
             .doc(authentication.currentUser.uid)
             .get()
