@@ -215,8 +215,8 @@ class FormProfile extends Component {
                                 <InputButton
                                     type="submit"
                                     name="save"
-                                    label={submitting ? 'Saving...' : 'Save'}
-                                    kind="success"
+                                    label={submitting ? 'Updating...' : 'Update'}
+                                    kind="primary"
                                     size={size}
                                     display="block"
                                     disabled={submitting}
