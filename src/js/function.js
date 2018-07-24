@@ -50,22 +50,25 @@ export const slugify = (text) => {
     );
 };
 
+export const excerptify = (text, limit) => (text.length > limit ? text.substr(0, text.lastIndexOf(' ', limit)) : text);
+
 // Array
-export const arrayToObject = (array, keyField) =>
+export const arrayToObject = (array, key) =>
     Object.assign(
         {},
         ...array.map((item) => ({
-            [item[keyField]]: item,
+            [item[key]]: item,
         })),
     );
 
 // ID
-export const generateID = (string) =>
+export const generateID = () =>
     Math.random()
         .toString(36)
-        .substring(2) +
-    new Date().getTime().toString(36) +
-    string;
+        .substring(2, 15) +
+    Math.random()
+        .toString(36)
+        .substring(2, 15);
 
 // Slug
 export const generateSlug = () =>

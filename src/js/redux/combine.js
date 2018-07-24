@@ -4,6 +4,7 @@ import profile from './reducer/reducerProfile';
 import view from './reducer/reducerView';
 import calls from './reducer/reducerCall';
 import users from './reducer/reducerUser';
+import posts from './reducer/reducerPost';
 
 export default combineReducers({
     account,
@@ -11,4 +12,5 @@ export default combineReducers({
     view,
     calls,
     users,
+    posts,
 });

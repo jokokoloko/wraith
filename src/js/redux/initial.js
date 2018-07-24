@@ -7,4 +7,5 @@ export default {
     view: {},
     calls: [],
     users: [],
+    posts: [],
 };

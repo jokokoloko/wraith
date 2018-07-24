@@ -1,6 +1,7 @@
 // Collection
 export const SLUGS = 'slugs';
 export const USERS = 'users';
+export const POSTS = 'posts';
 
 // User - Status
 export const FRESH = 'fresh';
@@ -18,3 +19,9 @@ export const OWNER = 'owner';
 export const ADMINISTRATOR = 'administrator';
 export const EDITOR = 'editor';
 export const MEMBER = 'member';
+
+// Post - Status
+export const DRAFT = 'draft';
+export const PENDING = 'pending';
+export const PRIVATE = 'private';
+export const PUBLISHED = 'published';

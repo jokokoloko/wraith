@@ -19,16 +19,25 @@ export const viewLoadFailure = (error) => ({
     error,
 });
 
-export const viewLoad = (slug, collection) => (dispatch) => {
+export const viewLoad = (slug, collection, edit) => (dispatch) => {
     dispatch(viewLoadRequest());
-    return apiView
-        .viewLoad(slug, collection)
-        .then((view) => dispatch(viewLoadSuccess(view)))
-        .catch((error) => {
-            dispatch(viewLoadFailure(error));
-            toastr.error(error.message);
-            throw error;
-        });
+    return edit
+        ? apiView
+              .viewLoadForEdit(slug, collection)
+              .then((view) => dispatch(viewLoadSuccess(view)))
+              .catch((error) => {
+                  dispatch(viewLoadFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              })
+        : apiView
+              .viewLoad(slug, collection)
+              .then((view) => dispatch(viewLoadSuccess(view)))
+              .catch((error) => {
+                  dispatch(viewLoadFailure(error));
+                  toastr.error(error.message);
+                  throw error;
+              });
 };
 
 // Void

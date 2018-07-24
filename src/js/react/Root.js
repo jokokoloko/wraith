@@ -9,9 +9,11 @@ import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute } from '../access';
 import _Private from './_Private';
+import ResetPassword from './ResetPassword';
 import Login from './Login';
 import Register from './Register';
 import About from './About';
+import Post from './Post';
 import User from './User';
 import UserView from './UserView';
 import Home from './Home';
@@ -50,9 +52,11 @@ class Root extends Component {
 
                     <Switch>
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
+                        <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.About} component={About} />
+                        <Route path={path.Post} component={Post} />
                         <Route path={path.User} component={User} />
                         <Route path={path.UserView} component={UserView} />
                         <Route path={path.Root} component={Home} exact />

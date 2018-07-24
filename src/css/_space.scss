@@ -56,6 +56,15 @@ h5 + p,
 h6 + p {
 	padding-top: 27px; // 30px spacing
 	}
+.d-flex h1 + p,
+.d-flex h2 + p,
+.d-flex h3 + p,
+.d-flex h4 + p,
+.d-flex h5 + p,
+.d-flex h6 + p,
+.d-flex p + p {
+	padding-top: 0; // 0 spacing
+	}
 
 /* ----------!LIST---------- */
 ol:not([class*="row"]):not([class*="nav"]):not([class*="navbar-nav"]):not([class*="dropdown-menu"]):not([class*="pager"]):not([class*="carousel-indicators"]) > li + li,
@@ -115,6 +124,23 @@ p + .btn {
 	margin-top: 30px; // 30px spacing
 	}
 .btn + .btn {
+	margin-left: 20px; // 20px spacing
+	}
+.d-flex h1 + button,
+.d-flex h2 + button,
+.d-flex h3 + button,
+.d-flex h4 + button,
+.d-flex h5 + button,
+.d-flex h6 + button,
+.d-flex p + button,
+.d-flex h1 + .btn,
+.d-flex h2 + .btn,
+.d-flex h3 + .btn,
+.d-flex h4 + .btn,
+.d-flex h5 + .btn,
+.d-flex h6 + .btn,
+.d-flex p + .btn {
+	margin-top: 0; // 30px spacing
 	margin-left: 20px; // 20px spacing
 	}
 
@@ -245,11 +271,6 @@ p + .instagram-media {
 /* ==========!COMPONENT========== */
 /* ============================== */
 
-/* ----------!ACCORDION---------- */
-.accordion .card-list .card + .card {
-    margin-top: 15px; // 15px spacing
-	}
-
 /* ----------!HERO---------- */
 .hero h1 + p {
 	padding-top: 24px; // 30px spacing
@@ -257,40 +278,4 @@ p + .instagram-media {
 .hero h2 + p,
 .hero h3 + p {
 	padding-top: 23px; // 30px spacing
-	}
-
-/* ============================= */
-/* ==========!TEMPLATE========== */
-/* ============================= */
-
-/* ----------!ARCHIVE---------- */
-.archive .hentry + .hentry,
-.blog .hentry + .hentry,
-.search .hentry + .hentry {
-	padding-top: 50px; // 50px spacing
-	}
-
-/* ----------!SINGLE---------- */
-@include media-breakpoint-up(lg) {
-	.single figure + header,
-	.single figure + section,
-	.single figure + footer,
-	.single header + figure,
-	.single header + section,
-	.single header + footer,
-	.single section + figure,
-	.single section + footer,
-	.single footer + figure {
-		padding-top: 50px; // 50px spacing
-		}
-	}
-.single .hentry figure img + .wp-caption-text {
-	padding-top: 15px; // 15px spacing
-	}
-.single .hentry .headline + .tagline {
-	padding-top: 26px; // 30px spacing
-	}
-.single .hentry .headline + .meta,
-.single .hentry .tagline + .meta {
-	padding-top: 28px; // 30px spacing
 	}

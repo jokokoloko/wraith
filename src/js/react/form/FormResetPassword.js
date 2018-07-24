@@ -1,16 +1,16 @@
 import React, { Component, createRef } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionAccount from '../../redux/action/actionAccount';
-import { ACCOUNT_LOG_IN_REQUEST } from '../../redux/type';
+import { ACCOUNT_RESET_PASSWORD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import * as path from '../../path';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
 
-class FormLogin extends Component {
+class FormResetPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,22 +46,18 @@ class FormLogin extends Component {
         });
     }
     onSubmit(event) {
-        const { actionAccount } = this.props;
+        const { history, actionAccount } = this.props;
         const { form } = this.state;
         event.preventDefault();
-        this.isValid() && actionAccount.accountLogIn(form);
+        this.isValid() && actionAccount.accountResetPassword(form).then(() => history.push(path.Login));
     }
     isValid() {
         const { form } = this.state;
         const error = {};
         const emailLength = 5;
-        const passwordLength = 5;
         let valid = true;
         (form.email === undefined || form.email.length < emailLength) &&
             (error.email = `Email must be at least ${emailLength} characters.`) &&
-            (valid = false);
-        (form.password === undefined || form.password.length < passwordLength) &&
-            (error.password = `Password must be at least ${passwordLength} characters.`) &&
             (valid = false);
         this.setState({
             error,
@@ -73,7 +69,7 @@ class FormLogin extends Component {
         const { form, error } = this.state;
         const size = 'lg';
         return (
-            <form id="form-login" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
+            <form id="form-reset-password" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
                     type="email"
                     name="email"
@@ -85,51 +81,30 @@ class FormLogin extends Component {
                     error={error.email}
                     reference={this.isFocus}
                 />
-                <InputText
-                    type="password"
-                    name="password"
-                    label="Password"
-                    placeholder="Password"
-                    size={size}
-                    onChange={this.onChange}
-                    value={form.password}
-                    error={error.password}
-                />
-                <div className="form-row">
-                    <div className="form-column col-lg">
-                        <div className="form-group">
-                            <InputButton
-                                type="submit"
-                                name="log-in"
-                                label={submitting ? 'Logging In...' : 'Log In'}
-                                kind="primary"
-                                size={size}
-                                display="block"
-                                disabled={submitting}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-column col-lg">
-                        <div className="form-group text-right">
-                            <Link className="btn btn-link btn-lg btn-block to-reset-password" to={path.ResetPassword}>
-                                Forgot Password?
-                            </Link>
-                        </div>
-                    </div>
+                <div className="form-group">
+                    <InputButton
+                        type="submit"
+                        name="reset-password"
+                        label={submitting ? 'Resetting Password...' : 'Reset Password'}
+                        kind="secondary"
+                        size={size}
+                        display="block"
+                        disabled={submitting}
+                    />
                 </div>
             </form>
         );
     }
 }
 
-FormLogin.propTypes = {
+FormResetPassword.propTypes = {
     submitting: PropTypes.bool.isRequired,
     actionAccount: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapStateToProps({ calls }) {
     return {
-        submitting: findByString(calls, removeStatus(ACCOUNT_LOG_IN_REQUEST)),
+        submitting: findByString(calls, removeStatus(ACCOUNT_RESET_PASSWORD_REQUEST)),
     };
 }
 
@@ -139,7 +114,9 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(FormLogin);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(FormResetPassword),
+);

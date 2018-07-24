@@ -5,11 +5,13 @@ import service from './service';
 import Root from './js/react/Root';
 import configureStore from './js/redux/store';
 import { usersLoad } from './js/redux/action/actionUser';
+import { postsLoad } from './js/redux/action/actionPost';
 import '../node_modules/toastr/build/toastr.min.css'; // 6 kb
 import './css/theme.css';
 
 const store = configureStore();
 store.dispatch(usersLoad(true));
+store.dispatch(postsLoad(true));
 
 ReactDOM.render(
     <Provider store={store}>

@@ -67,9 +67,9 @@ class FormRegister extends Component {
         return valid;
     }
     render() {
-        const size = 'lg';
         const { submitting } = this.props;
         const { form, error } = this.state;
+        const size = 'lg';
         return (
             <form id="form-register" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
                 <InputText
@@ -101,7 +101,7 @@ class FormRegister extends Component {
                         kind="success"
                         size={size}
                         display="block"
-                        submitting={submitting}
+                        disabled={submitting}
                     />
                 </div>
             </form>
@@ -126,4 +126,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormRegister);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FormRegister);

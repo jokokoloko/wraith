@@ -23,7 +23,7 @@ export const usersLoadFailure = (error) => ({
 export const usersLoad = (watch) => (dispatch) => {
     dispatch(usersLoadRequest());
     return watch
-        ? users.onSnapshot(
+        ? users.orderBy('time.created', 'desc').onSnapshot(
               (snapshot) => {
                   const users = snapshot.docs.map((user) => user.data());
                   dispatch(usersLoadSuccess(users));
