@@ -39,7 +39,7 @@ class apiPost {
                 apiSlug.slugAdd(form.slug, POSTS, form.id);
                 console.log('Edited post:', form.id); // remove
             })
-            .catch((error) => console.error('Error editing post', error)); // remove
+            .catch((error) => console.error('Error editing post:', error)); // remove
 
     // Load
     static postsLoad = () =>
