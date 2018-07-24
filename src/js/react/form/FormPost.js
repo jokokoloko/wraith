@@ -29,7 +29,7 @@ class FormPost extends Component {
     componentDidMount() {
         const { history, match, actionView } = this.props;
         match.params.id
-            ? actionView.viewLoad(match.params.id, POSTS).then((post) => {
+            ? actionView.viewLoad(match.params.id, POSTS, true).then((post) => {
                   post.view
                       ? this.setState({
                             loadingView: false,
