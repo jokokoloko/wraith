@@ -47,7 +47,7 @@ class apiPost {
             .orderBy('time.created', 'desc')
             .get()
             .then((snapshot) => {
-                console.log(`Posts: ${snapshot.size}`); // remove
+                console.log('Posts:', snapshot.size); // remove
                 // snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
                 return snapshot.docs.map((post) => post.data());
             })
@@ -59,7 +59,7 @@ class apiPost {
             .orderBy('time.created', 'desc')
             .get()
             .then((snapshot) => {
-                console.log(`Posts by user: ${snapshot.size}`); // remove
+                console.log('Posts by user:', snapshot.size); // remove
                 // snapshot.forEach((post) => console.log(post.id, '=>', post.data())); // remove
                 return snapshot.docs.map((post) => post.data());
             })
