@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,7 +24,7 @@ class _PostHome extends Component {
         );
     }
     render() {
-        const { match, posts } = this.props;
+        const { match, profile, posts } = this.props;
         const { loadingPosts } = this.state;
         const item = 'post';
         const empty = '-';
@@ -38,7 +38,13 @@ class _PostHome extends Component {
                     </th>
                     <td className={`${item}-user`}>{post.user || empty}</td>
                     <td className={`${item}-action`}>
-                        <Link to={`${match.path}/${post.id}`}>Edit</Link> - <Link to={`${path.Post}/${post.slug}`}>View</Link>
+                        <Link to={`${path.Post}/${post.slug}`}>View</Link>
+                        {profile.id === post.user && (
+                            <Fragment>
+                                <span className="separator"> - </span>
+                                <Link to={`${match.path}/${post.id}`}>Edit</Link>
+                            </Fragment>
+                        )}
                     </td>
                 </tr>
             );
@@ -98,12 +104,14 @@ class _PostHome extends Component {
 
 _PostHome.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ profile, posts }) {
     return {
+        profile,
         posts,
     };
 }
