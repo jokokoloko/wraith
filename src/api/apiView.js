@@ -42,7 +42,7 @@ class apiView {
             .get()
             .then((view) => {
                 view.exists ? console.log('View for edit:', view.data()) : console.log('No such view for edit!'); // remove
-                return authentication.currentUser.uid === view.data().user && view.data();
+                return view.exists && authentication.currentUser.uid === view.data().user && view.data();
             })
             .catch((error) => console.error('Error getting view for edit:', error)); // remove
 }
