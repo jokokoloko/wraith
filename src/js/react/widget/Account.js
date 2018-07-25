@@ -1,55 +1,37 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faHome from '@fortawesome/fontawesome-pro-regular/faHome';
-import faTachometer from '@fortawesome/fontawesome-pro-regular/faTachometer';
-import faUserAstronaut from '@fortawesome/fontawesome-pro-regular/faUserAstronaut';
+import * as client from '../../client';
+import * as logic from '../../logic';
 import * as path from '../../path';
 import Avatar from '../unit/Avatar';
 import Dropdown from '../unit/Dropdown';
 
 const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
-    const avatar = profile.avatar ? (
+    const profileName = logic.userName(profile);
+    const profileAvatar = profile.avatar ? (
         <Avatar
             position="fit exact-center"
-            source={profile.avatar}
-            alternate={
-                profile.name && profile.name.first && profile.name.last
-                    ? `${profile.name.first} ${profile.name.last}`
-                    : profile.name && profile.name.first
-                        ? `${profile.name.first}`
-                        : profile.name && profile.name.last
-                            ? `${profile.name.last}`
-                            : profile.handle
-                                ? profile.handle
-                                : 'Avatar'
-            }
+            source={profile.avatar || client.EMPTY_AVATAR}
+            alternate={logic.userNameHandle(profile, 'Avatar')}
         />
     ) : (
-        <FontAwesomeIcon icon={faUserAstronaut} />
+        'Account'
     );
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
-                <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
-                    <FontAwesomeIcon icon={_Private ? faHome : faTachometer} />
+                <NavLink
+                    className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
+                    to={_Private ? path.Root : path._Private}
+                    exact
+                >
+                    {_Private ? 'Home' : 'Dashboard'}
                 </NavLink>
             </li>
-            <Dropdown name="account" label={avatar} alignment="right">
-                {profile.name &&
-                    (profile.name.first || profile.name.last) && (
-                        <strong className="dropdown-header">
-                            {profile.name.first && profile.name.last
-                                ? `${profile.name.first} ${profile.name.last}`
-                                : profile.name.first
-                                    ? `${profile.name.first}`
-                                    : profile.name.last
-                                        ? `${profile.name.last}`
-                                        : 'Name'}
-                        </strong>
-                    )}
+            <Dropdown name="account" label={profileAvatar} alignment="right">
+                {profileName && <strong className="dropdown-header">{profileName}</strong>}
                 <p className="dropdown-text">{profile.email}</p>
                 <div className="dropdown-divider" />
                 <NavLink className="dropdown-item" to={`${path._Private}${path._Profile}`}>

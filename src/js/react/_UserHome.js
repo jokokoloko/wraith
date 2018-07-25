@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
-import * as path from '../path';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
@@ -28,23 +27,22 @@ class _UserHome extends Component {
         const { loadingUsers } = this.state;
         const item = 'user';
         const empty = '-';
-        const labelUser = ['#', 'Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
+        const labelUser = ['Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
         const loopUser = users.map((user, index) => {
-            const count = index + 1;
+            const count = users.length - index;
             return (
                 <tr key={user.id} id={user.id} className={`${item} ${item}-${count}`}>
-                    <th scope="row">{count}</th>
-                    <td>
+                    <th className={`${item}-email`} scope="row">
                         <span className={`status status-${user.status}`}>&#9679;</span>
-                        {user.email}
-                    </td>
-                    <td>{(user.name && user.name.first) || empty}</td>
-                    <td>{(user.name && user.name.last) || empty}</td>
-                    <td>{user.handle || empty}</td>
-                    <td>{(user.address && user.address.city) || empty}</td>
-                    <td>{(user.address && user.address.state) || empty}</td>
-                    <td>
-                        <Link to={`${path.Root}${user.slug}`}>View</Link>
+                        {user.email || empty}
+                    </th>
+                    <td className={`${item}-name ${item}-name-first`}>{(user.name && user.name.first) || empty}</td>
+                    <td className={`${item}-name ${item}-name-last`}>{(user.name && user.name.last) || empty}</td>
+                    <td className={`${item}-handle`}>{user.handle || empty}</td>
+                    <td className={`${item}-address ${item}-address-city`}>{(user.address && user.address.city) || empty}</td>
+                    <td className={`${item}-address ${item}-address-state`}>{(user.address && user.address.state) || empty}</td>
+                    <td className={`${item}-action`}>
+                        <Link to={`/${user.slug}`}>View</Link>
                     </td>
                 </tr>
             );
@@ -53,8 +51,9 @@ class _UserHome extends Component {
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic container="container-fluid" space="space-xs-50 space-lg-80">
-                        <header className="node-xs-50">
+                        <header className="d-flex align-items-end node-xs-50">
                             <h1>Users</h1>
+                            <p className="ml-auto">Total: {users.length}</p>
                         </header>
 
                         <section className="node-xs-50">
@@ -64,7 +63,7 @@ class _UserHome extends Component {
                                 <div className="table-container table-responsive-sm">
                                     <table className={`table table-striped table-bordered table-style table-size-80 table-${item}`}>
                                         <thead>
-                                            <tr>
+                                            <tr className="label-row">
                                                 {labelUser.map((name, index) => {
                                                     const count = index + 1;
                                                     return (
@@ -81,8 +80,13 @@ class _UserHome extends Component {
                                                 loopUser
                                             ) : (
                                                 <tr className={`${item} ${item}-empty`}>
-                                                    <th scope="row">0</th>
-                                                    <td>{`No ${item}s`}</td>
+                                                    <th className={`${item}-email`} scope="row">{`No ${item}s`}</th>
+                                                    <td className={`${item}-name ${item}-name-first`}>{empty}</td>
+                                                    <td className={`${item}-name ${item}-name-last`}>{empty}</td>
+                                                    <td className={`${item}-handle`}>{empty}</td>
+                                                    <td className={`${item}-address ${item}-address-city`}>{empty}</td>
+                                                    <td className={`${item}-address ${item}-address-state`}>{empty}</td>
+                                                    <td className={`${item}-action`}>{empty}</td>
                                                 </tr>
                                             )}
                                         </tbody>

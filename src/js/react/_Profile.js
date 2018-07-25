@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Basic from './section/Basic';
 import FormProfile from './form/FormProfile';
 
-const _Profile = () => (
+const _Profile = ({ authenticated }) => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic container="container-fluid" space="space-xs-50 space-lg-80">
@@ -11,11 +12,15 @@ const _Profile = () => (
                 </header>
 
                 <section className="node-xs-50">
-                    <FormProfile />
+                    <FormProfile authenticated={authenticated} />
                 </section>
             </Basic>
         </div>
     </main>
 );
+
+_Profile.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+};
 
 export default _Profile;

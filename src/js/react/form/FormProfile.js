@@ -1,15 +1,16 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faMapMarkerAlt from '@fortawesome/fontawesome-pro-regular/faMapMarkerAlt';
 import * as actionProfile from '../../redux/action/actionProfile';
 import { PROFILE_EDIT_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import { slugify } from '../../function';
+import * as client from '../../client';
+import * as logic from '../../logic';
 import InputButton from '../input/InputButton';
 import InputText from '../input/InputText';
+import Contact from '../widget/Contact';
 import Avatar from '../unit/Avatar';
 
 class FormProfile extends Component {
@@ -24,14 +25,12 @@ class FormProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount() {
-        const form = {
-            ...this.state.form,
-            ...this.props.profile,
-        };
-        this.setState({
-            form,
-        });
-        (!form.name && this.isFocus.current.focus()) || (form.name && !form.name.first && this.isFocus.current.focus());
+        const { authenticated, profile } = this.props;
+        authenticated &&
+            this.setState({
+                form: profile,
+            });
+        (!profile.name && this.isFocus.current.focus()) || (profile.name && !profile.name.first && this.isFocus.current.focus());
     }
     onChange(event) {
         const target = event.target;
@@ -55,28 +54,24 @@ class FormProfile extends Component {
         });
     }
     onSubmit(event) {
-        const { profile, actionProfile } = this.props;
+        const { authenticated, profile, actionProfile } = this.props;
         const { name } = this.state.form;
-        const slug = name.first && name.last ? slugify(`${name.first} ${name.last}`) : profile.slug;
+        const slug = (name && name.first && name.last && slugify(`${name.first} ${name.last}`)) || profile.slug;
         const form = {
             ...this.state.form,
-            time: {
-                ...this.state.form.time,
-                edited: new Date(),
-            },
             slug,
         };
         event.preventDefault();
-        actionProfile.profileEdit(form);
+        authenticated && actionProfile.profileEdit(form);
     }
     render() {
-        const size = 'lg';
         const { submitting } = this.props;
         const { form, error } = this.state;
+        const size = 'lg';
         return (
-            <form id="form-profile" className={`form form-${size} mx-lg-auto`} onSubmit={this.onSubmit}>
-                <div className="row gutter-lg-80">
-                    <div className="col-lg-9">
+            <form id="form-profile" className={`form form-${size}`} onSubmit={this.onSubmit}>
+                <div className="row gutter-80">
+                    <div className="col-lg">
                         <div className="form-row form-gutter-20">
                             <div className="form-column col-lg">
                                 <InputText
@@ -211,77 +206,20 @@ class FormProfile extends Component {
                             <div className="card-body">
                                 <Avatar
                                     position="fit exact-center"
-                                    source={form.avatar ? form.avatar : 'http://via.placeholder.com/800?text=Avatar'}
-                                    alternate={
-                                        form.name && form.name.first && form.name.last
-                                            ? `${form.name.first} ${form.name.last}`
-                                            : form.name && form.name.first
-                                                ? `${form.name.first}`
-                                                : form.name && form.name.last
-                                                    ? `${form.name.last}`
-                                                    : form.handle
-                                                        ? form.handle
-                                                        : 'Avatar'
-                                    }
+                                    source={form.avatar || client.EMPTY_AVATAR}
+                                    alternate={logic.userNameHandle(form, 'Avatar')}
                                 />
-                                <h2 className="name-full">
-                                    {form.name && form.name.first && form.name.last
-                                        ? `${form.name.first} ${form.name.last}`
-                                        : form.name && form.name.first
-                                            ? `${form.name.first}`
-                                            : form.name && form.name.last
-                                                ? `${form.name.last}`
-                                                : 'Name'}
-                                </h2>
-                                <h3 className="handle">@{form.handle ? `${form.handle}` : 'handle'}</h3>
-                                <address className="contact" itemType="http://schema.org/Organization" itemScope>
-                                    <p className="address" itemProp="address" itemType="http://schema.org/PostalAddress" itemScope>
-                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
-                                        {form.address && form.address.city && form.address.state && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city && form.address.state ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressLocality">{form.address.city}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.state && form.address.country ? (
-                                            <Fragment>
-                                                <span itemProp="addressRegion">{form.address.state}</span>
-                                                {', '}
-                                                <span itemProp="addressCountry">{form.address.country}</span>
-                                            </Fragment>
-                                        ) : form.address && form.address.city ? (
-                                            <span itemProp="addressLocality">{form.address.city}</span>
-                                        ) : form.address && form.address.state ? (
-                                            <span itemProp="addressRegion">{form.address.state}</span>
-                                        ) : form.address && form.address.country ? (
-                                            <span itemProp="addressCountry">{form.address.country}</span>
-                                        ) : (
-                                            'Location'
-                                        )}
-                                    </p>
-                                </address>
+                                <h2 className="user-name user-name-first user-name-last card-headline">{logic.userName(form, 'Name')}</h2>
+                                <h3 className="user-handle card-tagline">@{form.handle || 'handle'}</h3>
+                                <Contact className="user-contact card-meta" item={form} />
                                 <InputButton
                                     type="submit"
                                     name="save"
-                                    label={submitting ? 'Saving...' : 'Save'}
-                                    kind="success"
+                                    label={submitting ? 'Updating...' : 'Update'}
+                                    kind="primary"
                                     size={size}
                                     display="block"
-                                    submitting={submitting}
+                                    disabled={submitting}
                                 />
                             </div>
                         </div>
@@ -294,6 +232,7 @@ class FormProfile extends Component {
 
 FormProfile.propTypes = {
     submitting: PropTypes.bool.isRequired,
+    authenticated: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     actionProfile: PropTypes.objectOf(PropTypes.func).isRequired,
 };

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputButton = ({ type, name, label, kind, size, display, onClick, submitting }) => (
+const InputButton = ({ type, name, label, kind, size, display, onClick, disabled }) => (
     <input
         type={type}
         className={`btn btn-${kind} btn-${size} btn-${display} btn-${name}`}
         name={name}
         onClick={onClick}
         value={label}
-        disabled={submitting}
+        disabled={disabled}
     />
 );
 

@@ -1,17 +1,21 @@
 import React from 'react';
 import Basic from './section/Basic';
-import ChampionSelect from './widget/ChampionSelect';
+import FormResetPassword from './form/FormResetPassword';
 
-const Home = () => (
+const ResetPassword = () => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic space="space-xs-50 space-lg-80">
+                <header className="text-center">
+                    <h1>Reset Password</h1>
+                </header>
+
                 <section>
-                    <ChampionSelect />
+                    <FormResetPassword />
                 </section>
             </Basic>
         </div>
     </main>
 );
 
-export default Home;
+export default ResetPassword;

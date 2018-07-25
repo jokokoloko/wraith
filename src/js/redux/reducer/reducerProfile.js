@@ -4,6 +4,7 @@ import { PROFILE_EDIT_SUCCESS, PROFILE_LOAD_SUCCESS, PROFILE_VOID } from '../typ
 export default function(state = initial.profile, action) {
     switch (action.type) {
         case PROFILE_EDIT_SUCCESS:
+            return action.form || action.profile || initial.profile;
         case PROFILE_LOAD_SUCCESS:
             return action.profile || initial.profile;
         case PROFILE_VOID:

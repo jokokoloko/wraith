@@ -4,15 +4,35 @@ import { USERS } from '../js/data';
 
 class apiProfile {
     // Edit
-    static profileEdit = (profile) =>
+    static profileEdit = (form) =>
+        authentication.currentUser.uid === form.id &&
         users
             .doc(authentication.currentUser.uid)
-            .update(profile)
-            .then(() => apiSlug.slugAdd(profile.slug, USERS, authentication.currentUser.uid))
-            .catch((error) => console.error('Error updating profile', error)); // remove
+            .update({
+                ...form,
+                'time.edited': new Date(),
+            })
+            .then(() => {
+                apiSlug.slugAdd(form.slug, USERS, authentication.currentUser.uid);
+                console.log('Edited profile:', authentication.currentUser.uid); // remove
+            })
+            .catch((error) => console.error('Error editing profile:', error)); // remove
+
+    // Author
+    static profileAuthor = (collection, reference) =>
+        authentication.currentUser &&
+        users
+            .doc(authentication.currentUser.uid)
+            .update({
+                [`${collection}.${reference}`]: new Date(),
+                'time.authored': new Date(),
+            })
+            .then(() => console.log(`Authored a new document in ${collection}:`, reference)) // remove
+            .catch((error) => console.error(`Error authoring a new document in ${collection}:`, error)); // remove
 
     // Status
     static profileStatus = (status) =>
+        authentication.currentUser &&
         users.doc(authentication.currentUser.uid).update({
             [`time.${status}`]: new Date(),
             status,
@@ -20,6 +40,7 @@ class apiProfile {
 
     // Load
     static profileLoad = () =>
+        authentication.currentUser &&
         users
             .doc(authentication.currentUser.uid)
             .get()
@@ -27,7 +48,7 @@ class apiProfile {
                 user.exists ? console.log('Profile:', user.data()) : console.log('No such user!'); // remove
                 return user.data();
             })
-            .catch((error) => console.error('Error getting user', error)); // remove
+            .catch((error) => console.error('Error getting user:', error)); // remove
 }
 
 export default apiProfile;

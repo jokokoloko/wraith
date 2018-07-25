@@ -4,11 +4,10 @@ React ES6 Starter Application
 
 ## Stack
 
-React `16.4.0`</br >
-React Router `4.2.2`</br >
+React `16.4.1`</br >
+React Router `4.3.1`</br >
 Redux `4.0.0`</br >
-Firebase `5.0.4`</br >
-Font Awesome `1.1.8`</br >
+Firebase `5.2.0`</br >
 Bootstrap `4.1.0`
 
 ## Platform
@@ -26,19 +25,12 @@ Comparisons with other platforms:
 
 ## Prerequisites
 
-*   Install [node.js](http://nodejs.org/)
-*   Clone the repository: https://github.com/jokokoloko/spectre.git
+-   Install [node.js](http://nodejs.org/)
+-   Clone the repository: https://github.com/jokokoloko/spectre.git
 
 ## Installation
 
-First, you must register Font Awesome:
-
-```sh
-$ npm config set "@fortawesome:registry" https://npm.fontawesome.com
-$ npm config set "//npm.fontawesome.com/:_authToken" 8516A1CE-3B7B-48A0-BF42-4CA83CD66816
-```
-
-Then, go to the spectre repository on your local machine and install the packages:
+To begin installation, go to the spectre repository on your local machine and run:
 
 ```sh
 $ npm install

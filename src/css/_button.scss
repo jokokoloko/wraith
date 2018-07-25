@@ -5,20 +5,20 @@
 /* ----------!BASIC---------- */
 .btn {
 	background-image: none;
-	padding: 6px 12px;
+	padding: 4px 12px;
 	-ms-touch-action: manipulation;
 		touch-action: manipulation;
 	}
 .btn-default {
 	background-color: $color-white;
-	border-color: $color-grey;
+	border-color: $color-smoke;
 	color: $color-metal;
 	}
 .btn-default:active,
 .btn-default:hover,
 .btn-default:focus {
-	background-color: $color-dust;
-	border-color: $color-aluminium;
+	background-color: $color-spectre;
+	border-color: $color-smoke;
 	color: $color-metal;
 	}
 

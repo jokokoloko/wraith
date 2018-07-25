@@ -1,15 +1,15 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import * as client from "../../client";
-import * as path from "../../path";
-import Account from "../widget/Account";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import * as client from '../../client';
+import * as path from '../../path';
+import Account from '../widget/Account';
 
 const Header = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
-    const type = "fixed";
-    let container = "container";
-    _Private && (container = "container-fluid");
+    const type = 'fixed';
+    let container = 'container';
+    _Private && (container = 'container-fluid');
     return (
         <header
             id="header"

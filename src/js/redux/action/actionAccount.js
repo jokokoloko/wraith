@@ -83,11 +83,11 @@ export const accountRegisterFailure = (error) => ({
     error,
 });
 
-export const accountRegister = (account) => (dispatch) => {
+export const accountRegister = (form) => (dispatch) => {
     dispatch(accountRegisterRequest());
     toastr.warning('Registering...'); // possibly remove
     return apiAccount
-        .accountRegister(account)
+        .accountRegister(form)
         .then(() => dispatch(accountRegisterSuccess()))
         .catch((error) => {
             dispatch(accountRegisterFailure(error));
@@ -110,11 +110,11 @@ export const accountLogInFailure = (error) => ({
     error,
 });
 
-export const accountLogIn = (account) => (dispatch) => {
+export const accountLogIn = (form) => (dispatch) => {
     dispatch(accountLogInRequest());
     toastr.warning('Logging in...'); // possibly remove
     return apiAccount
-        .accountLogIn(account)
+        .accountLogIn(form)
         .then(() => dispatch(accountLogInSuccess()))
         .catch((error) => {
             dispatch(accountLogInFailure(error));
@@ -166,13 +166,13 @@ export const accountResetPasswordFailure = (error) => ({
     error,
 });
 
-export const accountResetPassword = (account) => (dispatch) => {
+export const accountResetPassword = (form) => (dispatch) => {
     dispatch(accountResetPasswordRequest());
     return apiAccount
-        .accountResetPassword(account)
+        .accountResetPassword(form)
         .then(() => {
             dispatch(accountResetPasswordSuccess());
-            toastr.info(`Sent password reset email to ${account.email}`);
+            toastr.info(`Sent password reset email to ${form.email}`);
         })
         .catch((error) => {
             dispatch(accountResetPasswordFailure(error));

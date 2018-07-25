@@ -62,9 +62,7 @@ select {
 	cursor: initial;
 	}
 textarea {
-	width: 100%;
-	height: auto !important;
-	resize: vertical;
+	min-height: 130px;
 	}
 
 /* ----------!STYLE---------- */
