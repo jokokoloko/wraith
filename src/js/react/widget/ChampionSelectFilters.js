@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import InputText from '../input/InputText';
 
 const ChampionSelectFilters = ({ roles, filters, filterRole, onFiltersChange }) => {

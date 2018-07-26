@@ -1,18 +1,12 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React from 'react';
 import InputText from '../input/InputText';
 
-const FormTeamComp = ({ formData, onTextChange }) => {
+const FormComposition = ({ formData, onTextChange }) => {
     const size = 'lg';
     return (
         <form className={`form form-${size} mx-lg-auto`}>
             <div className="form-row form-gutter-20">
-                <InputText name="title"
-                    label="Comp Name"
-                    placeholder="Comp Name"
-                    value={formData.title}
-                    size={size}
-                    onChange={onTextChange}
-                />
+                <InputText name="title" label="Comp Name" placeholder="Comp Name" value={formData.title} size={size} onChange={onTextChange} />
             </div>
             <div className="form-row form-gutter-20">
                 <InputText
@@ -27,6 +21,6 @@ const FormTeamComp = ({ formData, onTextChange }) => {
             </div>
         </form>
     );
-}
+};
 
-export default FormTeamComp;
+export default FormComposition;

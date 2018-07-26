@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const ChampionPicker = ({ lanes, selectLane, selectedLaneIdx, selectedChampion }) => {
     const loopLanes = lanes.map((lane, index) => {
@@ -12,9 +12,12 @@ const ChampionPicker = ({ lanes, selectLane, selectedLaneIdx, selectedChampion }
                 className={`champion-selection d-flex align-items-center ${highlightStyle}`}
                 onClick={() => selectLane(index)}
                 key={champion.key || `rip-${position}`}
-                id={champion.id || `rip-${position}`}
-            >
-                {champion.key ? <img src={imgUrl} className="champion-image bg-dark" /> : <div className="champion-image bg-dark" />}
+                id={champion.id || `rip-${position}`}>
+                {champion.key ? (
+                    <img className="champion-image bg-dark" src={imgUrl} alt={champion.name} />
+                ) : (
+                    <div className="champion-image bg-dark" />
+                )}
                 <span className="champion-lane">{position}:</span>
                 <span className="champion-name">{champion.name}</span>
             </li>

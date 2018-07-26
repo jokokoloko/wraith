@@ -7,8 +7,7 @@ import Loader from '../unit/Loader';
 import ChampionPicker from './ChampionPicker';
 import ChampionSelectFilters from './ChampionSelectFilters';
 import ChampionGrid from './ChampionGrid';
-import FormTeamComp from '../form/FormTeamComp';
-import InputText from '../input/InputText';
+import FormComposition from '../form/FormComposition';
 
 class ChampionSelect extends Component {
     constructor(props) {
@@ -135,19 +134,14 @@ class ChampionSelect extends Component {
                 </div>
 
                 <div className="col-6">
-                    <ChampionSelectFilters
-                        roles={roles}
-                        filters={filters}
-                        filterRole={this.filterRole}
-                        onFiltersChange={this.onFiltersChange}
-                    />
+                    <ChampionSelectFilters roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
                     {loadingChampions ? (
                         <Loader label="Loading champions" />
                     ) : (
                         <ChampionGrid champions={champions} selectChampion={this.selectChampion} filters={filters} />
                     )}
                     <section className="form-section">
-                        <FormTeamComp onTextChange={this.metaDataFormHandler} formData={this.state.form} />
+                        <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                     </section>
                 </div>
 
