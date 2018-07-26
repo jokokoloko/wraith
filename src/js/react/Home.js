@@ -1,6 +1,6 @@
 import React from 'react';
 import Basic from './section/Basic';
-import ChampionSelect from './widget/ChampionSelect';
+import ChampionSelect from './project/ChampionSelect';
 
 const Home = () => (
     <main id="main" role="main">
