@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CompView extends Component {
+class CompositionView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -90,4 +90,4 @@ class CompView extends Component {
     }
 }
 
-export default CompView;
+export default CompositionView;

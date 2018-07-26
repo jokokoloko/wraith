@@ -18,7 +18,7 @@ import User from './User';
 import UserView from './UserView';
 import Home from './Home';
 import Empty from './404';
-import CompView from './CompView';
+import CompositionView from './CompositionView';
 import Header from './region/Header';
 import Footer from './region/Footer';
 import Compass from './widget/Compass';
@@ -56,7 +56,7 @@ class Root extends Component {
                         <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <Route path="/comps/temp" component={CompView} />
+                        <Route path="/comps/temp" component={CompositionView} />
                         <Route path={path.About} component={About} />
                         <Route path={path.Post} component={Post} />
                         <Route path={path.User} component={User} />
@@ -95,4 +95,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Root);
