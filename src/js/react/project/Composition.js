@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ChampionPicker from './ChampionPicker';
-import ChampionGrid from './ChampionGrid';
+import CompositionSelector from './CompositionSelector';
+import Champion from './Champion';
 import FormComposition from '../form/FormComposition';
 import FormFilterChampion from '../form/FormFilterChampion';
 
@@ -118,7 +118,7 @@ class Composition extends Component {
         return (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
-                    <ChampionPicker
+                    <CompositionSelector
                         lanes={lanes}
                         selectLane={this.selectLane}
                         selectedLaneIdx={selectedLaneIdx}
@@ -127,7 +127,7 @@ class Composition extends Component {
                 </div>
                 <div className="col-6">
                     <FormFilterChampion roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
-                    <ChampionGrid selectChampion={this.selectChampion} filters={filters} />
+                    <Champion selectChampion={this.selectChampion} filters={filters} />
                     <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                 </div>
                 <div className="col-3">Champion info here!</div>
