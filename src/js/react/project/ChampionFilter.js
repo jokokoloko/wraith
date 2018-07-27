@@ -1,7 +1,7 @@
 import React from 'react';
 import InputText from '../input/InputText';
 
-const FormFilterChampion = ({ roles, filters, filterRole, onFiltersChange }) => {
+const ChampionFilter = ({ roles, filters, filterRole, onFiltersChange }) => {
     const size = 'sm';
     const loopRole = roles.map((role) => {
         const selectedClass = filters.role === role ? 'selected' : '';
@@ -17,7 +17,7 @@ const FormFilterChampion = ({ roles, filters, filterRole, onFiltersChange }) => 
                     <InputText
                         name="champion-name"
                         label="Champion Name"
-                        placeholder="Champion Name"
+                        placeholder="Filter by name..."
                         onChange={onFiltersChange}
                         value={filters.name}
                         size={size}
@@ -28,4 +28,4 @@ const FormFilterChampion = ({ roles, filters, filterRole, onFiltersChange }) => 
     );
 };
 
-export default FormFilterChampion;
+export default ChampionFilter;
