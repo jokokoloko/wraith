@@ -5,7 +5,7 @@ import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import Loader from '../unit/Loader';
 
-const ChampionGrid = ({ loadingChampions, champions, selectChampion, filters }) => {
+const Champion = ({ loadingChampions, champions, selectChampion, filters }) => {
     const item = 'champion';
     const shouldDisplay = (champ) => {
         // first filter by role
@@ -40,7 +40,7 @@ const ChampionGrid = ({ loadingChampions, champions, selectChampion, filters }) 
     );
 };
 
-ChampionGrid.propTypes = {
+Champion.propTypes = {
     loadingChampions: PropTypes.bool.isRequired,
     champions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
@@ -52,4 +52,4 @@ function mapStateToProps({ calls, champions }) {
     };
 }
 
-export default connect(mapStateToProps)(ChampionGrid);
+export default connect(mapStateToProps)(Champion);
