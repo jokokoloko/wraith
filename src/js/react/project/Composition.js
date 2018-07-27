@@ -5,9 +5,9 @@ import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import Loader from '../unit/Loader';
 import ChampionPicker from './ChampionPicker';
-import ChampionSelectFilters from './ChampionSelectFilters';
 import ChampionGrid from './ChampionGrid';
 import FormComposition from '../form/FormComposition';
+import FormFilterChampion from '../form/FormFilterChampion';
 
 class Composition extends Component {
     constructor(props) {
@@ -123,7 +123,7 @@ class Composition extends Component {
         const { lanes, selectedLaneIdx, selectedChampion, filters, roles } = this.state;
 
         return (
-            <div className="row">
+            <div className="row gutter-50 gutter-80">
                 <div className="col-3">
                     <ChampionPicker
                         lanes={lanes}
@@ -134,15 +134,13 @@ class Composition extends Component {
                 </div>
 
                 <div className="col-6">
-                    <ChampionSelectFilters roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
+                    <FormFilterChampion roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
                     {loadingChampions ? (
                         <Loader label="Loading champions" />
                     ) : (
                         <ChampionGrid champions={champions} selectChampion={this.selectChampion} filters={filters} />
                     )}
-                    <section className="form-section">
-                        <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
-                    </section>
+                    <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                 </div>
 
                 <div className="col-3">Champion info here!</div>
