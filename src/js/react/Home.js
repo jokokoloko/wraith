@@ -5,7 +5,7 @@ import Composition from './project/Composition';
 const Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
-            <Basic space="space-xs-50 space-lg-80">
+            <Basic space="space-xs-50">
                 <section>
                     <Composition />
                 </section>

@@ -4,13 +4,13 @@ import InputText from '../input/InputText';
 const FormComposition = ({ formData, onTextChange }) => {
     const size = 'lg';
     return (
-        <form id="form-composition" className={`form form-${size} mx-lg-auto`}>
-            <InputText name="title" label="Comp Name" placeholder="Comp Name" value={formData.title} size={size} onChange={onTextChange} />
+        <form id="form-composition" className={`form form-${size} panel`}>
+            <InputText name="title" label="Title" placeholder="Title" value={formData.title} size={size} onChange={onTextChange} />
             <InputText
                 type="area"
                 name="description"
-                label="description"
-                placeholder="How does this comp win?"
+                label="Description"
+                placeholder="Description"
                 value={formData.description}
                 size={size}
                 onChange={onTextChange}

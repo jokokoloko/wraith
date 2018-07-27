@@ -31,7 +31,7 @@ const ChampionGrid = ({ champions, selectChampion, filters }) => {
         );
     });
 
-    return <ul className="champion-grid row gutter-30 text-center">{loopChampion}</ul>;
+    return <ul className="champion-grid row gutter-30 panel text-center">{loopChampion}</ul>;
 };
 
 export default ChampionGrid;

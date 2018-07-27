@@ -11,11 +11,7 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
     let container = 'container';
     _Private && (container = 'container-fluid');
     return (
-        <header
-            id="header"
-            className={`navbar navbar-expand-lg navbar-${type}-top ${type} ${type}-top border-bottom border-secondary`}
-            role="banner"
-        >
+        <header id="header" className={`navbar navbar-expand-lg navbar-${type}-top ${type} ${type}-top`} role="banner">
             <div className={container}>
                 {!_Private && (
                     <Link className="navbar-brand" title={client.BRAND} rel="home" to={path.Root}>

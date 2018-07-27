@@ -31,8 +31,8 @@ class Composition extends Component {
             },
             roles: ['Tank', 'Mage', 'Assassin', 'Fighter', 'Marksman', 'Support'],
             form: {
-                title: 'hello',
-                description: 'world',
+                title: '',
+                description: '',
             },
         };
         this.selectChampion = this.selectChampion.bind(this);

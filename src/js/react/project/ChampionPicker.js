@@ -25,8 +25,8 @@ const ChampionPicker = ({ lanes, selectLane, selectedLaneIdx, selectedChampion }
     });
 
     return (
-        <div className="team-selection border border-primary bg-light">
-            <ul className="team-composition row">{loopLanes}</ul>
+        <div className="team-selection panel">
+            <ul className="team-composition">{loopLanes}</ul>
         </div>
     );
 };
