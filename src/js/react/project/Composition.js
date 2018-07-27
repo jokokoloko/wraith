@@ -9,7 +9,7 @@ import ChampionSelectFilters from './ChampionSelectFilters';
 import ChampionGrid from './ChampionGrid';
 import FormComposition from '../form/FormComposition';
 
-class ChampionSelect extends Component {
+class Composition extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -151,7 +151,7 @@ class ChampionSelect extends Component {
     }
 }
 
-ChampionSelect.propTypes = {
+Composition.propTypes = {
     loadingChampions: PropTypes.bool.isRequired,
     champions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
@@ -163,4 +163,4 @@ function mapStateToProps({ calls, champions }) {
     };
 }
 
-export default connect(mapStateToProps)(ChampionSelect);
+export default connect(mapStateToProps)(Composition);

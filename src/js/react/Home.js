@@ -1,13 +1,13 @@
 import React from 'react';
 import Basic from './section/Basic';
-import ChampionSelect from './project/ChampionSelect';
+import Composition from './project/Composition';
 
 const Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
             <Basic space="space-xs-50 space-lg-80">
                 <section>
-                    <ChampionSelect />
+                    <Composition />
                 </section>
             </Basic>
         </div>
