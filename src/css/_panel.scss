@@ -1,0 +1,12 @@
+/* ========================== */
+/* ==========!PANEL========== */
+/* ========================== */
+
+/* ----------!GENERAL---------- */
+.panel {
+	background-color: $color-phantom;
+	padding: 30px;
+	}
+.panel + .panel {
+	margin-top: 130px;
+	}
