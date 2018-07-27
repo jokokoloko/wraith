@@ -6,8 +6,6 @@ $role-icon-size: 35px;
 .role-icon {
     width: $role-icon-size;
     height: $role-icon-size;
-    display: inline-block;
-    box-sizing: content-box;
 
     &.bg-tank-icon {
         @include generate-icon($role-sprite, 0, 0, $role-icon-size);
