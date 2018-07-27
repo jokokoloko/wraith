@@ -1,7 +1,7 @@
 import React from 'react';
 import InputText from '../input/InputText';
 
-const FormComposition = ({ formData, onTextChange }) => {
+const CompositionMeta = ({ formData, onTextChange }) => {
     const size = 'lg';
     return (
         <form id="form-composition" className={`form form-${size} panel`}>
@@ -19,4 +19,4 @@ const FormComposition = ({ formData, onTextChange }) => {
     );
 };
 
-export default FormComposition;
+export default CompositionMeta;

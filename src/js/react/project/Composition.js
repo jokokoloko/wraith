@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
-import FormComposition from '../form/FormComposition';
 import FormFilterChampion from '../form/FormFilterChampion';
 
 class Composition extends Component {
@@ -128,7 +128,7 @@ class Composition extends Component {
                 <div className="col-6">
                     <FormFilterChampion roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
                     <Champion selectChampion={this.selectChampion} filters={filters} />
-                    <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
+                    <CompositionMeta onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                 </div>
                 <div className="col-3">Champion info here!</div>
             </div>
