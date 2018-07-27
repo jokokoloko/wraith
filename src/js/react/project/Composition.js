@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
-import { findByString, removeStatus } from '../../filter';
-import Loader from '../unit/Loader';
 import ChampionPicker from './ChampionPicker';
 import ChampionGrid from './ChampionGrid';
 import FormComposition from '../form/FormComposition';
@@ -15,8 +10,8 @@ class Composition extends Component {
         this.state = {
             selectedChampion: {},
             selectedLaneIdx: 0,
-            //this is object for tracking champs pick for what lanes.
-            //e.g. {annie: 0, aatrox: 1}
+            // this is object for tracking champs pick for what lanes.
+            // e.g. { annie: 0, aatrox: 1 }
             champsPicked: {},
             lanes: [
                 { position: 'top', champion: {} },
@@ -44,18 +39,18 @@ class Composition extends Component {
 
     selectChampion(selectedChampion) {
         let { lanes, selectedLaneIdx, champsPicked } = this.state;
-        //put champ in current lane index
+        // put champ in current lane index
         lanes[selectedLaneIdx].champion = selectedChampion;
-        //if champ is picked before, remove it from the other lane.
+        // if champ is picked before, remove it from the other lane.
         if (champsPicked.hasOwnProperty(selectedChampion.name)) {
             let curChampIdx = champsPicked[selectedChampion.name];
             lanes[curChampIdx].champion = {};
         }
-        //add champ to champs picked
+        // add champ to champs picked
         champsPicked[selectedChampion.name] = selectedLaneIdx;
-        //increase lane index
+        // increase lane index
         selectedLaneIdx = Math.min(lanes.length - 1, selectedLaneIdx + 1);
-        //set the state
+        // set the state
         this.setState({
             selectedChampion,
             selectedLaneIdx,
@@ -70,9 +65,9 @@ class Composition extends Component {
         });
     }
 
-    //for filtering role.
+    // for filtering role.
     filterRole(role) {
-        //capitalize the filter for now since that's how it is saved.
+        // capitalize the filter for now since that's how it is saved.
         const newRole = this.state.filters.role === role ? '' : role;
         const filters = {
             ...this.state.filters,
@@ -105,7 +100,7 @@ class Composition extends Component {
         });
     }
 
-    //for filtering name.
+    // for filtering name.
     onFiltersChange(event) {
         const target = event.target;
         const value = target.value;
@@ -119,9 +114,7 @@ class Composition extends Component {
     }
 
     render() {
-        const { loadingChampions, champions } = this.props;
         const { lanes, selectedLaneIdx, selectedChampion, filters, roles } = this.state;
-
         return (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
@@ -132,33 +125,15 @@ class Composition extends Component {
                         selectedChampion={selectedChampion}
                     />
                 </div>
-
                 <div className="col-6">
                     <FormFilterChampion roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
-                    {loadingChampions ? (
-                        <Loader label="Loading champions" />
-                    ) : (
-                        <ChampionGrid champions={champions} selectChampion={this.selectChampion} filters={filters} />
-                    )}
+                    <ChampionGrid selectChampion={this.selectChampion} filters={filters} />
                     <FormComposition onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                 </div>
-
                 <div className="col-3">Champion info here!</div>
             </div>
         );
     }
 }
 
-Composition.propTypes = {
-    loadingChampions: PropTypes.bool.isRequired,
-    champions: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-function mapStateToProps({ calls, champions }) {
-    return {
-        loadingChampions: findByString(calls, removeStatus(CHAMPIONS_LOAD_REQUEST)),
-        champions,
-    };
-}
-
-export default connect(mapStateToProps)(Composition);
+export default Composition;
