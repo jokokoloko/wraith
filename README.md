@@ -7,7 +7,7 @@ React ES6 Starter Application
 React `16.4.1`</br >
 React Router `4.3.1`</br >
 Redux `4.0.0`</br >
-Firebase `5.2.0`</br >
+Firebase `5.3.0`</br >
 Bootstrap `4.1.0`
 
 ## Platform
