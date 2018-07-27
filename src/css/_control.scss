@@ -26,7 +26,7 @@ $line-height-toggle:			14px;
 
 /* ----------!HEADER---------- */
 $header-height-xs:				50px;
-$header-height-lg:				80px;
+$header-height-lg:				50px;
 
 /* ----------!FOOTER---------- */
 $footer-height-xs:				0;
@@ -83,7 +83,7 @@ $color-brand-green-400:			#28a745;
 /* ----------!REGION---------- */
 $color-body:					(null, null, null);
 $color-offcanvas:				($color-ghost, $color-smoke !important, null);
-$color-header:					($color-white, $color-smoke !important, null);
+$color-header:					($color-phantom, null, null);
 $color-bar:						($color-blue-400, $color-blue-400 !important, null);
 $color-main:					(null, null, null);
 $color-footer:					(null, null, null);
