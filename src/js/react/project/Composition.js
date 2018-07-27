@@ -3,6 +3,7 @@ import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
 import ChampionFilter from './ChampionFilter';
+import ChampionInformation from './ChampionInformation';
 
 class Composition extends Component {
     constructor(props) {
@@ -36,7 +37,6 @@ class Composition extends Component {
         this.onFiltersChange = this.onFiltersChange.bind(this);
         this.metaDataFormHandler = this.metaDataFormHandler.bind(this);
     }
-
     selectChampion(selectedChampion) {
         let { lanes, selectedLaneIdx, champsPicked } = this.state;
         // put champ in current lane index
@@ -58,26 +58,11 @@ class Composition extends Component {
             lanes,
         });
     }
-
     selectLane(selectedLaneIdx) {
         this.setState({
             selectedLaneIdx,
         });
     }
-
-    // for filtering role.
-    filterRole(role) {
-        // capitalize the filter for now since that's how it is saved.
-        const newRole = this.state.filters.role === role ? '' : role;
-        const filters = {
-            ...this.state.filters,
-            role: newRole,
-        };
-        this.setState({
-            filters,
-        });
-    }
-
     metaDataFormHandler(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -99,7 +84,6 @@ class Composition extends Component {
             form,
         });
     }
-
     // for filtering name.
     onFiltersChange(event) {
         const target = event.target;
@@ -112,7 +96,18 @@ class Composition extends Component {
             filters,
         });
     }
-
+    // for filtering role.
+    filterRole(role) {
+        // capitalize the filter for now since that's how it is saved.
+        const newRole = this.state.filters.role === role ? '' : role;
+        const filters = {
+            ...this.state.filters,
+            role: newRole,
+        };
+        this.setState({
+            filters,
+        });
+    }
     render() {
         const { lanes, selectedLaneIdx, selectedChampion, filters, roles } = this.state;
         return (
@@ -130,7 +125,9 @@ class Composition extends Component {
                     <Champion selectChampion={this.selectChampion} filters={filters} />
                     <CompositionMeta onTextChange={this.metaDataFormHandler} formData={this.state.form} />
                 </div>
-                <div className="col-3">Champion info here!</div>
+                <div className="col-3">
+                    <ChampionInformation champion={selectedChampion} />
+                </div>
             </div>
         );
     }
