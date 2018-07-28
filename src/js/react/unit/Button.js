@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Button = ({ type, label, kind, size, display, link, onClick }) =>
+const Button = ({ type, label, kind, size, display, link, onClick, disabled }) =>
     type === 'button' ? (
-        <button type="button" className={`btn btn-${kind} btn-${size} btn-${display}`} onClick={onClick}>
+        <button type="button" className={`btn btn-${kind} btn-${size} btn-${display}`} onClick={onClick} disabled={disabled}>
             {label}
         </button>
     ) : type === 'submit' ? (
-        <input type="submit" className={`btn btn-${kind} btn-${size} btn-${display}`} value={label} />
+        <input type="submit" className={`btn btn-${kind} btn-${size} btn-${display}`} value={label} disabled={disabled} />
     ) : (
         <Link role="button" className={`btn btn-${kind} btn-${size} btn-${display}`} to={link}>
             {label}
@@ -23,6 +23,7 @@ Button.propTypes = {
     display: PropTypes.string,
     link: PropTypes.string,
     onClick: PropTypes.func,
+    disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -33,6 +34,7 @@ Button.defaultProps = {
     display: 'initial',
     link: '/',
     onClick: undefined,
+    disabled: false,
 };
 
 export default Button;
