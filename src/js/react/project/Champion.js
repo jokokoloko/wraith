@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
+import * as client from '../../client';
 import ChampionFilter from './ChampionFilter';
 import Loader from '../unit/Loader';
 
@@ -57,9 +58,9 @@ class Champion extends Component {
         const item = 'champion';
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
-            const sprite = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/sprite/${champion.image.sprite}`;
+            const championSprite = client.CHAMPION_SPRITE + champion.image.sprite;
             const style = {
-                backgroundImage: `url('${sprite}')`,
+                backgroundImage: `url('${championSprite}')`,
                 backgroundPosition: `-${champion.image.x}px -${champion.image.y}px`,
             };
             const displayClass = this.shouldDisplay(champion) ? 'd-flex' : 'd-none'; // basically show the <li> if filtering matches

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as client from '../../client';
 
 const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
     const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
         const highlightStyle = index === selectedLaneIdx ? 'highlight' : '';
-        const championAvatar = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/champion/${champion.key}.png`;
+        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
         return (
             <li
                 key={`lane-${position}`}
