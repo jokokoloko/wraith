@@ -20,7 +20,7 @@ InputButton.propTypes = {
     size: PropTypes.string,
     display: PropTypes.string,
     onClick: PropTypes.func,
-    submitting: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 InputButton.defaultProps = {
@@ -31,7 +31,7 @@ InputButton.defaultProps = {
     size: 'md',
     display: 'initial',
     onClick: undefined,
-    submitting: false,
+    disabled: false,
 };
 
 export default InputButton;
