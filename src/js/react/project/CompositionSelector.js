@@ -1,20 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ChampionPicker = ({ lanes, selectLane, selectedLaneIdx, selectedChampion }) => {
-    const loopLanes = lanes.map((lane, index) => {
+const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
+    const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
-
         const highlightStyle = index === selectedLaneIdx ? 'highlight' : '';
-        const imgUrl = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/champion/${champion.key}.png`;
+        const championAvatar = `https://ddragon.leagueoflegends.com/cdn/8.11.1/img/champion/${champion.key}.png`;
         return (
             <li
+                key={`lane-${position}`}
+                id={`lane-${position}`}
                 className={`champion-selection d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index)}
-                key={champion.key || `rip-${position}`}
-                id={champion.id || `rip-${position}`}>
+                onClick={() => selectLane(index)}>
                 {champion.key ? (
-                    <img className="champion-image bg-dark" src={imgUrl} alt={champion.name} />
+                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -23,12 +23,17 @@ const ChampionPicker = ({ lanes, selectLane, selectedLaneIdx, selectedChampion }
             </li>
         );
     });
-
     return (
         <div className="team-selection panel">
-            <ul className="team-composition">{loopLanes}</ul>
+            <ul className="team-composition">{loopLane}</ul>
         </div>
     );
 };
 
-export default ChampionPicker;
+CompositionSelector.propTypes = {
+    selectedLaneIdx: PropTypes.number.isRequired,
+    lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    selectLane: PropTypes.func.isRequired,
+};
+
+export default CompositionSelector;

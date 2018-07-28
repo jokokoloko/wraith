@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
-import ChampionFilter from './ChampionFilter';
 import ChampionInformation from './ChampionInformation';
 
 class Composition extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedChampion: {},
             selectedLaneIdx: 0,
+            selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
             // e.g. { annie: 0, aatrox: 1 }
             champsPicked: {},
@@ -21,24 +20,19 @@ class Composition extends Component {
                 { position: 'bottom', champion: {} },
                 { position: 'support', champion: {} },
             ],
-            filters: {
-                name: '',
-                role: '',
-            },
-            roles: ['Tank', 'Mage', 'Assassin', 'Fighter', 'Marksman', 'Support'],
-            form: {
-                title: '',
-                description: '',
-            },
+            form: {},
         };
-        this.selectChampion = this.selectChampion.bind(this);
         this.selectLane = this.selectLane.bind(this);
-        this.filterRole = this.filterRole.bind(this);
-        this.onFiltersChange = this.onFiltersChange.bind(this);
-        this.metaDataFormHandler = this.metaDataFormHandler.bind(this);
+        this.selectChampion = this.selectChampion.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+    selectLane(selectedLaneIdx) {
+        this.setState({
+            selectedLaneIdx,
+        });
     }
     selectChampion(selectedChampion) {
-        let { lanes, selectedLaneIdx, champsPicked } = this.state;
+        let { selectedLaneIdx, champsPicked, lanes } = this.state;
         // put champ in current lane index
         lanes[selectedLaneIdx].champion = selectedChampion;
         // if champ is picked before, remove it from the other lane.
@@ -52,18 +46,13 @@ class Composition extends Component {
         selectedLaneIdx = Math.min(lanes.length - 1, selectedLaneIdx + 1);
         // set the state
         this.setState({
-            selectedChampion,
             selectedLaneIdx,
+            selectedChampion,
             champsPicked,
             lanes,
         });
     }
-    selectLane(selectedLaneIdx) {
-        this.setState({
-            selectedLaneIdx,
-        });
-    }
-    metaDataFormHandler(event) {
+    onChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const field = target.name;
@@ -84,46 +73,16 @@ class Composition extends Component {
             form,
         });
     }
-    // for filtering name.
-    onFiltersChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const filters = {
-            ...this.state.filters,
-            name: value,
-        };
-        this.setState({
-            filters,
-        });
-    }
-    // for filtering role.
-    filterRole(role) {
-        // capitalize the filter for now since that's how it is saved.
-        const newRole = this.state.filters.role === role ? '' : role;
-        const filters = {
-            ...this.state.filters,
-            role: newRole,
-        };
-        this.setState({
-            filters,
-        });
-    }
     render() {
-        const { lanes, selectedLaneIdx, selectedChampion, filters, roles } = this.state;
+        const { selectedLaneIdx, selectedChampion, lanes, form } = this.state;
         return (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
-                    <CompositionSelector
-                        lanes={lanes}
-                        selectLane={this.selectLane}
-                        selectedLaneIdx={selectedLaneIdx}
-                        selectedChampion={selectedChampion}
-                    />
+                    <CompositionSelector selectedLaneIdx={selectedLaneIdx} lanes={lanes} selectLane={this.selectLane} />
                 </div>
                 <div className="col-6">
-                    <ChampionFilter roles={roles} filters={filters} filterRole={this.filterRole} onFiltersChange={this.onFiltersChange} />
-                    <Champion selectChampion={this.selectChampion} filters={filters} />
-                    <CompositionMeta onTextChange={this.metaDataFormHandler} formData={this.state.form} />
+                    <Champion selectChampion={this.selectChampion} />
+                    <CompositionMeta form={form} onChange={this.onChange} />
                 </div>
                 <div className="col-3">
                     <ChampionInformation champion={selectedChampion} />

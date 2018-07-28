@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputText from '../input/InputText';
 
-const ChampionFilter = ({ roles, filters, filterRole, onFiltersChange }) => {
+const ChampionFilter = ({ roles, filters, filterRole, filterName }) => {
     const size = 'sm';
     const loopRole = roles.map((role) => {
         const selectedClass = filters.role === role ? 'selected' : '';
@@ -15,10 +16,10 @@ const ChampionFilter = ({ roles, filters, filterRole, onFiltersChange }) => {
                 </div>
                 <div className="col">
                     <InputText
-                        name="champion-name"
-                        label="Champion Name"
+                        name="filter-by-name"
+                        label="Filter by name"
                         placeholder="Filter by name..."
-                        onChange={onFiltersChange}
+                        onChange={filterName}
                         value={filters.name}
                         size={size}
                     />
@@ -26,6 +27,13 @@ const ChampionFilter = ({ roles, filters, filterRole, onFiltersChange }) => {
             </div>
         </form>
     );
+};
+
+ChampionFilter.propTypes = {
+    roles: PropTypes.arrayOf(PropTypes.string).isRequired,
+    filters: PropTypes.objectOf(PropTypes.any).isRequired,
+    filterRole: PropTypes.func.isRequired,
+    filterName: PropTypes.func.isRequired,
 };
 
 export default ChampionFilter;
