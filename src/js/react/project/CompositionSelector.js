@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
+import Button from '../unit/Button';
 
 const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
     const loopLane = lanes.map((lane, index) => {
@@ -27,6 +28,7 @@ const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
     return (
         <div className="team-selection panel">
             <ul className="team-composition">{loopLane}</ul>
+            <Button type="submit" name="register" label={false ? 'Saving...' : 'Save'} kind="success" size="lg" display="block" disabled={false} />
         </div>
     );
 };
