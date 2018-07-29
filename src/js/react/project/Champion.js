@@ -65,7 +65,10 @@ class Champion extends Component {
             };
             const displayClass = this.shouldDisplay(champion) ? 'd-flex' : 'd-none'; // basically show the <li> if filtering matches
             return (
-                <li key={champion.id} id={champion.id} className={`${item} ${item}-${count} col ${displayClass} justify-content-center`}>
+                <li
+                    key={`${item}-${champion.id}`}
+                    id={`${item}-${champion.id}`}
+                    className={`${item} ${item}-${count} col ${displayClass} justify-content-center`}>
                     <div className="champion-profile d-flex flex-column align-items-center" onClick={() => selectChampion(champion)}>
                         <div className="champion-image" style={style} />
                         <h3 className="champion-name">{champion.name}</h3>
