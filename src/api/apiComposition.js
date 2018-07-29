@@ -9,7 +9,7 @@ class apiComposition {
         compositions
             .add({
                 ...data,
-                user: authentication.currentUser.uid,
+                user: (authentication.currentUser && authentication.currentUser.uid) || 'guest',
                 status: PUBLISHED,
                 time: {
                     created: new Date(),
