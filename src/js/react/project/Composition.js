@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import apiComposition from '../../../api/apiComposition';
+import { slugify, excerptify } from '../../function';
 import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
@@ -25,6 +27,7 @@ class Composition extends Component {
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
     selectLane(selectedLaneIdx) {
         this.setState({
@@ -73,12 +76,23 @@ class Composition extends Component {
             form,
         });
     }
+    onSubmit() {
+        const { form } = this.state;
+        const slug = slugify(form.title);
+        const excerpt = excerptify(form.description, 210);
+        const data = {
+            ...form,
+            slug,
+            excerpt,
+        };
+        apiComposition.compositionAdd(data);
+    }
     render() {
         const { selectedLaneIdx, selectedChampion, lanes, form } = this.state;
         return (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
-                    <CompositionSelector selectedLaneIdx={selectedLaneIdx} lanes={lanes} selectLane={this.selectLane} />
+                    <CompositionSelector selectedLaneIdx={selectedLaneIdx} lanes={lanes} selectLane={this.selectLane} onSubmit={this.onSubmit} />
                 </div>
                 <div className="col-6">
                     <Champion selectChampion={this.selectChampion} />

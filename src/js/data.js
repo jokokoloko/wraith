@@ -3,6 +3,7 @@ export const SLUGS = 'slugs';
 export const USERS = 'users';
 export const POSTS = 'posts';
 export const CHAMPIONS = 'champions';
+export const COMPOSITIONS = 'compositions';
 
 // User - Status
 export const FRESH = 'fresh';

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { SLUGS, USERS, POSTS, CHAMPIONS } from '../js/data';
+import { SLUGS, USERS, POSTS, CHAMPIONS, COMPOSITIONS } from '../js/data';
 
 const config = {
     apiKey: 'AIzaSyDzKR2q6lZuEG62Uge7nAddXOA33mvACjc',
@@ -23,3 +23,4 @@ export const slugs = firestore.collection(SLUGS);
 export const users = firestore.collection(USERS);
 export const posts = firestore.collection(POSTS);
 export const champions = firestore.collection(CHAMPIONS);
+export const compositions = firestore.collection(COMPOSITIONS);

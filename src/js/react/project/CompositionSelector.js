@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
 
-const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
+const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane, onSubmit }) => {
     const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
@@ -28,7 +28,16 @@ const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane }) => {
     return (
         <div className="team-selection panel">
             <ul className="team-composition">{loopLane}</ul>
-            <Button type="submit" name="register" label={false ? 'Saving...' : 'Save'} kind="success" size="lg" display="block" disabled={false} />
+            <Button
+                type="button"
+                name="register"
+                label={false ? 'Saving...' : 'Save'}
+                kind="success"
+                size="lg"
+                display="block"
+                onClick={onSubmit}
+                disabled={false}
+            />
         </div>
     );
 };
@@ -37,6 +46,7 @@ CompositionSelector.propTypes = {
     selectedLaneIdx: PropTypes.number.isRequired,
     lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
 };
 
 export default CompositionSelector;
