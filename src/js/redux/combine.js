@@ -4,8 +4,8 @@ import profile from './reducer/reducerProfile';
 import view from './reducer/reducerView';
 import calls from './reducer/reducerCall';
 import users from './reducer/reducerUser';
-import champions from './reducer/reducerChampion';
 import posts from './reducer/reducerPost';
+import champions from './reducer/reducerChampion';
 
 export default combineReducers({
     account,
@@ -13,6 +13,6 @@ export default combineReducers({
     view,
     calls,
     users,
-    champions,
     posts,
+    champions,
 });

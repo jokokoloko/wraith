@@ -1,15 +1,6 @@
 import toastr from 'toastr';
 import apiChampion from '../../../api/apiChampion';
-import { champions } from '../../../api/firebase';
-import {
-    CHAMPIONS_LOAD_REQUEST,
-    CHAMPIONS_LOAD_SUCCESS,
-    CHAMPIONS_LOAD_FAILURE,
-    CHAMPIONS_WATCH_REQUEST,
-    CHAMPIONS_WATCH_SUCCESS,
-    CHAMPIONS_WATCH_FAILURE,
-    CHAMPIONS_VOID,
-} from '../type';
+import { CHAMPIONS_LOAD_REQUEST, CHAMPIONS_LOAD_SUCCESS, CHAMPIONS_LOAD_FAILURE, CHAMPIONS_VOID } from '../type';
 
 toastr.options.positionClass = 'toast-top-center';
 
@@ -38,36 +29,6 @@ export const championsLoad = () => (dispatch) => {
             toastr.error(error.message);
             throw error;
         });
-};
-
-// Watch
-export const championsWatchRequest = () => ({
-    type: CHAMPIONS_WATCH_REQUEST,
-});
-
-export const championsWatchSuccess = (champions) => ({
-    type: CHAMPIONS_WATCH_SUCCESS,
-    champions,
-});
-
-export const championsWatchFailure = (error) => ({
-    type: CHAMPIONS_WATCH_FAILURE,
-    error,
-});
-
-export const championsWatch = () => (dispatch) => {
-    dispatch(championsWatchRequest());
-    return champions.onSnapshot(
-        (snapshot) => {
-            const champions = snapshot.docs.map((champion) => (champion.data()));
-            dispatch(championsWatchSuccess(champions));
-        },
-        (error) => {
-            dispatch(championsWatchFailure(error));
-            toastr.error(error.message);
-            throw error;
-        },
-    );
 };
 
 // Void

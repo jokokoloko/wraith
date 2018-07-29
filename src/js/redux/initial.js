@@ -7,6 +7,6 @@ export default {
     view: {},
     calls: [],
     users: [],
-    champions: [],
     posts: [],
+    champions: [],
 };
