@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
-import * as actionPost from '../redux/action/actionPost';
+import * as actionComposition from '../redux/action/actionComposition';
 import * as client from '../client';
 import * as logic from '../logic';
 import * as path from '../path';
@@ -18,16 +18,16 @@ class UserView extends Component {
         super(props);
         this.state = {
             loadingView: true,
-            loadingPosts: true,
+            loadingCompositions: true,
         };
     }
     componentDidMount() {
-        const { match, actionView, actionPost } = this.props;
+        const { match, actionView, actionComposition } = this.props;
         actionView.viewLoad(match.params.slug).then((user) => {
             user.view &&
-                actionPost.postsLoadByUser(user.view.id).then(() =>
+                actionComposition.compositionsLoadByUser(user.view.id).then(() =>
                     this.setState({
-                        loadingPosts: false,
+                        loadingCompositions: false,
                     }),
                 );
             this.setState({
@@ -36,19 +36,25 @@ class UserView extends Component {
         });
     }
     render() {
-        const { view: user, posts } = this.props;
-        const { loadingView, loadingPosts } = this.state;
+        const { view: user, profile, compositions } = this.props;
+        const { loadingView, loadingCompositions } = this.state;
         const userName = logic.userName(user);
-        const item = 'post';
-        const loopPost = posts.map((post, index) => {
-            const count = posts.length - index;
+        const item = 'composition';
+        const loopComposition = compositions.map((composition, index) => {
+            const count = compositions.length - index;
             return (
-                <article key={post.id} id={post.id} className={`${item} ${item}-${count} node-xs-20`}>
+                <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <h3 className="post-title card-headline">{post.title}</h3>
-                            <p className="post-excerpt">
-                                {post.excerpt}... <Link to={`${path.Post}/${post.slug}`}>Read More &rarr;</Link>
+                            <h3 className="composition-title card-headline">{composition.title}</h3>
+                            <p className="composition-excerpt">
+                                {composition.excerpt}... <Link to={`/${composition.id}`}>View</Link>
+                                {profile.id === composition.user && (
+                                    <Fragment>
+                                        <span className="separator"> - </span>
+                                        <Link to={`${path._Edit}/${composition.id}`}>Edit</Link>
+                                    </Fragment>
+                                )}
                             </p>
                         </div>
                     </header>
@@ -75,17 +81,19 @@ class UserView extends Component {
                                             {user.handle && <h2 className="user-handle card-tagline">@{user.handle || 'handle'}</h2>}
                                             <Contact className="user-contact card-meta" item={user} />
                                             <div className="card-statistic">
-                                                <p className="card-statistic-posts">Posts: {user.posts ? Object.keys(user.posts).length : 0}</p>
+                                                <p className="card-statistic-compositions">
+                                                    Compositions: {user.compositions ? Object.keys(user.compositions).length : 0}
+                                                </p>
                                             </div>
                                         </div>
                                     </header>
                                 </div>
 
                                 <div className="col">
-                                    {loadingPosts ? (
-                                        <Loader position="exact-center fixed" label="Loading posts" />
-                                    ) : posts.length > 0 ? (
-                                        loopPost
+                                    {loadingCompositions ? (
+                                        <Loader position="exact-center fixed" label="Loading compositions" />
+                                    ) : compositions.length > 0 ? (
+                                        loopComposition
                                     ) : (
                                         <article className="empty">
                                             <header>
@@ -109,23 +117,25 @@ class UserView extends Component {
 
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    profile: PropTypes.objectOf(PropTypes.any).isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
-    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+    compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
-    actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
+    actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, posts }) {
+function mapStateToProps({ profile, view, compositions }) {
     return {
+        profile,
         view,
-        posts,
+        compositions,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actionView: bindActionCreators(actionView, dispatch),
-        actionPost: bindActionCreators(actionPost, dispatch),
+        actionComposition: bindActionCreators(actionComposition, dispatch),
     };
 }
 

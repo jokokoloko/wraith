@@ -9,4 +9,5 @@ export default {
     users: [],
     posts: [],
     champions: [],
+    compositions: [],
 };

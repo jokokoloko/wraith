@@ -25,6 +25,30 @@ class apiComposition {
                 console.log('Added composition:', composition.id); // remove
             })
             .catch((error) => console.error('Error adding composition:', error)); // remove
+
+    // Load
+    static compositionsLoad = () =>
+        compositions
+            .orderBy('time.created', 'desc')
+            .get()
+            .then((snapshot) => {
+                console.log('Compositions:', snapshot.size); // remove
+                // snapshot.forEach((composition) => console.log(composition.id, '=>', composition.data())); // remove
+                return snapshot.docs.map((composition) => composition.data());
+            })
+            .catch((error) => console.error('Error getting compositions:', error)); // remove
+
+    static compositionsLoadByUser = (user) =>
+        compositions
+            .where('user', '==', user)
+            .orderBy('time.created', 'desc')
+            .get()
+            .then((snapshot) => {
+                console.log('Compositions by user:', snapshot.size); // remove
+                // snapshot.forEach((composition) => console.log(composition.id, '=>', composition.data())); // remove
+                return snapshot.docs.map((composition) => composition.data());
+            })
+            .catch((error) => console.error('Error getting compositions by user:', error)); // remove
 }
 
 export default apiComposition;
