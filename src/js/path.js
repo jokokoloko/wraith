@@ -11,6 +11,7 @@ export const ResetPassword = '/reset-password';
 export const Login = '/login';
 export const Register = '/register';
 export const About = '/about';
+export const CompositionView = '/:id';
 export const Post = '/post';
 export const PostView = '/:slug';
 export const User = '/user';
