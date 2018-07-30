@@ -1,7 +1,7 @@
 import initial from '../initial';
 import { CHAMPIONS_LOAD_SUCCESS, CHAMPIONS_VOID } from '../type';
 
-export default function reducerChampion(state = initial.champions, action) {
+export default function(state = initial.champions, action) {
     switch (action.type) {
         case CHAMPIONS_LOAD_SUCCESS:
             return action.champions || initial.champions;
