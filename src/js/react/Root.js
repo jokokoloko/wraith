@@ -55,7 +55,7 @@ class Root extends Component {
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.User} component={User} />
                         <Route path={path.CompositionView} component={CompositionView} />
-                        <Route path={path.Root} component={Home} exact />
+                        <Route path={path.Root} render={() => <Home authenticated={authenticated} />} exact />
                         <Route component={Empty} />
                     </Switch>
 

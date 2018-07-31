@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import apiComposition from '../../../api/apiComposition';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import * as actionComposition from '../../redux/action/actionComposition';
+import { COMPOSITION_SAVE_REQUEST } from '../../redux/type';
+import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
+import * as path from '../../path';
 import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
@@ -77,6 +84,7 @@ class Composition extends Component {
         });
     }
     onSubmit() {
+        const { history, authenticated, actionComposition } = this.props;
         const { lanes, form } = this.state;
         const slug = slugify(form.title);
         const excerpt = excerptify(form.description, 210);
@@ -92,14 +100,21 @@ class Composition extends Component {
             slug,
             excerpt,
         };
-        apiComposition.compositionAdd(data);
+        actionComposition.compositionSave(data).then(() => !authenticated && history.push(path.Register)); // temporary/unfinished redirect
     }
     render() {
+        const { submitting } = this.props;
         const { selectedLaneIdx, selectedChampion, lanes, form } = this.state;
         return (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
-                    <CompositionSelector selectedLaneIdx={selectedLaneIdx} lanes={lanes} selectLane={this.selectLane} onSubmit={this.onSubmit} />
+                    <CompositionSelector
+                        selectedLaneIdx={selectedLaneIdx}
+                        lanes={lanes}
+                        selectLane={this.selectLane}
+                        onSubmit={this.onSubmit}
+                        submitting={submitting}
+                    />
                 </div>
                 <div className="col-6">
                     <Champion selectChampion={this.selectChampion} />
@@ -113,4 +128,27 @@ class Composition extends Component {
     }
 }
 
-export default Composition;
+Composition.propTypes = {
+    submitting: PropTypes.bool.isRequired,
+    authenticated: PropTypes.bool.isRequired,
+    actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
+};
+
+function mapStateToProps({ calls }) {
+    return {
+        submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actionComposition: bindActionCreators(actionComposition, dispatch),
+    };
+}
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(Composition),
+);

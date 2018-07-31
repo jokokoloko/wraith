@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
 
-const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane, onSubmit }) => {
+const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane, onSubmit, submitting }) => {
     const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
@@ -31,12 +31,12 @@ const CompositionSelector = ({ selectedLaneIdx, lanes, selectLane, onSubmit }) =
             <Button
                 type="button"
                 name="register"
-                label={false ? 'Saving...' : 'Save'}
+                label={submitting ? 'Saving...' : 'Save'}
                 kind="success"
                 size="lg"
                 display="block"
                 onClick={onSubmit}
-                disabled={false}
+                disabled={submitting}
             />
         </div>
     );
@@ -47,6 +47,7 @@ CompositionSelector.propTypes = {
     lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
 };
 
 export default CompositionSelector;
