@@ -43,7 +43,7 @@ class Root extends Component {
         const { loadingAccount, loadingProfile, account, profile } = this.props;
         const authenticated = account.authenticated && profile.id && profile.email ? true : false;
         return account.initialized === false || loadingAccount || loadingProfile ? (
-            <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
+            <Loader position="exact-center fixed" label={loadingProfile ? 'Loading profile' : 'Initializing'} />
         ) : (
             <Router>
                 <Fragment>

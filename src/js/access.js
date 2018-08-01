@@ -28,7 +28,14 @@ export const PrivateRoute = ({ component: Component, authenticated, ...rest }) =
 );
 
 export const PublicRoute = ({ component: Component, authenticated, ...rest }) => (
-    <Route {...rest} render={(props) => (authenticated === false ? <Component {...props} /> : <Redirect to={path._Private} />)} />
+    <Route
+        {...rest}
+        render={(props) => (authenticated === false ? <Component {...props} authenticated={authenticated} /> : <Redirect to={path._Private} />)}
+    />
+);
+
+export const SmartRoute = ({ component: Component, authenticated, ...rest }) => (
+    <Route {...rest} render={(props) => <Component {...props} authenticated={authenticated} />} />
 );
 
 PrivateArea.propTypes = {
@@ -45,6 +52,12 @@ PrivateRoute.propTypes = {
 };
 
 PublicRoute.propTypes = {
+    path: PropTypes.string.isRequired,
+    component: PropTypes.func.isRequired,
+    authenticated: PropTypes.bool.isRequired,
+};
+
+SmartRoute.propTypes = {
     path: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
     authenticated: PropTypes.bool.isRequired,

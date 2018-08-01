@@ -21,6 +21,7 @@ class apiPost {
                     id: post.id,
                 });
                 apiProfile.profileAuthor(POSTS, post.id);
+                apiSlug.slugAdd(post.id, POSTS, post.id);
                 apiSlug.slugAdd(form.slug, POSTS, post.id);
                 console.log('Added post:', post.id); // remove
             })
