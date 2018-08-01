@@ -8,13 +8,13 @@ import { ACCOUNT_CHECK_REQUEST, PROFILE_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute } from '../access';
+import _CompositionEdit from './_CompositionEdit';
 import _Private from './_Private';
 import ResetPassword from './ResetPassword';
 import Login from './Login';
 import Register from './Register';
 import User from './User';
 import CompositionView from './CompositionView';
-import Home from './Home';
 import Empty from './404';
 import Header from './region/Header';
 import Footer from './region/Footer';
@@ -55,7 +55,7 @@ class Root extends Component {
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.User} component={User} />
                         <Route path={path.CompositionView} component={CompositionView} />
-                        <Route path={path.Root} render={() => <Home authenticated={authenticated} />} exact />
+                        <Route path={path.Root} render={() => <_CompositionEdit authenticated={authenticated} />} exact />
                         <Route component={Empty} />
                     </Switch>
 

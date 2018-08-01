@@ -1,22 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Basic from './section/Basic';
-import Composition from './project/Composition';
 
-const Home = ({ authenticated }) => (
+const Home = () => (
     <main id="main" role="main">
         <div className="container-fluid">
-            <Basic space="space-xs-50">
-                <section>
-                    <Composition authenticated={authenticated} />
-                </section>
+            <Basic space="space-xs-50 space-lg-80">
+                <header className="text-center">
+                    <h1>Home</h1>
+                </header>
             </Basic>
         </div>
     </main>
 );
-
-Home.propTypes = {
-    authenticated: PropTypes.bool.isRequired,
-};
 
 export default Home;
