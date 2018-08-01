@@ -54,10 +54,11 @@ export const compositionSave = (data) => (dispatch) => {
               })
         : apiComposition
               .compositionAdd(data)
-              .then(() => {
+              .then((composition) => {
                   dispatch(compositionAdd(data));
                   dispatch(compositionSaveSuccess());
                   toastr.success('Composition published!');
+                  return composition;
               })
               .catch((error) => {
                   dispatch(compositionSaveFailure(error));

@@ -102,7 +102,9 @@ class Composition extends Component {
             },
             slug,
         };
-        actionComposition.compositionSave(data).then(() => !authenticated && history.push(path.Register)); // temporary/unfinished redirect
+        actionComposition
+            .compositionSave(data)
+            .then((composition) => (authenticated ? history.push(`${path._Edit}/${composition.id}`) : history.push(path.Register)));
     }
     render() {
         const { submitting } = this.props;

@@ -23,6 +23,7 @@ class apiComposition {
                 data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, composition.id);
                 apiSlug.slugAdd(composition.id, COMPOSITIONS, composition.id);
                 console.log('Added composition:', composition.id); // remove
+                return composition;
             })
             .catch((error) => console.error('Error adding composition:', error)); // remove
 
