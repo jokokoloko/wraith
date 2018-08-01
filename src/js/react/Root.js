@@ -7,7 +7,7 @@ import * as actionAccount from '../redux/action/actionAccount';
 import { ACCOUNT_CHECK_REQUEST, PROFILE_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
-import { PrivateRoute, PublicRoute } from '../access';
+import { PrivateRoute, PublicRoute, SmartRoute } from '../access';
 import _CompositionEdit from './_CompositionEdit';
 import _Private from './_Private';
 import ResetPassword from './ResetPassword';
@@ -41,7 +41,7 @@ class Root extends Component {
         const { loadingAccount, loadingProfile, account, profile } = this.props;
         const authenticated = account.authenticated && profile.id && profile.email ? true : false;
         return account.initialized === false || loadingAccount || loadingProfile ? (
-            <Loader position="exact-center fixed" label={loadingProfile ? `Loading profile` : `Initializing`} />
+            <Loader position="exact-center fixed" label={loadingProfile ? 'Loading profile' : 'Initializing'} />
         ) : (
             <Router>
                 <Fragment>
@@ -55,7 +55,7 @@ class Root extends Component {
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.User} component={User} />
                         <Route path={path.CompositionView} component={CompositionView} />
-                        <Route path={path.Root} render={() => <_CompositionEdit authenticated={authenticated} />} exact />
+                        <SmartRoute path={path.Root} component={_CompositionEdit} authenticated={authenticated} exact />
                         <Route component={Empty} />
                     </Switch>
 
