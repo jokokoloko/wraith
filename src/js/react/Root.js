@@ -8,6 +8,7 @@ import { ACCOUNT_CHECK_REQUEST, PROFILE_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute, SmartRoute } from '../access';
+import _Composition from './_Composition';
 import _CompositionEdit from './_CompositionEdit';
 import _Private from './_Private';
 import ResetPassword from './ResetPassword';
@@ -49,11 +50,13 @@ class Root extends Component {
                     <Header authenticated={authenticated} profile={profile} onLogOut={this.onLogOut} />
 
                     <Switch>
+                        <PrivateRoute path={path._Edit} component={_Composition} authenticated={authenticated} />
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
                         <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
                         <Route path={path.User} component={User} />
+                        <SmartRoute path={path._Add} component={_CompositionEdit} authenticated={authenticated} />
                         <Route path={path.CompositionView} component={CompositionView} />
                         <SmartRoute path={path.Root} component={_CompositionEdit} authenticated={authenticated} exact />
                         <Route component={Empty} />
