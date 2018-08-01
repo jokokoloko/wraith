@@ -89,7 +89,6 @@ class Composition extends Component {
         const slug = slugify(form.title);
         const excerpt = excerptify(form.description, 210);
         const data = {
-            ...form,
             lane: {
                 top: lanes[0].champion.id || null,
                 jungle: lanes[1].champion.id || null,
@@ -97,8 +96,11 @@ class Composition extends Component {
                 bottom: lanes[3].champion.id || null,
                 support: lanes[4].champion.id || null,
             },
+            meta: {
+                ...form,
+                excerpt,
+            },
             slug,
-            excerpt,
         };
         actionComposition.compositionSave(data).then(() => !authenticated && history.push(path.Register)); // temporary/unfinished redirect
     }
