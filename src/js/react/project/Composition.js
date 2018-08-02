@@ -21,7 +21,6 @@ class Composition extends Component {
         super(props);
         this.state = {
             loadingView: true,
-            id: undefined,
             selectedLaneIdx: 0,
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
@@ -35,6 +34,7 @@ class Composition extends Component {
                 { position: 'support', champion: {} },
             ],
             form: {},
+            id: '',
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -136,7 +136,7 @@ class Composition extends Component {
             .then((composition) => (authenticated ? history.push(`${path._Edit}/${composition.id}`) : history.push(path.Register)));
     }
     render() {
-        const { submitting } = this.props;
+        const { submitting, authenticated } = this.props;
         const { loadingView, selectedLaneIdx, selectedChampion, lanes, form } = this.state;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
@@ -153,7 +153,7 @@ class Composition extends Component {
                 </div>
                 <div className="col-6">
                     <Champion selectChampion={this.selectChampion} />
-                    <CompositionMeta form={form} onChange={this.onChange} />
+                    {authenticated && <CompositionMeta form={form} onChange={this.onChange} />}
                 </div>
                 <div className="col-3">
                     <ChampionInformation champion={selectedChampion} />
@@ -167,9 +167,9 @@ Composition.propTypes = {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     submitting: PropTypes.bool.isRequired,
+    authenticated: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
-    authenticated: PropTypes.bool.isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
