@@ -3,8 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import * as actionView from '../../redux/action/actionView';
 import * as actionComposition from '../../redux/action/actionComposition';
 import { COMPOSITION_SAVE_REQUEST } from '../../redux/type';
+import { COMPOSITIONS } from '../../data';
 import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
 import * as path from '../../path';
@@ -12,11 +14,14 @@ import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
 import Champion from './Champion';
 import ChampionInformation from './ChampionInformation';
+import Loader from '../unit/Loader';
 
 class Composition extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loadingView: true,
+            id: undefined,
             selectedLaneIdx: 0,
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
@@ -35,6 +40,29 @@ class Composition extends Component {
         this.selectChampion = this.selectChampion.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+    componentDidMount() {
+        const { history, match, actionView } = this.props;
+        match.params.id
+            ? actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => {
+                  composition.view
+                      ? this.setState({
+                            loadingView: false,
+                        })
+                      : history.push(path.Root);
+              })
+            : this.setState({
+                  loadingView: false,
+              });
+    }
+    componentDidUpdate(prevProps) {
+        const { match, view } = this.props;
+        match.params.id &&
+            view !== prevProps.view &&
+            this.setState({
+                id: view.id,
+                form: view.meta,
+            });
     }
     selectLane(selectedLaneIdx) {
         this.setState({
@@ -85,7 +113,7 @@ class Composition extends Component {
     }
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
-        const { lanes, form } = this.state;
+        const { id, lanes, form } = this.state;
         const slug = slugify(form.title);
         const excerpt = excerptify(form.description, 210);
         const data = {
@@ -100,6 +128,7 @@ class Composition extends Component {
                 ...form,
                 excerpt,
             },
+            id,
             slug,
         };
         actionComposition
@@ -108,8 +137,10 @@ class Composition extends Component {
     }
     render() {
         const { submitting } = this.props;
-        const { selectedLaneIdx, selectedChampion, lanes, form } = this.state;
-        return (
+        const { loadingView, selectedLaneIdx, selectedChampion, lanes, form } = this.state;
+        return loadingView ? (
+            <Loader position="exact-center fixed" label="Loading view" />
+        ) : (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
                     <CompositionSelector
@@ -133,19 +164,25 @@ class Composition extends Component {
 }
 
 Composition.propTypes = {
+    history: PropTypes.objectOf(PropTypes.any).isRequired,
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
     submitting: PropTypes.bool.isRequired,
+    view: PropTypes.objectOf(PropTypes.any).isRequired,
+    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     authenticated: PropTypes.bool.isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ calls }) {
+function mapStateToProps({ view, calls }) {
     return {
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
+        view,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
+        actionView: bindActionCreators(actionView, dispatch),
         actionComposition: bindActionCreators(actionComposition, dispatch),
     };
 }

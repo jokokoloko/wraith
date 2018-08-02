@@ -46,9 +46,9 @@ class UserView extends Component {
                 <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <h3 className="composition-title card-headline">{composition.title}</h3>
+                            <h3 className="composition-title card-headline">{composition.meta.title}</h3>
                             <p className="composition-excerpt">
-                                {composition.excerpt}... <Link to={`/${composition.id}`}>View</Link>
+                                {composition.meta.excerpt}... <Link to={`/${composition.id}`}>View</Link>
                                 {profile.id === composition.user && (
                                     <Fragment>
                                         <span className="separator"> - </span>
