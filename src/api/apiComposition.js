@@ -27,6 +27,21 @@ class apiComposition {
             })
             .catch((error) => console.error('Error adding composition:', error)); // remove
 
+    // Edit
+    static compositionEdit = (data) =>
+        authentication.currentUser.uid === data.user &&
+        compositions
+            .doc(data.id)
+            .update({
+                ...data,
+                'time.edited': new Date(),
+            })
+            .then(() => {
+                apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id);
+                console.log('Edited composition:', data.id); // remove
+            })
+            .catch((error) => console.error('Error editing composition:', error)); // remove
+
     // Load
     static compositionsLoad = () =>
         compositions

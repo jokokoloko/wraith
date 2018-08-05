@@ -22,6 +22,7 @@ class Composition extends Component {
         this.state = {
             loadingView: true,
             id: null,
+            user: null,
             selectedLaneIdx: 0,
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
@@ -114,7 +115,7 @@ class Composition extends Component {
     }
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
-        const { id, lanes, form } = this.state;
+        const { id, user, lanes, form } = this.state;
         const slug = slugify(form.title);
         const excerpt = excerptify(form.description, 210);
         const data = {
@@ -130,6 +131,7 @@ class Composition extends Component {
                 excerpt,
             },
             id,
+            user,
             slug,
         };
         actionComposition
