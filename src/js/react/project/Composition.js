@@ -21,6 +21,7 @@ class Composition extends Component {
         super(props);
         this.state = {
             loadingView: true,
+            id: null,
             selectedLaneIdx: 0,
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
@@ -34,7 +35,6 @@ class Composition extends Component {
                 { position: 'support', champion: {} },
             ],
             form: {},
-            id: '',
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
