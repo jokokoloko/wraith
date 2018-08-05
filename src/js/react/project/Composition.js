@@ -147,13 +147,14 @@ class Composition extends Component {
     }
     render() {
         const { submitting, authenticated } = this.props;
-        const { loadingView, selectedLaneIdx, selectedChampion, lanes, form } = this.state;
+        const { loadingView, id, selectedLaneIdx, selectedChampion, lanes, form } = this.state;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
             <div className="row gutter-50 gutter-80">
                 <div className="col-3">
                     <CompositionSelector
+                        id={id}
                         selectedLaneIdx={selectedLaneIdx}
                         lanes={lanes}
                         selectLane={this.selectLane}
