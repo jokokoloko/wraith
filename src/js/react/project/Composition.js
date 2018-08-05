@@ -61,6 +61,7 @@ class Composition extends Component {
             view !== prevProps.view &&
             this.setState({
                 id: view.id,
+                user: view.user,
                 form: view.meta,
             });
     }
@@ -133,7 +134,14 @@ class Composition extends Component {
         };
         actionComposition
             .compositionSave(data)
-            .then((composition) => (authenticated ? history.push(`${path._Edit}/${composition.id}`) : history.push(path.Register)));
+            .then(
+                (composition) =>
+                    authenticated && composition
+                        ? history.push(`${path._Edit}/${composition.id}`)
+                        : authenticated
+                            ? null
+                            : history.push(path.Register),
+            );
     }
     render() {
         const { submitting, authenticated } = this.props;
