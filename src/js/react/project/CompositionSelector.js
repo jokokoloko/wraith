@@ -43,12 +43,16 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
 };
 
 CompositionSelector.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     selectedLaneIdx: PropTypes.number.isRequired,
     lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
+};
+
+CompositionSelector.defaultProps = {
+    id: null,
 };
 
 export default CompositionSelector;
