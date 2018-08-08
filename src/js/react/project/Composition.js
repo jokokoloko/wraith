@@ -8,7 +8,7 @@ import * as actionComposition from '../../redux/action/actionComposition';
 import { COMPOSITION_SAVE_REQUEST } from '../../redux/type';
 import { COMPOSITIONS } from '../../data';
 import { findByString, removeStatus } from '../../filter';
-import { slugify, excerptify } from '../../function';
+import { slugify, excerptify, arrayToObject } from '../../function';
 import * as path from '../../path';
 import CompositionMeta from './CompositionMeta';
 import CompositionSelector from './CompositionSelector';
@@ -36,6 +36,7 @@ class Composition extends Component {
                 { position: 'support', champion: {} },
             ],
             form: {},
+            championCollection: {},
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -58,13 +59,25 @@ class Composition extends Component {
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
-        match.params.id &&
-            view !== prevProps.view &&
-            this.setState({
-                id: view.id,
-                user: view.user,
-                form: view.meta,
-            });
+        match.params.id && view !== prevProps.view && this.setInitialStateHelper(view);
+    }
+    setInitialStateHelper(data) {
+        const { champions } = this.props;
+        const championCollection = arrayToObject(champions, 'id');
+        const { lane } = data;
+        this.setState({
+            lanes: [
+                { position: 'top', champion: championCollection[lane.top] },
+                { position: 'jungle', champion: championCollection[lane.jungle] },
+                { position: 'middle', champion: championCollection[lane.middle] },
+                { position: 'bottom', champion: championCollection[lane.bottom] },
+                { position: 'support', champion: championCollection[lane.support] },
+            ],
+            id: data.id,
+            user: data.user,
+            form: data.meta,
+            championCollection,
+        });
     }
     selectLane(selectedLaneIdx) {
         this.setState({
@@ -140,9 +153,7 @@ class Composition extends Component {
                 (composition) =>
                     authenticated && composition
                         ? history.push(`${path._Edit}/${composition.id}`)
-                        : authenticated
-                            ? null
-                            : history.push(path.Register),
+                        : authenticated ? null : history.push(path.Register),
             );
     }
     render() {
@@ -184,10 +195,11 @@ Composition.propTypes = {
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls }) {
+function mapStateToProps({ view, calls, champions }) {
     return {
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
         view,
+        champions,
     };
 }
 
@@ -198,9 +210,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(Composition),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Composition));
