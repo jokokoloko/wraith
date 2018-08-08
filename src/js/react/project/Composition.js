@@ -65,18 +65,24 @@ class Composition extends Component {
         const { champions } = this.props;
         const championCollection = arrayToObject(champions, 'id');
         const { lane } = data;
+        const lanes = [
+            { position: 'top', champion: championCollection[lane.top] },
+            { position: 'jungle', champion: championCollection[lane.jungle] },
+            { position: 'middle', champion: championCollection[lane.middle] },
+            { position: 'bottom', champion: championCollection[lane.bottom] },
+            { position: 'support', champion: championCollection[lane.support] },
+        ];
+        let champsPicked = {};
+        lanes.forEach((item, idx) => {
+            champsPicked[item.champion.name] = idx;
+        });
         this.setState({
-            lanes: [
-                { position: 'top', champion: championCollection[lane.top] },
-                { position: 'jungle', champion: championCollection[lane.jungle] },
-                { position: 'middle', champion: championCollection[lane.middle] },
-                { position: 'bottom', champion: championCollection[lane.bottom] },
-                { position: 'support', champion: championCollection[lane.support] },
-            ],
             id: data.id,
             user: data.user,
             form: data.meta,
             championCollection,
+            lanes,
+            champsPicked,
         });
     }
     selectLane(selectedLaneIdx) {
