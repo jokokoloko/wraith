@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
 import * as path from '../../path';
@@ -27,6 +27,14 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
                 </button>
 
                 <nav className="navbar-collapse collapse">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to={path.Composition}>
+                                Compositions
+                            </NavLink>
+                        </li>
+                    </ul>
+
                     <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />
                 </nav>
             </div>

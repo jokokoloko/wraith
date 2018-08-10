@@ -15,6 +15,7 @@ import ResetPassword from './ResetPassword';
 import Login from './Login';
 import Register from './Register';
 import User from './User';
+import Composition from './Composition';
 import CompositionView from './CompositionView';
 import Empty from './404';
 import Header from './region/Header';
@@ -55,9 +56,10 @@ class Root extends Component {
                         <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <Route path={path.User} component={User} />
+                        <SmartRoute path={path.User} component={User} authenticated={authenticated} />
                         <SmartRoute path={path._Add} component={_CompositionEdit} authenticated={authenticated} />
-                        <Route path={path.CompositionView} component={CompositionView} />
+                        <SmartRoute path={path.Composition} component={Composition} authenticated={authenticated} />
+                        <SmartRoute path={path.CompositionView} component={CompositionView} authenticated={authenticated} />
                         <SmartRoute path={path.Root} component={_CompositionEdit} authenticated={authenticated} exact />
                         <Route component={Empty} />
                     </Switch>
