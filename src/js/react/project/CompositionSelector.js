@@ -4,7 +4,7 @@ import * as client from '../../client';
 import Button from '../unit/Button';
 
 const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit, submitting }) => {
-    const loopLane = lanes.map((lane, index) => {
+    const loopLane = lanes.filter((item) => item.type === 'pick').map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
         const highlightStyle = index === selectedLaneIdx ? 'highlight' : '';
@@ -14,9 +14,14 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
                 key={`lane-${position}`}
                 id={`lane-${position}`}
                 className={`champion-selection d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index)}>
+                onClick={() => selectLane(index)}
+            >
                 {champion.key ? (
-                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
+                    <img
+                        className="champion-image bg-dark"
+                        src={championAvatar}
+                        alt={champion.name}
+                    />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -25,13 +30,43 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
             </li>
         );
     });
+    const loopBans = lanes.filter((item) => item.type === 'ban').map((item, index) => {
+        const champion = item.champion;
+        let realIdx = selectedLaneIdx - 5; //eeew hardcoded.
+        const highlightStyle = index === realIdx ? 'highlight' : '';
+        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
+        return (
+            <div
+                key={`ban-${index}`}
+                id={`ban-${index}`}
+                className={`champion-ban ${highlightStyle}`}
+                onClick={() => selectLane(index + 5)}
+            >
+                {champion.key ? (
+                    <img
+                        className="champion-image bg-dark"
+                        src={championAvatar}
+                        alt={champion.name}
+                    />
+                ) : (
+                    <div className="champion-image bg-dark" />
+                )}
+            </div>
+        );
+    });
     return (
         <div className="team-selection panel">
             <ul className="team-composition">{loopLane}</ul>
+            <h3>Bans:</h3>
+            <div className="team-bans">{loopBans}</div>
             <Button
                 type="button"
                 name="register"
-                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
+                label={
+                    id && submitting
+                        ? 'Updating...'
+                        : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'
+                }
                 kind={id ? 'primary' : 'success'}
                 size="lg"
                 display="block"

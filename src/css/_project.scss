@@ -1,5 +1,5 @@
-@import "css/sprites/_lane-icons.scss";
-@import "css/sprites/_role-icons.scss";
+@import "css/sprites/lane-icons";
+@import "css/sprites/role-icons";
 
 /* =============================== */
 /* ==========!NAVIGATION========== */
@@ -69,6 +69,7 @@ $padding-md: 10px;
 /* ----------!TEAM COMP---------- */
 .team-selection {
     width: 100%;
+    padding: 15px;
 }
 
 .team-composition {
@@ -79,6 +80,25 @@ $padding-md: 10px;
     .champion-selection {
         height: 64px;
         margin: 8px;
+    }
+}
+
+.team-bans {
+    width: 100%;
+    padding: $padding-md / 2;
+    margin: 20px 0;
+
+    .champion-ban {
+        width: 48px;
+        height: 48px;
+        border: 1px solid;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 3px;
+
+        &.highlight {
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
     }
 }
 

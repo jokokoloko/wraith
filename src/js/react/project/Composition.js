@@ -29,11 +29,16 @@ class Composition extends Component {
             // e.g. { annie: 0, aatrox: 1 }
             champsPicked: {},
             lanes: [
-                { position: 'top', champion: {} },
-                { position: 'jungle', champion: {} },
-                { position: 'middle', champion: {} },
-                { position: 'bottom', champion: {} },
-                { position: 'support', champion: {} },
+                { position: 'top', champion: {}, type: 'pick' },
+                { position: 'jungle', champion: {}, type: 'pick' },
+                { position: 'middle', champion: {}, type: 'pick' },
+                { position: 'bottom', champion: {}, type: 'pick' },
+                { position: 'support', champion: {}, type: 'pick' },
+                { index: 0, champion: {}, type: 'ban' },
+                { index: 1, champion: {}, type: 'ban' },
+                { index: 2, champion: {}, type: 'ban' },
+                { index: 3, champion: {}, type: 'ban' },
+                { index: 4, champion: {}, type: 'ban' },
             ],
             form: {},
         };
@@ -44,17 +49,21 @@ class Composition extends Component {
     }
     componentDidMount() {
         const { history, match, actionView } = this.props;
-        match.params.id
-            ? actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => {
-                  composition.view
-                      ? this.setState({
-                            loadingView: false,
-                        })
-                      : history.push(path.Root);
-              })
-            : this.setState({
-                  loadingView: false,
-              });
+        if (match.params.id) {
+            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => {
+                if (composition.view) {
+                    this.setState({
+                        loadingView: false,
+                    });
+                } else {
+                    history.push(path.Root);
+                }
+            });
+        } else {
+            this.setState({
+                loadingView: false,
+            });
+        }
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
@@ -91,6 +100,8 @@ class Composition extends Component {
     }
     selectChampion(selectedChampion) {
         let { selectedLaneIdx, champsPicked, lanes } = this.state;
+        let curChampSelected = lanes[selectedLaneIdx].champion;
+        if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
         // put champ in current lane index
         lanes[selectedLaneIdx].champion = selectedChampion;
         // if champ is picked before, remove it from the other lane.
@@ -158,9 +169,7 @@ class Composition extends Component {
                 (composition) =>
                     authenticated && composition
                         ? history.push(`${path._Edit}/${composition.id}`)
-                        : authenticated
-                            ? null
-                            : history.push(path.Register),
+                        : authenticated ? null : history.push(path.Register),
             );
     }
     render() {
@@ -219,9 +228,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(Composition),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Composition));
