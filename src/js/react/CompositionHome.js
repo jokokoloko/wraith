@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionComposition from '../redux/action/actionComposition';
+import { arrayToObject } from '../function';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
@@ -25,18 +26,22 @@ class CompositionHome extends Component {
         );
     }
     render() {
-        const { authenticated, profile, compositions } = this.props;
+        const { authenticated, profile, compositions, championsMap } = this.props;
         const { loadingCompositions } = this.state;
         const item = 'composition';
+        const empty = '-';
         const loopComposition = compositions.map((composition, index) => {
             const count = compositions.length - index;
+            const { top, jungle, middle, bottom, support } = composition.lane;
             return (
                 <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <p className="composition-lane">{`${composition.lane.top}, ${composition.lane.jungle}, ${composition.lane.middle}, ${
-                                composition.lane.bottom
-                            }, ${composition.lane.support}`}</p>
+                            <p className="composition-lane">
+                                {`${top ? championsMap[top].name : empty}, ${jungle ? championsMap[jungle].name : empty}, ${
+                                    middle ? championsMap[middle].name : empty
+                                }, ${bottom ? championsMap[bottom].name : empty}, ${support ? championsMap[support].name : empty}`}
+                            </p>
                             {composition.meta.title && <h3 className="composition-title card-headline">{composition.meta.title}</h3>}
                             {composition.meta.excerpt && <p className="composition-excerpt">{composition.meta.excerpt}...</p>}
                             <p className="composition-user">by {composition.user}</p>
@@ -89,13 +94,16 @@ CompositionHome.propTypes = {
     authenticated: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, compositions }) {
+function mapStateToProps({ profile, compositions, champions }) {
+    const championsMap = arrayToObject(champions, 'id');
     return {
         profile,
         compositions,
+        championsMap,
     };
 }
 
