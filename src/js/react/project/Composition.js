@@ -198,7 +198,6 @@ Composition.propTypes = {
     authenticated: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
-    champions: PropTypes.arrayOf(PropTypes.object).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
@@ -209,7 +208,6 @@ function mapStateToProps({ view, calls, champions }) {
     return {
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
         view,
-        champions,
         championsMap,
     };
 }
