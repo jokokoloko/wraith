@@ -36,7 +36,6 @@ class Composition extends Component {
                 { position: 'support', champion: {} },
             ],
             form: {},
-            championCollection: {},
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -62,19 +61,18 @@ class Composition extends Component {
         match.params.id && view !== prevProps.view && this.setInitialStateHelper(view);
     }
     setInitialStateHelper(data) {
-        const { champions } = this.props;
-        const championCollection = arrayToObject(champions, 'id');
+        const { championsMap } = this.props;
         const { lane } = data;
         const lanes = [
-            { position: 'top', champion: lane.top ? championCollection[lane.top] : {} },
-            { position: 'jungle', champion: lane.jungle ? championCollection[lane.jungle] : {} },
-            { position: 'middle', champion: lane.middle ? championCollection[lane.middle] : {} },
-            { position: 'bottom', champion: lane.bottom ? championCollection[lane.bottom] : {} },
-            { position: 'support', champion: lane.support ? championCollection[lane.support] : {} },
+            { position: 'top', champion: lane.top ? championsMap[lane.top] : {} },
+            { position: 'jungle', champion: lane.jungle ? championsMap[lane.jungle] : {} },
+            { position: 'middle', champion: lane.middle ? championsMap[lane.middle] : {} },
+            { position: 'bottom', champion: lane.bottom ? championsMap[lane.bottom] : {} },
+            { position: 'support', champion: lane.support ? championsMap[lane.support] : {} },
         ];
         let champsPicked = {};
         lanes.forEach((item, idx) => {
-            if (item.champion.name) {     
+            if (item.champion.name) {
                 champsPicked[item.champion.name] = idx;
             }
         });
@@ -82,9 +80,8 @@ class Composition extends Component {
             id: data.id,
             user: data.user,
             form: data.meta,
-            championCollection,
-            lanes,
             champsPicked,
+            lanes,
         });
     }
     selectLane(selectedLaneIdx) {
@@ -161,7 +158,9 @@ class Composition extends Component {
                 (composition) =>
                     authenticated && composition
                         ? history.push(`${path._Edit}/${composition.id}`)
-                        : authenticated ? null : history.push(path.Register),
+                        : authenticated
+                            ? null
+                            : history.push(path.Register),
             );
     }
     render() {
@@ -196,18 +195,22 @@ class Composition extends Component {
 Composition.propTypes = {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    submitting: PropTypes.bool.isRequired,
     authenticated: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
+    champions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 function mapStateToProps({ view, calls, champions }) {
+    const championsMap = arrayToObject(champions, 'id');
     return {
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
         view,
         champions,
+        championsMap,
     };
 }
 
@@ -218,4 +221,9 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Composition));
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(Composition),
+);
