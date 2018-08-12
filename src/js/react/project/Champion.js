@@ -58,7 +58,7 @@ class Champion extends Component {
         const item = 'champion';
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
-            const championSprite = client.CHAMPION_SPRITE + champion.image.sprite;
+            const championSprite = champion.image ? client.CHAMPION_SPRITE + champion.image.sprite : null;
             const style = {
                 backgroundImage: `url('${championSprite}')`,
                 backgroundPosition: `-${champion.image.x}px -${champion.image.y}px`,

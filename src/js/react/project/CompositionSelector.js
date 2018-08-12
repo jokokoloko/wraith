@@ -8,20 +8,15 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
         const champion = lane.champion;
         const position = lane.position;
         const highlightStyle = index === selectedLaneIdx ? 'highlight' : '';
-        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
+        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
         return (
             <li
                 key={`lane-${position}`}
                 id={`lane-${position}`}
-                className={`champion-selection d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index)}
-            >
+                className={`champion-selection champion-${champion.id || 'none'} d-flex align-items-center ${highlightStyle}`}
+                onClick={() => selectLane(index)}>
                 {champion.key ? (
-                    <img
-                        className="champion-image bg-dark"
-                        src={championAvatar}
-                        alt={champion.name}
-                    />
+                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -36,18 +31,9 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
         const highlightStyle = index === realIdx ? 'highlight' : '';
         const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
         return (
-            <div
-                key={`ban-${index}`}
-                id={`ban-${index}`}
-                className={`champion-ban ${highlightStyle}`}
-                onClick={() => selectLane(index + 5)}
-            >
+            <div key={`ban-${index}`} id={`ban-${index}`} className={`champion-ban ${highlightStyle}`} onClick={() => selectLane(index + 5)}>
                 {champion.key ? (
-                    <img
-                        className="champion-image bg-dark"
-                        src={championAvatar}
-                        alt={champion.name}
-                    />
+                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -62,11 +48,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
             <Button
                 type="button"
                 name="register"
-                label={
-                    id && submitting
-                        ? 'Updating...'
-                        : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'
-                }
+                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
                 kind={id ? 'primary' : 'success'}
                 size="lg"
                 display="block"
