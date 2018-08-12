@@ -8,6 +8,7 @@ import { arrayToObject } from '../function';
 import * as client from '../client';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
+import Image from './unit/Image';
 
 class CompositionView extends Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class CompositionView extends Component {
             const championLoading = champion ? client.CHAMPION_LOADING + champion.key + '_0.jpg' : null;
             return (
                 <li key={`lane-${lane}`} id={`lane-${lane}`} className={`lane lane-${count} champion-${champion ? champion.id : 'none'} col`}>
-                    <img className="champion-image-loading" src={championLoading} alt={champion ? champion.name : null} />
+                    <Image source={championLoading} alternate={champion ? champion.name : null} />
                     <p>{lane}</p>
                     <p>{champion ? champion.id : '-'}</p>
                     <h2>{champion ? champion.name : '-'}</h2>
