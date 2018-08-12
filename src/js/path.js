@@ -8,6 +8,7 @@ export const _Add = '/add';
 export const _Edit = '/edit';
 export const _Profile = '/profile';
 export const _Private = '/dashboard';
+export const _Access = _Profile;
 
 // Public
 export const ResetPassword = '/reset-password';

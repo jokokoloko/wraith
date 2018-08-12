@@ -63,13 +63,13 @@ class CompositionHome extends Component {
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
-                    <Basic space="space-xs-30 space-lg-80">
-                        <header className="text-center">
+                    <Basic space="space-xs-50">
+                        <header>
                             <h1>Compositions</h1>
                         </header>
                     </Basic>
 
-                    <Feed space="space-xs-20 space-lg-80" item={item}>
+                    <Feed space="space-xs-50" item={item}>
                         <section>
                             {loadingCompositions ? (
                                 <Loader position="exact-center fixed" label="Loading compositions" />

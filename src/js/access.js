@@ -30,7 +30,7 @@ export const PrivateRoute = ({ component: Component, authenticated, ...rest }) =
 export const PublicRoute = ({ component: Component, authenticated, ...rest }) => (
     <Route
         {...rest}
-        render={(props) => (authenticated === false ? <Component {...props} authenticated={authenticated} /> : <Redirect to={path._Private} />)}
+        render={(props) => (authenticated === false ? <Component {...props} authenticated={authenticated} /> : <Redirect to={path._Access} />)}
     />
 );
 

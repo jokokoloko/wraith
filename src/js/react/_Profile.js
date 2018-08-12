@@ -6,7 +6,7 @@ import FormProfile from './form/FormProfile';
 const _Profile = ({ authenticated }) => (
     <main id="main" role="main">
         <div className="container-fluid">
-            <Basic container="container-fluid" space="space-xs-50 space-lg-80">
+            <Basic space="space-xs-50">
                 <header className="node-xs-50">
                     <h1>Profile</h1>
                 </header>

@@ -11,22 +11,14 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
     const _Private = location.pathname.includes(path._Private);
     const profileName = logic.userName(profile);
     const profileAvatar = profile.avatar ? (
-        <Avatar
-            position="fit exact-center"
-            source={profile.avatar || client.EMPTY_AVATAR}
-            alternate={logic.userNameHandle(profile, 'Avatar')}
-        />
+        <Avatar position="fit exact-center" source={profile.avatar || client.EMPTY_AVATAR} alternate={logic.userNameHandle(profile, 'Avatar')} />
     ) : (
         'Account'
     );
     return authenticated === true ? (
         <ul className="navbar-nav ml-auto account account-member">
             <li className="nav-item">
-                <NavLink
-                    className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`}
-                    to={_Private ? path.Root : path._Private}
-                    exact
-                >
+                <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
                     {_Private ? 'Home' : 'Dashboard'}
                 </NavLink>
             </li>
@@ -34,7 +26,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                 {profileName && <strong className="dropdown-header">{profileName}</strong>}
                 <p className="dropdown-text">{profile.email}</p>
                 <div className="dropdown-divider" />
-                <NavLink className="dropdown-item" to={`${path._Private}${path._Profile}`}>
+                <NavLink className="dropdown-item" to={`${path._Profile}`}>
                     Profile
                 </NavLink>
                 <div className="dropdown-divider" />

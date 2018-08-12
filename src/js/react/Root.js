@@ -10,6 +10,7 @@ import * as path from '../path';
 import { PrivateRoute, PublicRoute, SmartRoute } from '../access';
 import _Composition from './_Composition';
 import _CompositionEdit from './_CompositionEdit';
+import _Profile from './_Profile';
 import _Private from './_Private';
 import ResetPassword from './ResetPassword';
 import Login from './Login';
@@ -52,6 +53,7 @@ class Root extends Component {
 
                     <Switch>
                         <PrivateRoute path={path._Edit} component={_Composition} authenticated={authenticated} />
+                        <PrivateRoute path={path._Profile} component={_Profile} authenticated={authenticated} />
                         <PrivateRoute path={path._Private} component={_Private} authenticated={authenticated} />
                         <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
