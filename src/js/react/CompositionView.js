@@ -1,93 +1,102 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import * as actionView from '../redux/action/actionView';
+import { COMPOSITIONS } from '../data';
+import { arrayToObject } from '../function';
+import * as client from '../client';
+import Basic from './section/Basic';
+import Loader from './unit/Loader';
 
 class CompositionView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamComposition: {
-                id: '',
-                user: '',
-                top: {
-                    image: {
-                        full: 'Annie.png',
-                        group: 'champion',
-                    },
-                    name: 'Annie',
-                    key: 'Annie',
-                    id: 1,
-                },
-                jungle: {
-                    image: {
-                        full: 'Kayle.png',
-                        group: 'champion',
-                    },
-                    name: 'Kayle',
-                    key: 'Kayle',
-                    id: 10,
-                },
-                middle: {
-                    image: {
-                        full: 'Xerath.png',
-                        group: 'champion',
-                    },
-                    name: 'Xerath',
-                    key: 'Xerath',
-                    id: 101,
-                },
-                bottom: {
-                    image: {
-                        full: 'Shyvana.png',
-                        group: 'champion',
-                    },
-                    name: 'Shyvana',
-                    key: 'Shyvana',
-                    id: 102,
-                },
-                support: {
-                    image: {
-                        full: 'Ahri.png',
-                        group: 'champion',
-                    },
-                    name: 'Ahri',
-                    key: 'Ahri',
-                    id: 103,
-                },
-                title: 'Badass Comp',
-                description:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            },
+            loadingView: true,
         };
     }
-
+    componentDidMount() {
+        const { match, actionView } = this.props;
+        actionView.viewLoad(match.params.id, COMPOSITIONS).then(() =>
+            this.setState({
+                loadingView: false,
+            }),
+        );
+    }
     render() {
-        const { top, jungle, middle, bottom, support, title, description } = this.state.teamComposition,
-            laneList = [top, jungle, middle, bottom, support],
-            loopLanes = laneList.map((champ, idx) => {
-                const imgUrl = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champ.name}_0.jpg`;
-                return (
-                    <div key={champ.id} className="col mx-2">
-                        <img className="champion" src={imgUrl} alt={champ.name} />
-                    </div>
-                );
-            });
-        return (
-            <div className="container-fluid">
-                <div className="container-fluid champ-row-bg">
-                    <div className="container">
-                        <div className="row">{loopLanes}</div>
-                    </div>
+        const { view: composition, championsMap } = this.props;
+        const { loadingView } = this.state;
+        const lanes = composition.lane ? Object.keys(composition.lane) : [];
+        const loopLane = lanes.map((lane, index) => {
+            const count = index + 1;
+            const champion = championsMap[composition.lane[lane]];
+            const championLoading = client.CHAMPION_LOADING + champion.key + '_0.jpg';
+            return (
+                <li key={`lane-${lane}`} id={`lane-${lane}`} className={`lane lane-${count} champion-${champion.id || 'none'} col`}>
+                    <img className="champion-image-loading" src={championLoading} alt={champion.name} />
+                    <p>{lane}</p>
+                    <p>{champion.id}</p>
+                    <h2>{champion.name}</h2>
+                </li>
+            );
+        });
+        return loadingView ? (
+            <Loader position="exact-center fixed" label="Loading view" />
+        ) : (
+            <main id="main" role="main">
+                <div className="container-fluid">
+                    {composition.id ? (
+                        <Fragment>
+                            <Basic space="space-xs-50">
+                                <ul className="row text-center">{loopLane}</ul>
+                            </Basic>
+
+                            <Basic space="space-xs-50">
+                                <header className="node-xs-50 text-center">
+                                    <h1 className="composition-title">{composition.meta.title}</h1>
+                                </header>
+
+                                <section className="node-xs-50 text-center">
+                                    <p className="composition-description">{composition.meta.description}</p>
+                                </section>
+                            </Basic>
+                        </Fragment>
+                    ) : (
+                        <Basic space="space-xs-50">
+                            <header className="empty text-center">
+                                <h1>404 - Composition</h1>
+                            </header>
+                        </Basic>
+                    )}
                 </div>
-                <div className="container">
-                    <div className="row my-5">
-                        <h3>{title}</h3>
-                    </div>
-                    <div className="row my-5">
-                        <p>{description}</p>
-                    </div>
-                </div>
-            </div>
+            </main>
         );
     }
 }
 
-export default CompositionView;
+CompositionView.propTypes = {
+    match: PropTypes.objectOf(PropTypes.any).isRequired,
+    view: PropTypes.objectOf(PropTypes.any).isRequired,
+    championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
+    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
+};
+
+function mapStateToProps({ view, champions }) {
+    const championsMap = arrayToObject(champions, 'id');
+    return {
+        view,
+        championsMap,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actionView: bindActionCreators(actionView, dispatch),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(CompositionView);
