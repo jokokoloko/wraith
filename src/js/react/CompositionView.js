@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
+import { VIEW_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import { COMPOSITIONS } from '../data';
 import { arrayToObject } from '../function';
 import * as client from '../client';
@@ -11,23 +13,12 @@ import Loader from './unit/Loader';
 import Image from './unit/Image';
 
 class CompositionView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingView: true,
-        };
-    }
     componentDidMount() {
         const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.id, COMPOSITIONS).then(() =>
-            this.setState({
-                loadingView: false,
-            }),
-        );
+        actionView.viewLoad(match.params.id, COMPOSITIONS);
     }
     render() {
-        const { view: composition, championsMap } = this.props;
-        const { loadingView } = this.state;
+        const { view: composition, loadingView, championsMap } = this.props;
         const lanes = composition.lane ? Object.keys(composition.lane) : [];
         const loopLane = lanes.map((lane, index) => {
             const count = index + 1;
@@ -78,14 +69,16 @@ class CompositionView extends Component {
 
 CompositionView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingView: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, champions }) {
+function mapStateToProps({ view, calls, champions }) {
     const championsMap = arrayToObject(champions, 'id');
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         view,
         championsMap,
     };

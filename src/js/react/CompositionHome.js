@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionComposition from '../redux/action/actionComposition';
+import { COMPOSITIONS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import { arrayToObject } from '../function';
 import * as path from '../path';
 import Basic from './section/Basic';
@@ -11,23 +13,12 @@ import Feed from './section/Feed';
 import Loader from './unit/Loader';
 
 class CompositionHome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingCompositions: true,
-        };
-    }
     componentDidMount() {
         const { actionComposition } = this.props;
-        actionComposition.compositionsLoad().then(() =>
-            this.setState({
-                loadingCompositions: false,
-            }),
-        );
+        actionComposition.compositionsLoad();
     }
     render() {
-        const { authenticated, profile, compositions, championsMap } = this.props;
-        const { loadingCompositions } = this.state;
+        const { authenticated, loadingCompositions, profile, compositions, championsMap } = this.props;
         const item = 'composition';
         const empty = '-';
         const loopComposition = compositions.map((composition, index) => {
@@ -92,15 +83,17 @@ class CompositionHome extends Component {
 
 CompositionHome.propTypes = {
     authenticated: PropTypes.bool.isRequired,
+    loadingCompositions: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, compositions, champions }) {
+function mapStateToProps({ profile, calls, compositions, champions }) {
     const championsMap = arrayToObject(champions, 'id');
     return {
+        loadingCompositions: findByString(calls, removeStatus(COMPOSITIONS_LOAD_REQUEST)),
         profile,
         compositions,
         championsMap,
