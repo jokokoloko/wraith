@@ -29,7 +29,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
         const champion = item.champion;
         let realIdx = selectedLaneIdx - 5; //eeew hardcoded.
         const highlightStyle = index === realIdx ? 'highlight' : '';
-        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
+        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
         return (
             <div key={`ban-${index}`} id={`ban-${index}`} className={`champion-ban ${highlightStyle}`} onClick={() => selectLane(index + 5)}>
                 {champion.key ? (

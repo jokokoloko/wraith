@@ -31,13 +31,13 @@ class CompositionView extends Component {
         const loopLane = lanes.map((lane, index) => {
             const count = index + 1;
             const champion = championsMap[composition.lane[lane]];
-            const championLoading = client.CHAMPION_LOADING + champion.key + '_0.jpg';
+            const championLoading = champion ? client.CHAMPION_LOADING + champion.key + '_0.jpg' : null;
             return (
-                <li key={`lane-${lane}`} id={`lane-${lane}`} className={`lane lane-${count} champion-${champion.id || 'none'} col`}>
-                    <img className="champion-image-loading" src={championLoading} alt={champion.name} />
+                <li key={`lane-${lane}`} id={`lane-${lane}`} className={`lane lane-${count} champion-${champion ? champion.id : 'none'} col`}>
+                    <img className="champion-image-loading" src={championLoading} alt={champion ? champion.name : null} />
                     <p>{lane}</p>
-                    <p>{champion.id}</p>
-                    <h2>{champion.name}</h2>
+                    <p>{champion ? champion.id : '-'}</p>
+                    <h2>{champion ? champion.name : '-'}</h2>
                 </li>
             );
         });
