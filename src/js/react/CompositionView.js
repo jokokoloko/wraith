@@ -44,15 +44,21 @@ class CompositionView extends Component {
                                 <ul className="row text-center">{loopLane}</ul>
                             </Basic>
 
-                            <Basic space="space-xs-50">
-                                <header className="node-xs-50 text-center">
-                                    <h1 className="composition-title">{composition.meta.title}</h1>
-                                </header>
-
-                                <section className="node-xs-50 text-center">
-                                    <p className="composition-description">{composition.meta.description}</p>
-                                </section>
-                            </Basic>
+                            {composition.meta &&
+                                (composition.meta.title || composition.meta.description) && (
+                                    <Basic space="space-xs-50">
+                                        {composition.meta.title && (
+                                            <header className="node-xs-50 text-center">
+                                                <h1 className="composition-title">{composition.meta.title}</h1>
+                                            </header>
+                                        )}
+                                        {composition.meta.description && (
+                                            <section className="node-xs-50 text-center">
+                                                <p className="composition-description">{composition.meta.description}</p>
+                                            </section>
+                                        )}
+                                    </Basic>
+                                )}
                         </Fragment>
                     ) : (
                         <Basic space="space-xs-50">
