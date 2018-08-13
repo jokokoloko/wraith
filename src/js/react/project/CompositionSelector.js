@@ -3,35 +3,20 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
 
-const CompositionSelector = ({
-    id,
-    selectedLaneIdx,
-    selectedCollection,
-    lanes,
-    bans,
-    selectLane,
-    onSubmit,
-    submitting,
-}) => {
+const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, lanes, bans, selectLane, onSubmit, submitting }) => {
     const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
-        const highlightStyle =
-            index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
-        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
+        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
+        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
         return (
             <li
                 key={`lane-${position}`}
                 id={`lane-${position}`}
                 className={`champion-selection d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index, 'lanes')}
-            >
+                onClick={() => selectLane(index, 'lanes')}>
                 {champion.key ? (
-                    <img
-                        className="champion-image bg-dark"
-                        src={championAvatar}
-                        alt={champion.name}
-                    />
+                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -40,24 +25,19 @@ const CompositionSelector = ({
             </li>
         );
     });
-    const loopBans = bans.map((item, index) => {
-        const champion = item.champion;
-        const highlightStyle =
-            index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
-        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
+    const loopBan = bans.map((ban, index) => {
+        const champion = ban.champion;
+        const position = ban.position;
+        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
+        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
         return (
             <div
-                key={`ban-${index}`}
-                id={`ban-${index}`}
+                key={`ban-${position}`}
+                id={`ban-${position}`}
                 className={`champion-ban ${highlightStyle}`}
-                onClick={() => selectLane(index, 'bans')}
-            >
+                onClick={() => selectLane(index, 'bans')}>
                 {champion.key ? (
-                    <img
-                        className="champion-image bg-dark"
-                        src={championAvatar}
-                        alt={champion.name}
-                    />
+                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -67,16 +47,12 @@ const CompositionSelector = ({
     return (
         <div className="team-selection panel">
             <ul className="team-composition">{loopLane}</ul>
-            <h3>Bans:</h3>
-            <div className="team-bans">{loopBans}</div>
+            <h5>Bans:</h5>
+            <div className="team-bans">{loopBan}</div>
             <Button
                 type="button"
                 name="register"
-                label={
-                    id && submitting
-                        ? 'Updating...'
-                        : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'
-                }
+                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
                 kind={id ? 'primary' : 'success'}
                 size="lg"
                 display="block"

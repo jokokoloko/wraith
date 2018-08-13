@@ -197,8 +197,6 @@ class Composition extends Component {
             ban[banned.position] = banned.champion.id || null;
         });
         const data = {
-            lane,
-            ban,
             meta: {
                 ...form,
                 excerpt,
@@ -206,6 +204,8 @@ class Composition extends Component {
             id,
             user,
             slug,
+            lane,
+            ban,
         };
         actionComposition.compositionSave(data).then((composition) => {
             if (authenticated && composition) {
@@ -217,16 +217,7 @@ class Composition extends Component {
     }
     render() {
         const { submitting, authenticated } = this.props;
-        const {
-            loadingView,
-            id,
-            selectedLaneIdx,
-            selectedCollection,
-            selectedChampion,
-            lanes,
-            bans,
-            form,
-        } = this.state;
+        const { loadingView, id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
@@ -282,4 +273,9 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Composition));
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps,
+    )(Composition),
+);
