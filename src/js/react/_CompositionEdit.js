@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import * as actionComposition from '../redux/action/actionComposition';
-import { COMPOSITION_SAVE_REQUEST } from '../redux/type';
+import { VIEW_LOAD_REQUEST, COMPOSITION_SAVE_REQUEST } from '../redux/type';
 import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
@@ -30,10 +30,10 @@ class _CompositionEdit extends Component {
             ];
         };
         this.state = {
-            loadingView: true,
             id: null,
             user: null,
             selectedLaneIdx: 0,
+            selectedCollection: 'lanes',
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
             // e.g. { lanes: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
@@ -41,7 +41,6 @@ class _CompositionEdit extends Component {
             lanes: laneObjInit(),
             bans: laneObjInit(),
             form: {},
-            selectedCollection: 'lanes',
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -50,21 +49,8 @@ class _CompositionEdit extends Component {
     }
     componentDidMount() {
         const { history, match, actionView } = this.props;
-        if (match.params.id) {
-            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => {
-                if (composition.view) {
-                    this.setState({
-                        loadingView: false,
-                    });
-                } else {
-                    history.push(path.Root);
-                }
-            });
-        } else {
-            this.setState({
-                loadingView: false,
-            });
-        }
+        match.params.id &&
+            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => !composition.view && history.push(path.Root));
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
@@ -217,8 +203,8 @@ class _CompositionEdit extends Component {
         });
     }
     render() {
-        const { submitting, authenticated } = this.props;
-        const { loadingView, id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
+        const { loadingView, submitting, authenticated } = this.props;
+        const { id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -261,6 +247,7 @@ _CompositionEdit.propTypes = {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     authenticated: PropTypes.bool.isRequired,
+    loadingView: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -271,6 +258,7 @@ _CompositionEdit.propTypes = {
 function mapStateToProps({ view, calls, champions }) {
     const championsMap = arrayToObject(champions, 'id');
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
         view,
         championsMap,
