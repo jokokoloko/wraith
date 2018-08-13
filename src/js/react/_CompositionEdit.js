@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -282,9 +281,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(_CompositionEdit),
-);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(_CompositionEdit);
