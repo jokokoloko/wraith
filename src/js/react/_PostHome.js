@@ -4,28 +4,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionPost from '../redux/action/actionPost';
+import { POSTS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
 class _PostHome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingPosts: true,
-        };
-    }
     componentDidMount() {
         const { actionPost } = this.props;
-        actionPost.postsLoad().then(() =>
-            this.setState({
-                loadingPosts: false,
-            }),
-        );
+        actionPost.postsLoad();
     }
     render() {
-        const { match, profile, posts } = this.props;
-        const { loadingPosts } = this.state;
+        const { match, loadingPosts, profile, posts } = this.props;
         const item = 'post';
         const empty = '-';
         const labelPost = ['Title', 'Author', 'Action'];
@@ -104,13 +95,15 @@ class _PostHome extends Component {
 
 _PostHome.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingPosts: PropTypes.bool.isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, posts }) {
+function mapStateToProps({ profile, calls, posts }) {
     return {
+        loadingPosts: findByString(calls, removeStatus(POSTS_LOAD_REQUEST)),
         profile,
         posts,
     };

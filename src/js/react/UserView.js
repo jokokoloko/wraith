@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import * as actionPost from '../redux/action/actionPost';
+import { VIEW_LOAD_REQUEST, POSTS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import * as client from '../client';
 import * as logic from '../logic';
 import * as path from '../path';
@@ -14,30 +16,12 @@ import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 class UserView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingView: true,
-            loadingPosts: true,
-        };
-    }
     componentDidMount() {
         const { match, actionView, actionPost } = this.props;
-        actionView.viewLoad(match.params.slug).then((user) => {
-            user.view &&
-                actionPost.postsLoadByUser(user.view.id).then(() =>
-                    this.setState({
-                        loadingPosts: false,
-                    }),
-                );
-            this.setState({
-                loadingView: false,
-            });
-        });
+        actionView.viewLoad(match.params.slug).then((user) => user.view && actionPost.postsLoadByUser(user.view.id));
     }
     render() {
-        const { view: user, posts } = this.props;
-        const { loadingView, loadingPosts } = this.state;
+        const { view: user, loadingView, loadingPosts, posts } = this.props;
         const userName = logic.userName(user);
         const item = 'post';
         const loopPost = posts.map((post, index) => {
@@ -109,14 +93,18 @@ class UserView extends Component {
 
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingView: PropTypes.bool.isRequired,
+    loadingPosts: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, posts }) {
+function mapStateToProps({ view, calls, posts }) {
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
+        loadingPosts: findByString(calls, removeStatus(POSTS_LOAD_REQUEST)),
         view,
         posts,
     };

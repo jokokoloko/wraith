@@ -3,27 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
+import { VIEW_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
 class PostView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingView: true,
-        };
-    }
     componentDidMount() {
         const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.slug).then(() =>
-            this.setState({
-                loadingView: false,
-            }),
-        );
+        actionView.viewLoad(match.params.slug);
     }
     render() {
-        const { view: post } = this.props;
-        const { loadingView } = this.state;
+        const { view: post, loadingView } = this.props;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
@@ -54,12 +45,14 @@ class PostView extends Component {
 
 PostView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingView: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view }) {
+function mapStateToProps({ view, calls }) {
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         view,
     };
 }

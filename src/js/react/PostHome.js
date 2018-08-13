@@ -4,28 +4,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionPost from '../redux/action/actionPost';
+import { POSTS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
 
 class PostHome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingPosts: true,
-        };
-    }
     componentDidMount() {
         const { actionPost } = this.props;
-        actionPost.postsLoad().then(() =>
-            this.setState({
-                loadingPosts: false,
-            }),
-        );
+        actionPost.postsLoad();
     }
     render() {
-        const { match, posts } = this.props;
-        const { loadingPosts } = this.state;
+        const { match, loadingPosts, posts } = this.props;
         const item = 'post';
         const loopPost = posts.map((post, index) => {
             const count = posts.length - index;
@@ -74,12 +65,14 @@ class PostHome extends Component {
 
 PostHome.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingPosts: PropTypes.bool.isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionPost: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ calls, posts }) {
     return {
+        loadingPosts: findByString(calls, removeStatus(POSTS_LOAD_REQUEST)),
         posts,
     };
 }

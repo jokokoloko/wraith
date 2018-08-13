@@ -4,27 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
+import { USERS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 
 class _UserHome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingUsers: true,
-        };
-    }
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersLoad().then(() =>
-            this.setState({
-                loadingUsers: false,
-            }),
-        );
+        actionUser.usersLoad();
     }
     render() {
-        const { users } = this.props;
-        const { loadingUsers } = this.state;
+        const { loadingUsers, users } = this.props;
         const item = 'user';
         const empty = '-';
         const labelUser = ['Email', 'First', 'Last', 'Handle', 'City', 'State', 'Action'];
@@ -102,12 +93,14 @@ class _UserHome extends Component {
 }
 
 _UserHome.propTypes = {
+    loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionUser: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ calls, users }) {
     return {
+        loadingUsers: findByString(calls, removeStatus(USERS_LOAD_REQUEST)),
         users,
     };
 }

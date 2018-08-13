@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionView from '../../redux/action/actionView';
 import * as actionPost from '../../redux/action/actionPost';
-import { POST_SAVE_REQUEST } from '../../redux/type';
+import { VIEW_LOAD_REQUEST, POST_SAVE_REQUEST } from '../../redux/type';
 import { POSTS } from '../../data';
 import { findByString, removeStatus } from '../../filter';
 import { slugify, excerptify } from '../../function';
@@ -18,7 +18,6 @@ class FormPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loadingView: true,
             form: {},
             error: {},
         };
@@ -29,19 +28,8 @@ class FormPost extends Component {
     componentDidMount() {
         const { history, match, actionView } = this.props;
         match.params.id
-            ? actionView.viewLoad(match.params.id, POSTS, true).then((post) => {
-                  post.view
-                      ? this.setState({
-                            loadingView: false,
-                        })
-                      : history.push(`${path._Private}${path._Post}`);
-              })
-            : this.setState(
-                  {
-                      loadingView: false,
-                  },
-                  () => this.isFocus.current.focus(),
-              );
+            ? actionView.viewLoad(match.params.id, POSTS, true).then((post) => !post.view && history.push(`${path._Private}${path._Post}`))
+            : this.isFocus.current.focus();
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
@@ -86,8 +74,8 @@ class FormPost extends Component {
         actionPost.postSave(form).then(() => !form.id && history.push(`${path._Private}${path._Post}`));
     }
     render() {
-        const { submitting } = this.props;
-        const { loadingView, form, error } = this.state;
+        const { loadingView, submitting } = this.props;
+        const { form, error } = this.state;
         const size = 'lg';
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
@@ -150,6 +138,7 @@ class FormPost extends Component {
 FormPost.propTypes = {
     history: PropTypes.objectOf(PropTypes.any).isRequired,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
+    loadingView: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
@@ -158,6 +147,7 @@ FormPost.propTypes = {
 
 function mapStateToProps({ view, calls }) {
     return {
+        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         submitting: findByString(calls, removeStatus(POST_SAVE_REQUEST)),
         view,
     };

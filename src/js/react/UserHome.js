@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionUser from '../redux/action/actionUser';
+import { USERS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
 import * as client from '../client';
 import * as logic from '../logic';
 import Basic from './section/Basic';
@@ -12,23 +14,12 @@ import Avatar from './unit/Avatar';
 import Loader from './unit/Loader';
 
 class UserHome extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loadingUsers: true,
-        };
-    }
     componentDidMount() {
         const { actionUser } = this.props;
-        actionUser.usersLoad().then(() =>
-            this.setState({
-                loadingUsers: false,
-            }),
-        );
+        actionUser.usersLoad();
     }
     render() {
-        const { users } = this.props;
-        const { loadingUsers } = this.state;
+        const { loadingUsers, users } = this.props;
         const item = 'user';
         const loopUser = users.map((user, index) => {
             const count = users.length - index;
@@ -80,12 +71,14 @@ class UserHome extends Component {
 }
 
 UserHome.propTypes = {
+    loadingUsers: PropTypes.bool.isRequired,
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
     actionUser: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ calls, users }) {
     return {
+        loadingUsers: findByString(calls, removeStatus(USERS_LOAD_REQUEST)),
         users,
     };
 }
