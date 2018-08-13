@@ -3,20 +3,35 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
 
-const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit, submitting }) => {
-    const loopLane = lanes.filter((item) => item.type === 'pick').map((lane, index) => {
+const CompositionSelector = ({
+    id,
+    selectedLaneIdx,
+    selectedCollection,
+    lanes,
+    bans,
+    selectLane,
+    onSubmit,
+    submitting,
+}) => {
+    const loopLane = lanes.map((lane, index) => {
         const champion = lane.champion;
         const position = lane.position;
-        const highlightStyle = index === selectedLaneIdx ? 'highlight' : '';
-        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+        const highlightStyle =
+            index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
+        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
         return (
             <li
                 key={`lane-${position}`}
                 id={`lane-${position}`}
-                className={`champion-selection champion-${champion.id || 'none'} d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index)}>
+                className={`champion-selection d-flex align-items-center ${highlightStyle}`}
+                onClick={() => selectLane(index, 'lanes')}
+            >
                 {champion.key ? (
-                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
+                    <img
+                        className="champion-image bg-dark"
+                        src={championAvatar}
+                        alt={champion.name}
+                    />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -25,15 +40,24 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
             </li>
         );
     });
-    const loopBans = lanes.filter((item) => item.type === 'ban').map((item, index) => {
+    const loopBans = bans.map((item, index) => {
         const champion = item.champion;
-        let realIdx = selectedLaneIdx - 5; //eeew hardcoded.
-        const highlightStyle = index === realIdx ? 'highlight' : '';
-        const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+        const highlightStyle =
+            index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
+        const championAvatar = client.CHAMPION_AVATAR + champion.key + '.png';
         return (
-            <div key={`ban-${index}`} id={`ban-${index}`} className={`champion-ban ${highlightStyle}`} onClick={() => selectLane(index + 5)}>
+            <div
+                key={`ban-${index}`}
+                id={`ban-${index}`}
+                className={`champion-ban ${highlightStyle}`}
+                onClick={() => selectLane(index, 'bans')}
+            >
                 {champion.key ? (
-                    <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
+                    <img
+                        className="champion-image bg-dark"
+                        src={championAvatar}
+                        alt={champion.name}
+                    />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
@@ -48,7 +72,11 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
             <Button
                 type="button"
                 name="register"
-                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
+                label={
+                    id && submitting
+                        ? 'Updating...'
+                        : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'
+                }
                 kind={id ? 'primary' : 'success'}
                 size="lg"
                 display="block"
@@ -62,7 +90,9 @@ const CompositionSelector = ({ id, selectedLaneIdx, lanes, selectLane, onSubmit,
 CompositionSelector.propTypes = {
     id: PropTypes.string,
     selectedLaneIdx: PropTypes.number.isRequired,
+    selectedCollection: PropTypes.string.isRequired,
     lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    bans: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,

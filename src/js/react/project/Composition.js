@@ -19,6 +19,15 @@ import Loader from '../unit/Loader';
 class Composition extends Component {
     constructor(props) {
         super(props);
+        let laneObjInit = () => {
+            return [
+                { position: 'top', champion: {} },
+                { position: 'jungle', champion: {} },
+                { position: 'middle', champion: {} },
+                { position: 'bottom', champion: {} },
+                { position: 'support', champion: {} },
+            ];
+        };
         this.state = {
             loadingView: true,
             id: null,
@@ -26,21 +35,12 @@ class Composition extends Component {
             selectedLaneIdx: 0,
             selectedChampion: {},
             // this is object for tracking champs pick for what lanes.
-            // e.g. { annie: 0, aatrox: 1 }
-            champsPicked: {},
-            lanes: [
-                { position: 'top', champion: {}, type: 'pick' },
-                { position: 'jungle', champion: {}, type: 'pick' },
-                { position: 'middle', champion: {}, type: 'pick' },
-                { position: 'bottom', champion: {}, type: 'pick' },
-                { position: 'support', champion: {}, type: 'pick' },
-                { index: 0, champion: {}, type: 'ban' },
-                { index: 1, champion: {}, type: 'ban' },
-                { index: 2, champion: {}, type: 'ban' },
-                { index: 3, champion: {}, type: 'ban' },
-                { index: 4, champion: {}, type: 'ban' },
-            ],
+            // e.g. { lanes: {annie: 0, aatrox: 1}, bans: {blitz: 0} }
+            champsPicked: { lanes: {}, bans: {} },
+            lanes: laneObjInit(),
+            bans: laneObjInit(),
             form: {},
+            selectedCollection: 'lanes',
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -69,56 +69,97 @@ class Composition extends Component {
         const { match, view } = this.props;
         match.params.id && view !== prevProps.view && this.setInitialStateHelper(view);
     }
-    setInitialStateHelper(data) {
-        const { championsMap } = this.props;
-        const { lane } = data;
-        const lanes = [
-            { position: 'top', champion: lane.top ? championsMap[lane.top] : {} },
-            { position: 'jungle', champion: lane.jungle ? championsMap[lane.jungle] : {} },
-            { position: 'middle', champion: lane.middle ? championsMap[lane.middle] : {} },
-            { position: 'bottom', champion: lane.bottom ? championsMap[lane.bottom] : {} },
-            { position: 'support', champion: lane.support ? championsMap[lane.support] : {} },
-        ];
-        let champsPicked = {};
-        lanes.forEach((item, idx) => {
-            if (item.champion.name) {
-                champsPicked[item.champion.name] = idx;
-            }
+    sortPositions(arr) {
+        const order = {
+            top: 1,
+            jungle: 2,
+            middle: 3,
+            bottom: 4,
+            support: 5,
+        };
+        return arr.sort((a, b) => {
+            return order[a.position] - order[b.position];
         });
+    }
+    setInitialStateHelper(data) {
+        const { championsMap } = this.props,
+            { lane, ban } = data;
+        let lanes = [],
+            bans = [],
+            champsPicked = { lanes: {}, bans: {} };
+
+        Object.keys(lane).forEach((key, idx) => {
+            let champ = lane[key];
+            lanes.push({
+                position: key,
+                champion: champ ? championsMap[champ] : {},
+            });
+            champsPicked.lanes[championsMap[champ].name] = idx;
+        });
+        lanes = this.sortPositions(lanes);
+
+        Object.keys(ban).forEach((key, idx) => {
+            let champ = ban[key];
+            bans.push({
+                position: key,
+                champion: champ ? championsMap[champ] : {},
+            });
+            champsPicked.bans[championsMap[champ].name] = idx;
+        });
+        bans = this.sortPositions(bans);
+
         this.setState({
             id: data.id,
             user: data.user,
             form: data.meta,
             champsPicked,
             lanes,
+            bans,
         });
     }
-    selectLane(selectedLaneIdx) {
+    selectLane(selectedLaneIdx, selectedCollection) {
         this.setState({
             selectedLaneIdx,
+            selectedCollection,
+        });
+    }
+    removeFromChampsPicked(champName) {
+        const { lanes, bans } = this.state;
+        const { lanes: lanePicks, bans: banPicks } = this.state.champsPicked;
+        if (lanePicks.hasOwnProperty(champName)) {
+            lanes[lanePicks[champName]].champion = {};
+            delete lanePicks[champName];
+        }
+        if (banPicks.hasOwnProperty(champName)) {
+            bans[banPicks[champName]].champion = {};
+            delete banPicks[champName];
+        }
+        this.setState({
+            lanes,
+            bans,
+            champsPicked: { lanePicks, banPicks },
         });
     }
     selectChampion(selectedChampion) {
-        let { selectedLaneIdx, champsPicked, lanes } = this.state;
-        let curChampSelected = lanes[selectedLaneIdx].champion;
+        let { selectedLaneIdx, champsPicked, selectedCollection, lanes, bans } = this.state;
+        let curCollection = this.state[selectedCollection];
+        let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
-        // put champ in current lane index
-        lanes[selectedLaneIdx].champion = selectedChampion;
         // if champ is picked before, remove it from the other lane.
-        if (champsPicked.hasOwnProperty(selectedChampion.name)) {
-            let curChampIdx = champsPicked[selectedChampion.name];
-            lanes[curChampIdx].champion = {};
-        }
+        this.removeFromChampsPicked(selectedChampion.name);
         // add champ to champs picked
-        champsPicked[selectedChampion.name] = selectedLaneIdx;
+        champsPicked[selectedCollection][selectedChampion.name] = selectedLaneIdx;
+        // put champ in current lane index
+        curCollection[selectedLaneIdx].champion = selectedChampion;
         // increase lane index
-        selectedLaneIdx = Math.min(lanes.length - 1, selectedLaneIdx + 1);
+        selectedLaneIdx = Math.min(curCollection.length - 1, selectedLaneIdx + 1);
         // set the state
         this.setState({
             selectedLaneIdx,
             selectedChampion,
             champsPicked,
             lanes,
+            bans,
         });
     }
     onChange(event) {
@@ -144,17 +185,20 @@ class Composition extends Component {
     }
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
-        const { id, user, lanes, form } = this.state;
+        const { id, user, lanes, bans, form } = this.state;
         const slug = slugify(form.title);
         const excerpt = excerptify(form.description, 210);
+        let lane = {},
+            ban = {};
+        lanes.forEach((pick, idx) => {
+            lane[pick.position] = pick.champion.id || null;
+        });
+        bans.forEach((banned, idx) => {
+            ban[banned.position] = banned.champion.id || null;
+        });
         const data = {
-            lane: {
-                top: lanes[0].champion.id || null,
-                jungle: lanes[1].champion.id || null,
-                middle: lanes[2].champion.id || null,
-                bottom: lanes[3].champion.id || null,
-                support: lanes[4].champion.id || null,
-            },
+            lane,
+            ban,
             meta: {
                 ...form,
                 excerpt,
@@ -163,18 +207,26 @@ class Composition extends Component {
             user,
             slug,
         };
-        actionComposition
-            .compositionSave(data)
-            .then(
-                (composition) =>
-                    authenticated && composition
-                        ? history.push(`${path._Edit}/${composition.id}`)
-                        : authenticated ? null : history.push(path.Register),
-            );
+        actionComposition.compositionSave(data).then((composition) => {
+            if (authenticated && composition) {
+                history.push(`${path._Edit}/${composition.id}`);
+            } else if (!authenticated) {
+                history.push(path.Register);
+            }
+        });
     }
     render() {
         const { submitting, authenticated } = this.props;
-        const { loadingView, id, selectedLaneIdx, selectedChampion, lanes, form } = this.state;
+        const {
+            loadingView,
+            id,
+            selectedLaneIdx,
+            selectedCollection,
+            selectedChampion,
+            lanes,
+            bans,
+            form,
+        } = this.state;
         return loadingView ? (
             <Loader position="exact-center fixed" label="Loading view" />
         ) : (
@@ -183,7 +235,9 @@ class Composition extends Component {
                     <CompositionSelector
                         id={id}
                         selectedLaneIdx={selectedLaneIdx}
+                        selectedCollection={selectedCollection}
                         lanes={lanes}
+                        bans={bans}
                         selectLane={this.selectLane}
                         onSubmit={this.onSubmit}
                         submitting={submitting}
