@@ -14,6 +14,7 @@ import CompositionSelector from './project/CompositionSelector';
 import Champion from './project/Champion';
 import ChampionInformation from './project/ChampionInformation';
 import Basic from './section/Basic';
+import Affix from './unit/Affix';
 import Loader from './unit/Loader';
 
 class _CompositionEdit extends Component {
@@ -227,16 +228,18 @@ class _CompositionEdit extends Component {
                         ) : (
                             <div className="row gutter-50 gutter-80">
                                 <div className="col-3">
-                                    <CompositionSelector
-                                        id={id}
-                                        selectedLaneIdx={selectedLaneIdx}
-                                        selectedCollection={selectedCollection}
-                                        lanes={lanes}
-                                        bans={bans}
-                                        selectLane={this.selectLane}
-                                        onSubmit={this.onSubmit}
-                                        submitting={submitting}
-                                    />
+                                    <Affix>
+                                        <CompositionSelector
+                                            id={id}
+                                            selectedLaneIdx={selectedLaneIdx}
+                                            selectedCollection={selectedCollection}
+                                            lanes={lanes}
+                                            bans={bans}
+                                            selectLane={this.selectLane}
+                                            onSubmit={this.onSubmit}
+                                            submitting={submitting}
+                                        />
+                                    </Affix>
                                 </div>
                                 <div className="col-6">
                                     <Champion selectChampion={this.selectChampion} />
