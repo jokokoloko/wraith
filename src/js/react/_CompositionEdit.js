@@ -68,46 +68,46 @@ class _CompositionEdit extends Component {
             return order[a.position] - order[b.position];
         });
     }
-    setInitialStateHelper(data) {
-        const { championsMap } = this.props,
-            { lane, ban } = data;
+    setInitialStateHelper(view) {
+        const { championsMap } = this.props;
+        const { champsPicked } = this.state;
+        const { lane, ban } = view;
+        const lanesArray = lane ? Object.keys(lane) : [];
+        const bansArray = ban ? Object.keys(ban) : [];
         let lanes = [],
-            bans = [],
-            champsPicked = { lanes: {}, bans: {} };
+            bans = [];
 
-        Object.keys(lane).forEach((key, idx) => {
-            let champ = lane[key];
+        lanesArray.forEach((key, idx) => {
+            const champion = lane[key];
             lanes.push({
                 position: key,
-                champion: champ ? championsMap[champ] : {},
+                champion: champion ? championsMap[champion] : {},
             });
-            champsPicked.lanes[championsMap[champ].name] = idx;
+            if (champion) {
+                champsPicked.lanes[championsMap[champion].name] = idx;
+            }
         });
         lanes = this.sortPositions(lanes);
 
-        Object.keys(ban).forEach((key, idx) => {
-            let champ = ban[key];
+        bansArray.forEach((key, idx) => {
+            const champion = ban[key];
             bans.push({
                 position: key,
-                champion: champ ? championsMap[champ] : {},
+                champion: champion ? championsMap[champion] : {},
             });
-            champsPicked.bans[championsMap[champ].name] = idx;
+            if (champion) {
+                champsPicked.bans[championsMap[champion].name] = idx;
+            }
         });
         bans = this.sortPositions(bans);
 
         this.setState({
-            id: data.id,
-            user: data.user,
-            form: data.meta,
+            id: view.id,
+            user: view.user,
+            form: view.meta,
             champsPicked,
             lanes,
             bans,
-        });
-    }
-    selectLane(selectedLaneIdx, selectedCollection) {
-        this.setState({
-            selectedLaneIdx,
-            selectedCollection,
         });
     }
     removeFromChampsPicked(champName) {
@@ -122,9 +122,15 @@ class _CompositionEdit extends Component {
             delete banPicks[champName];
         }
         this.setState({
+            champsPicked: { lanePicks, banPicks },
             lanes,
             bans,
-            champsPicked: { lanePicks, banPicks },
+        });
+    }
+    selectLane(selectedLaneIdx, selectedCollection) {
+        this.setState({
+            selectedLaneIdx,
+            selectedCollection,
         });
     }
     selectChampion(selectedChampion) {
@@ -132,11 +138,11 @@ class _CompositionEdit extends Component {
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
-        // if champ is picked before, remove it from the other lane.
+        // if champion is picked before, remove it from the other lane.
         this.removeFromChampsPicked(selectedChampion.name);
-        // add champ to champs picked
+        // add champion to champions picked
         champsPicked[selectedCollection][selectedChampion.name] = selectedLaneIdx;
-        // put champ in current lane index
+        // put champion in current lane index
         curCollection[selectedLaneIdx].champion = selectedChampion;
         // increase lane index
         selectedLaneIdx = Math.min(curCollection.length - 1, selectedLaneIdx + 1);
