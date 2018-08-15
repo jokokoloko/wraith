@@ -2,16 +2,22 @@ import { slugs } from './firebase';
 
 class apiSlug {
     // Add
-    static slugAdd = (id, collection, reference) =>
-        slugs
-            .doc(id)
-            .set({
-                id,
-                collection,
-                reference,
-            })
-            .then(() => console.log('Added slug:', id)) // remove
-            .catch((error) => console.error('Error adding slug:', error)); // remove
+    static slugAdd = (id, collection, reference, batch = null) => {
+        let slugRef = slugs.doc(id);
+        let updatedData = {
+            id,
+            collection,
+            reference,
+        };
+        if (batch) {
+            batch.set(slugRef, updatedData);
+        } else {
+            return slugRef
+                .set(updatedData)
+                .then(() => console.log('Added slug:', id)) // remove
+                .catch((error) => console.error('Error adding slug:', error)); // remove
+        }
+    };
 }
 
 export default apiSlug;

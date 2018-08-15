@@ -1,46 +1,64 @@
 import apiProfile from './apiProfile';
 import apiSlug from './apiSlug';
-import { authentication, compositions } from './firebase';
+import { authentication, compositions, firestore } from './firebase';
 import { COMPOSITIONS, PUBLISHED } from '../js/data';
 
 class apiComposition {
     // Add
-    static compositionAdd = (data) =>
-        compositions
-            .add({
-                ...data,
-                user: (authentication.currentUser && authentication.currentUser.uid) || 'guest',
-                status: PUBLISHED,
-                time: {
-                    created: new Date(),
-                },
-            })
-            .then((composition) => {
-                composition.update({
-                    id: composition.id,
-                });
-                authentication.currentUser && apiProfile.profileAuthor(COMPOSITIONS, composition.id);
-                data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, composition.id);
-                apiSlug.slugAdd(composition.id, COMPOSITIONS, composition.id);
-                console.log('Added composition:', composition.id); // remove
-                return composition;
+    static compositionAdd = (data) => {
+        let newComp = compositions.doc();
+        let batch = firestore.batch();
+        batch.set(newComp, {
+            ...data,
+            id: newComp.id,
+            user: (authentication.currentUser && authentication.currentUser.uid) || 'guest',
+            status: PUBLISHED,
+            time: {
+                created: new Date(),
+            },
+        });
+        authentication.currentUser && apiProfile.profileAuthor(COMPOSITIONS, newComp.id, batch);
+        data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, newComp.id, batch);
+        apiSlug.slugAdd(newComp.id, COMPOSITIONS, newComp.id, batch);
+        return batch
+            .commit()
+            .then(() => {
+                console.log('Added composition:', newComp.id); // remove
+                //now that it is batched, we need to get the composition we saved
+                return newComp
+                    .get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            return doc.data();
+                        } else {
+                            console.error('Cannot find composition document');
+                        }
+                    })
+                    .catch((error) => console.error('Error getting composition:', error));
             })
             .catch((error) => console.error('Error adding composition:', error)); // remove
+    };
 
     // Edit
-    static compositionEdit = (data) =>
-        authentication.currentUser.uid === data.user &&
-        compositions
-            .doc(data.id)
-            .update({
+    static compositionEdit = (data) => {
+        if (authentication.currentUser.uid === data.user) {
+            let compRef = compositions.doc(data.id);
+            let batch = firestore.batch();
+            //update the comp
+            batch.update(compRef, {
                 ...data,
                 'time.edited': new Date(),
-            })
-            .then(() => {
-                apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id);
-                console.log('Edited composition:', data.id); // remove
-            })
-            .catch((error) => console.error('Error editing composition:', error)); // remove
+            });
+            //update the slug
+            apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id, batch);
+            return batch
+                .commit()
+                .then(() => {
+                    console.log('Edited composition:', data.id); // remove
+                })
+                .catch((error) => console.error('Error editing composition:', error)); // remove
+        }
+    };
 
     // Load
     static compositionsLoad = () =>

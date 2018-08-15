@@ -19,16 +19,25 @@ class apiProfile {
             .catch((error) => console.error('Error editing profile:', error)); // remove
 
     // Author
-    static profileAuthor = (collection, reference) =>
-        authentication.currentUser &&
-        users
-            .doc(authentication.currentUser.uid)
-            .update({
+    static profileAuthor = (collection, reference, batch = null) => {
+        if (authentication.currentUser) {
+            let userRef = users.doc(authentication.currentUser.uid);
+            let updatedData = {
                 [`${collection}.${reference}`]: new Date(),
                 'time.authored': new Date(),
-            })
-            .then(() => console.log(`Authored a new document in ${collection}:`, reference)) // remove
-            .catch((error) => console.error(`Error authoring a new document in ${collection}:`, error)); // remove
+            };
+            if (batch) {
+                batch.update(userRef, updatedData);
+            } else {
+                return userRef
+                    .update(updatedData)
+                    .then(() => console.log(`Authored a new document in ${collection}:`, reference)) // remove
+                    .catch((error) =>
+                        console.error(`Error authoring a new document in ${collection}:`, error),
+                    ); // remove
+            }
+        }
+    };
 
     // Status
     static profileStatus = (status) =>

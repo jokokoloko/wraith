@@ -50,7 +50,9 @@ class _CompositionEdit extends Component {
     componentDidMount() {
         const { history, match, actionView } = this.props;
         match.params.id &&
-            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => !composition.view && history.push(path.Root));
+            actionView
+                .viewLoad(match.params.id, COMPOSITIONS, true)
+                .then((composition) => !composition.view && history.push(path.Root));
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
@@ -83,11 +85,11 @@ class _CompositionEdit extends Component {
                 position: key,
                 champion: champion ? championsMap[champion] : {},
             });
-            if (champion) {
-                champsPicked.lanes[championsMap[champion].name] = idx;
-            }
         });
         lanes = this.sortPositions(lanes);
+        lanes.forEach((item, idx) => {
+            champsPicked.lanes[item.champion.name] = idx;
+        });
 
         bansArray.forEach((key, idx) => {
             const champion = ban[key];
@@ -95,11 +97,11 @@ class _CompositionEdit extends Component {
                 position: key,
                 champion: champion ? championsMap[champion] : {},
             });
-            if (champion) {
-                champsPicked.bans[championsMap[champion].name] = idx;
-            }
         });
         bans = this.sortPositions(bans);
+        bans.forEach((item, idx) => {
+            champsPicked.bans[item.champion.name] = idx;
+        });
 
         this.setState({
             id: view.id,
@@ -110,16 +112,18 @@ class _CompositionEdit extends Component {
             bans,
         });
     }
-    removeFromChampsPicked(champName) {
+    removeFromChampsPicked(newChamp, oldChamp) {
         const { lanes, bans } = this.state;
         const { lanes: lanePicks, bans: banPicks } = this.state.champsPicked;
-        if (lanePicks.hasOwnProperty(champName)) {
-            lanes[lanePicks[champName]].champion = {};
-            delete lanePicks[champName];
+        delete lanePicks[oldChamp];
+        delete banPicks[oldChamp];
+        if (lanePicks.hasOwnProperty(newChamp)) {
+            lanes[lanePicks[newChamp]].champion = {};
+            delete lanePicks[newChamp];
         }
-        if (banPicks.hasOwnProperty(champName)) {
-            bans[banPicks[champName]].champion = {};
-            delete banPicks[champName];
+        if (banPicks.hasOwnProperty(newChamp)) {
+            bans[banPicks[newChamp]].champion = {};
+            delete banPicks[newChamp];
         }
         this.setState({
             champsPicked: { lanePicks, banPicks },
@@ -139,7 +143,7 @@ class _CompositionEdit extends Component {
         let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
         // if champion is picked before, remove it from the other lane.
-        this.removeFromChampsPicked(selectedChampion.name);
+        this.removeFromChampsPicked(selectedChampion.name, curChampSelected.name);
         // add champion to champions picked
         champsPicked[selectedCollection][selectedChampion.name] = selectedLaneIdx;
         // put champion in current lane index
@@ -210,7 +214,15 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const { id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
+        const {
+            id,
+            selectedLaneIdx,
+            selectedCollection,
+            selectedChampion,
+            lanes,
+            bans,
+            form,
+        } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -235,7 +247,9 @@ class _CompositionEdit extends Component {
                                 </div>
                                 <div className="col-6">
                                     <Champion selectChampion={this.selectChampion} />
-                                    {authenticated && <CompositionMeta form={form} onChange={this.onChange} />}
+                                    {authenticated && (
+                                        <CompositionMeta form={form} onChange={this.onChange} />
+                                    )}
                                 </div>
                                 <div className="col-3">
                                     <ChampionInformation champion={selectedChampion} />
@@ -278,7 +292,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(_CompositionEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);
