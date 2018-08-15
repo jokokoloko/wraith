@@ -20,15 +20,6 @@ import Loader from './unit/Loader';
 class _CompositionEdit extends Component {
     constructor(props) {
         super(props);
-        let laneObjInit = () => {
-            return [
-                { position: 'top', champion: {} },
-                { position: 'jungle', champion: {} },
-                { position: 'middle', champion: {} },
-                { position: 'bottom', champion: {} },
-                { position: 'support', champion: {} },
-            ];
-        };
         this.state = {
             id: null,
             user: null,
@@ -38,8 +29,8 @@ class _CompositionEdit extends Component {
             // this is object for tracking champs pick for what lanes.
             // e.g. { lanes: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
             champsPicked: { lanes: {}, bans: {} },
-            lanes: laneObjInit(),
-            bans: laneObjInit(),
+            lanes: this.laneObjInit(),
+            bans: this.laneObjInit(),
             form: {},
         };
         this.selectLane = this.selectLane.bind(this);
@@ -50,15 +41,22 @@ class _CompositionEdit extends Component {
     componentDidMount() {
         const { history, match, actionView } = this.props;
         match.params.id &&
-            actionView
-                .viewLoad(match.params.id, COMPOSITIONS, true)
-                .then((composition) => !composition.view && history.push(path.Root));
+            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => !composition.view && history.push(path.Root));
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
-        match.params.id && view !== prevProps.view && this.setInitialStateHelper(view);
+        match.params.id && view !== prevProps.view && this.setInitialStateForEdit(view);
     }
-    sortPositions(arr) {
+    laneObjInit() {
+        return [
+            { position: 'top', champion: {} },
+            { position: 'jungle', champion: {} },
+            { position: 'middle', champion: {} },
+            { position: 'bottom', champion: {} },
+            { position: 'support', champion: {} },
+        ];
+    }
+    sortPositions(array) {
         const order = {
             top: 1,
             jungle: 2,
@@ -66,11 +64,9 @@ class _CompositionEdit extends Component {
             bottom: 4,
             support: 5,
         };
-        return arr.sort((a, b) => {
-            return order[a.position] - order[b.position];
-        });
+        return array.sort((a, b) => order[a.position] - order[b.position]);
     }
-    setInitialStateHelper(view) {
+    setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { champsPicked } = this.state;
         const { lane, ban } = view;
@@ -214,15 +210,7 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const {
-            id,
-            selectedLaneIdx,
-            selectedCollection,
-            selectedChampion,
-            lanes,
-            bans,
-            form,
-        } = this.state;
+        const { id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -247,9 +235,7 @@ class _CompositionEdit extends Component {
                                 </div>
                                 <div className="col-6">
                                     <Champion selectChampion={this.selectChampion} />
-                                    {authenticated && (
-                                        <CompositionMeta form={form} onChange={this.onChange} />
-                                    )}
+                                    {authenticated && <CompositionMeta form={form} onChange={this.onChange} />}
                                 </div>
                                 <div className="col-3">
                                     <ChampionInformation champion={selectedChampion} />
@@ -292,4 +278,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(_CompositionEdit);
