@@ -43,7 +43,7 @@ export const compositionSave = (data) => (dispatch) => {
         ? apiComposition
               .compositionEdit(data)
               .then(() => {
-                  dispatch(compositionEdit(data));
+                  dispatch(compositionEdit());
                   dispatch(compositionSaveSuccess());
                   toastr.success('Composition updated!');
               })
@@ -55,7 +55,7 @@ export const compositionSave = (data) => (dispatch) => {
         : apiComposition
               .compositionAdd(data)
               .then((composition) => {
-                  dispatch(compositionAdd(data));
+                  dispatch(compositionAdd());
                   dispatch(compositionSaveSuccess());
                   toastr.success('Composition published!');
                   return composition;

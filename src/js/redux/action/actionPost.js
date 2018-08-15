@@ -43,7 +43,7 @@ export const postSave = (form) => (dispatch) => {
         ? apiPost
               .postEdit(form)
               .then(() => {
-                  dispatch(postEdit(form));
+                  dispatch(postEdit());
                   dispatch(postSaveSuccess());
                   toastr.success('Post updated!');
               })
@@ -55,7 +55,7 @@ export const postSave = (form) => (dispatch) => {
         : apiPost
               .postAdd(form)
               .then(() => {
-                  dispatch(postAdd(form));
+                  dispatch(postAdd());
                   dispatch(postSaveSuccess());
                   toastr.success('Post published!');
               })
