@@ -3,6 +3,7 @@ import { slugs } from './firebase';
 class apiSlug {
     // Add
     static slugAdd = (id, collection, reference, batch = null) => {
+        if (!id) return;
         let slugRef = slugs.doc(id);
         let updatedData = {
             id,

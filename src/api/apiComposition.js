@@ -16,6 +16,7 @@ class apiComposition {
             time: {
                 created: new Date(),
             },
+            slug: data.slug || newComp.id,
         });
         authentication.currentUser && apiProfile.profileAuthor(COMPOSITIONS, newComp.id, batch);
         data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, newComp.id, batch);
@@ -50,7 +51,7 @@ class apiComposition {
                 'time.edited': new Date(),
             });
             //update the slug
-            apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id, batch);
+            data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id, batch);
             return batch
                 .commit()
                 .then(() => {

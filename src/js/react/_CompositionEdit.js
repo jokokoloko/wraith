@@ -183,7 +183,7 @@ class _CompositionEdit extends Component {
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
         const { id, user, lanes, bans, form } = this.state;
-        const slug = slugify(form.title);
+        const slug = slugify(form.title) || id;
         const excerpt = excerptify(form.description, 210);
         let lane = {},
             ban = {};
