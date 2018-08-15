@@ -12,6 +12,7 @@ class apiSlug {
         };
         if (batch) {
             batch.set(slugRef, updatedData);
+            console.log('Added slug:', id); // remove
         } else {
             return slugRef
                 .set(updatedData)
