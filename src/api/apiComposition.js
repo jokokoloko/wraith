@@ -11,12 +11,12 @@ class apiComposition {
         batch.set(newComp, {
             ...data,
             id: newComp.id,
+            slug: data.slug || newComp.id,
             user: (authentication.currentUser && authentication.currentUser.uid) || 'guest',
             status: PUBLISHED,
             time: {
                 created: new Date(),
             },
-            slug: data.slug || newComp.id,
         });
         authentication.currentUser && apiProfile.profileAuthor(COMPOSITIONS, newComp.id, batch);
         data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, newComp.id, batch);
@@ -25,7 +25,7 @@ class apiComposition {
             .commit()
             .then(() => {
                 console.log('Added composition:', newComp.id); // remove
-                //now that it is batched, we need to get the composition we saved
+                // now that it is batched, we need to get the composition we saved
                 return newComp
                     .get()
                     .then((doc) => {
@@ -45,12 +45,12 @@ class apiComposition {
         if (authentication.currentUser.uid === data.user) {
             let compRef = compositions.doc(data.id);
             let batch = firestore.batch();
-            //update the comp
+            // update the comp
             batch.update(compRef, {
                 ...data,
                 'time.edited': new Date(),
             });
-            //update the slug
+            // update the slug
             data.slug && apiSlug.slugAdd(data.slug, COMPOSITIONS, data.id, batch);
             return batch
                 .commit()
