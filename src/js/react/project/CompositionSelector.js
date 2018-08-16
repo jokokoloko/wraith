@@ -3,38 +3,38 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
 
-const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, lanes, bans, selectLane, onSubmit, submitting }) => {
-    const loopLane = lanes.map((lane, index) => {
-        const champion = lane.champion;
-        const position = lane.position;
-        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
+const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
+    const loopPick = picks.map((pick, index) => {
+        const count = index + 1;
+        const { champion, position } = pick;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
         return (
             <li
-                key={`lane-${position}`}
-                id={`lane-${position}`}
-                className={`champion-selection d-flex align-items-center ${highlightStyle}`}
+                key={`pick-${position}`}
+                id={`pick-${position}`}
+                className={`champion-selection pick pick-${count} d-flex align-items-center ${highlightStyle}`}
                 onClick={() => selectLane(index, 'lanes')}>
                 {champion.key ? (
                     <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
                     <div className="champion-image bg-dark" />
                 )}
-                <span className="champion-lane">{position}:</span>
+                <span className="champion-pick">{position}:</span>
                 <span className="champion-name">{champion.name}</span>
             </li>
         );
     });
     const loopBan = bans.map((ban, index) => {
-        const champion = ban.champion;
-        const position = ban.position;
-        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
+        const count = index + 1;
+        const { champion, position } = ban;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
         return (
             <div
                 key={`ban-${position}`}
                 id={`ban-${position}`}
-                className={`champion-ban ${highlightStyle}`}
+                className={`champion-ban ban ban-${count} ${highlightStyle}`}
                 onClick={() => selectLane(index, 'bans')}>
                 {champion.key ? (
                     <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
@@ -46,7 +46,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, lanes, b
     });
     return (
         <div className="team-selection panel">
-            <ul className="team-composition">{loopLane}</ul>
+            <ul className="team-composition">{loopPick}</ul>
             <h5>Bans:</h5>
             <div className="team-bans">{loopBan}</div>
             <Button
@@ -67,7 +67,7 @@ CompositionSelector.propTypes = {
     id: PropTypes.string,
     selectedLaneIdx: PropTypes.number.isRequired,
     selectedCollection: PropTypes.string.isRequired,
-    lanes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    picks: PropTypes.arrayOf(PropTypes.object).isRequired,
     bans: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,

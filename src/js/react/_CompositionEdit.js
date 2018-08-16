@@ -9,6 +9,7 @@ import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
 import * as path from '../path';
+import { formatLanes } from '../composition';
 import CompositionMeta from './project/CompositionMeta';
 import CompositionSelector from './project/CompositionSelector';
 import Champion from './project/Champion';
@@ -56,55 +57,26 @@ class _CompositionEdit extends Component {
             { position: 'support', champion: {} },
         ];
     }
-    sortPositions(array) {
-        const order = {
-            top: 1,
-            jungle: 2,
-            middle: 3,
-            bottom: 4,
-            support: 5,
-        };
-        return array.sort((a, b) => order[a.position] - order[b.position]);
-    }
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { champsPicked } = this.state;
         const { lane, ban } = view;
-        const lanesArray = lane ? Object.keys(lane) : [];
+        const picksArray = lane ? Object.keys(lane) : [];
         const bansArray = ban ? Object.keys(ban) : [];
-        let lanes = [],
-            bans = [];
-
-        lanesArray.forEach((key, idx) => {
-            const champion = lane[key];
-            lanes.push({
-                position: key,
-                champion: champion ? championsMap[champion] : {},
-            });
+        const picks = formatLanes(picksArray, lane, championsMap);
+        const bans = formatLanes(bansArray, ban, championsMap);
+        picks.forEach((pick, index) => {
+            champsPicked.lanes[pick.champion.name] = index;
         });
-        lanes = this.sortPositions(lanes);
-        lanes.forEach((item, idx) => {
-            champsPicked.lanes[item.champion.name] = idx;
+        bans.forEach((ban, index) => {
+            champsPicked.bans[ban.champion.name] = index;
         });
-
-        bansArray.forEach((key, idx) => {
-            const champion = ban[key];
-            bans.push({
-                position: key,
-                champion: champion ? championsMap[champion] : {},
-            });
-        });
-        bans = this.sortPositions(bans);
-        bans.forEach((item, idx) => {
-            champsPicked.bans[item.champion.name] = idx;
-        });
-
         this.setState({
             id: view.id,
             user: view.user,
             form: view.meta,
             champsPicked,
-            lanes,
+            lanes: picks,
             bans,
         });
     }
@@ -225,7 +197,7 @@ class _CompositionEdit extends Component {
                                             id={id}
                                             selectedLaneIdx={selectedLaneIdx}
                                             selectedCollection={selectedCollection}
-                                            lanes={lanes}
+                                            picks={lanes}
                                             bans={bans}
                                             selectLane={this.selectLane}
                                             onSubmit={this.onSubmit}

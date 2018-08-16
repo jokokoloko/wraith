@@ -8,6 +8,7 @@ import { findByString, removeStatus } from '../filter';
 import { COMPOSITIONS } from '../data';
 import { arrayToObject } from '../function';
 import * as client from '../client';
+import { formatLanes } from '../composition';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 import Image from './unit/Image';
@@ -19,15 +20,16 @@ class CompositionView extends Component {
     }
     render() {
         const { view: composition, loadingView, championsMap } = this.props;
-        const lanes = composition.lane ? Object.keys(composition.lane) : [];
-        const loopLane = lanes.map((lane, index) => {
+        const picksArray = composition.lane ? Object.keys(composition.lane) : [];
+        const picks = formatLanes(picksArray, composition.lane, championsMap);
+        const loopPick = picks.map((pick, index) => {
             const count = index + 1;
-            const champion = championsMap[composition.lane[lane]];
-            const championLoading = champion ? client.CHAMPION_LOADING + champion.key + '_0.jpg' : null;
+            const { champion, position } = pick;
+            const championLoading = champion.key ? client.CHAMPION_LOADING + champion.key + '_0.jpg' : null;
             return (
-                <li key={`lane-${lane}`} id={`lane-${lane}`} className={`lane lane-${count} champion-${champion ? champion.id : 'none'} col`}>
+                <li key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count} champion-${champion ? champion.id : 'none'} col`}>
                     <Image source={championLoading} alternate={champion ? champion.name : null} />
-                    <p>{lane}</p>
+                    <p>{position}</p>
                     <p>{champion ? champion.id : '-'}</p>
                     <h2>{champion ? champion.name : '-'}</h2>
                 </li>
@@ -41,7 +43,7 @@ class CompositionView extends Component {
                     {composition.id ? (
                         <Fragment>
                             <Basic space="space-xs-50">
-                                <ul className="row text-center">{loopLane}</ul>
+                                <ul className="row text-center">{loopPick}</ul>
                             </Basic>
 
                             {composition.meta &&
