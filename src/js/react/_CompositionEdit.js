@@ -9,7 +9,7 @@ import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
 import * as path from '../path';
-import { formatLanes } from '../composition';
+import { emptyLanes, formatLanes } from '../composition';
 import CompositionMeta from './project/CompositionMeta';
 import CompositionSelector from './project/CompositionSelector';
 import Champion from './project/Champion';
@@ -30,8 +30,8 @@ class _CompositionEdit extends Component {
             // this is object for tracking champs pick for what lanes.
             // e.g. { lanes: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
             champsPicked: { lanes: {}, bans: {} },
-            lanes: this.laneObjInit(),
-            bans: this.laneObjInit(),
+            lanes: emptyLanes(),
+            bans: emptyLanes(),
             form: {},
         };
         this.selectLane = this.selectLane.bind(this);
@@ -47,15 +47,6 @@ class _CompositionEdit extends Component {
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
         match.params.id && view !== prevProps.view && this.setInitialStateForEdit(view);
-    }
-    laneObjInit() {
-        return [
-            { position: 'top', champion: {} },
-            { position: 'jungle', champion: {} },
-            { position: 'middle', champion: {} },
-            { position: 'bottom', champion: {} },
-            { position: 'support', champion: {} },
-        ];
     }
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
