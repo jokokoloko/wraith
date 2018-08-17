@@ -11,11 +11,11 @@ export const sortPositions = (lanes) => {
 
 export const formatLanes = (lanesArray, lane, championsMap) => {
     const lanes = [];
-    lanesArray.forEach((key) => {
-        const champion = lane[key];
+    lanesArray.forEach((position) => {
+        const champion = lane[position];
         lanes.push({
-            position: key,
             champion: champion ? championsMap[champion] : {},
+            position,
         });
     });
     return sortPositions(lanes);
