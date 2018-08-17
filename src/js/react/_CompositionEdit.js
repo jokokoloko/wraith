@@ -60,11 +60,10 @@ class _CompositionEdit extends Component {
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { champsPicked } = this.state;
-        const { lane, ban } = view;
-        const picksArray = lane ? Object.keys(lane) : [];
-        const bansArray = ban ? Object.keys(ban) : [];
-        const picks = formatLanes(picksArray, lane, championsMap);
-        const bans = formatLanes(bansArray, ban, championsMap);
+        const picksArray = view.lane ? Object.keys(view.lane) : [];
+        const bansArray = view.ban ? Object.keys(view.ban) : [];
+        const picks = formatLanes(picksArray, view.lane, championsMap);
+        const bans = formatLanes(bansArray, view.ban, championsMap);
         picks.forEach((pick, index) => {
             champsPicked.lanes[pick.champion.name] = index;
         });
