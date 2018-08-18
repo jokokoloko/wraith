@@ -1,12 +1,10 @@
 export const positions = ['top', 'jungle', 'middle', 'bottom', 'support'];
 
-export const emptyLanes = () => [
-    { position: 'top', champion: {} },
-    { position: 'jungle', champion: {} },
-    { position: 'middle', champion: {} },
-    { position: 'bottom', champion: {} },
-    { position: 'support', champion: {} },
-];
+export const emptyLanes = () =>
+    positions.map((position) => ({
+        champion: {},
+        position,
+    }));
 
 export const formatLanes = (lanesMap, championsMap) => {
     const lanes = [];
