@@ -8,7 +8,7 @@ import { findByString, removeStatus } from '../filter';
 import { COMPOSITIONS } from '../data';
 import { arrayToObject } from '../function';
 import * as client from '../client';
-import { formatLanes } from '../composition';
+import { buildLanes } from '../composition';
 import Basic from './section/Basic';
 import Loader from './unit/Loader';
 import Image from './unit/Image';
@@ -20,7 +20,7 @@ class CompositionView extends Component {
     }
     render() {
         const { view: composition, loadingView, championsMap } = this.props;
-        const picks = formatLanes(composition.lane, championsMap);
+        const picks = buildLanes(composition.lane, championsMap);
         const loopPick = picks.map((pick, index) => {
             const count = index + 1;
             const { champion, position } = pick;

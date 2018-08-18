@@ -9,7 +9,7 @@ import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
 import * as path from '../path';
-import { emptyLanes, formatLanes } from '../composition';
+import { buildLanes } from '../composition';
 import CompositionMeta from './project/CompositionMeta';
 import CompositionSelector from './project/CompositionSelector';
 import Champion from './project/Champion';
@@ -30,8 +30,8 @@ class _CompositionEdit extends Component {
             // this is object for tracking champs pick for what lanes.
             // e.g. { lanes: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
             champsPicked: { lanes: {}, bans: {} },
-            lanes: emptyLanes(),
-            bans: emptyLanes(),
+            lanes: buildLanes(),
+            bans: buildLanes(),
             form: {},
         };
         this.selectLane = this.selectLane.bind(this);
@@ -51,8 +51,8 @@ class _CompositionEdit extends Component {
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { champsPicked } = this.state;
-        const picks = formatLanes(view.lane, championsMap);
-        const bans = formatLanes(view.ban, championsMap);
+        const picks = buildLanes(view.lane, championsMap);
+        const bans = buildLanes(view.ban, championsMap);
         picks.forEach((pick, index) => {
             champsPicked.lanes[pick.champion.name] = index;
         });
