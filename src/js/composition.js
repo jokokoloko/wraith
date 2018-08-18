@@ -6,15 +6,11 @@ export const emptyLanes = () =>
         position,
     }));
 
-export const formatLanes = (lanesMap, championsMap) => {
-    const lanes = [];
-    lanesMap &&
-        positions.forEach((position) => {
-            const champion = lanesMap[position];
-            lanes.push({
-                champion: champion ? championsMap[champion] : {},
-                position,
-            });
-        });
-    return lanesMap ? lanes : emptyLanes();
-};
+export const formatLanes = (lanesMap, championsMap) =>
+    positions.map((position) => {
+        const champion = lanesMap && lanesMap[position];
+        return {
+            champion: champion ? championsMap[champion] : {},
+            position,
+        };
+    });
