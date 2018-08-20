@@ -20,7 +20,7 @@ class CompositionView extends Component {
     }
     render() {
         const { view: composition, loadingView, championsMap } = this.props;
-        const picks = buildLanes(composition.lane, championsMap);
+        const picks = buildLanes(composition.pick, championsMap);
         const loopPick = picks.map((pick, index) => {
             const count = index + 1;
             const { champion, position } = pick;

@@ -23,12 +23,12 @@ class CompositionHome extends Component {
         const empty = '-';
         const loopComposition = compositions.map((composition, index) => {
             const count = compositions.length - index;
-            const { top, jungle, middle, bottom, support } = composition.lane;
+            const { top, jungle, middle, bottom, support } = composition.pick;
             return (
                 <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <p className="composition-lane">
+                            <p className="composition-pick">
                                 {`${top ? championsMap[top].name : empty}, ${jungle ? championsMap[jungle].name : empty}, ${
                                     middle ? championsMap[middle].name : empty
                                 }, ${bottom ? championsMap[bottom].name : empty}, ${support ? championsMap[support].name : empty}`}

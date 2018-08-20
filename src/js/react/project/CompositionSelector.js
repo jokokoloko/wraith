@@ -5,16 +5,17 @@ import Button from '../unit/Button';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     const loopPick = picks.map((pick, index) => {
+        const collection = 'picks';
         const count = index + 1;
         const { champion, position } = pick;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
-        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'lanes' ? 'highlight' : '';
+        const highlightStyle = selectedCollection === collection && selectedLaneIdx === index ? 'highlight' : '';
         return (
             <li
                 key={`pick-${position}`}
                 id={`pick-${position}`}
                 className={`champion-selection pick pick-${count} d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index, 'lanes')}>
+                onClick={() => selectLane(index, collection)}>
                 {champion.key ? (
                     <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (
@@ -26,16 +27,17 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         );
     });
     const loopBan = bans.map((ban, index) => {
+        const collection = 'bans';
         const count = index + 1;
         const { champion, position } = ban;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
-        const highlightStyle = index === selectedLaneIdx && selectedCollection === 'bans' ? 'highlight' : '';
+        const highlightStyle = selectedCollection === collection && selectedLaneIdx === index ? 'highlight' : '';
         return (
             <div
                 key={`ban-${position}`}
                 id={`ban-${position}`}
                 className={`champion-ban ban ban-${count} ${highlightStyle}`}
-                onClick={() => selectLane(index, 'bans')}>
+                onClick={() => selectLane(index, collection)}>
                 {champion.key ? (
                     <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />
                 ) : (

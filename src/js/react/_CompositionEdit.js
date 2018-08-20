@@ -25,12 +25,12 @@ class _CompositionEdit extends Component {
             id: null,
             user: null,
             selectedLaneIdx: 0,
-            selectedCollection: 'lanes',
+            selectedCollection: 'picks',
             selectedChampion: {},
-            // this is object for tracking champs pick for what lanes.
-            // e.g. { lanes: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
-            champsPicked: { lanes: {}, bans: {} },
-            lanes: buildLanes(),
+            // this is object for tracking the champions selected per collection and lane
+            // e.g. { picks: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
+            champsPicked: { picks: {}, bans: {} },
+            picks: buildLanes(),
             bans: buildLanes(),
             form: {},
         };
@@ -51,10 +51,10 @@ class _CompositionEdit extends Component {
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { champsPicked } = this.state;
-        const picks = buildLanes(view.lane, championsMap);
+        const picks = buildLanes(view.pick, championsMap);
         const bans = buildLanes(view.ban, championsMap);
         picks.forEach((pick, index) => {
-            champsPicked.lanes[pick.champion.name] = index;
+            champsPicked.picks[pick.champion.name] = index;
         });
         bans.forEach((ban, index) => {
             champsPicked.bans[ban.champion.name] = index;
@@ -64,26 +64,26 @@ class _CompositionEdit extends Component {
             user: view.user,
             form: view.meta,
             champsPicked,
-            lanes: picks,
+            picks,
             bans,
         });
     }
     removeFromChampsPicked(newChamp, oldChamp) {
-        const { lanes, bans } = this.state;
-        const { lanes: lanePicks, bans: banPicks } = this.state.champsPicked;
-        delete lanePicks[oldChamp];
+        const { picks, bans } = this.state;
+        const { picks: pickPicks, bans: banPicks } = this.state.champsPicked;
+        delete pickPicks[oldChamp];
         delete banPicks[oldChamp];
-        if (lanePicks.hasOwnProperty(newChamp)) {
-            lanes[lanePicks[newChamp]].champion = {};
-            delete lanePicks[newChamp];
+        if (pickPicks.hasOwnProperty(newChamp)) {
+            picks[pickPicks[newChamp]].champion = {};
+            delete pickPicks[newChamp];
         }
         if (banPicks.hasOwnProperty(newChamp)) {
             bans[banPicks[newChamp]].champion = {};
             delete banPicks[newChamp];
         }
         this.setState({
-            champsPicked: { lanePicks, banPicks },
-            lanes,
+            champsPicked: { pickPicks, banPicks },
+            picks,
             bans,
         });
     }
@@ -94,13 +94,13 @@ class _CompositionEdit extends Component {
         });
     }
     selectChampion(selectedChampion) {
-        let { selectedLaneIdx, champsPicked, selectedCollection, lanes, bans } = this.state;
+        let { selectedLaneIdx, champsPicked, selectedCollection, picks, bans } = this.state;
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
-        // if champion is picked before, remove it from the other lane.
+        // if champion is already selected, remove it from the other lane
         this.removeFromChampsPicked(selectedChampion.name, curChampSelected.name);
-        // add champion to champions picked
+        // add champion to champions selected
         champsPicked[selectedCollection][selectedChampion.name] = selectedLaneIdx;
         // put champion in current lane index
         curCollection[selectedLaneIdx].champion = selectedChampion;
@@ -111,7 +111,7 @@ class _CompositionEdit extends Component {
             selectedLaneIdx,
             selectedChampion,
             champsPicked,
-            lanes,
+            picks,
             bans,
         });
     }
@@ -138,13 +138,13 @@ class _CompositionEdit extends Component {
     }
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
-        const { id, user, lanes, bans, form } = this.state;
+        const { id, user, picks, bans, form } = this.state;
         const slug = slugify(form.title) || id;
         const excerpt = excerptify(form.description, 210);
-        let lane = {},
+        let pick = {},
             ban = {};
-        lanes.forEach((pick, idx) => {
-            lane[pick.position] = pick.champion.id || null;
+        picks.forEach((picked, idx) => {
+            pick[picked.position] = picked.champion.id || null;
         });
         bans.forEach((banned, idx) => {
             ban[banned.position] = banned.champion.id || null;
@@ -155,9 +155,9 @@ class _CompositionEdit extends Component {
                 excerpt,
             },
             id,
-            user,
             slug,
-            lane,
+            user,
+            pick,
             ban,
         };
         actionComposition.compositionSave(data).then((composition) => {
@@ -170,7 +170,7 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const { id, selectedLaneIdx, selectedCollection, selectedChampion, lanes, bans, form } = this.state;
+        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -185,7 +185,7 @@ class _CompositionEdit extends Component {
                                             id={id}
                                             selectedLaneIdx={selectedLaneIdx}
                                             selectedCollection={selectedCollection}
-                                            picks={lanes}
+                                            picks={picks}
                                             bans={bans}
                                             selectLane={this.selectLane}
                                             onSubmit={this.onSubmit}
