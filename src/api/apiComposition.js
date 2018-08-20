@@ -2,6 +2,7 @@ import apiProfile from './apiProfile';
 import apiSlug from './apiSlug';
 import { authentication, compositions, firestore } from './firebase';
 import { COMPOSITIONS, PUBLISHED } from '../js/data';
+import * as client from '../js/client';
 
 class apiComposition {
     // Add
@@ -14,6 +15,7 @@ class apiComposition {
             slug: data.slug || newComp.id,
             user: (authentication.currentUser && authentication.currentUser.uid) || 'guest',
             status: PUBLISHED,
+            patch: client.PATCH,
             time: {
                 created: new Date(),
             },
@@ -48,6 +50,7 @@ class apiComposition {
             // update the comp
             batch.update(compRef, {
                 ...data,
+                patch: client.PATCH,
                 'time.edited': new Date(),
             });
             // update the slug
