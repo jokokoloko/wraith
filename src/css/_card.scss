@@ -13,10 +13,6 @@
 .card-panel .card-body svg {
 	margin-right: 8px;
 	}
-.card-panel .card-body figure,
-.card-panel .card-body img {
-	height: 210px;
-	}
 .card-panel .card-body figure + .card-headline,
 .card-panel .card-body img + .card-headline,
 .card-panel .card-body figure + .card-tagline,
@@ -42,6 +38,9 @@
 .card-panel .card-body .card-tagline {
 	@extend [class*="xs-15"];
 	@extend .p-xs-15;
+	}
+.card-panel .card-body .avatar {
+	height: 210px;
 	}
 .card-panel .card-body .btn {
 	margin-top: 80px;
