@@ -7,10 +7,13 @@ import * as actionComposition from '../redux/action/actionComposition';
 import { COMPOSITIONS_LOAD_REQUEST } from '../redux/type';
 import { findByString, removeStatus } from '../filter';
 import { arrayToObject } from '../function';
+import * as client from '../client';
 import * as path from '../path';
+import { buildLanes } from '../composition';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
+import Image from './unit/Image';
 
 class CompositionHome extends Component {
     componentDidMount() {
@@ -20,19 +23,24 @@ class CompositionHome extends Component {
     render() {
         const { authenticated, loadingCompositions, profile, compositions, championsMap } = this.props;
         const item = 'composition';
-        const empty = '-';
         const loopComposition = compositions.map((composition, index) => {
             const count = compositions.length - index;
-            const { top, jungle, middle, bottom, support } = composition.pick;
+            const picks = buildLanes(composition.pick, championsMap);
+            const loopPick = picks.map((pick, index) => {
+                const count = index + 1;
+                const { champion, position } = pick;
+                const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+                return (
+                    <li key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count} col-1`}>
+                        <Image source={championAvatar} alternate={champion ? champion.name : null} />
+                    </li>
+                );
+            });
             return (
                 <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
                     <header className="card card-panel">
                         <div className="card-body">
-                            <p className="composition-pick">
-                                {`${top ? championsMap[top].name : empty}, ${jungle ? championsMap[jungle].name : empty}, ${
-                                    middle ? championsMap[middle].name : empty
-                                }, ${bottom ? championsMap[bottom].name : empty}, ${support ? championsMap[support].name : empty}`}
-                            </p>
+                            <ul className="composition-pick row">{loopPick}</ul>
                             {composition.meta.title && <h3 className="composition-title card-headline">{composition.meta.title}</h3>}
                             {composition.meta.excerpt && <p className="composition-excerpt">{composition.meta.excerpt}...</p>}
                             <p className="composition-user">by {composition.user}</p>
