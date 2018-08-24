@@ -29,7 +29,7 @@ class _CompositionEdit extends Component {
             selectedChampion: {},
             // this is object for tracking the champions selected per collection and lane
             // e.g. { picks: { annie: 0, aatrox: 1 }, bans: { blitz: 0 } }
-            champsPicked: { picks: {}, bans: {} },
+            championsSelected: { picks: {}, bans: {} },
             picks: buildLanes(),
             bans: buildLanes(),
             form: {},
@@ -50,27 +50,27 @@ class _CompositionEdit extends Component {
     }
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
-        const { champsPicked } = this.state;
+        const { championsSelected } = this.state;
         const picks = buildLanes(view.pick, championsMap);
         const bans = buildLanes(view.ban, championsMap);
         picks.forEach((pick, index) => {
-            champsPicked.picks[pick.champion.name] = index;
+            championsSelected.picks[pick.champion.name] = index;
         });
         bans.forEach((ban, index) => {
-            champsPicked.bans[ban.champion.name] = index;
+            championsSelected.bans[ban.champion.name] = index;
         });
         this.setState({
             id: view.id,
             user: view.user,
             form: view.meta,
-            champsPicked,
+            championsSelected,
             picks,
             bans,
         });
     }
-    removeFromChampsPicked(newChamp, oldChamp) {
+    removeFromChampionsSelected(newChamp, oldChamp) {
         const { picks, bans } = this.state;
-        const { picks: pickPicks, bans: banPicks } = this.state.champsPicked;
+        const { picks: pickPicks, bans: banPicks } = this.state.championsSelected;
         delete pickPicks[oldChamp];
         delete banPicks[oldChamp];
         if (pickPicks.hasOwnProperty(newChamp)) {
@@ -82,7 +82,7 @@ class _CompositionEdit extends Component {
             delete banPicks[newChamp];
         }
         this.setState({
-            champsPicked: { pickPicks, banPicks },
+            championsSelected: { pickPicks, banPicks },
             picks,
             bans,
         });
@@ -94,14 +94,14 @@ class _CompositionEdit extends Component {
         });
     }
     selectChampion(selectedChampion) {
-        let { selectedLaneIdx, champsPicked, selectedCollection, picks, bans } = this.state;
+        let { selectedLaneIdx, championsSelected, selectedCollection, picks, bans } = this.state;
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
         // if champion is already selected, remove it from the other lane
-        this.removeFromChampsPicked(selectedChampion.name, curChampSelected.name);
+        this.removeFromChampionsSelected(selectedChampion.name, curChampSelected.name);
         // add champion to champions selected
-        champsPicked[selectedCollection][selectedChampion.name] = selectedLaneIdx;
+        championsSelected[selectedCollection][selectedChampion.name] = selectedLaneIdx;
         // put champion in current lane index
         curCollection[selectedLaneIdx].champion = selectedChampion;
         // increase lane index
@@ -110,7 +110,7 @@ class _CompositionEdit extends Component {
         this.setState({
             selectedLaneIdx,
             selectedChampion,
-            champsPicked,
+            championsSelected,
             picks,
             bans,
         });
