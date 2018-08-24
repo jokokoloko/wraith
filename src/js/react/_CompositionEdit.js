@@ -68,21 +68,21 @@ class _CompositionEdit extends Component {
             bans,
         });
     }
-    removeFromChampionsSelected(newChamp, oldChamp) {
-        const { picks, bans } = this.state;
-        const { picks: pickPicks, bans: banPicks } = this.state.championsSelected;
-        delete pickPicks[oldChamp];
-        delete banPicks[oldChamp];
-        if (pickPicks.hasOwnProperty(newChamp)) {
-            picks[pickPicks[newChamp]].champion = {};
-            delete pickPicks[newChamp];
+    removeFromChampionsSelected(newChampion, oldChampion) {
+        const { championsSelected, picks, bans } = this.state;
+        const { picks: picksSelected, bans: bansSelected } = championsSelected;
+        delete picksSelected[oldChampion];
+        delete bansSelected[oldChampion];
+        if (picksSelected.hasOwnProperty(newChampion)) {
+            picks[picksSelected[newChampion]].champion = {};
+            delete picksSelected[newChampion];
         }
-        if (banPicks.hasOwnProperty(newChamp)) {
-            bans[banPicks[newChamp]].champion = {};
-            delete banPicks[newChamp];
+        if (bansSelected.hasOwnProperty(newChampion)) {
+            bans[bansSelected[newChampion]].champion = {};
+            delete bansSelected[newChampion];
         }
         this.setState({
-            championsSelected: { pickPicks, banPicks },
+            championsSelected: { picksSelected, bansSelected },
             picks,
             bans,
         });
