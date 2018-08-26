@@ -32,12 +32,16 @@ class _CompositionEdit extends Component {
             championsSelected: { picks: {}, bans: {} },
             picks: buildLanes(),
             bans: buildLanes(),
-            form: { top: {}, jungle: {}, middle: {}, bottom: {}, support: {}},
+            form: {},
+            formNotes: { top: {}, jungle: {}, middle: {}, bottom: {}, support: {} },
+            formStrategies: { '1': {}},
+            strategyCounter: 1
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.addStrategy = this.addStrategy.bind(this);
     }
     componentDidMount() {
         const { history, match, actionView } = this.props;
@@ -115,25 +119,34 @@ class _CompositionEdit extends Component {
             bans,
         });
     }
-    onChange(event) {
+    onChange(event, formType) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const field = target.name;
         const group = target.dataset.group;
-        const form = group
+        const newData = group
             ? {
-                  ...this.state.form,
+                  ...this.state[formType],
                   [group]: {
-                      ...this.state.form[group],
+                      ...this.state[formType][group],
                       [field]: value,
                   },
               }
             : {
-                  ...this.state.form,
+                  ...this.state[formType],
                   [field]: value,
               };
         this.setState({
-            form,
+            [formType]: newData,
+        });
+    }
+    addStrategy() {
+        let { strategyCounter, formStrategies } = this.state;
+        strategyCounter++;
+        formStrategies[strategyCounter] = {};
+        this.setState({
+            strategyCounter,
+            formStrategies
         });
     }
     onSubmit() {
@@ -170,7 +183,7 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form } = this.state;
+        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form, formNotes, formStrategies } = this.state;
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
@@ -195,7 +208,14 @@ class _CompositionEdit extends Component {
                                 </div>
                                 <div className="col-6">
                                     <Champion selectChampion={this.selectChampion} />
-                                    {authenticated && <CompositionMeta form={form} onChange={this.onChange} />}
+                                    {authenticated &&
+                                        <CompositionMeta
+                                            form={form}
+                                            onChange={this.onChange}
+                                            formNotes={formNotes}
+                                            formStrategies={formStrategies}
+                                            addStrategy={this.addStrategy}
+                                        />}
                                 </div>
                                 <div className="col-3">
                                     <ChampionInformation champion={selectedChampion} />
@@ -238,7 +258,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(_CompositionEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);
