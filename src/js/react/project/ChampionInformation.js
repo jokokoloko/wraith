@@ -7,7 +7,6 @@ const ChampionInformation = ({ champion }) => {
     let champImg,
         roles = '';
     if (champion && champion.name) {
-        console.log('my champ', champion);
         champImg = client.CHAMPION_LOADING + champion.key + '_0.jpg';
         Object.keys(champion.tags).forEach((tag) => {
             roles += tag + ', ';

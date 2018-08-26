@@ -63,10 +63,17 @@ class _CompositionEdit extends Component {
         bans.forEach((ban, index) => {
             championsSelected.bans[ban.champion.name] = index;
         });
+        let formStrategies = {};
+        view.strategies.forEach((item, idx) => {
+            formStrategies[idx + 1] = item;
+        });
         this.setState({
             id: view.id,
             user: view.user,
             form: view.meta,
+            formNotes: view.note,
+            strategyCounter: view.strategies.length,
+            formStrategies,
             championsSelected,
             picks,
             bans,
@@ -151,7 +158,7 @@ class _CompositionEdit extends Component {
     }
     onSubmit() {
         const { history, authenticated, actionComposition } = this.props;
-        const { id, user, picks, bans, form } = this.state;
+        const { id, user, picks, bans, form, formNotes, formStrategies } = this.state;
         const slug = slugify(form.title) || id;
         const excerpt = excerptify(form.description, 210);
         let pick = {},
@@ -162,11 +169,19 @@ class _CompositionEdit extends Component {
         bans.forEach((banned, idx) => {
             ban[banned.position] = banned.champion.id || null;
         });
+        let strategies = [];
+        Object.keys(formStrategies).forEach((key) => {
+            strategies.push(formStrategies[key]);
+        });
         const data = {
             meta: {
                 ...form,
                 excerpt,
             },
+            note: {
+                ...formNotes
+            },
+            strategies,
             id,
             slug,
             user,
