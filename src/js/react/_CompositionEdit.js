@@ -32,7 +32,7 @@ class _CompositionEdit extends Component {
             championsSelected: { picks: {}, bans: {} },
             picks: buildLanes(),
             bans: buildLanes(),
-            form: {},
+            form: { top: {}, jungle: {}, middle: {}, bottom: {}, support: {}},
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
