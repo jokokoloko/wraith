@@ -63,21 +63,26 @@ class _CompositionEdit extends Component {
         bans.forEach((ban, index) => {
             championsSelected.bans[ban.champion.name] = index;
         });
-        let formStrategies = {};
-        view.strategies.forEach((item, idx) => {
-            formStrategies[idx + 1] = item;
-        });
-        this.setState({
+        let stateObj = {
             id: view.id,
             user: view.user,
             form: view.meta,
-            formNotes: view.note,
-            strategyCounter: view.strategies.length,
-            formStrategies,
             championsSelected,
             picks,
             bans,
-        });
+        };
+        //conditionally add other data if present.
+        if (view.strategies) {
+            let formStrategies = {};
+            stateObj.strategyCounter = view.strategies.length;
+            view.strategies.forEach((item, idx) => {
+                formStrategies[idx + 1] = item;
+            });
+        }
+        if (view.note) {
+            stateObj.formNotes = view.note;
+        }
+        this.setState(stateObj);
     }
     removeFromChampionsSelected(newChampion, oldChampion) {
         const { championsSelected, picks, bans } = this.state;
