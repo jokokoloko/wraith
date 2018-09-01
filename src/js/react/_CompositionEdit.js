@@ -17,6 +17,7 @@ import ChampionInformation from './project/ChampionInformation';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
 import Loader from './unit/Loader';
+import wildcards from '../wildcards';
 
 class _CompositionEdit extends Component {
     constructor(props) {

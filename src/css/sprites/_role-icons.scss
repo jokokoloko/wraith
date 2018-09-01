@@ -1,6 +1,7 @@
 @import "css/mixins/_generate-icon.scss";
 
 $role-sprite: "../img/role-sprite.svg";
+$lane-sprite: "../img/lane-sprite.svg";
 $role-icon-size: 35px;
 
 .role-icon {
@@ -30,5 +31,56 @@ $role-icon-size: 35px;
     &.bg-support-icon {
         @include generate-icon($role-sprite, 0, 5, $role-icon-size);
     }
+}
 
+//Ideally we want a mixin but copy this for now
+$fill-size: 20px;
+$role-wildcard-size: 40px;
+
+.role-wildcard {
+    position: relative;
+    width: $role-wildcard-size;
+    height: $role-wildcard-size;
+
+    &::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: -6px;
+        right: -17px;
+        width: $fill-size;
+        height: $fill-size;
+        @include generate-icon($lane-sprite, 0, 1, $fill-size);
+    }
+
+    &.bg-tank-icon {
+        @include generate-icon($role-sprite, 0, 0, $role-wildcard-size);
+    }
+
+    &.bg-mage-icon {
+        @include generate-icon($role-sprite, 0, 1, $role-wildcard-size);
+    }
+
+    &.bg-assassin-icon {
+        @include generate-icon($role-sprite, 0, 2, $role-wildcard-size);
+    }
+
+    &.bg-fighter-icon {
+        @include generate-icon($role-sprite, 0, 3, $role-wildcard-size);
+    }
+
+    &.bg-marksman-icon {
+        @include generate-icon($role-sprite, 0, 4, $role-wildcard-size);
+    }
+
+    &.bg-support-icon {
+        @include generate-icon($role-sprite, 0, 5, $role-wildcard-size);
+    }
+
+    &.bg-fill-icon {
+        @include generate-icon($lane-sprite, 0, 1, $role-wildcard-size);
+        &::before {
+            display: none;
+        }
+    }
 }

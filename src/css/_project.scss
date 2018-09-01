@@ -24,7 +24,7 @@ $padding-md: 10px;
 .champion-grid {
     margin: 0;
     padding: 15px;
-    height: 550px;
+    height: 390px;
     overflow-y: scroll;
 }
 .champion-grid .champion {
@@ -60,6 +60,22 @@ $padding-md: 10px;
 }
 #form-filter-champion {
     padding-bottom: 30px;
+}
+
+/* ----------!WILDCARD--------- */
+.wildcard-container {
+    width: 400px;
+
+    .wildcard {
+        height: 65px;
+        padding: 3px;
+        border: 1px solid #ccc;
+    }
+}
+
+.role-wildcard {
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* ================================ */

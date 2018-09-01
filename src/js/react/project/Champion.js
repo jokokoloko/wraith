@@ -6,6 +6,7 @@ import { findByString, removeStatus } from '../../filter';
 import * as client from '../../client';
 import ChampionFilter from './ChampionFilter';
 import Loader from '../unit/Loader';
+import wildcards from '../../wildcards';
 
 class Champion extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class Champion extends Component {
                 role: '',
             },
             roles: ['Tank', 'Mage', 'Assassin', 'Fighter', 'Marksman', 'Support'],
+            wildcards: { ...wildcards },
         };
         this.filterRole = this.filterRole.bind(this);
         this.filterName = this.filterName.bind(this);
@@ -54,7 +56,7 @@ class Champion extends Component {
     }
     render() {
         const { loadingChampions, champions, selectChampion } = this.props;
-        const { filters, roles } = this.state;
+        const { filters, roles, wildcards } = this.state;
         const item = 'champion';
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
@@ -76,12 +78,24 @@ class Champion extends Component {
                 </li>
             );
         });
+        const loopWildcard = Object.keys(wildcards).map((key) => {
+            const wc = wildcards[key];
+            console.log('wild', wc);
+            return (
+                <div key={`wildcard-${wc.role}`} className="wildcard flex-fill">
+                    <div className={`role-wildcard bg-${wc.role}-icon`}></div>
+                </div>
+            );
+        });
         return (
             <Fragment>
                 <ChampionFilter roles={roles} filters={filters} filterRole={this.filterRole} filterName={this.filterName} />
                 <ul className="champion-grid row gutter-30 panel text-center">
                     {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
                 </ul>
+                <div className="wildcard-container d-flex flex-row">
+                    {loopWildcard}
+                </div>
             </Fragment>
         );
     }
