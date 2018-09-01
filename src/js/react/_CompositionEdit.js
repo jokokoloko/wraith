@@ -56,14 +56,18 @@ class _CompositionEdit extends Component {
     setInitialStateForEdit(view) {
         const { championsMap } = this.props;
         const { championsSelected } = this.state;
-        const picks = buildLanes(view.pick, championsMap);
-        const bans = buildLanes(view.ban, championsMap);
-        picks.forEach((pick, index) => {
-            championsSelected.picks[pick.champion.name] = index;
-        });
-        bans.forEach((ban, index) => {
-            championsSelected.bans[ban.champion.name] = index;
-        });
+        const picks = buildLanes(view.pick, championsMap, wildcards);
+        const bans = buildLanes(view.ban, championsMap, wildcards);
+        picks
+            .filter(pick => pick.champion.type !== 'wildcard')
+            .forEach((pick, index) => {
+                championsSelected.picks[pick.champion.name] = index;
+            });
+        bans
+            .filter(pick => pick.champion.type !== 'wildcard')
+            .forEach((ban, index) => {
+                championsSelected.bans[ban.champion.name] = index;
+            });
         let stateObj = {
             id: view.id,
             user: view.user,
@@ -79,6 +83,7 @@ class _CompositionEdit extends Component {
             view.strategies.forEach((item, idx) => {
                 formStrategies[idx + 1] = item;
             });
+            stateObj.formStrategies = formStrategies;
         }
         if (view.note) {
             stateObj.formNotes = view.note;
@@ -114,13 +119,23 @@ class _CompositionEdit extends Component {
         let { selectedLaneIdx, championsSelected, selectedCollection, picks, bans } = this.state;
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
-        if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
-        // if champion is already selected, remove it from the other lane
-        this.removeFromChampionsSelected(selectedChampion.name, curChampSelected.name);
-        // add champion to champions selected
-        championsSelected[selectedCollection][selectedChampion.name] = selectedLaneIdx;
-        // put champion in current lane index
-        curCollection[selectedLaneIdx].champion = selectedChampion;
+        if (selectedChampion.type && selectedChampion.type === 'wildcard') {
+            if (curChampSelected.id && curChampSelected.id === selectedChampion.id) return;
+            // if champion is already selected, remove it from the other lane
+            //pass id because wildcards have no name
+            this.removeFromChampionsSelected(selectedChampion.id, curChampSelected.name);
+            // put wildcard in current lane index
+            curCollection[selectedLaneIdx].champion = selectedChampion;
+        }
+        else {
+            if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
+            // if champion is already selected, remove it from the other lane
+            this.removeFromChampionsSelected(selectedChampion.name, curChampSelected.name);
+            // add champion to champions selected
+            championsSelected[selectedCollection][selectedChampion.name] = selectedLaneIdx;
+            // put champion in current lane index
+            curCollection[selectedLaneIdx].champion = selectedChampion;
+        }
         // increase lane index
         selectedLaneIdx = Math.min(curCollection.length - 1, selectedLaneIdx + 1);
         // set the state
@@ -170,10 +185,10 @@ class _CompositionEdit extends Component {
         let pick = {},
             ban = {};
         picks.forEach((picked, idx) => {
-            pick[picked.position] = picked.champion.id || null;
+            pick[picked.position] = picked.champion.id || wildcards.wildcardFill;
         });
         bans.forEach((banned, idx) => {
-            ban[banned.position] = banned.champion.id || null;
+            ban[banned.position] = banned.champion.id || wildcards.wildcardFill;
         });
         let strategies = [];
         Object.keys(formStrategies).forEach((key) => {

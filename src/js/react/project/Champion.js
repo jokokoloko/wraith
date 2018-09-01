@@ -80,9 +80,8 @@ class Champion extends Component {
         });
         const loopWildcard = Object.keys(wildcards).map((key) => {
             const wc = wildcards[key];
-            console.log('wild', wc);
             return (
-                <div key={`wildcard-${wc.role}`} className="wildcard flex-fill">
+                <div key={`wildcard-${wc.role}`} className="wildcard flex-fill" onClick={() => selectChampion(wc)}>
                     <div className={`role-wildcard bg-${wc.role}-icon`}></div>
                 </div>
             );

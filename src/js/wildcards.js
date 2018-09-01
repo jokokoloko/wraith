@@ -1,32 +1,39 @@
 //Todo: move this to db later.
 const wildcards = {
-    'wildcard-tank': {
-        id: 'wildcard-tank',
-        role: 'tank'
+    'wildcardTank': {
+        id: 'wildcardTank',
+        role: 'tank',
+        type: 'wildcard'
     },
-    'wildcard-mage': {
-        id: 'wildcard-mage',
-        role: 'mage'
+    'wildcardMage': {
+        id: 'wildcardMage',
+        role: 'mage',
+        type: 'wildcard'
     },
-    'wildcard-assassin': {
-        id: 'wildcard-assassin',
-        role: 'assassin'
+    'wildcardAssassin': {
+        id: 'wildcardAssassin',
+        role: 'assassin',
+        type: 'wildcard'
     },
-    'wildcard-fighter': {
-        id: 'wildcard-fighter',
-        role: 'fighter'
+    'wildcardFighter': {
+        id: 'wildcardFighter',
+        role: 'fighter',
+        type: 'wildcard'
     },
-    'wildcard-marksman': {
-        id: 'wildcard-marksman',
-        role: 'marksman'
+    'wildcardMarksman': {
+        id: 'wildcardMarksman',
+        role: 'marksman',
+        type: 'wildcard'
     },
-    'wildcard-support': {
-        id: 'wildcard-support',
-        role: 'support'
+    'wildcardSupport': {
+        id: 'wildcardSupport',
+        role: 'support',
+        type: 'wildcard'
     },
-    'wildcard-fill': {
-        id: 'wildcard-fill',
-        role: 'fill'
+    'wildcardFill': {
+        id: 'wildcardFill',
+        role: 'fill',
+        type: 'wildcard'
     },
 };
 
