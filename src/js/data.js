@@ -4,6 +4,7 @@ export const USERS = 'users';
 export const POSTS = 'posts';
 export const CHAMPIONS = 'champions';
 export const COMPOSITIONS = 'compositions';
+export const WILDCARDS = 'wildcards';
 
 // User - Status
 export const FRESH = 'fresh';

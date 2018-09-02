@@ -6,7 +6,7 @@ import { findByString, removeStatus } from '../../filter';
 import * as client from '../../client';
 import ChampionFilter from './ChampionFilter';
 import Loader from '../unit/Loader';
-import wildcards from '../../wildcards';
+import { arrayToObject } from '../../function';
 
 class Champion extends Component {
     constructor(props) {
@@ -17,7 +17,6 @@ class Champion extends Component {
                 role: '',
             },
             roles: ['Tank', 'Mage', 'Assassin', 'Fighter', 'Marksman', 'Support'],
-            wildcards: { ...wildcards },
         };
         this.filterRole = this.filterRole.bind(this);
         this.filterName = this.filterName.bind(this);
@@ -55,8 +54,8 @@ class Champion extends Component {
         return roleMatch && champion.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0;
     }
     render() {
-        const { loadingChampions, champions, selectChampion } = this.props;
-        const { filters, roles, wildcards } = this.state;
+        const { loadingChampions, champions, selectChampion, wildcards } = this.props;
+        const { filters, roles } = this.state;
         const item = 'champion';
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
@@ -106,9 +105,10 @@ Champion.propTypes = {
     selectChampion: PropTypes.func.isRequired,
 };
 
-function mapStateToProps({ calls, champions }) {
+function mapStateToProps({ calls, champions, wildcards }) {
     return {
         loadingChampions: findByString(calls, removeStatus(CHAMPIONS_LOAD_REQUEST)),
+        wildcards: arrayToObject(wildcards, 'id'),
         champions,
     };
 }

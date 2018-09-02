@@ -17,7 +17,6 @@ import ChampionInformation from './project/ChampionInformation';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
 import Loader from './unit/Loader';
-import wildcards from '../wildcards';
 
 class _CompositionEdit extends Component {
     constructor(props) {
@@ -54,10 +53,10 @@ class _CompositionEdit extends Component {
         match.params.id && view !== prevProps.view && this.setInitialStateForEdit(view);
     }
     setInitialStateForEdit(view) {
-        const { championsMap } = this.props;
+        const { championsMap, wildcardsMap } = this.props;
         const { championsSelected } = this.state;
-        const picks = buildLanes(view.pick, championsMap, wildcards);
-        const bans = buildLanes(view.ban, championsMap, wildcards);
+        const picks = buildLanes(view.pick, championsMap, wildcardsMap);
+        const bans = buildLanes(view.ban, championsMap, wildcardsMap);
         picks
             .filter(pick => pick.champion.type !== 'wildcard')
             .forEach((pick, index) => {
@@ -178,17 +177,17 @@ class _CompositionEdit extends Component {
         });
     }
     onSubmit() {
-        const { history, authenticated, actionComposition } = this.props;
+        const { history, authenticated, actionComposition, wildcardsMap } = this.props;
         const { id, user, picks, bans, form, formNotes, formStrategies } = this.state;
         const slug = slugify(form.title) || id;
         const excerpt = excerptify(form.description, 210);
         let pick = {},
             ban = {};
         picks.forEach((picked, idx) => {
-            pick[picked.position] = picked.champion.id || wildcards.wildcardFill;
+            pick[picked.position] = picked.champion.id || wildcardsMap.wildcardFill.id;
         });
         bans.forEach((banned, idx) => {
-            ban[banned.position] = banned.champion.id || wildcards.wildcardFill;
+            ban[banned.position] = banned.champion.id || wildcardsMap.wildcardFill.id;
         });
         let strategies = [];
         Object.keys(formStrategies).forEach((key) => {
@@ -273,17 +272,20 @@ _CompositionEdit.propTypes = {
     submitting: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
+    wildcardsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls, champions }) {
+function mapStateToProps({ view, calls, champions, wildcards }) {
     const championsMap = arrayToObject(champions, 'id');
+    const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
         loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         submitting: findByString(calls, removeStatus(COMPOSITION_SAVE_REQUEST)),
         view,
         championsMap,
+        wildcardsMap,
     };
 }
 
