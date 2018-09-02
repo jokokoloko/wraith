@@ -19,8 +19,8 @@ class CompositionView extends Component {
         actionView.viewLoad(match.params.id, COMPOSITIONS);
     }
     render() {
-        const { view: composition, loadingView, championsMap } = this.props;
-        const picks = buildLanes(composition.pick, championsMap);
+        const { view: composition, loadingView, championsMap, wildcardsMap } = this.props;
+        const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
         const loopPick = picks.map((pick, index) => {
             const count = index + 1;
             const { champion, position } = pick;
@@ -79,15 +79,18 @@ CompositionView.propTypes = {
     loadingView: PropTypes.bool.isRequired,
     view: PropTypes.objectOf(PropTypes.any).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
+    wildcardsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls, champions }) {
+function mapStateToProps({ view, calls, champions, wildcards }) {
     const championsMap = arrayToObject(champions, 'id');
+    const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
         loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
         view,
         championsMap,
+        wildcardsMap,
     };
 }
 

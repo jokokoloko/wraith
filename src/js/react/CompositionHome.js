@@ -21,11 +21,11 @@ class CompositionHome extends Component {
         actionComposition.compositionsLoad();
     }
     render() {
-        const { authenticated, loadingCompositions, profile, compositions, championsMap } = this.props;
+        const { authenticated, loadingCompositions, profile, compositions, championsMap, wildcardsMap } = this.props;
         const item = 'composition';
         const loopComposition = compositions.map((composition, index) => {
             const count = compositions.length - index;
-            const picks = buildLanes(composition.pick, championsMap);
+            const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
             const loopPick = picks.map((pick, index) => {
                 const count = index + 1;
                 const { champion, position } = pick;
@@ -95,16 +95,19 @@ CompositionHome.propTypes = {
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
     compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
+    wildcardsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, calls, compositions, champions }) {
+function mapStateToProps({ profile, calls, compositions, champions, wildcards }) {
     const championsMap = arrayToObject(champions, 'id');
+    const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
         loadingCompositions: findByString(calls, removeStatus(COMPOSITIONS_LOAD_REQUEST)),
         profile,
         compositions,
         championsMap,
+        wildcardsMap,
     };
 }
 
