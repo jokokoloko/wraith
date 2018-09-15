@@ -77,12 +77,20 @@ class Champion extends Component {
                 </li>
             );
         });
+        // const loopWildcard = Object.keys(wildcards).map((key) => {
+        //     const wc = wildcards[key];
+        //     return (
+        //         <div key={`wildcard-${wc.role}`} className="wildcard flex-fill" onClick={() => selectChampion(wc)}>
+        //             <div className={`role-wildcard bg-${wc.role}-icon`}></div>
+        //         </div>
+        //     );
+        // });
         const loopWildcard = Object.keys(wildcards).map((key) => {
             const wc = wildcards[key];
             return (
-                <div key={`wildcard-${wc.role}`} className="wildcard flex-fill" onClick={() => selectChampion(wc)}>
+                <li key={`wildcard-${wc.role}`} className="wildcard col justify-content-center" onClick={() => selectChampion(wc)}>
                     <div className={`role-wildcard bg-${wc.role}-icon`}></div>
-                </div>
+                </li>
             );
         });
         return (
@@ -90,10 +98,11 @@ class Champion extends Component {
                 <ChampionFilter roles={roles} filters={filters} filterRole={this.filterRole} filterName={this.filterName} />
                 <ul className="champion-grid row gutter-30 panel text-center">
                     {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
-                </ul>
-                <div className="wildcard-container d-flex flex-row">
                     {loopWildcard}
-                </div>
+                </ul>
+                {/* <div className="wildcard-container d-flex flex-row">
+                    {loopWildcard}
+                </div> */}
             </Fragment>
         );
     }
