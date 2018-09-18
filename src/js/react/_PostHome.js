@@ -23,7 +23,7 @@ class _PostHome extends Component {
         const loopPost = posts.map((post, index) => {
             const count = posts.length - index;
             return (
-                <tr key={post.id} id={post.id} className={`${item} ${item}-${count}`}>
+                <tr key={post.id || count} id={post.id} className={`${item} ${item}-${count}`}>
                     <th className={`${item}-title`} scope="row">
                         {post.title || empty}
                     </th>
