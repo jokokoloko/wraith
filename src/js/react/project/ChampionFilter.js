@@ -18,7 +18,7 @@ const ChampionFilter = ({ roles, filters, filterRole, filterName }) => {
                     <InputText
                         name="filter-by-name"
                         label="Filter by name"
-                        placeholder="Filter by name..."
+                        placeholder="Filter by champion name..."
                         onChange={filterName}
                         value={filters.name}
                         size={size}

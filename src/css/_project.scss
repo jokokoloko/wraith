@@ -1,6 +1,49 @@
 @import "css/sprites/lane-icons";
 @import "css/sprites/role-icons";
 
+/* =========================== */
+/* ==========!REGION========== */
+/* =========================== */
+
+/* ----------!BODY---------- */
+#body {
+	background-image: url('../img/background-magic.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+	}
+
+/* ========================= */
+/* ==========!AREA========== */
+/* ========================= */
+
+/* ----------!FORM-COMPOSITION---------- */
+#form-composition {
+	padding-top: 80px;
+	padding-bottom: 80px;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =============================== */
 /* ==========!NAVIGATION========== */
 /* =============================== */
@@ -91,7 +134,7 @@ $padding-md: 10px;
 .team-composition {
     list-style-type: none;
     flex-direction: column;
-    padding: 0 20px;
+    padding: 0;
 
     .champion-selection {
         height: 64px;

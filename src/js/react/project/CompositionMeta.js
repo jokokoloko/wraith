@@ -23,7 +23,7 @@ class CompositionMeta extends Component {
         const size = 'lg';
         const buttonGroup = positions.map((pos, idx) => {
             return (
-                <button key={`btn-${idx}`} type="button" className="btn btn-info" onClick={() => this.selectPosition(pos)}>
+                <button key={`btn-${idx}`} type="button" className="btn btn-hollow" onClick={() => this.selectPosition(pos)}>
                     {pos}
                 </button>
             );
@@ -52,10 +52,10 @@ class CompositionMeta extends Component {
                     />
                 </div>
             );
-        })
+        });
         return (
             <form id="form-composition" className={`form form-${size}`}>
-                <div className="panel mt-5">
+                <div className="panel">
                     <InputText name="title" label="Title" placeholder="Title" size={size} onChange={(e) => onChange(e, 'form')} value={form.title} />
                     <InputText
                         type="area"
@@ -68,7 +68,7 @@ class CompositionMeta extends Component {
                     />
                 </div>
 
-                <div className="panel mt-5">
+                <div className="panel">
                     {buttonGroup}
 
                     <InputText
@@ -93,7 +93,7 @@ class CompositionMeta extends Component {
                     />
                 </div>
 
-                <div className="panel mt-5">
+                <div className="panel">
                     {strategyInputs}
                     <button type="button" className="btn btn-info" onClick={addStrategy}>
                         + Strategy

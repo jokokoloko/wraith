@@ -82,7 +82,8 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 .form-control {
-	border-color: $color-smoke;
+	background-color: $color-form-grey-0C0C14;
+	border-color: $color-form-bronze-382B19;
 	color: inherit;
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
@@ -102,12 +103,13 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 .form-control:focus {
-	border-color: $color-brand-blue-200;
-	color: $color-brand-blue-200;
-	box-shadow: 0 0 0 3px rgba(0, 125, 255, 0.25);
+	background-color: $color-form-grey-0C0C14;
+	border-color: $color-text-cream-F1E6D0;
+	color: $color-general-blue-09BCD6;
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
 .form-control::placeholder {
-	color: $color-smoke;
+	color: $color-text-grey-434647;
 	opacity: 1;
 	}
 

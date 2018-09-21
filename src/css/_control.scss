@@ -80,10 +80,25 @@ $color-brand-blue-300:			#007bff;
 $color-brand-blue-400:			#0056b3;
 $color-brand-green-400:			#28a745;
 
+/* ----------!GENERAL---------- */
+$color-general-blue-09BCD6:		#09BCD6;
+$color-general-midnight-010C16:	#010C16;
+
+/* ----------!TEXT---------- */
+$color-text-cream-F1E6D0:		#F1E6D0;
+$color-text-iron-A09A8E:		#A09A8E;
+$color-text-gold-937341:		#937341;
+$color-text-grey-434647:		#434647;
+$color-text-green-38A53D:		#38A53D;
+
+/* ----------!FORM---------- */
+$color-form-bronze-382B19:		#382B19;
+$color-form-grey-0C0C14:		#0C0C14;
+
 /* ----------!REGION---------- */
-$color-body:					(null, null, null);
+$color-body:					($color-general-midnight-010C16, null, null);
 $color-offcanvas:				($color-ghost, $color-smoke !important, null);
-$color-header:					($color-phantom, null, null);
+$color-header:					($color-general-midnight-010C16, null, null);
 $color-bar:						($color-blue-400, $color-blue-400 !important, null);
 $color-main:					(null, null, null);
 $color-footer:					(null, null, null);

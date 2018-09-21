@@ -11,7 +11,7 @@ const Footer = ({ location }) => {
     _Private && (container = 'container-fluid');
     return (
         <footer id="footer" className={`navbar navbar-expand-lg navbar-${type}-bottom bottom`} role="contentinfo">
-            <div className={container}>
+            <div className={`${container} justify-content-center`}>
                 <p className="copyright navbar-text">
                     <Link className="navbar-link" title={client.BRAND} rel="home" to={path.Root}>
                         {client.BRAND}
