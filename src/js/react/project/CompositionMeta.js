@@ -30,7 +30,7 @@ class CompositionMeta extends Component {
         });
         const strategyInputs = Object.keys(formStrategies).map((key, idx) => {
             return (
-                <div key={`strategy-${key}`} className="mt-3">
+                <div key={`strategy-${key}`} className="strategy-group">
                     <InputText
                         name="phase"
                         label="phase"
@@ -69,7 +69,7 @@ class CompositionMeta extends Component {
                 </div>
 
                 <div className="panel">
-                    {buttonGroup}
+                    <div className="form-action">{buttonGroup}</div>
 
                     <InputText
                         type="area"
@@ -95,9 +95,12 @@ class CompositionMeta extends Component {
 
                 <div className="panel">
                     {strategyInputs}
-                    <button type="button" className="btn btn-info" onClick={addStrategy}>
-                        + Strategy
-                    </button>
+
+                    <div className="strategy-action text-right">
+                        <button type="button" className="btn btn-hollow btn-add-group" onClick={addStrategy}>
+                            + Strategy
+                        </button>
+                    </div>
                 </div>
             </form>
         );

@@ -21,7 +21,14 @@
 /* ----------!FORM-COMPOSITION---------- */
 #form-composition {
 	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-bottom: 340px;
+	}
+#form-composition .strategy-group + .strategy-group {
+	padding-top: 50px;
+	}
+#form-composition .strategy-group + .strategy-action,
+#form-composition .form-action + .form-group {
+	margin-top: 20px;
 	}
 
 

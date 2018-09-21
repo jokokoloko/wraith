@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InputText from '../input/InputText';
 
 const ChampionFilter = ({ roles, filters, filterRole, filterName }) => {
-    const size = 'sm';
+    const size = 'md';
     const loopRole = roles.map((role) => {
         const selectedClass = filters.role === role ? 'selected' : '';
         return <li key={role} className={`role-icon bg-${role.toLowerCase()}-icon ${selectedClass}`} onClick={() => filterRole(role)} />;
