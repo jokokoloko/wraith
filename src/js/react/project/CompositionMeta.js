@@ -81,7 +81,7 @@ class CompositionMeta extends Component {
                         group={curPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[curPosition].notes}
+                        value={formNotes[curPosition].pick}
                     />
                     <InputText
                         type="area"
