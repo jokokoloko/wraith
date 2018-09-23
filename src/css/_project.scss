@@ -137,22 +137,6 @@ $padding-md: 10px;
 /* ================================ */
 
 /* ----------!TEAM COMP---------- */
-.team-selection {
-    width: 100%;
-    padding: 15px;
-}
-
-.team-composition {
-    list-style-type: none;
-    flex-direction: column;
-    padding: 0;
-
-    .champion-selection {
-        height: 64px;
-        margin: 8px;
-    }
-}
-
 .team-bans {
     width: 100%;
     padding: $padding-md / 2;
@@ -170,11 +154,6 @@ $padding-md: 10px;
             border: 1px solid rgba(81, 203, 238, 1);
         }
     }
-}
-
-.champion-selection.highlight {
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    border: 1px solid rgba(81, 203, 238, 1);
 }
 
 .champion-selection .champion-image {

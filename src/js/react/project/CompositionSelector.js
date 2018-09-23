@@ -10,7 +10,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         } else if (champion.type === 'wildcard') {
             return (
                 <div className="champion-image">
-                    <div className={`role-wildcard bg-${champion.role}-icon`}></div>
+                    <div className={`role-wildcard bg-${champion.role}-icon`} />
                 </div>
             );
         } else {
@@ -28,7 +28,8 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 key={`pick-${position}`}
                 id={`pick-${position}`}
                 className={`champion-selection pick pick-${count} d-flex align-items-center ${highlightStyle}`}
-                onClick={() => selectLane(index, collection)}>
+                onClick={() => selectLane(index, collection)}
+            >
                 {generateAvatar(champion, championAvatar)}
                 <span className="champion-pick">{position}:</span>
                 <span className="champion-name">{champion.id ? champion.name || `Any ${champion.role}` : ''}</span>
@@ -46,7 +47,8 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 key={`ban-${position}`}
                 id={`ban-${position}`}
                 className={`champion-ban ban ban-${count} ${highlightStyle}`}
-                onClick={() => selectLane(index, collection)}>
+                onClick={() => selectLane(index, collection)}
+            >
                 {generateAvatar(champion, championAvatar)}
             </div>
         );
@@ -54,7 +56,6 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     return (
         <div className="team-selection panel">
             <ul className="team-composition">{loopPick}</ul>
-            <h5>Bans:</h5>
             <div className="team-bans">{loopBan}</div>
             <Button
                 type="button"
