@@ -47,8 +47,28 @@
 /* --------------------------------------------------------- */
 /* ----------!BELOW-THIS-LINE-ARE-TEMPORARY-STYLES---------- */
 /* --------------------------------------------------------- */
+.tip {
+	background-color: $color-text-bronze-5D4623;
+	color: $color-general-bronze-C8AA6E;
+}
 
+.welcome {
 
+	.title {
+		@extend [class*="xs-15"];
+		@extend .p-xs-15;
+		color: $color-text-gold-937341;
+	}
+
+	.description {
+		@extend [class*="xs-10"];
+		@extend .p-xs-10;
+	}
+
+	.title + .description {
+		padding-top: 20px;
+	}
+}
 
 
 

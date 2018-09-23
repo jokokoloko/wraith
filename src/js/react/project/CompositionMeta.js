@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../input/InputText';
 import { positions } from '../../composition';
+import Tip from '../unit/Tip';
 
 class CompositionMeta extends Component {
     constructor(props) {
@@ -57,6 +58,7 @@ class CompositionMeta extends Component {
             <form id="form-composition" className={`form form-${size}`}>
                 <div className="panel">
                     <InputText name="title" label="Title" placeholder="Title" size={size} onChange={(e) => onChange(e, 'form')} value={form.title} />
+                    <Tip />
                     <InputText
                         type="area"
                         name="description"

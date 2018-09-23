@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
+import Welcome from './Welcome';
 import Image from '../unit/Image';
+import rift from '../../../img/summoners-rift.jpg';
 
 const ChampionInformation = ({ champion }) => {
     let champImg,
@@ -24,7 +26,11 @@ const ChampionInformation = ({ champion }) => {
             <h4 className="p-xs-15">Roles: {roles}</h4>
         </div>
     ) : (
-        <h1 className="p-xs-15">Select a Champion.</h1>
+        <Welcome
+            title="Welcome to Invade Blue"
+            description="Here you can build team compositons and share them for all to see or only with your friends."
+            image={rift}
+        />
     );
 };
 
