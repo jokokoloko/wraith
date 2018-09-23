@@ -53,6 +53,10 @@ class Champion extends Component {
         }
         return roleMatch && champion.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0;
     }
+    shouldDisplayRole(fillRole) {
+        const { filters } = this.state;
+        return filters.role ? filters.role.toLowerCase() === fillRole.role.toLowerCase() : true;
+    }
     render() {
         const { loadingChampions, champions, selectChampion, wildcards } = this.props;
         const { filters, roles } = this.state;
@@ -77,19 +81,14 @@ class Champion extends Component {
                 </li>
             );
         });
-        // const loopWildcard = Object.keys(wildcards).map((key) => {
-        //     const wc = wildcards[key];
-        //     return (
-        //         <div key={`wildcard-${wc.role}`} className="wildcard flex-fill" onClick={() => selectChampion(wc)}>
-        //             <div className={`role-wildcard bg-${wc.role}-icon`}></div>
-        //         </div>
-        //     );
-        // });
         const loopWildcard = Object.keys(wildcards).map((key) => {
             const wc = wildcards[key];
+            const displayClass = this.shouldDisplayRole(wc) ? 'd-flex' : 'd-none';
             return (
-                <li key={`wildcard-${wc.role}`} className="wildcard col justify-content-center" onClick={() => selectChampion(wc)}>
-                    <div className={`role-wildcard bg-${wc.role}-icon`}></div>
+                <li key={`wildcard-${wc.role}`} className={`${displayClass} wildcard col justify-content-center`} onClick={() => selectChampion(wc)}>
+                    <div className="wildcard-item">
+                        <div className={`role-wildcard bg-${wc.role}-icon`}></div>
+                    </div>
                 </li>
             );
         });
@@ -100,9 +99,6 @@ class Champion extends Component {
                     {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
                     {loopWildcard}
                 </ul>
-                {/* <div className="wildcard-container d-flex flex-row">
-                    {loopWildcard}
-                </div> */}
             </Fragment>
         );
     }

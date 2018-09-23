@@ -76,11 +76,4 @@ $role-wildcard-size: 40px;
     &.bg-support-icon {
         @include generate-icon($role-sprite, 0, 5, $role-wildcard-size);
     }
-
-    &.bg-fill-icon {
-        @include generate-icon($lane-sprite, 0, 1, $role-wildcard-size);
-        &::before {
-            display: none;
-        }
-    }
 }
