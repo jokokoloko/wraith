@@ -69,13 +69,15 @@ class CompositionMeta extends Component {
                 </div>
 
                 <div className="panel">
+                    <h4 className="section-title">Notes</h4>
+
                     <div className="form-action">{buttonGroup}</div>
 
                     <InputText
                         type="area"
-                        name="notes"
-                        label="notes"
-                        placeholder="Notes"
+                        name="pick"
+                        label="pick"
+                        placeholder="Pick"
                         group={curPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
@@ -94,11 +96,13 @@ class CompositionMeta extends Component {
                 </div>
 
                 <div className="panel">
+                    <h4 className="section-title">Strategies</h4>
+
                     {strategyInputs}
 
                     <div className="strategy-action text-right">
                         <button type="button" className="btn btn-hollow btn-add-group" onClick={addStrategy}>
-                            + Strategy
+                            + Phase
                         </button>
                     </div>
                 </div>
