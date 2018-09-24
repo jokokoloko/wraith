@@ -9,7 +9,7 @@ const ChampionInformation = ({ champion }) => {
     let champImg,
         roles = '';
     if (champion && champion.name) {
-        champImg = client.CHAMPION_LOADING + champion.key + '_0.jpg';
+        champImg = client.CHAMPION_SPLASH + champion.key + '_0.jpg';
         Object.keys(champion.tags).forEach((tag) => {
             roles += tag + ', ';
         });
