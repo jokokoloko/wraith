@@ -5,6 +5,14 @@
 /* ==========!CHAMPION========== */
 /* ============================= */
 
+/* ----------!IMAGE---------- */
+.champion-image {
+    background-color: $color-general-midnight-010C16;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    }
+
 /* ----------!NAME---------- */
 .champion-name {
     text-transform: capitalize;
@@ -98,7 +106,6 @@
 /* ==========!NAVIGATION========== */
 /* =============================== */
 
-$champ-size: 80px;
 $padding-md: 10px;
 
 /* ----------!NAVBAR---------- */
@@ -172,10 +179,4 @@ $padding-md: 10px;
 }
 #form-filter-champion {
     padding-bottom: 30px;
-}
-
-.champion-selection .champion-image {
-    width: $champ-size;
-    height: $champ-size;
-    margin-right: 20px;
 }

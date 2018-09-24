@@ -6,7 +6,7 @@ import Button from '../unit/Button';
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     const generateAvatar = (champion, championAvatar) => {
         if (champion.key && champion.name) {
-            return <img className="champion-image bg-dark" src={championAvatar} alt={champion.name} />;
+            return <img className="champion-image" src={championAvatar} alt={champion.name} />;
         } else if (champion.type === 'wildcard') {
             return (
                 <div className="champion-image">
@@ -14,49 +14,43 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 </div>
             );
         } else {
-            return <div className="champion-image bg-dark" />;
+            return <div className="champion-image" />;
         }
     };
     const loopPick = picks.map((pick, index) => {
+        const { champion, position } = pick;
         const collection = 'picks';
         const count = index + 1;
-        const { champion, position } = pick;
+        const active = selectedCollection === collection && selectedLaneIdx === index;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
-        const highlightStyle = selectedCollection === collection && selectedLaneIdx === index ? 'highlight' : '';
         return (
             <li
                 key={`pick-${position}`}
                 id={`pick-${position}`}
-                className={`champion-selection pick pick-${count} d-flex align-items-center ${highlightStyle}`}
+                className={`pick pick-${count} d-flex align-items-center ${active ? 'active' : ''}`}
                 onClick={() => selectLane(index, collection)}
             >
                 {generateAvatar(champion, championAvatar)}
 
-                {/* {selectedCollection === collection && selectedLaneIdx === index ? (
+                {champion.id ? (
+                    <span className="champion-name">{champion.name}</span>
+                ) : active ? (
                     <span className="champion-pick">{`Pick for ${position}`}</span>
-                    ) : (
-                    <span className="champion-name">{champion.name || champion.role}</span>
-                )} */}
-
-                {!champion.id && selectedCollection === collection && selectedLaneIdx === index ? (
-                    <span className="champion-pick">{`Pick for ${position}`}</span>
-                ) : (
-                    <span className="champion-name">{champion.name || champion.role}</span>
-                )}
+                ) : null}
             </li>
         );
     });
     const loopBan = bans.map((ban, index) => {
+        const { champion, position } = ban;
         const collection = 'bans';
         const count = index + 1;
-        const { champion, position } = ban;
+        const active = selectedCollection === collection && selectedLaneIdx === index;
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
-        const highlightStyle = selectedCollection === collection && selectedLaneIdx === index ? 'highlight' : '';
         return (
             <li
                 key={`ban-${position}`}
                 id={`ban-${position}`}
-                className={`champion-ban ban ban-${count} ${highlightStyle}`}
+                className={`ban ban-${count} ${active ? 'active' : ''}`}
                 onClick={() => selectLane(index, collection)}
             >
                 {generateAvatar(champion, championAvatar)}
