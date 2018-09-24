@@ -1,17 +1,27 @@
 @import "css/sprites/lane-icons";
 @import "css/sprites/role-icons";
 
-/* =========================== */
-/* ==========!REGION========== */
-/* =========================== */
+/* ============================= */
+/* ==========!CHAMPION========== */
+/* ============================= */
 
-/* ----------!BODY---------- */
-#body {
-	background-image: url('../img/background-magic.png');
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+/* ----------!NAME---------- */
+.champion-name {
+    text-transform: capitalize;
+	}
+
+/* ================================ */
+/* ==========!COMPOSITION========== */
+/* ================================ */
+
+/* ----------!PICK---------- */
+.composition-picks .pick + .pick {
+    padding-top: 20px;
+	}
+
+/* ----------!BUTTON---------- */
+#composition ul + .btn {
+	margin-top: 80px;
 	}
 
 /* ========================= */
@@ -40,18 +50,32 @@
 	margin-top: 20px;
 	}
 
+/* =========================== */
+/* ==========!REGION========== */
+/* =========================== */
 
+/* ----------!BODY---------- */
+#body {
+	background-image: url('../img/background-magic.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+	}
 
 
 
 /* --------------------------------------------------------- */
 /* ----------!BELOW-THIS-LINE-ARE-TEMPORARY-STYLES---------- */
 /* --------------------------------------------------------- */
+
+/* ----------!TIP---------- */
 .tip {
 	background-color: $color-text-bronze-5D4623;
 	color: $color-general-bronze-C8AA6E;
 }
 
+/* ----------!WELCOME---------- */
 .welcome {
 
 	.title {
@@ -70,13 +94,11 @@
 	}
 }
 
-
-
 /* =============================== */
 /* ==========!NAVIGATION========== */
 /* =============================== */
 
-$champ-size: 60px;
+$champ-size: 80px;
 $padding-md: 10px;
 
 /* ----------!NAVBAR---------- */
@@ -152,44 +174,8 @@ $padding-md: 10px;
     padding-bottom: 30px;
 }
 
-/* ================================ */
-/* ==========!COMPOSITION========== */
-/* ================================ */
-
-/* ----------!TEAM COMP---------- */
-.team-bans {
-    width: 100%;
-    padding: $padding-md / 2;
-    margin: 20px 0;
-
-    .champion-ban {
-        width: 48px;
-        height: 48px;
-        border: 1px solid;
-        display: inline-block;
-        vertical-align: top;
-        margin-right: 3px;
-
-        &.highlight {
-            border: 1px solid rgba(81, 203, 238, 1);
-        }
-    }
-}
-
 .champion-selection .champion-image {
     width: $champ-size;
     height: $champ-size;
-    padding-right: $padding-md;
-}
-
-.champion-selection .champion-lane {
-    text-transform: capitalize;
-    padding-right: $padding-md;
-}
-
-/*----------- !Team View --------------*/
-.champ-row-bg {
-    background: #474747;
-    background: -webkit-linear-gradient(left, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
-    background: linear-gradient(to right, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
+    margin-right: 20px;
 }

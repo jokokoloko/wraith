@@ -31,8 +31,18 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 onClick={() => selectLane(index, collection)}
             >
                 {generateAvatar(champion, championAvatar)}
-                <span className="champion-pick">{position}:</span>
-                <span className="champion-name">{champion.id ? champion.name || `Any ${champion.role}` : ''}</span>
+
+                {/* {selectedCollection === collection && selectedLaneIdx === index ? (
+                    <span className="champion-pick">{`Pick for ${position}`}</span>
+                    ) : (
+                    <span className="champion-name">{champion.name || champion.role}</span>
+                )} */}
+
+                {!champion.id && selectedCollection === collection && selectedLaneIdx === index ? (
+                    <span className="champion-pick">{`Pick for ${position}`}</span>
+                ) : (
+                    <span className="champion-name">{champion.name || champion.role}</span>
+                )}
             </li>
         );
     });
