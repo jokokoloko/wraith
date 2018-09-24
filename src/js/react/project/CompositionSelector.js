@@ -43,24 +43,24 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
         const highlightStyle = selectedCollection === collection && selectedLaneIdx === index ? 'highlight' : '';
         return (
-            <div
+            <li
                 key={`ban-${position}`}
                 id={`ban-${position}`}
                 className={`champion-ban ban ban-${count} ${highlightStyle}`}
                 onClick={() => selectLane(index, collection)}
             >
                 {generateAvatar(champion, championAvatar)}
-            </div>
+            </li>
         );
     });
     return (
-        <div className="team-selection panel">
-            <ul className="team-composition">{loopPick}</ul>
-            <div className="team-bans">{loopBan}</div>
+        <div id="composition">
+            <ul className="composition-picks list-reset">{loopPick}</ul>
+            <ul className="composition-bans list-reset">{loopBan}</ul>
             <Button
                 type="button"
                 name="register"
-                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Publishing...' : 'Publish'}
+                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Locking In...' : 'Lock In'}
                 kind={id ? 'primary' : 'success'}
                 size="lg"
                 display="block"
