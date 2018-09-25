@@ -4,19 +4,20 @@ import * as client from '../../client';
 import Button from '../unit/Button';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
-    const generateAvatar = (champion, championAvatar) => {
-        if (champion.key && champion.name) {
-            return <img className="champion-image" src={championAvatar} alt={champion.name} />;
-        } else if (champion.type === 'wildcard') {
-            return (
-                <div className="champion-image">
-                    <div className={`role-wildcard bg-${champion.role}-icon`} />
-                </div>
-            );
-        } else {
-            return <div className="champion-image" />;
-        }
-    };
+    // const generateAvatar = (champion, championAvatar) => {
+    //     if (champion.key && champion.name) {
+    //         return <img className="champion-image" src={championAvatar} alt={champion.name} />;
+    //     } else if (champion.type === 'wildcard') {
+    //         return (
+    //             <div className="champion-image cell">
+    //                 <div className={`role-wildcard bg-${champion.role}-icon`} />
+    //             </div>
+    //         );
+    //     } else {
+    //         return <div className="champion-image cell" />;
+    //     }
+    // };
+    const generateAvatar = (champion, championAvatar) => <div className="cell" />;
     const loopPick = picks.map((pick, index) => {
         const { champion, position } = pick;
         const collection = 'picks';
@@ -60,7 +61,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     return (
         <div id="composition">
             <ul className="composition-picks list-reset">{loopPick}</ul>
-            <ul className="composition-bans list-reset">{loopBan}</ul>
+            <ul className="composition-bans list-reset d-flex justify-content-between">{loopBan}</ul>
             <Button
                 type="button"
                 name="register"

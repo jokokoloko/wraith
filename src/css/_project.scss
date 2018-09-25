@@ -1,17 +1,27 @@
 @import "css/sprites/lane-icons";
 @import "css/sprites/role-icons";
 
+/* ========================== */
+/* ==========!BASIC========== */
+/* ========================== */
+
+/* ----------!CELL---------- */
+.cell {
+    background-color: $color-general-midnight-010C16;
+	}
+
+/* =========================== */
+/* ==========!SCRIPT========== */
+/* =========================== */
+
+/* ----------!AFFIX---------- */
+.affix-width {
+    width: 305px;
+	}
+
 /* ============================= */
 /* ==========!CHAMPION========== */
 /* ============================= */
-
-/* ----------!IMAGE---------- */
-.champion-image {
-    background-color: $color-general-midnight-010C16;
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
-    }
 
 /* ----------!NAME---------- */
 .champion-name {
@@ -26,9 +36,23 @@
 .composition-picks .pick + .pick {
     padding-top: 20px;
 	}
+.composition-picks .pick .cell {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+	}
 
-/* ----------!BUTTON---------- */
-#composition ul + .btn {
+/* ----------!BAN---------- */
+.composition-bans .ban .cell {
+    width: 50px;
+    height: 50px;
+	}
+
+/* ----------!SPACE---------- */
+.composition-picks + .composition-bans {
+	padding-top: 50px;
+	}
+.composition-bans + .btn {
 	margin-top: 80px;
 	}
 
