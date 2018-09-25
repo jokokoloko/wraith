@@ -1,45 +1,59 @@
 //Todo: move this to db later.
 module.exports = {
-    'wildcardTank': {
+    wildcardTank: {
         id: 'wildcardTank',
+        key: 'Tank',
+        name: 'Tank',
         role: 'tank',
         type: 'wildcard',
-        order: 1
+        order: 1,
     },
-    'wildcardMage': {
+    wildcardMage: {
         id: 'wildcardMage',
+        key: 'Mage',
+        name: 'Mage',
         role: 'mage',
         type: 'wildcard',
-        order: 2
+        order: 2,
     },
-    'wildcardAssassin': {
+    wildcardAssassin: {
         id: 'wildcardAssassin',
+        key: 'Assassin',
+        name: 'Assassin',
         role: 'assassin',
         type: 'wildcard',
-        order: 3
+        order: 3,
     },
-    'wildcardFighter': {
+    wildcardFighter: {
         id: 'wildcardFighter',
+        key: 'Fighter',
+        name: 'Fighter',
         role: 'fighter',
         type: 'wildcard',
-        order: 4
+        order: 4,
     },
-    'wildcardMarksman': {
+    wildcardMarksman: {
         id: 'wildcardMarksman',
+        key: 'Marksman',
+        name: 'Marksman',
         role: 'marksman',
         type: 'wildcard',
-        order: 5
+        order: 5,
     },
-    'wildcardSupport': {
+    wildcardSupport: {
         id: 'wildcardSupport',
+        key: 'Support',
+        name: 'Support',
         role: 'support',
         type: 'wildcard',
-        order: 6
+        order: 6,
     },
-    'wildcardFill': {
+    wildcardFill: {
         id: 'wildcardFill',
+        key: 'Fill',
+        name: 'Fill',
         role: 'fill',
         type: 'wildcard',
-        order: 7
+        order: 7,
     },
 };
