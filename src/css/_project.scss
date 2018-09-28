@@ -5,6 +5,16 @@
 /* ==========!BASIC========== */
 /* ========================== */
 
+/* ----------!ACTION---------- */
+.action {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
+    font-weight: $font-weight-3;
+    text-transform: uppercase;
+    color: $color-text-cream-F1E6D0;
+	}
+
 /* ----------!CELL---------- */
 .cell {
     background-color: $color-general-midnight-010C16;

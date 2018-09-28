@@ -36,7 +36,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 {champion.id ? (
                     <span className="champion-name">{champion.name}</span>
                 ) : active ? (
-                    <span className="champion-pick">{`Pick for ${position}`}</span>
+                    <span className="action">{`Pick for ${position}`}</span>
                 ) : null}
             </li>
         );
