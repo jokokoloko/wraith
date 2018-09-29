@@ -28,34 +28,29 @@ class CompositionHome extends Component {
             const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
             const loopPick = picks.map((pick, index) => {
                 const count = index + 1;
+                console.log(pick);
                 const { champion, position } = pick;
                 const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
                 return (
-                    <li key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count} col-1`}>
+                    <div key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count}`}>
                         <Image source={championAvatar} alternate={champion ? champion.name : null} />
-                    </li>
+                        <span></span>
+                    </div>
                 );
             });
             return (
-                <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20`}>
-                    <header className="card card-panel">
-                        <div className="card-body">
-                            <ul className="composition-pick row">{loopPick}</ul>
-                            {composition.meta.title && <h3 className="composition-title card-headline">{composition.meta.title}</h3>}
-                            {composition.meta.excerpt && <p className="composition-excerpt">{composition.meta.excerpt}...</p>}
-                            <p className="composition-user">by {composition.user}</p>
-                            <p className="composition-action">
-                                <Link to={`/${composition.id}`}>View</Link>
-                                {authenticated &&
-                                    profile.id === composition.user && (
-                                        <Fragment>
-                                            <span className="separator"> - </span>
-                                            <Link to={`${path._Edit}/${composition.id}`}>Edit</Link>
-                                        </Fragment>
-                                    )}
-                            </p>
+                <article key={composition.id} id={composition.id} className={`${item} ${item}-${count} node-xs-20 composition-article`}>
+                    <Link to={`/${composition.id}`}>
+                        <div className="card card-panel container">
+                            <div className="card-body row composition-details">
+                                <div className="composition-pick col-6">
+                                    {loopPick}
+                                </div>
+                                {composition.meta.title && <h3 className="composition-title card-headline col-3">{composition.meta.title}</h3>}
+                                <p className="composition-user col-3">by {composition.user}</p>
+                            </div>
                         </div>
-                    </header>
+                    </Link>
                 </article>
             );
         });
@@ -64,11 +59,11 @@ class CompositionHome extends Component {
                 <div className="container-fluid">
                     <Basic space="space-xs-50">
                         <header>
-                            <h1>Compositions</h1>
+                            <h1>Welcome to Invade.Blue</h1>
                         </header>
                     </Basic>
 
-                    <Feed space="space-xs-50" item={item}>
+                    <Feed space="space-xs-50">
                         <section>
                             {loadingCompositions ? (
                                 <Loader position="exact-center fixed" label="Loading compositions" />
