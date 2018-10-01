@@ -17,7 +17,13 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     //         return <div className="champion-image cell" />;
     //     }
     // };
-    const generateAvatar = (champion, championAvatar) => <div className="cell" />;
+    const generateAvatar = (champion, championAvatar) => (
+        <div className="cell">
+            <div className="membrane">
+                <div className="nucleus" />
+            </div>
+        </div>
+    );
     const loopPick = picks.map((pick, index) => {
         const { champion, position } = pick;
         const collection = 'picks';
