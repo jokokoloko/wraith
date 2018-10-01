@@ -14,7 +14,7 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
         <header id="header" className={`navbar navbar-expand-lg navbar-${type}-top ${type} ${type}-top`} role="banner">
             <div className={container}>
                 {!_Private && (
-                    <Link className="navbar-brand" title={client.BRAND} rel="home" to={path.Root}>
+                    <Link className="navbar-brand logo" title={client.BRAND} rel="home" to={path.Root}>
                         {client.BRAND}
                     </Link>
                 )}
