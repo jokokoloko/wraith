@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
+import lane from '../../../img/lane-none.png';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     // const generateAvatar = (champion, championAvatar) => {
@@ -20,7 +21,9 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     const generateAvatar = (champion, championAvatar) => (
         <div className="cell">
             <div className="membrane">
-                <div className="nucleus" />
+                <div className="nucleus">
+                    <img className="icon-lane img-fluid exact-center" src={lane} alt="" />
+                </div>
             </div>
         </div>
     );

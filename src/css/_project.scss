@@ -20,19 +20,30 @@
     background-color: $color-form-grey-0C0C14;
     border: 1px solid $color-form-grey-0C0C14;
 	}
-.cell .membrane,
-.cell .nucleus {
+.cell > .membrane,
+.cell > .membrane > .nucleus {
     width: 100%;
     height: 100%;
 	}
-.cell .membrane {
+.cell > .membrane {
     border: 1px solid $color-general-grey-3C3C41;
 	}
-.cell .nucleus {
+.cell > .membrane > .nucleus {
     border: 1px solid $color-form-grey-0C0C14;
+    position: relative;
 	}
-.active .cell .membrane {
+.cell > .membrane > .nucleus > .icon-lane {
+    width: 40px;
+    height: 40px;
+    opacity: 0.3;
+	}
+
+/* ----------!CELL-ACTIVE---------- */
+.active > .cell > .membrane {
     border-color: $color-general-blue-09BCD6;
+	}
+.active > .cell > .membrane > .nucleus > .icon-lane {
+    opacity: 1;
 	}
 
 /* =========================== */
@@ -158,7 +169,8 @@
 
 /* ----------!WELCOME---------- */
 .welcome {
-
+    text-align: center;
+    
 	.title {
 		@extend [class*="xs-15"];
 		@extend .p-xs-15;
