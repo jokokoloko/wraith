@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Button from '../unit/Button';
-import lane from '../../../img/lane-none.png';
+import lane from '../../../img/icon-lane-none.png';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     // const generateAvatar = (champion, championAvatar) => {
