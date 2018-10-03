@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
+import IconLane from './IconLane';
 import Button from '../unit/Button';
-import lane from '../../../img/icon-lane-none.png';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     // const generateAvatar = (champion, championAvatar) => {
@@ -18,11 +18,11 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     //         return <div className="champion-image cell" />;
     //     }
     // };
-    const generateAvatar = (champion, championAvatar) => (
+    const generateAvatar = (champion, championAvatar, position) => (
         <div className="cell">
             <div className="membrane">
                 <div className="nucleus">
-                    <img className="icon-lane img-fluid exact-center" src={lane} alt="" />
+                    <IconLane className="icon-lane img-fluid exact-center" position={position} />
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 className={`pick pick-${count} d-flex align-items-center ${active ? 'active' : ''}`}
                 onClick={() => selectLane(index, collection)}
             >
-                {generateAvatar(champion, championAvatar)}
+                {generateAvatar(champion, championAvatar, position)}
 
                 {champion.id ? (
                     <span className="champion-name">{champion.name}</span>
@@ -63,7 +63,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 className={`ban ban-${count} ${active ? 'active' : ''}`}
                 onClick={() => selectLane(index, collection)}
             >
-                {generateAvatar(champion, championAvatar)}
+                {generateAvatar(champion, championAvatar, 'ban')}
             </li>
         );
     });
