@@ -15,7 +15,20 @@
     color: $color-text-cream-F1E6D0;
 	}
 
-/* ----------!CELL---------- */
+/* =========================== */
+/* ==========!SCRIPT========== */
+/* =========================== */
+
+/* ----------!AFFIX---------- */
+.affix-width {
+    width: 305px;
+	}
+
+/* ========================= */
+/* ==========!CELL========== */
+/* ========================= */
+
+/* ----------!GENERAL---------- */
 .cell {
     background-color: $color-form-grey-0C0C14;
     border: 1px solid $color-form-grey-0C0C14;
@@ -33,26 +46,15 @@
     position: relative;
 	}
 .cell > .membrane > .nucleus > .icon-lane {
-    width: 40px;
-    height: 40px;
     opacity: 0.3;
 	}
 
-/* ----------!CELL-ACTIVE---------- */
+/* ----------!ACTIVE---------- */
 .active > .cell > .membrane {
     border-color: $color-general-blue-09BCD6;
 	}
 .active > .cell > .membrane > .nucleus > .icon-lane {
     opacity: 1;
-	}
-
-/* =========================== */
-/* ==========!SCRIPT========== */
-/* =========================== */
-
-/* ----------!AFFIX---------- */
-.affix-width {
-    width: 305px;
 	}
 
 /* ============================= */
@@ -76,23 +78,27 @@
 .composition-bans {
     margin: -1px;
 	}
-.composition-picks .pick,
-.composition-bans .ban {
+.composition-picks > .pick,
+.composition-bans > .ban {
     cursor: pointer;
 	}
 
 /* ----------!PICK---------- */
-.composition-picks .pick + .pick {
+.composition-picks > .pick + .pick {
     margin-top: 18px;
 	}
-.composition-picks .pick .cell {
+.composition-picks > .pick > .cell {
     width: 80px;
     height: 80px;
     margin-right: 20px;
 	}
+.composition-picks > .pick > .cell > .membrane > .nucleus > .icon-lane {
+    width: 40px;
+    height: 40px;
+	}
 
 /* ----------!BAN---------- */
-.composition-bans .ban .cell {
+.composition-bans > .ban > .cell {
     width: 50px;
     height: 50px;
 	}
@@ -170,7 +176,7 @@
 /* ----------!WELCOME---------- */
 .welcome {
     text-align: center;
-    
+
 	.title {
 		@extend [class*="xs-15"];
 		@extend .p-xs-15;
