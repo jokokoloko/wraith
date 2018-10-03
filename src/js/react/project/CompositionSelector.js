@@ -22,7 +22,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         <div className="cell">
             <div className="membrane">
                 <div className="nucleus">
-                    <IconLane className="icon-lane img-fluid exact-center" position={position} />
+                    <IconLane className="exact-center" position={position} />
                 </div>
             </div>
         </div>

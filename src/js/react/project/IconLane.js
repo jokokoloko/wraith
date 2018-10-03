@@ -20,7 +20,7 @@ const IconLane = ({ className, position }) => {
         fill: iconLaneFill,
         ban: iconLaneBan,
     };
-    return <img className={`icon ${className}`} src={lane[position]} alt={position} />;
+    return <img className={`icon icon-lane img-fluid ${className}`} src={lane[position]} alt={position} />;
 };
 
 IconLane.propTypes = {
