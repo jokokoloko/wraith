@@ -42,7 +42,7 @@ const InputText = ({ type, name, label, placeholder, size, onChange, value, erro
                     {error}
                 </div>
             )}
-            {tip && <Tip />}
+            {!value && tip && <Tip />}
         </div>
     );
 };
@@ -58,6 +58,7 @@ InputText.propTypes = {
     error: PropTypes.string,
     group: PropTypes.string,
     reference: PropTypes.object,
+    tip: PropTypes.bool,
 };
 
 InputText.defaultProps = {
@@ -67,6 +68,7 @@ InputText.defaultProps = {
     error: undefined,
     group: undefined,
     reference: undefined,
+    tip: undefined,
 };
 
 export default InputText;

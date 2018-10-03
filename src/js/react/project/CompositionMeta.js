@@ -55,7 +55,15 @@ class CompositionMeta extends Component {
         return (
             <form id="form-composition" className={`form form-${size}`}>
                 <div className="panel">
-                    <InputText name="title" label="Title" placeholder="Title" size={size} onChange={(e) => onChange(e, 'form')} value={form.title} />
+                    <InputText
+                        name="title"
+                        label="Title"
+                        placeholder="Title"
+                        size={size}
+                        onChange={(e) => onChange(e, 'form')}
+                        value={form.title}
+                        tip={true}
+                    />
                     <InputText
                         type="area"
                         name="description"
@@ -64,6 +72,7 @@ class CompositionMeta extends Component {
                         size={size}
                         onChange={(e) => onChange(e, 'form')}
                         value={form.description}
+                        tip={true}
                     />
                 </div>
 
