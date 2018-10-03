@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../input/InputText';
 import { positions } from '../../composition';
-import Tip from '../unit/Tip';
 
 class CompositionMeta extends Component {
     constructor(props) {
@@ -17,7 +16,6 @@ class CompositionMeta extends Component {
             curPosition: position,
         });
     }
-
     render() {
         const { form, onChange, formNotes, formStrategies, addStrategy } = this.props;
         let { curPosition } = this.state;
@@ -58,7 +56,6 @@ class CompositionMeta extends Component {
             <form id="form-composition" className={`form form-${size}`}>
                 <div className="panel">
                     <InputText name="title" label="Title" placeholder="Title" size={size} onChange={(e) => onChange(e, 'form')} value={form.title} />
-                    <Tip />
                     <InputText
                         type="area"
                         name="description"
@@ -72,9 +69,7 @@ class CompositionMeta extends Component {
 
                 <div className="panel">
                     <h4 className="section-title">Notes</h4>
-
                     <div className="form-action">{buttonGroup}</div>
-
                     <InputText
                         type="area"
                         name="pick"
@@ -99,9 +94,7 @@ class CompositionMeta extends Component {
 
                 <div className="panel">
                     <h4 className="section-title">Strategies</h4>
-
                     {strategyInputs}
-
                     <div className="strategy-action text-right">
                         <button type="button" className="btn btn-hollow btn-add-group" onClick={addStrategy}>
                             + Phase
