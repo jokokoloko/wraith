@@ -75,7 +75,6 @@ class CompositionMeta extends Component {
                         tip={true}
                     />
                 </div>
-
                 <div className="panel">
                     <h4 className="section-title">Notes</h4>
                     <div className="form-action">{buttonGroup}</div>
@@ -100,7 +99,6 @@ class CompositionMeta extends Component {
                         value={formNotes[curPosition].ban}
                     />
                 </div>
-
                 <div className="panel">
                     <h4 className="section-title">Strategies</h4>
                     {strategyInputs}
