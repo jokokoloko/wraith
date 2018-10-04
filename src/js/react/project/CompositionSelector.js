@@ -22,7 +22,11 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         <div className="cell">
             <div className="membrane">
                 <div className="nucleus">
-                    <IconLane className="exact-center" position={position} />
+                    {champion.id ? (
+                        <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
+                    ) : (
+                        <IconLane className="exact-center" position={position} />
+                    )}
                 </div>
             </div>
         </div>
@@ -75,7 +79,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
                 type="button"
                 name="register"
                 label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Locking In...' : 'Lock In'}
-                kind={id ? 'primary' : 'success'}
+                kind={id ? 'update' : 'lock-in'}
                 size="lg"
                 display="block"
                 onClick={onSubmit}

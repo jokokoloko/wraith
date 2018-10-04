@@ -54,6 +54,24 @@
     width: 305px;
 	}
 
+/* =========================== */
+/* ==========!BUTTON========== */
+/* =========================== */
+
+/* ----------!GENERAL---------- */
+.btn {
+    font-weight: 700;
+    text-transform: uppercase;
+    }
+
+/* ----------!LOCK-IN---------- */
+.btn-lock-in,
+.btn-lock-in:hover {
+    background-color: $color-general-blue-09BCD6;
+    border-color: $color-general-blue-09BCD6;
+    color: $color-white;
+    }
+    
 /* ========================= */
 /* ==========!CELL========== */
 /* ========================= */
@@ -74,6 +92,7 @@
 .cell > .membrane > .nucleus {
     border: 1px solid $color-form-grey-0C0C14;
     position: relative;
+    overflow: hidden;
 	}
 .cell > .membrane > .nucleus > .icon-lane {
     opacity: 0.3;
@@ -85,6 +104,9 @@
 	}
 .active > .cell > .membrane > .nucleus > .icon-lane {
     opacity: 1;
+	}
+.active > .cell > .membrane > .nucleus > .champion-avatar {
+    opacity: 0.5;
 	}
 
 /* ============================= */
@@ -126,6 +148,10 @@
     width: 40px;
     height: 40px;
 	}
+.composition-picks > .pick > .cell > .membrane > .nucleus > .champion-avatar {
+    width: 86px;
+    height: 86px;
+	}
 
 /* ----------!BAN---------- */
 .composition-bans > .ban > .cell {
@@ -135,6 +161,10 @@
 .composition-bans > .ban > .cell > .membrane > .nucleus > .icon-lane {
     width: 25px;
     height: 25px;
+	}
+.composition-bans > .ban > .cell > .membrane > .nucleus > .champion-avatar {
+    width: 51px;
+    height: 51px;
 	}
 
 /* ----------!SPACE---------- */
