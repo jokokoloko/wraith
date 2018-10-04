@@ -8,15 +8,15 @@ import rift from '../../../img/summoners-rift.jpg';
 const ChampionInformation = ({ champion }) => {
     let champImg,
         roles = '';
-    if (champion && champion.name) {
+    if (champion.id && champion.type !== 'wildcard') {
         champImg = client.CHAMPION_SPLASH + champion.key + '_0.jpg';
         Object.keys(champion.tags).forEach((tag) => {
             roles += tag + ', ';
         });
-        //remove the extra comma.
+        // remove the extra comma.
         roles = roles.substring(0, roles.length - 2);
     }
-    return champion && champion.name ? (
+    return champion.id && champion.type !== 'wildcard' ? (
         <div className="champion-info">
             <div className="img-container">
                 <Image source={champImg} alternate={champion.name} />
