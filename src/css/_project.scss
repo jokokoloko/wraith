@@ -1,6 +1,15 @@
 @import "css/sprites/lane-icons";
 @import "css/sprites/role-icons";
 
+/* =========================== */
+/* ==========!SCRIPT========== */
+/* =========================== */
+
+/* ----------!AFFIX---------- */
+.affix-width {
+    width: 305px;
+	}
+
 /* ========================== */
 /* ==========!BASIC========== */
 /* ========================== */
@@ -46,15 +55,6 @@
     }
 
 /* =========================== */
-/* ==========!SCRIPT========== */
-/* =========================== */
-
-/* ----------!AFFIX---------- */
-.affix-width {
-    width: 305px;
-	}
-
-/* =========================== */
 /* ==========!BUTTON========== */
 /* =========================== */
 
@@ -81,7 +81,6 @@
     background-color: $color-form-grey-0C0C14;
     border: 1px solid $color-form-grey-0C0C14;
 	}
-.cell > .membrane,
 .cell > .membrane > .nucleus {
     width: 100%;
     height: 100%;
@@ -126,10 +125,6 @@
 /* ================================ */
 
 /* ----------!GENERAL---------- */
-.composition-picks,
-.composition-bans {
-    margin: -1px;
-	}
 .composition-picks > .pick,
 .composition-bans > .ban {
     cursor: pointer;
@@ -140,9 +135,11 @@
     margin-top: 18px;
 	}
 .composition-picks > .pick > .cell {
+    margin-right: 20px;
+	}
+.composition-picks > .pick > .cell > .membrane {
     width: 80px;
     height: 80px;
-    margin-right: 20px;
 	}
 .composition-picks > .pick > .cell > .membrane > .nucleus > .icon-lane {
     width: 40px;
@@ -154,7 +151,7 @@
 	}
 
 /* ----------!BAN---------- */
-.composition-bans > .ban > .cell {
+.composition-bans > .ban > .cell > .membrane {
     width: 50px;
     height: 50px;
 	}
@@ -173,6 +170,45 @@
 	}
 .composition-bans + .btn {
 	margin-top: 80px;
+	}
+
+/* ================================ */
+/* ==========!INFORMATION========== */
+/* ================================ */
+
+/* ----------!GENERAL---------- */
+.information .cell + .title,
+.information .cell + .description {
+    padding-top: 30px;
+    }
+.information .title {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    color: $color-text-gold-937341;
+    }
+.information .description {
+    @extend [class*="xs-10"];
+    @extend .p-xs-10;
+    }
+.information .title + .description {
+    padding-top: 18px;
+    }
+
+/* ----------!WELCOME---------- */
+.information-welcome {
+    text-align: center;
+    }
+
+/* =========================== */
+/* ==========!OFFSET========== */
+/* =========================== */
+
+/* ----------!CELL---------- */
+.offset-cell,
+.composition-picks,
+.composition-bans,
+.information {
+    margin: -1px;
 	}
 
 /* ========================= */
@@ -236,40 +272,6 @@
 /* ----------!BELOW-THIS-LINE-ARE-TEMPORARY-STYLES---------- */
 /* --------------------------------------------------------- */
 
-/* ----------!WELCOME---------- */
-.welcome {
-    text-align: center;
-
-	.title {
-		@extend [class*="xs-15"];
-		@extend .p-xs-15;
-		color: $color-text-gold-937341;
-	}
-
-	.description {
-		@extend [class*="xs-10"];
-		@extend .p-xs-10;
-	}
-
-	.title + .description {
-		padding-top: 20px;
-	}
-}
-
-/* =============================== */
-/* ==========!NAVIGATION========== */
-/* =============================== */
-
-$padding-md: 10px;
-
-/* ----------!NAVBAR---------- */
-.navbar .navbar-brand:active,
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-    background-color: $color-transparent;
-    color: $color-metal;
-}
-
 /* ============================= */
 /* ==========!CHAMPION========== */
 /* ============================= */
@@ -316,7 +318,7 @@ $padding-md: 10px;
     }
 }
 .champion-grid .champion .champion-image + .champion-name {
-    padding-top: $padding-md;
+    padding-top: 10px;
 }
 
 /* ----------!FILTER---------- */
