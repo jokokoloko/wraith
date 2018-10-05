@@ -177,26 +177,42 @@
 /* ================================ */
 
 /* ----------!GENERAL---------- */
-.information .cell + .title,
-.information .cell + .description {
-    padding-top: 30px;
+.information {
+    text-align: center;
     }
 .information .title {
-    @extend [class*="xs-15"];
-    @extend .p-xs-15;
     color: $color-text-gold-937341;
-    }
-.information .description {
-    @extend [class*="xs-10"];
-    @extend .p-xs-10;
-    }
-.information .title + .description {
-    padding-top: 18px;
     }
 
 /* ----------!WELCOME---------- */
-.information-welcome {
-    text-align: center;
+.information-welcome .cell + .title,
+.information-welcome .cell + .description {
+    padding-top: 30px;
+    }
+.information-welcome .title {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    }
+.information-welcome .description {
+    @extend [class*="xs-10"];
+    @extend .p-xs-10;
+    }
+.information-welcome .title + .description {
+    padding-top: 18px;
+    }
+
+/* ----------!CHAMPION---------- */
+.information-champion .cell + .title,
+.information-champion .cell + .description {
+    padding-top: 30px;
+    }
+.information-champion .title {
+    @extend [class*="xs-25"];
+    @extend .p-xs-25;
+    }
+.information-champion .description {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
     }
 
 /* =========================== */

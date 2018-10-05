@@ -26,7 +26,7 @@ const ChampionInformation = ({ champion }) => {
             </div>
             <h1 className="title">{champion.name}</h1>
             <h2 className="description">{champion.title}</h2>
-            <p className="description">Roles: {roles}</p>
+            <p className="tag d-none">{roles}</p>
         </div>
     ) : (
         <div className="information information-welcome">
