@@ -14,6 +14,7 @@ import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
 import Image from './unit/Image';
+import CompositionListFilter from './project/CompositionListFilter';
 
 class CompositionHome extends Component {
     componentDidMount() {
@@ -28,7 +29,6 @@ class CompositionHome extends Component {
             const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
             const loopPick = picks.map((pick, index) => {
                 const count = index + 1;
-                console.log(pick);
                 const { champion, position } = pick;
                 const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
                 return (
@@ -62,7 +62,7 @@ class CompositionHome extends Component {
                             <h1>Welcome to Invade.Blue</h1>
                         </header>
                     </Basic>
-
+                    <CompositionListFilter championsMap={championsMap}/>
                     <Feed space="space-xs-50">
                         <section>
                             {loadingCompositions ? (
