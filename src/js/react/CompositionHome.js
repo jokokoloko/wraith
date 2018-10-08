@@ -19,7 +19,7 @@ import CompositionListFilter from './project/CompositionListFilter';
 class CompositionHome extends Component {
     componentDidMount() {
         const { actionComposition } = this.props;
-        actionComposition.compositionsLoad();
+        actionComposition.compositionsLoadByTime('desc', 10);
     }
     render() {
         const { authenticated, loadingCompositions, profile, compositions, championsMap, wildcardsMap } = this.props;
@@ -34,7 +34,7 @@ class CompositionHome extends Component {
                 return (
                     <div key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count}`}>
                         <Image source={championAvatar} alternate={champion ? champion.name : null} />
-                        <span></span>
+                        <span>{champion.name}</span>
                     </div>
                 );
             });

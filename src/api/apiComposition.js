@@ -87,6 +87,18 @@ class apiComposition {
                 return snapshot.docs.map((composition) => composition.data());
             })
             .catch((error) => console.error('Error getting compositions by user:', error)); // remove
+
+    static compositionsLoadByTime = (order, limit, startAfterDoc = false) => {
+        let ref = compositions.orderBy('time.created', order).limit(limit);
+        if (startAfterDoc) {
+            ref.startAfter(startAfterDoc);
+        }
+        return ref.get()
+            .then((snapshot) => {
+                return snapshot.docs.map((composition) => composition.data());
+            })
+            .catch((error) => console.error('Error getting compositions by time:', error));
+    }
 }
 
 export default apiComposition;
