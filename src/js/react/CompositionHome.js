@@ -15,11 +15,23 @@ import Feed from './section/Feed';
 import Loader from './unit/Loader';
 import Image from './unit/Image';
 import CompositionListFilter from './project/CompositionListFilter';
+import Pager from './widget/Pager';
 
 class CompositionHome extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            curPage: 1,
+            pageSize: 10,
+            compositionList: []
+        }
+    }
     componentDidMount() {
         const { actionComposition } = this.props;
         actionComposition.compositionsLoadByTime('desc', 10);
+    }
+    nextPage = () => {
+        
     }
     render() {
         const { authenticated, loadingCompositions, profile, compositions, championsMap, wildcardsMap } = this.props;
@@ -62,6 +74,7 @@ class CompositionHome extends Component {
                         </header>
                     </Basic>
                     <CompositionListFilter championsMap={championsMap}/>
+                    <Pager />
                     <Feed space="space-xs-50">
                         <section>
                             {loadingCompositions ? (

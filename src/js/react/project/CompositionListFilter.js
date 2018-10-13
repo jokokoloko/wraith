@@ -41,7 +41,9 @@ const CompositionListFilter = ({ championsMap }) => {
                             </select>
                         </div>
                     </div>
-                    <div className="col-8">hello world!</div>
+                    <div className="col-8">
+                        hello there!
+                    </div>
                 </div>
                 <div className="row my-3">
                     {loopTest}
