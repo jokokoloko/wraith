@@ -28,7 +28,7 @@ const CompositionListFilter = ({ championsMap }) => {
     return (
         <section className="basic block height-auto align-left">
             <div className="container p-3">
-                <div className="row">
+                <div className="row my-3">
                     <div className="col-4">
                         <div className="input-group">
                             <div className="input-group-prepend">
@@ -43,7 +43,7 @@ const CompositionListFilter = ({ championsMap }) => {
                     </div>
                     <div className="col-8">hello world!</div>
                 </div>
-                <div className="row">
+                <div className="row my-3">
                     {loopTest}
                 </div>
                 <div className="row">

@@ -34,7 +34,6 @@ class CompositionHome extends Component {
                 return (
                     <div key={`pick-${position}`} id={`pick-${position}`} className={`pick pick-${count}`}>
                         <Image source={championAvatar} alternate={champion ? champion.name : null} />
-                        <span>{champion.name}</span>
                     </div>
                 );
             });

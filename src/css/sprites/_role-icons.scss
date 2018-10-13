@@ -4,33 +4,63 @@ $role-sprite: "../img/role-sprite.svg";
 $lane-sprite: "../img/lane-sprite.svg";
 $role-icon-size: 35px;
 
-.role-icon {
-    width: $role-icon-size;
-    height: $role-icon-size;
+@mixin generate-role-icons($size) {
+    width: $size;
+    height: $size;
 
     &.bg-tank-icon {
-        @include generate-icon($role-sprite, 0, 0, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 0, $size);
     }
 
     &.bg-mage-icon {
-        @include generate-icon($role-sprite, 0, 1, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 1, $size);
     }
 
     &.bg-assassin-icon {
-        @include generate-icon($role-sprite, 0, 2, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 2, $size);
     }
 
     &.bg-fighter-icon {
-        @include generate-icon($role-sprite, 0, 3, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 3, $size);
     }
 
     &.bg-marksman-icon {
-        @include generate-icon($role-sprite, 0, 4, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 4, $size);
     }
 
     &.bg-support-icon {
-        @include generate-icon($role-sprite, 0, 5, $role-icon-size);
+        @include generate-icon($role-sprite, 0, 5, $size);
     }
+}
+
+.role-icon {
+    @include generate-role-icons($role-icon-size);
+    // width: $role-icon-size;
+    // height: $role-icon-size;
+    //
+    // &.bg-tank-icon {
+    //     @include generate-icon($role-sprite, 0, 0, $role-icon-size);
+    // }
+    //
+    // &.bg-mage-icon {
+    //     @include generate-icon($role-sprite, 0, 1, $role-icon-size);
+    // }
+    //
+    // &.bg-assassin-icon {
+    //     @include generate-icon($role-sprite, 0, 2, $role-icon-size);
+    // }
+    //
+    // &.bg-fighter-icon {
+    //     @include generate-icon($role-sprite, 0, 3, $role-icon-size);
+    // }
+    //
+    // &.bg-marksman-icon {
+    //     @include generate-icon($role-sprite, 0, 4, $role-icon-size);
+    // }
+    //
+    // &.bg-support-icon {
+    //     @include generate-icon($role-sprite, 0, 5, $role-icon-size);
+    // }
 }
 
 //Ideally we want a mixin but copy this for now
