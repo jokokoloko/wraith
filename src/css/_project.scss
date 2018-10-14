@@ -2,21 +2,239 @@
 @import "css/sprites/role-icons";
 
 /* =========================== */
-/* ==========!REGION========== */
+/* ==========!SCRIPT========== */
 /* =========================== */
 
-/* ----------!BODY---------- */
-#body {
-	background-image: url('../img/background-magic.png');
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+/* ----------!AFFIX---------- */
+.affix-width {
+    width: 305px;
+	}
+
+/* ========================== */
+/* ==========!BASIC========== */
+/* ========================== */
+
+/* ----------!ACTION---------- */
+.action {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
+    font-weight: $font-weight-3;
+    text-transform: uppercase;
+    color: $color-text-cream-F1E6D0;
+	}
+
+/* ----------!TIP---------- */
+.tip {
+    background-color: $color-transparent;
+    border: 0 none $color-transparent;
+    padding: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.3;
+    }
+.tip:active,
+.tip:hover,
+.tip:focus {
+    opacity: 1;
+    }
+.tip i {
+    background-color: $color-text-bronze-5D4623;
+    border-radius: 50% !important;
+    padding-left: 1px;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 18px;
+    text-align: center;
+    color: $color-general-bronze-C8AA6E;
+    display: block;
+    overflow: hidden;
+    }
+
+/* =========================== */
+/* ==========!BUTTON========== */
+/* =========================== */
+
+/* ----------!GENERAL---------- */
+.btn {
+    font-weight: 700;
+    text-transform: uppercase;
+    }
+
+/* ----------!LOCK-IN---------- */
+.btn-lock-in,
+.btn-lock-in:hover {
+    background-color: $color-general-blue-09BCD6;
+    border-color: $color-general-blue-09BCD6;
+    color: $color-white;
+    }
+
+/* ========================= */
+/* ==========!CELL========== */
+/* ========================= */
+
+/* ----------!GENERAL---------- */
+.cell {
+    background-color: $color-form-grey-0C0C14;
+    border: 1px solid $color-form-grey-0C0C14;
+	}
+.cell > .membrane > .nucleus {
+    width: 100%;
+    height: 100%;
+	}
+.cell > .membrane {
+    border: 1px solid $color-general-grey-3C3C41;
+	}
+.cell > .membrane > .nucleus {
+    border: 1px solid $color-form-grey-0C0C14;
+    position: relative;
+    overflow: hidden;
+	}
+.cell > .membrane > .nucleus > .icon-lane {
+    opacity: 0.3;
+	}
+
+/* ----------!ACTIVE---------- */
+.active > .cell > .membrane {
+    border-color: $color-general-blue-09BCD6;
+	}
+.active > .cell > .membrane > .nucleus > .icon-lane {
+    opacity: 1;
+	}
+.active > .cell > .membrane > .nucleus > .champion-avatar {
+    opacity: 0.5;
+	}
+
+/* ============================= */
+/* ==========!CHAMPION========== */
+/* ============================= */
+
+/* ----------!NAME---------- */
+.champion-name {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
+    text-transform: capitalize;
+	}
+
+/* ================================ */
+/* ==========!COMPOSITION========== */
+/* ================================ */
+
+/* ----------!GENERAL---------- */
+.composition-picks > .pick,
+.composition-bans > .ban {
+    cursor: pointer;
+	}
+
+/* ----------!PICK---------- */
+.composition-picks > .pick + .pick {
+    margin-top: 18px;
+	}
+.composition-picks > .pick > .cell {
+    margin-right: 20px;
+	}
+.composition-picks > .pick > .cell > .membrane {
+    width: 80px;
+    height: 80px;
+	}
+.composition-picks > .pick > .cell > .membrane > .nucleus > .icon-lane {
+    width: 40px;
+    height: 40px;
+	}
+.composition-picks > .pick > .cell > .membrane > .nucleus > .champion-avatar {
+    width: 88px;
+    height: 88px;
+	}
+
+/* ----------!BAN---------- */
+.composition-bans > .ban > .cell > .membrane {
+    width: 50px;
+    height: 50px;
+	}
+.composition-bans > .ban > .cell > .membrane > .nucleus > .icon-lane {
+    width: 25px;
+    height: 25px;
+	}
+.composition-bans > .ban > .cell > .membrane > .nucleus > .champion-avatar {
+    width: 53px;
+    height: 53px;
+	}
+
+/* ----------!SPACE---------- */
+.composition-picks + .composition-bans {
+	margin-top: 50px;
+	}
+.composition-bans + .btn {
+	margin-top: 80px;
+	}
+
+/* ================================ */
+/* ==========!INFORMATION========== */
+/* ================================ */
+
+/* ----------!GENERAL---------- */
+.information {
+    text-align: center;
+    }
+.information .title {
+    color: $color-text-gold-937341;
+    }
+
+/* ----------!WELCOME---------- */
+.information-welcome .cell + .title,
+.information-welcome .cell + .description {
+    padding-top: 30px;
+    }
+.information-welcome .title {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    }
+.information-welcome .description {
+    @extend [class*="xs-10"];
+    @extend .p-xs-10;
+    }
+.information-welcome .title + .description {
+    padding-top: 18px;
+    }
+
+/* ----------!CHAMPION---------- */
+.information-champion .cell + .title,
+.information-champion .cell + .description {
+    padding-top: 30px;
+    }
+.information-champion .title {
+    @extend [class*="xs-25"];
+    @extend .p-xs-25;
+    }
+.information-champion .description {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    }
+
+/* =========================== */
+/* ==========!OFFSET========== */
+/* =========================== */
+
+/* ----------!CELL---------- */
+.offset-cell,
+.composition-picks,
+.composition-bans,
+.information {
+    margin: -1px;
 	}
 
 /* ========================= */
 /* ==========!AREA========== */
 /* ========================= */
+
+/* ----------!COMPOSITION---------- */
+#composition {
+    user-select: none;
+	}
 
 /* ----------!FORM-COMPOSITION---------- */
 #form-composition {
@@ -40,32 +258,35 @@
 	margin-top: 20px;
 	}
 
+/* =========================== */
+/* ==========!REGION========== */
+/* =========================== */
 
+/* ----------!BODY---------- */
+#body {
+	background-image: url('../img/background-magic.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+	}
 
-
+/* ----------!HEADER---------- */
+#header .logo {
+    margin-right: 0;
+    position: relative;
+	color: $color-text-iron-A09A8E !important;
+	}
+#header .logo::after {
+    position: absolute;
+    top: 12px;
+    left: 85px;
+	content: url('../img/blue.png');
+	}
 
 /* --------------------------------------------------------- */
 /* ----------!BELOW-THIS-LINE-ARE-TEMPORARY-STYLES---------- */
 /* --------------------------------------------------------- */
-
-
-
-
-
-/* =============================== */
-/* ==========!NAVIGATION========== */
-/* =============================== */
-
-$champ-size: 60px;
-$padding-md: 10px;
-
-/* ----------!NAVBAR---------- */
-.navbar .navbar-brand:active,
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-    background-color: $color-transparent;
-    color: $color-metal;
-}
 
 /* ============================= */
 /* ==========!CHAMPION========== */
@@ -113,7 +334,7 @@ $padding-md: 10px;
     }
 }
 .champion-grid .champion .champion-image + .champion-name {
-    padding-top: $padding-md;
+    padding-top: 10px;
 }
 
 /* ----------!FILTER---------- */

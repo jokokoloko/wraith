@@ -34,8 +34,8 @@ class _CompositionEdit extends Component {
             bans: buildLanes(),
             form: {},
             formNotes: { top: {}, jungle: {}, middle: {}, bottom: {}, support: {} },
-            formStrategies: { '1': {}},
-            strategyCounter: 1
+            formStrategies: { '1': {} },
+            strategyCounter: 1,
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -57,16 +57,12 @@ class _CompositionEdit extends Component {
         const { championsSelected } = this.state;
         const picks = buildLanes(view.pick, championsMap, wildcardsMap);
         const bans = buildLanes(view.ban, championsMap, wildcardsMap);
-        picks
-            .filter(pick => pick.champion.type !== 'wildcard')
-            .forEach((pick, index) => {
-                championsSelected.picks[pick.champion.name] = index;
-            });
-        bans
-            .filter(pick => pick.champion.type !== 'wildcard')
-            .forEach((ban, index) => {
-                championsSelected.bans[ban.champion.name] = index;
-            });
+        picks.filter((pick) => pick.champion.type !== 'wildcard').forEach((pick, index) => {
+            championsSelected.picks[pick.champion.name] = index;
+        });
+        bans.filter((pick) => pick.champion.type !== 'wildcard').forEach((ban, index) => {
+            championsSelected.bans[ban.champion.name] = index;
+        });
         let stateObj = {
             id: view.id,
             user: view.user,
@@ -125,8 +121,7 @@ class _CompositionEdit extends Component {
             this.removeFromChampionsSelected(selectedChampion.id, curChampSelected.name);
             // put wildcard in current lane index
             curCollection[selectedLaneIdx].champion = selectedChampion;
-        }
-        else {
+        } else {
             if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
             // if champion is already selected, remove it from the other lane
             this.removeFromChampionsSelected(selectedChampion.name, curChampSelected.name);
@@ -173,7 +168,7 @@ class _CompositionEdit extends Component {
         formStrategies[strategyCounter] = {};
         this.setState({
             strategyCounter,
-            formStrategies
+            formStrategies,
         });
     }
     onSubmit() {
@@ -199,7 +194,7 @@ class _CompositionEdit extends Component {
                 excerpt,
             },
             note: {
-                ...formNotes
+                ...formNotes,
             },
             strategies,
             id,
@@ -226,8 +221,8 @@ class _CompositionEdit extends Component {
                         {loadingView ? (
                             <Loader position="exact-center fixed" label="Loading view" />
                         ) : (
-                            <div className="row gutter-50 gutter-80">
-                                <div className="col-3">
+                            <div className="row gutter-80">
+                                <div className="col-auto">
                                     <Affix>
                                         <CompositionSelector
                                             id={id}
@@ -241,16 +236,17 @@ class _CompositionEdit extends Component {
                                         />
                                     </Affix>
                                 </div>
-                                <div className="col-6">
+                                <div className="col">
                                     <Champion selectChampion={this.selectChampion} />
-                                    {authenticated &&
+                                    {authenticated && (
                                         <CompositionMeta
                                             form={form}
                                             onChange={this.onChange}
                                             formNotes={formNotes}
                                             formStrategies={formStrategies}
                                             addStrategy={this.addStrategy}
-                                        />}
+                                        />
+                                    )}
                                 </div>
                                 <div className="col-3">
                                     <ChampionInformation champion={selectedChampion} />
@@ -296,4 +292,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(_CompositionEdit);

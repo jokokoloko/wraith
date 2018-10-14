@@ -16,7 +16,6 @@ class CompositionMeta extends Component {
             curPosition: position,
         });
     }
-
     render() {
         const { form, onChange, formNotes, formStrategies, addStrategy } = this.props;
         let { curPosition } = this.state;
@@ -56,7 +55,15 @@ class CompositionMeta extends Component {
         return (
             <form id="form-composition" className={`form form-${size}`}>
                 <div className="panel">
-                    <InputText name="title" label="Title" placeholder="Title" size={size} onChange={(e) => onChange(e, 'form')} value={form.title} />
+                    <InputText
+                        name="title"
+                        label="Title"
+                        placeholder="Title"
+                        size={size}
+                        onChange={(e) => onChange(e, 'form')}
+                        value={form.title}
+                        tip={true}
+                    />
                     <InputText
                         type="area"
                         name="description"
@@ -65,14 +72,12 @@ class CompositionMeta extends Component {
                         size={size}
                         onChange={(e) => onChange(e, 'form')}
                         value={form.description}
+                        tip={true}
                     />
                 </div>
-
                 <div className="panel">
                     <h4 className="section-title">Notes</h4>
-
                     <div className="form-action">{buttonGroup}</div>
-
                     <InputText
                         type="area"
                         name="pick"
@@ -81,7 +86,7 @@ class CompositionMeta extends Component {
                         group={curPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[curPosition].notes}
+                        value={formNotes[curPosition].pick}
                     />
                     <InputText
                         type="area"
@@ -94,12 +99,9 @@ class CompositionMeta extends Component {
                         value={formNotes[curPosition].ban}
                     />
                 </div>
-
                 <div className="panel">
                     <h4 className="section-title">Strategies</h4>
-
                     {strategyInputs}
-
                     <div className="strategy-action text-right">
                         <button type="button" className="btn btn-hollow btn-add-group" onClick={addStrategy}>
                             + Phase

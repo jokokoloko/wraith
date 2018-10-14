@@ -26,11 +26,11 @@ Comparisons with other platforms:
 ## Prerequisites
 
 -   Install [node.js](http://nodejs.org/)
--   Clone the repository: https://github.com/jokokoloko/spectre.git
+-   Clone the repository: https://github.com/dcanlas/invade-blue
 
 ## Installation
 
-To begin installation, go to the spectre repository on your local machine and run:
+To begin installation, go to the invadeblue repository on your local machine and run:
 
 ```sh
 $ npm install

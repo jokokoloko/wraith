@@ -1,7 +1,7 @@
 @import "css/mixins/_generate-icon.scss";
 
-$role-sprite: "../img/role-sprite.svg";
-$lane-sprite: "../img/lane-sprite.svg";
+$role-sprite: "../img/sprite-role.svg";
+$lane-sprite: "../img/sprite-lane.svg";
 $role-icon-size: 35px;
 
 @mixin generate-role-icons($size) {

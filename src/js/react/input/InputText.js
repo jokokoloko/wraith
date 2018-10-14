@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tip from '../unit/Tip';
 
-const InputText = ({ type, name, label, placeholder, size, onChange, value, error, group, reference }) => {
+const InputText = ({ type, name, label, placeholder, size, onChange, value, error, group, reference, tip }) => {
     const fieldClass = `form-control form-control-${size}`;
     let wrapperClass = 'form-group';
     error && error.length > 0 && (wrapperClass += ' has-error');
@@ -41,6 +42,7 @@ const InputText = ({ type, name, label, placeholder, size, onChange, value, erro
                     {error}
                 </div>
             )}
+            {!value && tip && <Tip />}
         </div>
     );
 };
@@ -56,6 +58,7 @@ InputText.propTypes = {
     error: PropTypes.string,
     group: PropTypes.string,
     reference: PropTypes.object,
+    tip: PropTypes.bool,
 };
 
 InputText.defaultProps = {
@@ -65,6 +68,7 @@ InputText.defaultProps = {
     error: undefined,
     group: undefined,
     reference: undefined,
+    tip: undefined,
 };
 
 export default InputText;

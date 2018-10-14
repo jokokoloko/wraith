@@ -2,29 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Image from '../unit/Image';
+import rift from '../../../img/summoners-rift.jpg';
 
 const ChampionInformation = ({ champion }) => {
     let champImg,
         roles = '';
-    if (champion && champion.name) {
-        champImg = client.CHAMPION_LOADING + champion.key + '_0.jpg';
+    if (champion.id && champion.type !== 'wildcard') {
+        champImg = client.CHAMPION_SPLASH + champion.key + '_0.jpg';
         Object.keys(champion.tags).forEach((tag) => {
             roles += tag + ', ';
         });
-        //remove the extra comma.
+        // remove the extra comma.
         roles = roles.substring(0, roles.length - 2);
     }
-    return champion && champion.name ? (
-        <div className="champion-info">
-            <div className="img-container">
-                <Image source={champImg} alternate={champion.name} />
+    return champion.id && champion.type !== 'wildcard' ? (
+        <div className="information information-champion">
+            <div className="cell">
+                <div className="membrane">
+                    <div className="nucleus">
+                        <Image source={champImg} alternate={champion.name} />
+                    </div>
+                </div>
             </div>
-            <h1 className="p-xs-15">{champion.name}</h1>
-            <h2 className="p-xs-15">{champion.title}</h2>
-            <h4 className="p-xs-15">Roles: {roles}</h4>
+            <h1 className="title">{champion.name}</h1>
+            <h2 className="description">{champion.title}</h2>
+            <p className="tag d-none">{roles}</p>
         </div>
     ) : (
-        <h1 className="p-xs-15">Select a Champion.</h1>
+        <div className="information information-welcome">
+            <div className="cell">
+                <div className="membrane">
+                    <div className="nucleus">
+                        <Image source={rift} alternate="Welcome to Invade Blue" />
+                    </div>
+                </div>
+            </div>
+            <h1 className="title">Welcome to Invade Blue</h1>
+            <h2 className="description">Here you can build team compositons and share them for all to see or only with your friends.</h2>
+        </div>
     );
 };
 

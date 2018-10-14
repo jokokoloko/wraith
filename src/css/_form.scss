@@ -82,7 +82,7 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 .form-control {
-	background-color: $color-form-grey-0C0C14;
+	background-color: $color-form-grey-0C0C14-80;
 	border-color: $color-form-bronze-382B19;
 	color: inherit;
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
@@ -104,7 +104,7 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 .form-control:focus {
 	background-color: $color-form-grey-0C0C14;
-	border-color: $color-text-cream-F1E6D0;
+	border-color: $color-text-gold-937341;
 	color: $color-general-blue-09BCD6;
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
@@ -119,8 +119,10 @@ input[type="tel"]:focus,
 
 /* ----------!FORM---------- */
 .form-group {
+	border: 1px solid $color-form-grey-0C0C14;
 	margin: 0;
 	width: 100%;
+	position: relative;
 	}
 .form-group-sm label i,
 .form-group-sm label span {
