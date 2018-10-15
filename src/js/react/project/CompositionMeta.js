@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Cell from './Cell';
 import InputText from '../input/InputText';
 import { positions } from '../../composition';
 
@@ -20,14 +21,16 @@ class CompositionMeta extends Component {
         const { form, onChange, formNotes, formStrategies, addStrategy } = this.props;
         let { curPosition } = this.state;
         const size = 'lg';
-        const buttonGroup = positions.map((pos, idx) => {
+        const buttonGroup = positions.map((position, index) => {
             return (
-                <button key={`btn-${idx}`} type="button" className="btn btn-hollow" onClick={() => this.selectPosition(pos)}>
-                    {pos}
+                <button key={`btn-${index}`} type="button" className="btn btn-tab" onClick={() => this.selectPosition(position)}>
+                    <Cell>
+                        <div className="exact-center">{position}</div>
+                    </Cell>
                 </button>
             );
         });
-        const strategyInputs = Object.keys(formStrategies).map((key, idx) => {
+        const strategyInputs = Object.keys(formStrategies).map((key, index) => {
             return (
                 <div key={`strategy-${key}`} className="strategy-group">
                     <InputText
@@ -77,7 +80,7 @@ class CompositionMeta extends Component {
                 </div>
                 <div className="panel">
                     <h4 className="section-title">Notes</h4>
-                    <div className="form-action">{buttonGroup}</div>
+                    <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
                     <InputText
                         type="area"
                         name="pick"
