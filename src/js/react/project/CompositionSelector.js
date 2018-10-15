@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
+import Cell from './Cell';
 import IconLane from './IconLane';
 import Button from '../unit/Button';
 
@@ -19,17 +20,13 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
     //     }
     // };
     const generateAvatar = (champion, championAvatar, position) => (
-        <div className="cell">
-            <div className="membrane">
-                <div className="nucleus">
-                    {champion.id ? (
-                        <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
-                    ) : (
-                        <IconLane className="exact-center" position={position} />
-                    )}
-                </div>
-            </div>
-        </div>
+        <Cell>
+            {champion.id ? (
+                <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
+            ) : (
+                <IconLane className="exact-center" position={position} />
+            )}
+        </Cell>
     );
     const loopPick = picks.map((pick, index) => {
         const { champion, position } = pick;
