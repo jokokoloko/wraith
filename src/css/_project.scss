@@ -60,16 +60,41 @@
 
 /* ----------!GENERAL---------- */
 .btn {
+    padding: 2px;
     font-weight: 700;
     text-transform: uppercase;
     }
+
+/* ----------!SIZE---------- */
+.btn-lg {
+	padding: 3px;
+	}
+.btn-lg .core {
+	padding: 7px;
+	}
+
+/* ----------!TAB---------- */
+.btn-tab {
+    background-color: $color-transparent;
+    border: 0 none $color-transparent;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: $color-text-gold-937341;
+    }
+.btn-tab > .cell > .membrane {
+    width: 110px;
+    height: 30px;
+	}
 
 /* ----------!LOCK-IN---------- */
 .btn-lock-in,
 .btn-lock-in:hover {
     background-color: $color-general-blue-09BCD6;
-    border-color: $color-general-blue-09BCD6;
-    color: $color-white;
+    border-color: $color-form-grey-0C0C14;
+    color: $color-general-blue-09BCD6;
+    }
+.btn-lock-in .core {
+    background-color: $color-form-grey-0C0C14;
     }
 
 /* ========================= */
@@ -353,53 +378,11 @@
     padding-bottom: 30px;
 }
 
-/* ================================ */
-/* ==========!COMPOSITION========== */
-/* ================================ */
-
-/* ----------!TEAM COMP---------- */
-.team-bans {
-    width: 100%;
-    padding: $padding-md / 2;
-    margin: 20px 0;
-
-    .champion-ban {
-        width: 48px;
-        height: 48px;
-        border: 1px solid;
-        display: inline-block;
-        vertical-align: top;
-        margin-right: 3px;
-
-        &.highlight {
-            border: 1px solid rgba(81, 203, 238, 1);
-        }
-    }
-}
-
-.champion-selection .champion-image {
-    width: $champ-size;
-    height: $champ-size;
-    padding-right: $padding-md;
-}
-
-.champion-selection .champion-lane {
-    text-transform: capitalize;
-    padding-right: $padding-md;
-}
-
-/*----------- !Team View --------------*/
-.champ-row-bg {
-    background: #474747;
-    background: -webkit-linear-gradient(left, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
-    background: linear-gradient(to right, #474747 0%, #0d0d0d 15%, #010101 51%, #0a0a0a 85%, #474747 100%);
-}
-
 /*----------- !Compositions View (Home) --------*/
 .composition-article {
 
 	.composition-details {
-		padding: $padding-md;
+		padding: 30px;
 
 		.composition-pick {
 			min-width: 450px;

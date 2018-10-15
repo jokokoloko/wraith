@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as client from '../../client';
 import Cell from './Cell';
 import IconLane from './IconLane';
-import Button from '../unit/Button';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     // const generateAvatar = (champion, championAvatar) => {
@@ -72,16 +71,9 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         <div id="composition">
             <ul className="composition-picks list-reset">{loopPick}</ul>
             <ul className="composition-bans list-reset d-flex justify-content-between">{loopBan}</ul>
-            <Button
-                type="button"
-                name="register"
-                label={id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Locking In...' : 'Lock In'}
-                kind={id ? 'update' : 'lock-in'}
-                size="lg"
-                display="block"
-                onClick={onSubmit}
-                disabled={submitting}
-            />
+            <button type="button" className={`btn btn-${id ? 'update' : 'lock-in'} btn-lg btn-block`} onClick={onSubmit} disabled={submitting}>
+                <div className="core">{id && submitting ? 'Updating...' : id ? 'Update' : submitting ? 'Locking In...' : 'Lock In'}</div>
+            </button>
         </div>
     );
 };
