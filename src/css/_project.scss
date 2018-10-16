@@ -2,11 +2,12 @@
 @import "css/sprites/role-icons";
 
 /* =========================== */
-/* ==========!SCRIPT========== */
+/* ==========!LAYOUT========== */
 /* =========================== */
 
-/* ----------!AFFIX---------- */
-.affix-width {
+/* ----------!WIDTH---------- */
+.affix-width,
+.information {
     width: 305px;
 	}
 
@@ -88,7 +89,7 @@
     color: $color-text-gold-937341;
     }
 .btn-tab > .cell > .membrane {
-    width: 110px;
+    width: 105px;
     height: 30px;
 	}
 
@@ -231,8 +232,8 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
     }
 
 /* ----------!WELCOME---------- */
-.information-welcome .cell + .title,
-.information-welcome .cell + .description {
+.information-welcome .offset-cell + .title,
+.information-welcome .offset-cell + .description {
     padding-top: 30px;
     }
 .information-welcome .title {
@@ -248,8 +249,8 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
     }
 
 /* ----------!CHAMPION---------- */
-.information-champion .cell + .title,
-.information-champion .cell + .description {
+.information-champion .offset-cell + .title,
+.information-champion .offset-cell + .description {
     padding-top: 30px;
     }
 .information-champion .title {
@@ -269,7 +270,6 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
 .offset-cell,
 .composition-picks > .pick,
 .composition-bans > .ban,
-.information,
 .surface {
     margin: -1px;
 	}
@@ -402,17 +402,9 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
 }
 
 /* ----------!FILTER---------- */
-.role {
-    margin-left: -5px;
-    margin-right: -5px;
-	padding: 0;
-	list-style: none;
-}
 .role .role-icon {
-    margin: 0 5px !important;
-    padding-top: 0 !important;
     cursor: pointer;
-}
+    }
 #form-filter-champion {
     padding-bottom: 30px;
 }

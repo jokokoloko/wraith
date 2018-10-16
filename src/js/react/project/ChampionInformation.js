@@ -18,18 +18,22 @@ const ChampionInformation = ({ champion }) => {
     }
     return champion.id && champion.type !== 'wildcard' ? (
         <div className="information information-champion">
-            <Cell>
-                <Image source={champImg} alternate={champion.name} />
-            </Cell>
+            <div className="offset-cell">
+                <Cell>
+                    <Image source={champImg} alternate={champion.name} />
+                </Cell>
+            </div>
             <h1 className="title">{champion.name}</h1>
             <h2 className="description">{champion.title}</h2>
             <p className="tag d-none">{roles}</p>
         </div>
     ) : (
         <div className="information information-welcome">
-            <Cell>
-                <Image source={rift} alternate="Welcome to Invade Blue" />
-            </Cell>
+            <div className="offset-cell">
+                <Cell>
+                    <Image source={rift} alternate="Welcome to Invade Blue" />
+                </Cell>
+            </div>
             <h1 className="title">Welcome to Invade Blue</h1>
             <h2 className="description">Here you can build team compositons and share them for all to see or only with your friends.</h2>
         </div>

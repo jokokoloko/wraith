@@ -248,7 +248,7 @@ class _CompositionEdit extends Component {
                                         />
                                     )}
                                 </div>
-                                <div className="col-3">
+                                <div className="col-auto">
                                     <ChampionInformation champion={selectedChampion} />
                                 </div>
                             </div>

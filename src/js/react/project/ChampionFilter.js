@@ -12,7 +12,7 @@ const ChampionFilter = ({ roles, filters, filterRole, filterName }) => {
         <form id="form-filter-champion" className={`form form-${size}`}>
             <div className="row">
                 <div className="col">
-                    <ul className="role d-flex">{loopRole}</ul>
+                    <ul className="role list-reset d-flex justify-content-between">{loopRole}</ul>
                 </div>
                 <div className="col">
                     <InputText
