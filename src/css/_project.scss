@@ -67,11 +67,11 @@
     text-transform: uppercase;
     }
 .btn > .surface > .mantle {
-    border: 1px solid $color-form-grey-0C0C14;
+    border: 1px solid $color-general-midnight-010C16;
     padding: 2px;
     }
 .btn > .surface > .mantle > .core {
-    border: 1px solid $color-form-grey-0C0C14;
+    border: 1px solid $color-general-midnight-010C16;
     padding: 4px;
     }
 
@@ -93,22 +93,29 @@
 	}
 
 /* ----------!LOCK-IN---------- */
-$gradient-btn-lock-in-top: $color-general-blue-BEF6F5;
-$gradient-btn-lock-in-bottom: $color-general-blue-257EA3;
+$gradient-btn-lock-in-mantle-top: $color-general-blue-BEF6F5;
+$gradient-btn-lock-in-mantle-bottom: $color-general-blue-257EA3;
+$gradient-btn-lock-in-core-top: $color-general-midnight-010C16;
+$gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
 
 .btn-lock-in {
     color: $color-text-blue-B2D9DB;
     }
 .btn-lock-in > .surface > .mantle,
 .btn-lock-in:hover > .surface > .mantle {
-    background: $gradient-btn-lock-in-bottom; /* Old browsers */
-    background: -moz-linear-gradient(top, $gradient-btn-lock-in-top 1%, $gradient-btn-lock-in-bottom 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-top 1%,$gradient-btn-lock-in-bottom 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, $gradient-btn-lock-in-top 1%,$gradient-btn-lock-in-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-top', endColorstr='$gradient-btn-lock-in-bottom',GradientType=0 ); /* IE6-9 */
+    background: $gradient-btn-lock-in-mantle-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-lock-in-mantle-top 1%, $gradient-btn-lock-in-mantle-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-mantle-top 1%,$gradient-btn-lock-in-mantle-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-lock-in-mantle-top 1%,$gradient-btn-lock-in-mantle-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-mantle-top', endColorstr='$gradient-btn-lock-in-mantle-bottom',GradientType=0 ); /* IE6-9 */
     }
-.btn-lock-in > .surface > .mantle > .core {
-    background-color: $color-form-grey-0C0C14;
+.btn-lock-in > .surface > .mantle > .core,
+.btn-lock-in:hover > .surface > .mantle > .core {
+    background: $gradient-btn-lock-in-core-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-lock-in-core-top 1%, $gradient-btn-lock-in-core-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-core-top 1%,$gradient-btn-lock-in-core-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-lock-in-core-top 1%,$gradient-btn-lock-in-core-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-mantle-top', endColorstr='$gradient-btn-lock-in-mantle-bottom',GradientType=0 ); /* IE6-9 */
     }
 
 /* ========================= */
@@ -118,7 +125,7 @@ $gradient-btn-lock-in-bottom: $color-general-blue-257EA3;
 /* ----------!GENERAL---------- */
 .cell {
     background-color: $color-form-grey-0C0C14;
-    border: 1px solid $color-form-grey-0C0C14;
+    border: 1px solid $color-general-midnight-010C16;
 	}
 .cell > .membrane > .nucleus {
     width: 100%;
@@ -128,7 +135,7 @@ $gradient-btn-lock-in-bottom: $color-general-blue-257EA3;
     border: 1px solid $color-general-grey-3C3C41;
 	}
 .cell > .membrane > .nucleus {
-    border: 1px solid $color-form-grey-0C0C14;
+    border: 1px solid $color-general-midnight-010C16;
     position: relative;
     overflow: hidden;
 	}
@@ -303,13 +310,30 @@ $gradient-btn-lock-in-bottom: $color-general-blue-257EA3;
 /* =========================== */
 
 /* ----------!BODY---------- */
-#body {
-	background-image: url('../img/background-magic.png');
-    background-position: center bottom;
+#body,
+#body::after {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 	}
+#body {
+	background-image: url('../img/background-magic.png');
+    background-position: center bottom;
+	}
+#body::after {
+    background-image: url('../img/background-map.jpg');
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.5;
+    content: '';
+    z-index: -1;
+    }
 
 /* ----------!HEADER---------- */
 #header .logo {
