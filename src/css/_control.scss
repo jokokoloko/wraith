@@ -87,6 +87,7 @@ $color-general-blue-BEF6F5:		#BEF6F5;
 $color-general-blue-257EA3:		#257EA3;
 $color-general-blue-09BCD6:		#09BCD6;
 $color-general-midnight-010C16:	#010C16;
+$color-general-midnight-010C16-80:	rgba(1, 12, 22, 0.8);
 
 /* ----------!TEXT---------- */
 $color-text-cream-F1E6D0:		#F1E6D0;
@@ -105,7 +106,7 @@ $color-form-grey-0C0C14-80:		rgba(12, 12, 20, 0.8);
 /* ----------!REGION---------- */
 $color-body:					($color-general-midnight-010C16, null, null);
 $color-offcanvas:				($color-ghost, $color-smoke !important, null);
-$color-header:					($color-general-midnight-010C16, null, null);
+$color-header:					($color-general-midnight-010C16-80, null, null);
 $color-bar:						($color-blue-400, $color-blue-400 !important, null);
 $color-main:					(null, null, null);
 $color-footer:					(null, null, null);
