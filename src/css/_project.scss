@@ -28,7 +28,7 @@
 .tip {
     background-color: $color-transparent;
     border: 0 none $color-transparent;
-    padding: 16px;
+    padding: 16px !important;
     position: absolute;
     top: 0;
     right: 0;
@@ -60,25 +60,31 @@
 
 /* ----------!GENERAL---------- */
 .btn {
-    padding: 2px;
+    background-color: $color-transparent;
+    border: 0 none $color-transparent;
+    padding: 0;
     font-weight: 700;
     text-transform: uppercase;
     }
+.btn > .surface > .mantle {
+    border: 1px solid $color-form-grey-0C0C14;
+    padding: 2px;
+    }
+.btn > .surface > .mantle > .core {
+    border: 1px solid $color-form-grey-0C0C14;
+    padding: 4px;
+    }
 
 /* ----------!SIZE---------- */
-.btn-lg {
-	padding: 3px;
-	}
-.btn-lg .core {
-	padding: 7px;
-	}
+.btn-lg > .surface > .mantle {
+    padding: 3px;
+    }
+.btn-lg > .surface > .mantle > .core {
+    padding: 6px;
+    }
 
 /* ----------!TAB---------- */
 .btn-tab {
-    background-color: $color-transparent;
-    border: 0 none $color-transparent;
-    margin: 0 !important;
-    padding: 0 !important;
     color: $color-text-gold-937341;
     }
 .btn-tab > .cell > .membrane {
@@ -87,13 +93,21 @@
 	}
 
 /* ----------!LOCK-IN---------- */
-.btn-lock-in,
-.btn-lock-in:hover {
-    background-color: $color-general-blue-09BCD6;
-    border-color: $color-form-grey-0C0C14;
-    color: $color-general-blue-09BCD6;
+$gradient-btn-lock-in-top: $color-general-blue-BEF6F5;
+$gradient-btn-lock-in-bottom: $color-general-blue-257EA3;
+
+.btn-lock-in {
+    color: $color-text-blue-B2D9DB;
     }
-.btn-lock-in .core {
+.btn-lock-in > .surface > .mantle,
+.btn-lock-in:hover > .surface > .mantle {
+    background: $gradient-btn-lock-in-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-lock-in-top 1%, $gradient-btn-lock-in-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-top 1%,$gradient-btn-lock-in-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-lock-in-top 1%,$gradient-btn-lock-in-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-top', endColorstr='$gradient-btn-lock-in-bottom',GradientType=0 ); /* IE6-9 */
+    }
+.btn-lock-in > .surface > .mantle > .core {
     background-color: $color-form-grey-0C0C14;
     }
 
@@ -157,7 +171,7 @@
 
 /* ----------!PICK---------- */
 .composition-picks > .pick + .pick {
-    margin-top: 18px;
+    margin-top: 19px;
 	}
 .composition-picks > .pick > .cell {
     margin-right: 20px;
@@ -246,9 +260,10 @@
 
 /* ----------!CELL---------- */
 .offset-cell,
-.composition-picks,
-.composition-bans,
-.information {
+.composition-picks > .pick,
+.composition-bans > .ban,
+.information,
+.surface {
     margin: -1px;
 	}
 
