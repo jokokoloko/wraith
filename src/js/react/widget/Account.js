@@ -38,13 +38,13 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
     ) : (
         <ul className="navbar-nav ml-auto account account-guest">
             <li className="nav-item">
-                <NavLink className="nav-link to-register" to={path.Register}>
-                    Register
+                <NavLink className="nav-link to-login" to={path.Login}>
+                    Log In
                 </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link to-login" to={path.Login}>
-                    Log In
+                <NavLink className="nav-link to-register" to={path.Register}>
+                    Register
                 </NavLink>
             </li>
         </ul>
