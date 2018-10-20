@@ -43,7 +43,6 @@
 .tip i {
     background-color: $color-text-bronze-5D4623;
     border-radius: 50% !important;
-    padding-left: 1px;
     width: 18px;
     height: 18px;
     font-size: 12px;
@@ -67,20 +66,31 @@
     font-weight: 700;
     text-transform: uppercase;
     }
-.btn > .surface > .mantle {
+.btn > .first > .second {
     border: 1px solid $color-general-midnight-010C16;
     padding: 2px;
     }
-.btn > .surface > .mantle > .core {
+.btn > .first > .second > .third {
     border: 1px solid $color-general-midnight-010C16;
+    position: relative;
+    }
+.btn > .first > .second > .third::after,
+.btn > .first > .second > .third > .fourth::after {
+    @extend .overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    content: '';
+    }
+.btn > .first > .second > .third > .fourth {
     padding: 4px;
     }
 
 /* ----------!SIZE---------- */
-.btn-lg > .surface > .mantle {
+.btn-lg > .first > .second {
     padding: 3px;
     }
-.btn-lg > .surface > .mantle > .core {
+.btn-lg > .first > .second > .third > .fourth {
     padding: 6px;
     }
 
@@ -94,29 +104,38 @@
 	}
 
 /* ----------!LOCK-IN---------- */
-$gradient-btn-lock-in-mantle-top: $color-general-blue-BEF6F5;
-$gradient-btn-lock-in-mantle-bottom: $color-general-blue-257EA3;
-$gradient-btn-lock-in-core-top: $color-general-midnight-010C16;
-$gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
+$gradient-btn-lock-in-second-top: $color-general-blue-BEF6F5;
+$gradient-btn-lock-in-second-bottom: $color-general-blue-257EA3;
+$gradient-btn-lock-in-third-top: $color-general-midnight-010C16;
+$gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 
 .btn-lock-in {
     color: $color-text-blue-B2D9DB;
     }
-.btn-lock-in > .surface > .mantle,
-.btn-lock-in:hover > .surface > .mantle {
-    background: $gradient-btn-lock-in-mantle-bottom; /* Old browsers */
-    background: -moz-linear-gradient(top, $gradient-btn-lock-in-mantle-top 1%, $gradient-btn-lock-in-mantle-bottom 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-mantle-top 1%,$gradient-btn-lock-in-mantle-bottom 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, $gradient-btn-lock-in-mantle-top 1%,$gradient-btn-lock-in-mantle-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-mantle-top', endColorstr='$gradient-btn-lock-in-mantle-bottom',GradientType=0 ); /* IE6-9 */
+.btn-lock-in > .first > .second,
+.btn-lock-in:hover > .first > .second {
+    background: $gradient-btn-lock-in-second-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-lock-in-second-top 1%, $gradient-btn-lock-in-second-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-second-top 1%,$gradient-btn-lock-in-second-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-lock-in-second-top 1%,$gradient-btn-lock-in-second-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-second-top', endColorstr='$gradient-btn-lock-in-second-bottom',GradientType=0 ); /* IE6-9 */
     }
-.btn-lock-in > .surface > .mantle > .core,
-.btn-lock-in:hover > .surface > .mantle > .core {
-    background: $gradient-btn-lock-in-core-bottom; /* Old browsers */
-    background: -moz-linear-gradient(top, $gradient-btn-lock-in-core-top 1%, $gradient-btn-lock-in-core-bottom 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-core-top 1%,$gradient-btn-lock-in-core-bottom 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, $gradient-btn-lock-in-core-top 1%,$gradient-btn-lock-in-core-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-mantle-top', endColorstr='$gradient-btn-lock-in-mantle-bottom',GradientType=0 ); /* IE6-9 */
+.btn-lock-in > .first > .second > .third,
+.btn-lock-in:hover > .first > .second > .third {
+    background: $gradient-btn-lock-in-third-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-lock-in-third-top 1%, $gradient-btn-lock-in-third-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-lock-in-third-top 1%,$gradient-btn-lock-in-third-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-lock-in-third-top 1%,$gradient-btn-lock-in-third-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-lock-in-second-top', endColorstr='$gradient-btn-lock-in-second-bottom',GradientType=0 ); /* IE6-9 */
+    }
+.btn-lock-in > .first > .second > .third::after {
+    background-image: url('../img/effect-noise-large.png');
+    opacity: 0.1;
+    }
+.btn-lock-in > .first > .second > .third > .fourth::after {
+    background-image: url('../img/effect-magic.png');
+    background-size: cover;
+    opacity: 0.2;
     }
 
 /* ========================= */
@@ -270,7 +289,7 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
 .offset-cell,
 .composition-picks > .pick,
 .composition-bans > .ban,
-.surface {
+.first {
     margin: -1px;
 	}
 
@@ -321,18 +340,13 @@ $gradient-btn-lock-in-core-bottom: $color-general-midnight-010C16-80;
     background-position: center bottom;
 	}
 #body::after {
+    @extend .overlay;
     background-image: url('../img/background-map.jpg');
     background-position: center;
-    width: 100%;
-    height: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     opacity: 0.5;
-    content: '';
     z-index: -1;
+    content: '';
     }
 
 /* ----------!HEADER---------- */
