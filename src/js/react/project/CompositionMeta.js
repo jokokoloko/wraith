@@ -106,8 +106,14 @@ class CompositionMeta extends Component {
                     <h4 className="section-title">Strategies</h4>
                     {strategyInputs}
                     <div className="strategy-action text-right">
-                        <button type="button" className="btn btn-hollow btn-add-group" onClick={addStrategy}>
-                            + Phase
+                        <button type="button" className="btn btn-add-group btn-main" onClick={addStrategy}>
+                            <div className="first">
+                                <div className="second">
+                                    <div className="third">
+                                        <div className="fourth">+ Phase</div>
+                                    </div>
+                                </div>
+                            </div>
                         </button>
                     </div>
                 </div>
