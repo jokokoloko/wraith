@@ -63,13 +63,13 @@ ul#{$not-list} > li {
 /* ----------!ANCHOR---------- */
 a {
 	font-weight: $font-weight-2;
-	color: $color-brand-blue-300;
+	color: $color-general-blue-09BCD6;
 	}
 a:active:not([class*="btn"]),
 a:hover:not([class*="btn"]),
 a:focus:not([class*="btn"]) {
 	text-decoration: none;
-	color: $color-brand-blue-400;
+	color: $color-general-blue-09BCD6;
 	}
 
 /* ----------!UNDERLINE---------- */
@@ -124,12 +124,6 @@ label {
 .meta {
 	@extend [class*="xs-10"];
 	@extend .h-xs-10;
-	}
-
-/* ----------!LINK---------- */
-.link {
-	font-weight: $font-weight-2 !important;
-	color: $color-blue-400 !important;
 	}
 
 /* ========================= */

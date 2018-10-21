@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as client from '../../client';
+import * as path from '../../path';
 import Cell from './Cell';
 import Image from '../unit/Image';
 import rift from '../../../img/summoners-rift.jpg';
@@ -36,6 +38,9 @@ const ChampionInformation = ({ champion }) => {
             </div>
             <h1 className="title">Welcome to Invade Blue</h1>
             <h2 className="description">Here you can build team compositons and share them for all to see or only with your friends.</h2>
+            <Link className="link to-register" to={path.Register}>
+                Sign up for more features!
+            </Link>
         </div>
     );
 };

@@ -196,6 +196,21 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     opacity: 0.5;
 	}
 
+/* ========================= */
+/* ==========!LINK========== */
+/* ========================= */
+
+/* ----------!GENERAL---------- */
+.link {
+    font-weight: $font-weight-3;
+    }
+
+/* ----------!TO-REGISTER---------- */
+.link.to-register {
+    text-decoration: underline !important;
+    color: $color-text-green-38A53D !important;
+    }
+
 /* ============================= */
 /* ==========!CHAMPION========== */
 /* ============================= */
@@ -275,7 +290,7 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 /* ----------!WELCOME---------- */
 .information-welcome .offset-cell + .title,
 .information-welcome .offset-cell + .description {
-    padding-top: 30px;
+    padding-top: 29px;
     }
 .information-welcome .title {
     @extend [class*="xs-15"];
@@ -286,7 +301,15 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     @extend .p-xs-10;
     }
 .information-welcome .title + .description {
-    padding-top: 18px;
+    padding-top: 15px;
+    }
+.information-welcome .link {
+    @extend [class*="xs-10"];
+    @extend .p-xs-10;
+    display: inline-block;
+    }
+.information-welcome .description + .link {
+    margin-top: 25px;
     }
 
 /* ----------!CHAMPION---------- */

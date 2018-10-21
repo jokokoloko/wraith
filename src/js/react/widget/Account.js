@@ -44,7 +44,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
             </li>
             <li className="nav-item">
                 <NavLink className="nav-link to-register" to={path.Register}>
-                    Register
+                    Sign Up
                 </NavLink>
             </li>
         </ul>
