@@ -110,7 +110,7 @@ $gradient-btn-main-second-bottom: $color-general-bronze-7A5C29;
 
 .btn-main {
     min-width: 82px;
-    color: $color-text-yellow-CDBE91;
+    color: $color-text-yellow-CDBE91 !important;
     }
 .btn-main > .first > .second,
 .btn-main:hover > .first > .second {
@@ -125,6 +125,30 @@ $gradient-btn-main-second-bottom: $color-general-bronze-7A5C29;
     background-color: $color-general-grey-1E2328;
     }
 
+/* ----------!REGISTER---------- */
+$gradient-btn-register-second-top: $color-general-green-64F49E;
+$gradient-btn-register-second-bottom: $color-general-green-09A646;
+
+.btn-register {
+    margin: 9px 15px !important;
+    padding: 0 !important;
+    min-width: 82px !important;
+    line-height: 20px !important;
+    color: $color-text-cream-F1E6D0 !important;
+    }
+.btn-register > .first > .second,
+.btn-register:hover > .first > .second {
+    background: $gradient-btn-register-second-bottom; /* Old browsers */
+    background: -moz-linear-gradient(top, $gradient-btn-register-second-top 1%, $gradient-btn-register-second-bottom 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-btn-register-second-top 1%,$gradient-btn-register-second-bottom 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-btn-register-second-top 1%,$gradient-btn-register-second-bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-btn-register-second-top', endColorstr='$gradient-btn-register-second-bottom',GradientType=0 ); /* IE6-9 */
+    }
+.btn-register > .first > .second > .third,
+.btn-register:hover > .first > .second > .third {
+    background-color: $color-general-midnight-010C16;
+    }
+
 /* ----------!LOCK-IN---------- */
 $gradient-btn-lock-in-second-top: $color-general-blue-BEF6F5;
 $gradient-btn-lock-in-second-bottom: $color-general-blue-257EA3;
@@ -132,7 +156,7 @@ $gradient-btn-lock-in-third-top: $color-general-midnight-010C16;
 $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 
 .btn-lock-in {
-    color: $color-text-blue-B2D9DB;
+    color: $color-text-blue-B2D9DB !important;
     }
 .btn-lock-in > .first > .second,
 .btn-lock-in:hover > .first > .second {

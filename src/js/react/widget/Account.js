@@ -43,8 +43,14 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                 </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link to-register" to={path.Register}>
-                    Sign Up
+                <NavLink className="nav-link to-register btn btn-register" to={path.Register}>
+                    <div className="first">
+                        <div className="second">
+                            <div className="third">
+                                <div className="fourth">Sign Up</div>
+                            </div>
+                        </div>
+                    </div>
                 </NavLink>
             </li>
         </ul>
