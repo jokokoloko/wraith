@@ -71,7 +71,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         <div id="composition">
             <ul className="composition-picks list-reset">{loopPick}</ul>
             <ul className="composition-bans list-reset d-flex justify-content-between">{loopBan}</ul>
-            <button type="button" className={`btn btn-${id ? 'update' : 'lock-in'} btn-lg btn-block`} onClick={onSubmit} disabled={submitting}>
+            <button type="button" className={`btn btn-${id ? 'main' : 'lock-in'} btn-lg btn-block`} onClick={onSubmit} disabled={submitting}>
                 <div className="first">
                     <div className="second">
                         <div className="third">
