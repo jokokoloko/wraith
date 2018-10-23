@@ -16,7 +16,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
         'Account'
     );
     return authenticated === true ? (
-        <ul className="navbar-nav ml-auto account account-member">
+        <ul className="navbar-nav justify-content-end account account-member">
             <li className="nav-item">
                 <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
                     {_Private ? 'Home' : 'Dashboard'}
@@ -36,7 +36,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
             </Dropdown>
         </ul>
     ) : (
-        <ul className="navbar-nav ml-auto account account-guest">
+        <ul className="navbar-nav justify-content-end account account-guest">
             <li className="nav-item">
                 <NavLink className="nav-link to-login" to={path.Login}>
                     Log In

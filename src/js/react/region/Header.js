@@ -19,24 +19,15 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
                     </Link>
                 )}
 
-                <button className="navbar-menu navbar-toggler" type="button">
-                    <span className="icon-text sr-only">Menu</span>
-                    <span className="icon-bar">&#9472;</span>
-                    <span className="icon-bar">&#9472;</span>
-                    <span className="icon-bar">&#9472;</span>
-                </button>
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to={path.Composition}>
+                            Compositions
+                        </NavLink>
+                    </li>
+                </ul>
 
-                <nav className="navbar-collapse collapse">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to={path.Composition}>
-                                Compositions
-                            </NavLink>
-                        </li>
-                    </ul>
-
-                    <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />
-                </nav>
+                <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />
             </div>
         </header>
     );

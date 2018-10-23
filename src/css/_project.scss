@@ -419,8 +419,10 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     }
 
 /* ----------!HEADER---------- */
+$header-column-width: 210px;
+
 #header .logo {
-    margin-right: 0;
+    margin-right: $header-column-width - 153;
     position: relative;
 	color: $color-text-iron-A09A8E !important;
 	}
@@ -429,6 +431,9 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     top: 12px;
     left: 85px;
 	content: url('../img/blue.png');
+	}
+#header .account {
+    min-width: $header-column-width;
 	}
 
 /* --------------------------------------------------------- */
