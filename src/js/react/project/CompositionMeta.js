@@ -8,25 +8,28 @@ class CompositionMeta extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            curPosition: 'top',
+            currentPosition: 'top',
         };
         this.selectPosition = this.selectPosition.bind(this);
     }
     selectPosition(position) {
         this.setState({
-            curPosition: position,
+            currentPosition: position,
         });
     }
     render() {
         const { form, onChange, formNotes, formStrategies, addStrategy } = this.props;
-        let { curPosition } = this.state;
+        let { currentPosition } = this.state;
         const size = 'lg';
         const buttonGroup = positions.map((position, index) => {
-            const activeClass = position === curPosition ? 'active': '';
+            const active = currentPosition === position;
             return (
-                <button key={`btn-${index}`} type="button"
-                    className={`btn btn-tab ${activeClass}`}
-                    onClick={() => this.selectPosition(position)}>
+                <button
+                    key={`btn-${index}`}
+                    type="button"
+                    className={`btn btn-tab ${active ? 'active' : ''}`}
+                    onClick={() => this.selectPosition(position)}
+                >
                     <Cell>
                         <div className="exact-center">{position}</div>
                     </Cell>
@@ -89,20 +92,20 @@ class CompositionMeta extends Component {
                         name="pick"
                         label="pick"
                         placeholder="Pick"
-                        group={curPosition}
+                        group={currentPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[curPosition].pick}
+                        value={formNotes[currentPosition].pick}
                     />
                     <InputText
                         type="area"
                         name="ban"
                         label="ban"
                         placeholder="Ban"
-                        group={curPosition}
+                        group={currentPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[curPosition].ban}
+                        value={formNotes[currentPosition].ban}
                     />
                 </div>
                 <div className="panel">
