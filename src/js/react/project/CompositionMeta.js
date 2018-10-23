@@ -22,8 +22,11 @@ class CompositionMeta extends Component {
         let { curPosition } = this.state;
         const size = 'lg';
         const buttonGroup = positions.map((position, index) => {
+            const activeClass = position === curPosition ? 'active': '';
             return (
-                <button key={`btn-${index}`} type="button" className="btn btn-tab" onClick={() => this.selectPosition(position)}>
+                <button key={`btn-${index}`} type="button"
+                    className={`btn btn-tab ${activeClass}`}
+                    onClick={() => this.selectPosition(position)}>
                     <Cell>
                         <div className="exact-center">{position}</div>
                     </Cell>
