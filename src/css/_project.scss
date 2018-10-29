@@ -8,7 +8,7 @@
 /* ----------!WIDTH---------- */
 .affix-width,
 .information {
-    width: 305px;
+    width: 325px;
 	}
 
 /* ========================== */
@@ -97,7 +97,7 @@
 
 /* ----------!TAB---------- */
 .btn-tab > .cell > .membrane {
-    width: 105px;
+    width: 95px;
     height: 30px;
 	}
 
@@ -240,13 +240,54 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 /* ==========!CHAMPION========== */
 /* ============================= */
 
+/* ----------!PROFILE---------- */
+.champion-profile,
+.wildcard-profile {
+    cursor: pointer;
+    }
+
 /* ----------!NAME---------- */
-.champion-name {
-    @extend [class*="xs-15"];
-    @extend .p-xs-15;
-    margin: 0;
+.champion-name,
+.wildcard-name {
+    @extend [class*="xs-10"];
+    @extend .p-xs-10;
     text-transform: capitalize;
 	}
+
+/* ----------!GRID---------- */
+.champion-grid {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: $color-form-bronze-382B19;
+    height: 595px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    user-select: none;
+    }
+.champion-grid > .champion-list > .champion,
+.champion-grid > .champion-list > .wildcard {
+    padding: 15px;
+    max-width: 116px;
+	}
+.champion-grid > .champion-list > .champion > .champion-profile > .cell > .membrane,
+.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell > .membrane {
+    width: 80px;
+    height: 80px;
+	}
+.champion-grid > .champion-list > .champion > .champion-profile > .cell > .membrane > .nucleus > .champion-avatar,
+.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell > .membrane > .nucleus > .wildcard-avatar {
+    width: 88px;
+    height: 88px;
+	}
+.champion-grid > .champion-list > .champion > .champion-profile > .cell + .champion-name,
+.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell + .wildcard-name {
+    padding-top: 10px;
+    }
+.champion-grid > .champion-list > .champion > .champion-profile > .champion-name,
+.champion-grid > .champion-list > .wildcard > .wildcard-profile > .wildcard-name {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    }
 
 /* ================================ */
 /* ==========!COMPOSITION========== */
@@ -256,6 +297,12 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 .composition-picks > .pick,
 .composition-bans > .ban {
     cursor: pointer;
+	}
+.composition-picks > .pick > .champion-name,
+.composition-bans > .ban > .champion-name {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
 	}
 
 /* ----------!PICK---------- */
@@ -357,6 +404,8 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 
 /* ----------!CELL---------- */
 .offset-cell,
+.champion-grid > .champion-list > .champion,
+.champion-grid > .champion-list > .wildcard,
 .composition-picks > .pick,
 .composition-bans > .ban,
 .btn-lock-in > .first {
@@ -371,6 +420,11 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 #composition {
     user-select: none;
 	}
+
+/* ----------!FORM-FILTER-CHAMPION---------- */
+#form-filter-champion {
+    padding-bottom: 5px;
+    }
 
 /* ----------!FORM-COMPOSITION---------- */
 #form-composition {
@@ -441,62 +495,10 @@ $header-column-width: 210px;
 /* ----------!BELOW-THIS-LINE-ARE-TEMPORARY-STYLES---------- */
 /* --------------------------------------------------------- */
 
-/* ============================= */
-/* ==========!CHAMPION========== */
-/* ============================= */
-
-/* ----------!GRID---------- */
-.champion-grid {
-    margin: 0;
-    padding: 15px;
-    height: 390px;
-    overflow-y: scroll;
-
-    .champion {
-        max-width: 120px;
-
-        .champion-profile {
-            width: 80px;
-            cursor: pointer;
-        }
-
-        .champion-image {
-            width: 48px;
-            height: 48px;
-        }
-
-        .champion-name {
-            @extend [class*="xs-10"];
-            @extend .p-xs-10;
-        }
-    }
-
-    .wildcard {
-        max-width: 120px;
-
-        .wildcard-item {
-            width: 80px;
-            cursor: pointer;
-            border: 2px solid black;
-        }
-
-        .role-wildcard {
-            display: inline-block;
-            margin-top: 10px;
-        }
-    }
-}
-.champion-grid .champion .champion-image + .champion-name {
-    padding-top: 10px;
-}
-
 /* ----------!FILTER---------- */
 .role .role-icon {
     cursor: pointer;
     }
-#form-filter-champion {
-    padding-bottom: 30px;
-}
 
 /*----------- !Compositions View (Home) --------*/
 .composition-article {

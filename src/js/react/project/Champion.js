@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CHAMPIONS_LOAD_REQUEST } from '../../redux/type';
+import { CHAMPIONS_LOAD_REQUEST, WILDCARDS_LOAD_REQUEST } from '../../redux/type';
 import { findByString, removeStatus } from '../../filter';
 import * as client from '../../client';
+import Cell from './Cell';
 import ChampionFilter from './ChampionFilter';
 import Loader from '../unit/Loader';
-import { arrayToObject } from '../../function';
 
 class Champion extends Component {
     constructor(props) {
@@ -58,36 +58,42 @@ class Champion extends Component {
         return filters.role ? filters.role.toLowerCase() === fillRole.role.toLowerCase() : true;
     }
     render() {
-        const { loadingChampions, champions, selectChampion, wildcards } = this.props;
+        const { loadingChampions, loadingWildcards, champions, wildcards, selectChampion } = this.props;
         const { filters, roles } = this.state;
-        const item = 'champion';
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
-            const championSprite = champion.image ? client.CHAMPION_SPRITE + champion.image.sprite : null;
-            const style = {
-                backgroundImage: `url('${championSprite}')`,
-                backgroundPosition: `-${champion.image.x}px -${champion.image.y}px`,
-            };
-            const displayClass = this.shouldDisplay(champion) ? 'd-flex' : 'd-none'; // basically show the <li> if filtering matches
+            const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
+            const displayClass = this.shouldDisplay(champion) ? 'd-flex' : 'd-none';
             return (
                 <li
-                    key={`${item}-${champion.id}`}
-                    id={`${item}-${champion.id}`}
-                    className={`${item} ${item}-${count} col ${displayClass} justify-content-center`}>
+                    key={`champion-${champion.id}`}
+                    id={`champion-${champion.id}`}
+                    className={`champion champion-${count} col justify-content-center ${displayClass}`}
+                >
                     <div className="champion-profile d-flex flex-column align-items-center" onClick={() => selectChampion(champion)}>
-                        <div className="champion-image" style={style} />
-                        <h3 className="champion-name">{champion.name}</h3>
+                        <Cell>
+                            <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
+                        </Cell>
+                        <span className="champion-name">{champion.name}</span>
                     </div>
                 </li>
             );
         });
-        const loopWildcard = Object.keys(wildcards).map((key) => {
-            const wc = wildcards[key];
-            const displayClass = this.shouldDisplayRole(wc) ? 'd-flex' : 'd-none';
+        const loopWildcard = wildcards.map((wildcard, index) => {
+            const count = index + 1;
+            const wildcardAvatar = wildcard.role.toLowerCase();
+            const displayClass = this.shouldDisplayRole(wildcard) ? 'd-flex' : 'd-none';
             return (
-                <li key={`wildcard-${wc.role}`} className={`${displayClass} wildcard col justify-content-center`} onClick={() => selectChampion(wc)}>
-                    <div className="wildcard-item">
-                        <div className={`role-wildcard bg-${wc.role}-icon`}></div>
+                <li
+                    key={`wildcard-${wildcard.role}`}
+                    id={`wildcard-${wildcard.role}`}
+                    className={`wildcard wildcard-${count} col justify-content-center ${displayClass}`}
+                >
+                    <div className="wildcard-profile d-flex flex-column align-items-center" onClick={() => selectChampion(wildcard)}>
+                        <Cell>
+                            <img className="wildcard-avatar exact-center" src={wildcardAvatar} alt={wildcard.name} />
+                        </Cell>
+                        <span className="wildcard-name">{wildcard.name}</span>
                     </div>
                 </li>
             );
@@ -95,10 +101,12 @@ class Champion extends Component {
         return (
             <Fragment>
                 <ChampionFilter roles={roles} filters={filters} filterRole={this.filterRole} filterName={this.filterName} />
-                <ul className="champion-grid row gutter-30 panel text-center">
-                    {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
-                    {loopWildcard}
-                </ul>
+                <div className="champion-grid">
+                    <ul className="champion-list row">
+                        {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
+                        {loadingWildcards ? <Loader label="Loading wildcards" /> : loopWildcard}
+                    </ul>
+                </div>
             </Fragment>
         );
     }
@@ -106,15 +114,18 @@ class Champion extends Component {
 
 Champion.propTypes = {
     loadingChampions: PropTypes.bool.isRequired,
+    loadingWildcards: PropTypes.bool.isRequired,
     champions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    wildcards: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectChampion: PropTypes.func.isRequired,
 };
 
 function mapStateToProps({ calls, champions, wildcards }) {
     return {
         loadingChampions: findByString(calls, removeStatus(CHAMPIONS_LOAD_REQUEST)),
-        wildcards: arrayToObject(wildcards, 'id'),
+        loadingWildcards: findByString(calls, removeStatus(WILDCARDS_LOAD_REQUEST)),
         champions,
+        wildcards,
     };
 }
 
