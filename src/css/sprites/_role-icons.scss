@@ -2,7 +2,7 @@
 
 $role-sprite: "../img/sprite-role.svg";
 $lane-sprite: "../img/sprite-lane.svg";
-$role-icon-size: 35px;
+$role-icon-size: 30px;
 
 @mixin generate-role-icons($size) {
     width: $size;
