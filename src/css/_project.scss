@@ -271,47 +271,44 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 	}
 
 /* ----------!WINDOW---------- */
-.champion-window {
+.champion-grid {
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: $color-form-bronze-382B19;
-    margin-left: 1px;
-    margin-right: 1px;
+    margin-right: -20px;
     height: 595px;
     overflow-x: hidden;
     overflow-y: scroll;
     }
-.champion-window::-webkit-scrollbar-track {
+.champion-grid::-webkit-scrollbar-track {
     background: $color-transparent;
     }
 
 /* ----------!GRID---------- */
 .champion-grid {
-    margin-left: -1px;
-    margin-right: -1px;
     user-select: none;
     }
-.champion-grid > .champion-list > .champion,
-.champion-grid > .champion-list > .wildcard {
+.champion-grid > .champion,
+.champion-grid > .wildcard {
     padding: 15px;
     max-width: 116px;
 	}
-.champion-grid > .champion-list > .champion > .champion-profile > .cell > .membrane,
-.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell > .membrane {
+.champion-grid > .champion > .champion-profile > .cell > .membrane,
+.champion-grid > .wildcard > .wildcard-profile > .cell > .membrane {
     width: 80px;
     height: 80px;
 	}
-.champion-grid > .champion-list > .champion > .champion-profile > .cell > .membrane > .nucleus > .champion-avatar,
-.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell > .membrane > .nucleus > .wildcard-avatar {
+.champion-grid > .champion > .champion-profile > .cell > .membrane > .nucleus > .champion-avatar,
+.champion-grid > .wildcard > .wildcard-profile > .cell > .membrane > .nucleus > .wildcard-avatar {
     width: 88px;
     height: 88px;
 	}
-.champion-grid > .champion-list > .champion > .champion-profile > .cell + .champion-name,
-.champion-grid > .champion-list > .wildcard > .wildcard-profile > .cell + .wildcard-name {
+.champion-grid > .champion > .champion-profile > .cell + .champion-name,
+.champion-grid > .wildcard > .wildcard-profile > .cell + .wildcard-name {
     padding-top: 10px;
     }
-.champion-grid > .champion-list > .champion > .champion-profile > .champion-name,
-.champion-grid > .champion-list > .wildcard > .wildcard-profile > .wildcard-name {
+.champion-grid > .champion > .champion-profile > .champion-name,
+.champion-grid > .wildcard > .wildcard-profile > .wildcard-name {
     margin-left: -10px !important;
     margin-right: -10px !important;
     }
@@ -431,8 +428,8 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 
 /* ----------!CELL---------- */
 .offset-cell,
-.champion-grid > .champion-list > .champion,
-.champion-grid > .champion-list > .wildcard,
+.champion-grid > .champion,
+.champion-grid > .wildcard,
 .composition-picks > .pick,
 .composition-bans > .ban,
 .btn-lock-in > .first {
