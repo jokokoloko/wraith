@@ -271,11 +271,19 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 	}
 
 /* ----------!WINDOW---------- */
-.champion-grid {
+.champion-window {
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: $color-form-bronze-382B19;
-    margin-right: -20px;
+    margin: 0 1px;
+    }
+
+/* ----------!GRID---------- */
+.champion-grid {
+    user-select: none;
+    margin-right: -21px;
+    margin-left: -16px;
+    padding-bottom: 15px;
     height: 595px;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -283,15 +291,10 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 .champion-grid::-webkit-scrollbar-track {
     background: $color-transparent;
     }
-
-/* ----------!GRID---------- */
-.champion-grid {
-    user-select: none;
-    }
 .champion-grid > .champion,
 .champion-grid > .wildcard {
     padding: 15px;
-    max-width: 116px;
+    max-width: 116.5px;
 	}
 .champion-grid > .champion > .champion-profile > .cell > .membrane,
 .champion-grid > .wildcard > .wildcard-profile > .cell > .membrane {

@@ -101,10 +101,12 @@ class Champion extends Component {
         return (
             <Fragment>
                 <ChampionFilter roles={roles} filters={filters} filterRole={this.filterRole} filterName={this.filterName} />
-                <ul className="champion-grid row">
-                    {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
-                    {loadingWildcards ? <Loader label="Loading wildcards" /> : loopWildcard}
-                </ul>
+                <div className="champion-window">
+                    <ul className="champion-grid row">
+                        {loadingChampions ? <Loader label="Loading champions" /> : loopChampion}
+                        {loadingWildcards ? <Loader label="Loading wildcards" /> : loopWildcard}
+                    </ul>
+                </div>
             </Fragment>
         );
     }
