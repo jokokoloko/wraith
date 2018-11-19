@@ -255,6 +255,7 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 /* ============================= */
 /* ==========!CHAMPION========== */
 /* ============================= */
+$window: 540px;
 
 /* ----------!PROFILE---------- */
 .champion-profile,
@@ -276,6 +277,7 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     border-bottom: 1px solid;
     border-color: $color-form-bronze-382B19;
     margin: 0 1px;
+    height: $window + 2;
     }
 
 /* ----------!GRID---------- */
@@ -284,7 +286,7 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     margin-right: -21px;
     margin-left: -16px;
     padding-bottom: 15px;
-    height: 595px;
+    max-height: $window;
     overflow-x: hidden;
     overflow-y: scroll;
     }
@@ -294,7 +296,8 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 .champion-grid > .champion,
 .champion-grid > .wildcard {
     padding: 15px;
-    max-width: 116.5px;
+    max-width: 116px;
+    max-height: 116px;
 	}
 .champion-grid > .champion > .champion-profile > .cell > .membrane,
 .champion-grid > .wildcard > .wildcard-profile > .cell > .membrane {
@@ -308,7 +311,7 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
 	}
 .champion-grid > .champion > .champion-profile > .cell + .champion-name,
 .champion-grid > .wildcard > .wildcard-profile > .cell + .wildcard-name {
-    padding-top: 10px;
+    padding-top: 8px;
     }
 .champion-grid > .champion > .champion-profile > .champion-name,
 .champion-grid > .wildcard > .wildcard-profile > .wildcard-name {
