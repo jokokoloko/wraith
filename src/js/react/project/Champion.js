@@ -63,39 +63,43 @@ class Champion extends Component {
         const loopChampion = champions.map((champion, index) => {
             const count = index + 1;
             const championAvatar = champion.image ? client.CHAMPION_AVATAR + champion.image.full : null;
-            const displayClass = this.shouldDisplay(champion) ? 'd-flex' : 'd-none';
+            const display = this.shouldDisplay(champion);
             return (
-                <li
-                    key={`champion-${champion.id}`}
-                    id={`champion-${champion.id}`}
-                    className={`champion champion-${count} col justify-content-center ${displayClass}`}
-                >
-                    <div className="champion-profile d-flex flex-column align-items-center" onClick={() => selectChampion(champion)}>
-                        <Cell>
-                            <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
-                        </Cell>
-                        <span className="champion-name">{champion.name}</span>
-                    </div>
-                </li>
+                display && (
+                    <li
+                        key={`champion-${champion.id}`}
+                        id={`champion-${champion.id}`}
+                        className={`champion champion-${count} col justify-content-center`}
+                    >
+                        <div className="champion-profile d-flex flex-column align-items-center" onClick={() => selectChampion(champion)}>
+                            <Cell>
+                                <img className="champion-avatar exact-center" src={championAvatar} alt={champion.name} />
+                            </Cell>
+                            <span className="champion-name">{champion.name}</span>
+                        </div>
+                    </li>
+                )
             );
         });
         const loopWildcard = wildcards.map((wildcard, index) => {
             const count = index + 1;
             const wildcardAvatar = wildcard.role.toLowerCase();
-            const displayClass = this.shouldDisplayRole(wildcard) ? 'd-flex' : 'd-none';
+            const display = this.shouldDisplayRole(wildcard);
             return (
-                <li
-                    key={`wildcard-${wildcard.role}`}
-                    id={`wildcard-${wildcard.role}`}
-                    className={`wildcard wildcard-${count} col justify-content-center ${displayClass}`}
-                >
-                    <div className="wildcard-profile d-flex flex-column align-items-center" onClick={() => selectChampion(wildcard)}>
-                        <Cell>
-                            <img className="wildcard-avatar exact-center" src={wildcardAvatar} alt={wildcard.name} />
-                        </Cell>
-                        <span className="wildcard-name">{wildcard.name}</span>
-                    </div>
-                </li>
+                display && (
+                    <li
+                        key={`wildcard-${wildcard.role}`}
+                        id={`wildcard-${wildcard.role}`}
+                        className={`wildcard wildcard-${count} col justify-content-center`}
+                    >
+                        <div className="wildcard-profile d-flex flex-column align-items-center" onClick={() => selectChampion(wildcard)}>
+                            <Cell>
+                                <img className="wildcard-avatar exact-center" src={wildcardAvatar} alt={wildcard.name} />
+                            </Cell>
+                            <span className="wildcard-name">{wildcard.name}</span>
+                        </div>
+                    </li>
+                )
             );
         });
         return (
