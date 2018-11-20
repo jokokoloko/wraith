@@ -55,7 +55,17 @@ class Champion extends Component {
     }
     shouldDisplayRole(fillRole) {
         const { filters } = this.state;
-        return filters.role ? filters.role.toLowerCase() === fillRole.role.toLowerCase() : true;
+        let roleMatch = true,
+            nameMatch = true;
+        if (filters.role || filters.name) {
+            if (filters.name.length > 0) {
+                nameMatch = fillRole.name.toLowerCase().indexOf(filters.name.toLowerCase()) >= 0;
+            }
+            if (filters.role) {
+                roleMatch = filters.role.toLowerCase() === fillRole.role.toLowerCase();
+            }
+        }
+        return roleMatch && nameMatch;
     }
     render() {
         const { loadingChampions, loadingWildcards, champions, wildcards, selectChampion } = this.props;
