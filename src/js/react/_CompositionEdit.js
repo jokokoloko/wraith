@@ -17,6 +17,7 @@ import ChampionInformation from './project/ChampionInformation';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
 import Loader from './unit/Loader';
+import { isFull, findNextEmpty } from './CompositionUtils';
 
 class _CompositionEdit extends Component {
     constructor(props) {
@@ -112,6 +113,8 @@ class _CompositionEdit extends Component {
     }
     selectChampion(selectedChampion) {
         let { selectedLaneIdx, championsSelected, selectedCollection, picks, bans } = this.state;
+        if (selectedLaneIdx == undefined || selectedLaneIdx == -1) return;
+
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
         if (selectedChampion.type && selectedChampion.type === 'wildcard') {
@@ -130,12 +133,21 @@ class _CompositionEdit extends Component {
             // put champion in current lane index
             curCollection[selectedLaneIdx].champion = selectedChampion;
         }
-        // increase lane index
-        selectedLaneIdx = Math.min(curCollection.length - 1, selectedLaneIdx + 1);
+        // if the current list is full, switch the collection
+        if (isFull(curCollection)) {
+            selectedCollection = selectedCollection == "picks" ? "bans" : "picks";
+            curCollection = this.state[selectedCollection];
+            selectedLaneIdx = -1;
+        }
+
+        // set to the next empty index
+        selectedLaneIdx = findNextEmpty(curCollection, selectedLaneIdx + 1);
+
         // set the state
         this.setState({
             selectedLaneIdx,
             selectedChampion,
+            selectedCollection,
             championsSelected,
             picks,
             bans,
