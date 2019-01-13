@@ -125,7 +125,10 @@ export const compositionsLoadByTime = (order, limit, startAfterDoc) => (dispatch
     dispatch(compositionsLoadRequest());
     return apiComposition
         .compositionsLoadByTime(order, limit, startAfterDoc)
-        .then((compositions) => dispatch(compositionsLoadSuccess(compositions)))
+        .then((compositions) => {
+            console.log("my comp now", compositions);
+            return dispatch(compositionsLoadSuccess(compositions));
+        })
         .catch((error) => {
             dispatch(compositionsLoadFailure(error));
             toastr.error(error.message);

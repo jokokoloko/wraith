@@ -5,6 +5,10 @@ import { COMPOSITIONS, PUBLISHED } from '../js/data';
 import * as client from '../js/client';
 
 class apiComposition {
+
+    constructor() {
+        this._last = null;
+    }
     // Add
     static compositionAdd = (data) => {
         let newComp = compositions.doc();
@@ -71,7 +75,6 @@ class apiComposition {
             .get()
             .then((snapshot) => {
                 console.log('Compositions:', snapshot.size); // remove
-                // snapshot.forEach((composition) => console.log(composition.id, '=>', composition.data())); // remove
                 return snapshot.docs.map((composition) => composition.data());
             })
             .catch((error) => console.error('Error getting compositions:', error)); // remove
@@ -83,7 +86,6 @@ class apiComposition {
             .get()
             .then((snapshot) => {
                 console.log('Compositions by user:', snapshot.size); // remove
-                // snapshot.forEach((composition) => console.log(composition.id, '=>', composition.data())); // remove
                 return snapshot.docs.map((composition) => composition.data());
             })
             .catch((error) => console.error('Error getting compositions by user:', error)); // remove
@@ -91,11 +93,15 @@ class apiComposition {
     static compositionsLoadByTime = (order, limit, startAfterDoc = false) => {
         let ref = compositions.orderBy('time.created', order).limit(limit);
         if (startAfterDoc) {
-            ref.startAfter(startAfterDoc);
+            ref = compositions.orderBy('time.created', order)
+                .startAfter(startAfterDoc.time.created)
+                .limit(limit);
         }
         return ref.get()
-            .then((snapshot) => {
-                return snapshot.docs.map((composition) => composition.data());
+            .then(function (snapshot) {
+                return snapshot.docs.map((composition) => {
+                    return composition.data();
+                });
             })
             .catch((error) => console.error('Error getting compositions by time:', error));
     }

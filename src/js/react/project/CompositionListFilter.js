@@ -1,24 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../input/InputText';
+import { sortBy } from 'lodash';
+import { positions } from '../../utilities';
 
-const CompositionListFilter = ({ championsMap }) => {
-    // const size = 'md';
-    const champOptions = Object.keys(championsMap).map((key) => {
-        let cur = championsMap[key];
+const CompositionListFilter = ({ championsMap, filterChamps, apply }) => {
+    const sortedChamps = sortBy(championsMap, ['name']);
+    const champOptions = sortedChamps.map((cur) => {
         return (
             <option key={cur.key} value={cur.id}>{cur.name}</option>
         );
     });
-    const loopTest = [1,2,3,4,5].map((item, idx) => {
+    const loopTest = positions.map((position, idx) => {
         return (
-            <div className="col" key={`test-${item}`}>
+            <div className="col" key={`filter-${position}`}>
                 <div className="input-group">
                     <div className="input-group-prepend">
-                        <label className="input-group-text" htmlFor={`inputGroupSelect-${idx}`}>Lane</label>
+                        <label className="input-group-text" htmlFor={`inputGroupSelect-${idx}`}>{position}</label>
                     </div>
-                    <select className="custom-select" id={`inputGroupSelect-${idx}`}>
-                        <option defaultValue="none">Choose...</option>
+                    <select className="custom-select"
+                        id={`inputGroupSelect-${idx}`}
+                        onChange={(e) => filterChamps(position, e.target.value)}>
+                        <option defaultValue="none" value="none">Choose...</option>
                         {champOptions}
                     </select>
                 </div>
@@ -49,18 +52,17 @@ const CompositionListFilter = ({ championsMap }) => {
                     {loopTest}
                 </div>
                 <div className="row">
-                    <button type="button" className="btn btn-success">Apply</button>
+                    <button type="button" className="btn btn-success" onClick={apply}>Apply</button>
                 </div>
             </div>
         </section>
     );
 };
 
-// CompositionListFilter.propTypes = {
-//     roles: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     filters: PropTypes.objectOf(PropTypes.any).isRequired,
-//     filterRole: PropTypes.func.isRequired,
-//     filterName: PropTypes.func.isRequired,
-// };
+CompositionListFilter.propTypes = {
+    championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
+    filterChamps: PropTypes.func.isRequired,
+    apply: PropTypes.func.isRequired,
+};
 
 export default CompositionListFilter;

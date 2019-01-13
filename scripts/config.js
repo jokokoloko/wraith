@@ -10,6 +10,6 @@ exports.riot = {
     locale: 'en_US',
     staticData: {
         base: 'https://ddragon.leagueoflegends.com/cdn',
-        version: '8.13.1'
+        version: '9.2.1'
     }
 };
