@@ -113,7 +113,7 @@ class _CompositionEdit extends Component {
     }
     selectChampion(selectedChampion) {
         let { selectedLaneIdx, championsSelected, selectedCollection, picks, bans } = this.state;
-        if (selectedLaneIdx == undefined || selectedLaneIdx == -1) return;
+        if (selectedLaneIdx === undefined || selectedLaneIdx === -1) return;
 
         let curCollection = this.state[selectedCollection];
         let curChampSelected = curCollection[selectedLaneIdx].champion;
@@ -135,7 +135,7 @@ class _CompositionEdit extends Component {
         }
         // if the current list is full, switch the collection
         if (isFull(curCollection)) {
-            selectedCollection = selectedCollection == "picks" ? "bans" : "picks";
+            selectedCollection = selectedCollection === "picks" ? "bans" : "picks";
             curCollection = this.state[selectedCollection];
             selectedLaneIdx = -1;
         }

@@ -6,7 +6,7 @@ export const EMPTY_AVATAR = 'http://via.placeholder.com/800?text=Avatar';
 
 // Patch
 export const HOST = 'https://ddragon.leagueoflegends.com/cdn';
-export const PATCH = '8.11.1';
+export const PATCH = '9.2.1';
 
 // Champion
 export const CHAMPION_SPLASH = HOST + '/img/champion/splash/'; // requires file extension to be added manually and skin number
