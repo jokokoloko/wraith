@@ -106,6 +106,7 @@ label {
 .title {
 	@extend [class*="xs-30"];
 	@extend .h-xs-30;
+	color: $color-text-gold-937341;
 	}
 
 /* ----------!HEADLINE---------- */
@@ -124,6 +125,11 @@ label {
 .meta {
 	@extend [class*="xs-10"];
 	@extend .h-xs-10;
+	}
+
+/* ----------!SECTION-TITLE---------- */
+.section-title {
+	color: $color-text-gold-937341;
 	}
 
 /* ========================= */

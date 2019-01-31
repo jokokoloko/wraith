@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Text
 export const capitalize = (text) => text.replace(/\b\w/g, (l) => l.toUpperCase());
 
@@ -52,13 +54,15 @@ export const slugify = (text) => {
     );
 };
 
+export const paragraphify = (text) => text.split('\n\n').map((paragraph) => <p key={generateID()}>{paragraph}</p>);
+
 export const excerptify = (text, limit) => (text && (text.length > limit ? text.substr(0, text.lastIndexOf(' ', limit)) : text)) || null;
 
 // Object
 export const flattenObject = (object) => {
     const result = {};
-    Object.keys(object).forEach(
-        (key) => (typeof object[key] === 'object' ? Object.assign(result, flattenObject(object[key])) : (result[key] = object[key])),
+    Object.keys(object).forEach((key) =>
+        typeof object[key] === 'object' ? Object.assign(result, flattenObject(object[key])) : (result[key] = object[key]),
     );
     return result;
 };

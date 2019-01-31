@@ -58,9 +58,11 @@ class _CompositionEdit extends Component {
         const { championsSelected } = this.state;
         const picks = buildLanes(view.pick, championsMap, wildcardsMap);
         const bans = buildLanes(view.ban, championsMap, wildcardsMap);
-        picks.filter((pick) => pick.champion.type !== 'wildcard').forEach((pick, index) => {
-            championsSelected.picks[pick.champion.name] = index;
-        });
+        picks
+            .filter((pick) => pick.champion.type !== 'wildcard')
+            .forEach((pick, index) => {
+                championsSelected.picks[pick.champion.name] = index;
+            });
         bans.filter((pick) => pick.champion.type !== 'wildcard').forEach((ban, index) => {
             championsSelected.bans[ban.champion.name] = index;
         });
@@ -227,7 +229,7 @@ class _CompositionEdit extends Component {
         const { loadingView, submitting, authenticated } = this.props;
         const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form, formNotes, formStrategies } = this.state;
         return (
-            <main id="main" role="main">
+            <main id="main" className="composition-edit" role="main">
                 <div className="container-fluid">
                     <Basic space="space-xs-50">
                         {loadingView ? (

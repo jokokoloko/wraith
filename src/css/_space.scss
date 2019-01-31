@@ -183,11 +183,6 @@ blockquote ol:last-child,
 blockquote ul:last-child {
     margin-bottom: -8px;
 	}
-.icon + h3,
-.icon + h4,
-.icon + p {
-	padding-top: 50px; // 50px spacing
-	}
 
 /* ----------!EXTRA---------- */
 hr {
@@ -224,7 +219,7 @@ hr {
 
 /* ----------!HEADER---------- */
 header .title + p {
-	padding-top: 23px; // 30px spacing
+	padding-top: 43px; // 50px spacing
 	}
 
 /* ----------!SECTION---------- */

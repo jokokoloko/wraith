@@ -1,6 +1,27 @@
 @import "css/sprites/lane-icons";
 @import "css/sprites/role-icons";
 
+/* ========================= */
+/* ==========!RULE========== */
+/* ========================= */
+
+/* ----------!RESIZE---------- */
+textarea {
+    resize: none;
+	}
+
+/* ----------!USER-SELECT---------- */
+.composition-picks,
+.composition-bans {
+    user-select: none;
+	}
+
+/* ----------!CURSOR-POINTER---------- */
+#composition-selector .composition-picks > .pick,
+#composition-selector .composition-bans > .ban {
+    cursor: pointer;
+	}
+
 /* =========================== */
 /* ==========!SCRIPT========== */
 /* =========================== */
@@ -23,9 +44,10 @@
 
 /* ----------!WIDTH---------- */
 .affix-width,
-.information {
+.information,
+.extra {
     width: 325px;
-	}
+    }
 
 /* ========================== */
 /* ==========!BASIC========== */
@@ -319,15 +341,42 @@ $window: 540px;
     margin-right: -10px !important;
     }
 
+/* ----------!LOADING---------- */
+.champion-loading {
+    position: relative;
+    overflow: hidden;
+    }
+.champion-loading > .champion-overlay {
+    background-color: $color-form-grey-0C0C14-80;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    }
+.champion-loading > .champion-overlay > .icon-lane {
+    width: 25px;
+    height: 25px;
+    }
+.champion-loading > .champion-overlay > .champion-name {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
+    font-weight: $font-weight-3;
+    text-transform: uppercase;
+    color: $color-text-cream-F1E6D0;
+    }
+.champion-loading > .champion-overlay > .icon-lane + .champion-name {
+    margin-top: 1px;
+    }
+
 /* ================================ */
 /* ==========!COMPOSITION========== */
 /* ================================ */
 
 /* ----------!GENERAL---------- */
-.composition-picks > .pick,
-.composition-bans > .ban {
-    cursor: pointer;
-	}
 .composition-picks > .pick > .champion-name,
 .composition-bans > .ban > .champion-name {
     @extend [class*="xs-15"];
@@ -335,45 +384,102 @@ $window: 540px;
     margin: 0;
 	}
 
+/* ===================================== */
+/* ==========!COMPOSITION-VIEW========== */
+/* ===================================== */
+
+/* ----------!AFFIX---------- */
+.composition-view .affix.position-fixed {
+    top: 50px;
+    }
+
+/* ----------!NOTES---------- */
+.composition-notes > header {
+    margin-top: -16px;
+    margin-bottom: -16px;
+    }
+.composition-notes > section > article > header {
+    margin-top: -7px;
+    margin-bottom: -8px;
+    }
+.composition-notes .icon-lane {
+    margin: -5px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    }
+.composition-notes .champion-name {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    margin: 0;
+    font-weight: $font-weight-3;
+    text-transform: uppercase;
+    color: $color-text-cream-F1E6D0;
+    }
+.composition-notes .champion-list {
+    width: 300px;
+    }
+.composition-notes .champion-list .cell > .membrane {
+    width: 50px;
+    height: 50px;
+    }
+.composition-notes .champion-list .cell > .membrane > .nucleus > .champion-avatar {
+    width: 53px;
+    height: 53px;
+    }
+
+/* ----------!STRATEGIES---------- */
+.composition-strategies .strategies-phase {
+    @extend [class*="xs-15"];
+    @extend .p-xs-15;
+    font-weight: $font-weight-3;
+    text-transform: uppercase;
+    color: $color-text-cream-F1E6D0;
+    }
+
+/* ========================================= */
+/* ==========!COMPOSITION-SELECTOR========== */
+/* ========================================= */
+
 /* ----------!PICK---------- */
-.composition-picks > .pick + .pick {
+#composition-selector .composition-picks > .pick + .pick {
     margin-top: 19px;
 	}
-.composition-picks > .pick > .cell {
+#composition-selector .composition-picks > .pick > .cell {
     margin-right: 20px;
 	}
-.composition-picks > .pick > .cell > .membrane {
+#composition-selector .composition-picks > .pick > .cell > .membrane {
     width: 80px;
     height: 80px;
 	}
-.composition-picks > .pick > .cell > .membrane > .nucleus > .icon-lane {
+#composition-selector .composition-picks > .pick > .cell > .membrane > .nucleus > .icon-lane {
     width: 40px;
     height: 40px;
 	}
-.composition-picks > .pick > .cell > .membrane > .nucleus > .champion-avatar {
+#composition-selector .composition-picks > .pick > .cell > .membrane > .nucleus > .champion-avatar {
     width: 88px;
     height: 88px;
 	}
 
 /* ----------!BAN---------- */
-.composition-bans > .ban > .cell > .membrane {
+#composition-selector .composition-bans > .ban > .cell > .membrane {
     width: 50px;
     height: 50px;
 	}
-.composition-bans > .ban > .cell > .membrane > .nucleus > .icon-lane {
+#composition-selector .composition-bans > .ban > .cell > .membrane > .nucleus > .icon-lane {
     width: 25px;
     height: 25px;
 	}
-.composition-bans > .ban > .cell > .membrane > .nucleus > .champion-avatar {
+#composition-selector .composition-bans > .ban > .cell > .membrane > .nucleus > .champion-avatar {
     width: 53px;
     height: 53px;
 	}
 
 /* ----------!SPACE---------- */
-.composition-picks + .composition-bans {
+#composition-selector .composition-picks + .composition-bans {
 	margin-top: 50px;
 	}
-.composition-bans + .btn {
+#composition-selector .composition-bans + .btn {
 	margin-top: 80px;
 	}
 
@@ -384,9 +490,6 @@ $window: 540px;
 /* ----------!GENERAL---------- */
 .information {
     text-align: center;
-    }
-.information .title {
-    color: $color-text-gold-937341;
     }
 
 /* ----------!WELCOME---------- */
@@ -436,8 +539,8 @@ $window: 540px;
 .offset-cell,
 .champion-grid > .champion,
 .champion-grid > .wildcard,
-.composition-picks > .pick,
-.composition-bans > .ban,
+#composition-selector .composition-picks > .pick,
+#composition-selector .composition-bans > .ban,
 .btn-lock-in > .first {
     margin: -1px;
 	}
@@ -445,11 +548,6 @@ $window: 540px;
 /* ========================= */
 /* ==========!AREA========== */
 /* ========================= */
-
-/* ----------!COMPOSITION---------- */
-#composition {
-    user-select: none;
-	}
 
 /* ----------!FORM-FILTER-CHAMPION---------- */
 #form-filter-champion {
@@ -459,7 +557,6 @@ $window: 540px;
 /* ----------!FORM-COMPOSITION---------- */
 #form-composition {
 	padding-top: 80px;
-	padding-bottom: 340px;
 	}
 #form-composition .section-title {
 	text-align: center;
@@ -490,9 +587,10 @@ $window: 540px;
     background-attachment: fixed;
 	}
 #body {
-	background-image: url('../img/background-magic.png');
+    background-image: url('../img/background-magic.png');
     background-position: center bottom;
-	}
+    padding-bottom: 340px;
+    }
 #body::after {
     @extend .overlay;
     background-image: url('../img/background-map.jpg');

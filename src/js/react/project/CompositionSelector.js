@@ -5,19 +5,6 @@ import Cell from './Cell';
 import IconLane from './IconLane';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
-    // const generateAvatar = (champion, championAvatar) => {
-    //     if (champion.key && champion.name) {
-    //         return <img className="champion-image" src={championAvatar} alt={champion.name} />;
-    //     } else if (champion.type === 'wildcard') {
-    //         return (
-    //             <div className="champion-image cell">
-    //                 <div className={`role-wildcard bg-${champion.role}-icon`} />
-    //             </div>
-    //         );
-    //     } else {
-    //         return <div className="champion-image cell" />;
-    //     }
-    // };
     const generateAvatar = (champion, championAvatar, position) => (
         <Cell>
             {champion.id ? (
@@ -68,7 +55,7 @@ const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, b
         );
     });
     return (
-        <div id="composition">
+        <div id="composition-selector">
             <ul className="composition-picks list-reset">{loopPick}</ul>
             <ul className="composition-bans list-reset d-flex justify-content-between">{loopBan}</ul>
             <button type="button" className={`btn btn-${id ? 'main' : 'lock-in'} btn-lg btn-block`} onClick={onSubmit} disabled={submitting}>
