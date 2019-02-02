@@ -9,15 +9,14 @@ import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
 import * as path from '../path';
-import { buildLanes } from '../composition';
-import CompositionMeta from './project/CompositionMeta';
-import CompositionSelector from './project/CompositionSelector';
-import Champion from './project/Champion';
-import ChampionInformation from './project/ChampionInformation';
+import { buildLanes, isFull, findNextEmpty } from '../utilities';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
 import Loader from './unit/Loader';
-import { isFull, findNextEmpty } from './CompositionUtils';
+import Champion from './project/Champion';
+import ChampionInformation from './project/ChampionInformation';
+import CompositionMeta from './project/CompositionMeta';
+import CompositionSelector from './project/CompositionSelector';
 
 class _CompositionEdit extends Component {
     constructor(props) {
@@ -137,7 +136,7 @@ class _CompositionEdit extends Component {
         }
         // if the current list is full, switch the collection
         if (isFull(curCollection)) {
-            selectedCollection = selectedCollection === "picks" ? "bans" : "picks";
+            selectedCollection = selectedCollection === 'picks' ? 'bans' : 'picks';
             curCollection = this.state[selectedCollection];
             selectedLaneIdx = -1;
         }

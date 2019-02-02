@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
 import InputText from '../input/InputText';
-import { positions } from '../../composition';
+import { positions } from '../../utilities';
 
 class CompositionMeta extends Component {
     constructor(props) {

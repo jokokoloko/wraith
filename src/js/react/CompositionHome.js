@@ -9,7 +9,7 @@ import { findByString, removeStatus } from '../filter';
 import { arrayToObject } from '../function';
 import * as client from '../client';
 import * as path from '../path';
-import { buildLanes } from '../composition';
+import { buildLanes } from '../utilities';
 import Basic from './section/Basic';
 import Feed from './section/Feed';
 import Loader from './unit/Loader';
@@ -23,16 +23,14 @@ class CompositionHome extends Component {
         this.state = {
             curPage: 1,
             pageSize: 10,
-            compositionList: []
-        }
+            compositionList: [],
+        };
     }
     componentDidMount() {
         const { actionComposition } = this.props;
         actionComposition.compositionsLoadByTime('desc', 10);
     }
-    nextPage = () => {
-        
-    }
+    nextPage = () => {};
     render() {
         const { authenticated, loadingCompositions, profile, compositions, championsMap, wildcardsMap } = this.props;
         const item = 'composition';
@@ -54,9 +52,7 @@ class CompositionHome extends Component {
                     <Link to={`/${composition.id}`}>
                         <div className="card card-panel container">
                             <div className="card-body row composition-details">
-                                <div className="composition-pick col-6">
-                                    {loopPick}
-                                </div>
+                                <div className="composition-pick col-6">{loopPick}</div>
                                 {composition.meta.title && <h3 className="composition-title card-headline col-3">{composition.meta.title}</h3>}
                                 <p className="composition-user col-3">by {composition.user}</p>
                             </div>
@@ -73,7 +69,7 @@ class CompositionHome extends Component {
                             <h1>Welcome to Invade.Blue</h1>
                         </header>
                     </Basic>
-                    <CompositionListFilter championsMap={championsMap}/>
+                    <CompositionListFilter championsMap={championsMap} />
                     <Pager />
                     <Feed space="space-xs-50">
                         <section>

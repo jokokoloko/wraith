@@ -8,14 +8,14 @@ import { findByString, removeStatus } from '../filter';
 import { COMPOSITIONS } from '../data';
 import { paragraphify, arrayToObject } from '../function';
 import * as client from '../client';
-import { buildLanes } from '../composition';
+import { buildLanes } from '../utilities';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
 import Image from './unit/Image';
 import Loader from './unit/Loader';
+import IconLane from './project/IconLane';
 import LoopChampion from './project/LoopChampion';
 import LoopNote from './project/LoopNote';
-import IconLane from './project/IconLane';
 
 class CompositionView extends Component {
     componentDidMount() {
