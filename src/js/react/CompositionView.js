@@ -113,6 +113,17 @@ class CompositionView extends Component {
                                                     </ul>
                                                 </header>
                                                 <section className="node-xs-50">
+                                                    <article
+                                                        key="note-pick-general"
+                                                        id="note-pick-general"
+                                                        className="note-pick note-pick-0 node-xs-50"
+                                                    >
+                                                        <section className="node-xs-30">
+                                                            {paragraphify(
+                                                                'Picks general. Venison tri-tip salami rump, ham jerky filet mignon ground round pig shank shoulder bacon strip steak. Meatloaf hamburger rump alcatra tail chuck frankfurter filet mignon pork short ribs drumstick.',
+                                                            )}
+                                                        </section>
+                                                    </article>
                                                     <LoopNote type="pick" collection={picks} notes={notes} />
                                                 </section>
                                             </section>
@@ -126,6 +137,13 @@ class CompositionView extends Component {
                                                     </ul>
                                                 </header>
                                                 <section className="node-xs-50">
+                                                    <article key="note-ban-general" id="note-ban-general" className="note-ban note-ban-0 node-xs-50">
+                                                        <section className="node-xs-30">
+                                                            {paragraphify(
+                                                                'Bans general. Venison tri-tip salami rump, ham jerky filet mignon ground round pig shank shoulder bacon strip steak. Meatloaf hamburger rump alcatra tail chuck frankfurter filet mignon pork short ribs drumstick.',
+                                                            )}
+                                                        </section>
+                                                    </article>
                                                     <LoopNote type="ban" collection={bans} notes={notes} />
                                                 </section>
                                             </section>
