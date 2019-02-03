@@ -154,6 +154,15 @@ class _CompositionEdit extends Component {
             bans,
         });
     }
+    addStrategy() {
+        let { strategyCounter, formStrategies } = this.state;
+        strategyCounter++;
+        formStrategies[strategyCounter] = {};
+        this.setState({
+            strategyCounter,
+            formStrategies,
+        });
+    }
     onChange(event, formType) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -173,15 +182,6 @@ class _CompositionEdit extends Component {
               };
         this.setState({
             [formType]: newData,
-        });
-    }
-    addStrategy() {
-        let { strategyCounter, formStrategies } = this.state;
-        strategyCounter++;
-        formStrategies[strategyCounter] = {};
-        this.setState({
-            strategyCounter,
-            formStrategies,
         });
     }
     onSubmit() {
@@ -254,10 +254,10 @@ class _CompositionEdit extends Component {
                                     {authenticated && (
                                         <CompositionMeta
                                             form={form}
-                                            onChange={this.onChange}
                                             formNotes={formNotes}
                                             formStrategies={formStrategies}
                                             addStrategy={this.addStrategy}
+                                            onChange={this.onChange}
                                         />
                                     )}
                                 </div>

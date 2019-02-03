@@ -565,14 +565,15 @@ $window: 540px;
 #form-composition .section-title + .form-action,
 #form-composition .section-title + .strategy-group,
 #form-composition .section-title + .strategy-action {
-	padding-top: 30px;
+	margin-top: 30px; // 30px spacing
 	}
+#form-composition .form-group + .form-action,
 #form-composition .strategy-group + .strategy-group {
-	padding-top: 50px;
+	margin-top: 50px; // 50px spacing
 	}
-#form-composition .strategy-group + .strategy-action,
-#form-composition .form-action + .form-group {
-	margin-top: 20px;
+#form-composition .form-action + .form-group,
+#form-composition .strategy-group + .strategy-action {
+	margin-top: 20px; // 20px spacing
 	}
 
 /* =========================== */

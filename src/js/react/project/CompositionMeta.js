@@ -18,7 +18,7 @@ class CompositionMeta extends Component {
         });
     }
     render() {
-        const { form, onChange, formNotes, formStrategies, addStrategy } = this.props;
+        const { form, formNotes, formStrategies, addStrategy, onChange } = this.props;
         let { currentPosition } = this.state;
         const size = 'lg';
         const buttonGroup = positions.map((position, index) => {
@@ -85,27 +85,26 @@ class CompositionMeta extends Component {
                     />
                 </div>
                 <div className="panel">
-                    <h4 className="section-title">Notes</h4>
+                    <h4 className="section-title">Picks</h4>
+                    <InputText
+                        type="area"
+                        name="note-picks-general"
+                        label="General"
+                        placeholder="General"
+                        size={size}
+                        onChange={(e) => onChange(e, 'form')} // change
+                        value={form.description} // change
+                    />
                     <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
                     <InputText
                         type="area"
                         name="pick"
                         label="pick"
-                        placeholder="Pick"
+                        placeholder="Note"
                         group={currentPosition}
                         size={size}
                         onChange={(e) => onChange(e, 'formNotes')}
                         value={formNotes[currentPosition].pick}
-                    />
-                    <InputText
-                        type="area"
-                        name="ban"
-                        label="ban"
-                        placeholder="Ban"
-                        group={currentPosition}
-                        size={size}
-                        onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[currentPosition].ban}
                     />
                 </div>
                 <div className="panel">
@@ -130,6 +129,9 @@ class CompositionMeta extends Component {
 
 CompositionMeta.propTypes = {
     form: PropTypes.objectOf(PropTypes.any).isRequired,
+    formNotes: PropTypes.objectOf(PropTypes.any).isRequired,
+    formStrategies: PropTypes.objectOf(PropTypes.any).isRequired,
+    addStrategy: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
