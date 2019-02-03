@@ -220,6 +220,26 @@ $gradient-btn-lock-in-third-bottom: $color-general-midnight-010C16-80;
     }
 
 /* ========================= */
+/* ==========!FORM========== */
+/* ========================= */
+
+/* ----------!SPACE---------- */
+.form .form-panel + .form-panel {
+	padding-top: 80px; // 80px spacing
+	}
+.form .form-title + .form-group,
+.form .form-title + .form-action,
+.form .form-title + .form-node,
+.form .form-group + .form-node,
+.form .form-node + .form-node {
+	margin-top: 50px; // 50px spacing
+	}
+.form .form-action + .form-group,
+.form .form-node + .form-action {
+	margin-top: 20px; // 20px spacing
+	}
+
+/* ========================= */
 /* ==========!CELL========== */
 /* ========================= */
 
@@ -560,20 +580,6 @@ $window: 540px;
 	}
 #form-composition .section-title {
 	text-align: center;
-	}
-#form-composition .section-title + .form-group,
-#form-composition .section-title + .form-action,
-#form-composition .section-title + .strategy-group,
-#form-composition .section-title + .strategy-action {
-	margin-top: 30px; // 30px spacing
-	}
-#form-composition .form-group + .form-action,
-#form-composition .strategy-group + .strategy-group {
-	margin-top: 50px; // 50px spacing
-	}
-#form-composition .form-action + .form-group,
-#form-composition .strategy-group + .strategy-action {
-	margin-top: 20px; // 20px spacing
 	}
 
 /* =========================== */

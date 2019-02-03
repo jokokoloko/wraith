@@ -38,7 +38,7 @@ class CompositionMeta extends Component {
         });
         const strategyInputs = Object.keys(formStrategies).map((key, index) => {
             return (
-                <div key={`strategy-${key}`} className="strategy-group">
+                <div key={`strategy-${key}`} className="form-node">
                     <InputText
                         name="phase"
                         label="phase"
@@ -63,7 +63,7 @@ class CompositionMeta extends Component {
         });
         return (
             <form id="form-composition" className={`form form-${size}`}>
-                <div className="panel">
+                <div className="form-panel">
                     <InputText
                         name="title"
                         label="Title"
@@ -84,8 +84,8 @@ class CompositionMeta extends Component {
                         tip={true}
                     />
                 </div>
-                <div className="panel">
-                    <h4 className="section-title">Picks</h4>
+                <div className="form-panel">
+                    <h3 className="form-title section-title">Picks</h3>
                     <InputText
                         type="area"
                         name="note-picks-general"
@@ -95,22 +95,24 @@ class CompositionMeta extends Component {
                         onChange={(e) => onChange(e, 'form')} // change
                         value={form.description} // change
                     />
-                    <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
-                    <InputText
-                        type="area"
-                        name="pick"
-                        label="pick"
-                        placeholder="Note"
-                        group={currentPosition}
-                        size={size}
-                        onChange={(e) => onChange(e, 'formNotes')}
-                        value={formNotes[currentPosition].pick}
-                    />
+                    <div className="form-node">
+                        <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
+                        <InputText
+                            type="area"
+                            name="pick"
+                            label="pick"
+                            placeholder="Note"
+                            group={currentPosition}
+                            size={size}
+                            onChange={(e) => onChange(e, 'formNotes')}
+                            value={formNotes[currentPosition].pick}
+                        />
+                    </div>
                 </div>
-                <div className="panel">
-                    <h4 className="section-title">Strategies</h4>
+                <div className="form-panel">
+                    <h3 className="form-title section-title">Strategies</h3>
                     {strategyInputs}
-                    <div className="strategy-action text-right">
+                    <div className="form-action text-right">
                         <button type="button" className="btn btn-add-group btn-main" onClick={addStrategy}>
                             <div className="first">
                                 <div className="second">
