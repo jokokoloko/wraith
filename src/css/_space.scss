@@ -259,11 +259,23 @@ p + .instagram-media {
 /* ==========!FORM========== */
 /* ========================= */
 
-/* ----------!FORM-GROUP---------- */
+/* ----------!DEFAULT---------- */
+.form .form-panel + .form-panel {
+	padding-top: 80px; // 80px spacing
+	}
+.form .form-title + .form-group,
+.form .form-title + .form-action,
+.form .form-title + .form-node,
+.form .form-group + .form-node,
+.form .form-node + .form-node {
+	margin-top: 50px; // 50px spacing
+	}
 .form .form-group + .form-group,
 .form .form-group + .form-row,
 .form .form-row + .form-group,
-.form .form-row + .form-row {
+.form .form-row + .form-row,
+.form .form-action + .form-group,
+.form .form-node + .form-action {
     margin-top: 20px; // 20px spacing
 	}
 
