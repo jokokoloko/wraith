@@ -92,8 +92,8 @@ class CompositionMeta extends Component {
                         label="General"
                         placeholder="General"
                         size={size}
-                        onChange={(e) => onChange(e, 'form')} // change
-                        value={form.description} // change
+                        onChange={(e) => onChange(e, 'form')} // change and remove comment
+                        value={form.description} // change and remove comment
                     />
                     <div className="form-node">
                         <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
@@ -104,8 +104,33 @@ class CompositionMeta extends Component {
                             placeholder="Note"
                             group={currentPosition}
                             size={size}
-                            onChange={(e) => onChange(e, 'formNotes')}
-                            value={formNotes[currentPosition].pick}
+                            onChange={(e) => onChange(e, 'formNotes')} // change and remove comment
+                            value={formNotes[currentPosition].pick} // change and remove comment
+                        />
+                    </div>
+                </div>
+                <div className="form-panel">
+                    <h3 className="form-title section-title">Bans</h3>
+                    <InputText
+                        type="area"
+                        name="note-bans-general"
+                        label="General"
+                        placeholder="General"
+                        size={size}
+                        onChange={(e) => onChange(e, 'form')} // change and remove comment
+                        value={form.description} // change and remove comment
+                    />
+                    <div className="form-node">
+                        <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
+                        <InputText
+                            type="area"
+                            name="ban"
+                            label="ban"
+                            placeholder="Note"
+                            group={currentPosition}
+                            size={size}
+                            onChange={(e) => onChange(e, 'formNotes')} // change and remove comment
+                            value={formNotes[currentPosition].ban} // change and remove comment
                         />
                     </div>
                 </div>
