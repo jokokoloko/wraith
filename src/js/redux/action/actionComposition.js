@@ -118,15 +118,15 @@ export const compositionsLoadByUser = (user) => (dispatch) => {
         });
 };
 
-//order -> either "asc" or "desc"
-//limit -> number of items to get.
-//startAfterDoc -> a document snapshot that serves as point of reference for pagination.
+// order -> either "asc" or "desc"
+// limit -> number of items to get.
+// startAfterDoc -> a document snapshot that serves as point of reference for pagination.
 export const compositionsLoadByTime = (order, limit, startAfterDoc) => (dispatch) => {
     dispatch(compositionsLoadRequest());
     return apiComposition
         .compositionsLoadByTime(order, limit, startAfterDoc)
         .then((compositions) => {
-            console.log("my comp now", compositions);
+            console.log('my comp now', compositions); // remove
             return dispatch(compositionsLoadSuccess(compositions));
         })
         .catch((error) => {

@@ -1,23 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { filter, forEach, sortBy } from 'lodash';
-// import * as actionComposition from '../redux/action/actionComposition';
-import { COMPOSITIONS_LOAD_REQUEST } from '../redux/type';
-import { findByString, removeStatus } from '../filter';
+import apiComposition from '../../api/apiComposition';
 import { arrayToObject } from '../function';
 import * as client from '../client';
-import * as path from '../path';
 import { buildLanes } from '../utilities';
-import apiComposition from '../../api/apiComposition';
-import Basic from './section/Basic';
 import Feed from './section/Feed';
+import Pager from './widget/Pager';
 import Loader from './unit/Loader';
 import Image from './unit/Image';
 import CompositionListFilter from './project/CompositionListFilter';
-import Pager from './widget/Pager';
 
 class CompositionHome extends Component {
     constructor(props) {
@@ -30,11 +24,11 @@ class CompositionHome extends Component {
             loadingCompositions: true,
             filters: {
                 sort: 'newest',
-                lanes: {}
-            }
-        }
-        this.nextPage = this.nextPage.bind(this);
+                lanes: {},
+            },
+        };
         this.prevPage = this.prevPage.bind(this);
+        this.nextPage = this.nextPage.bind(this);
         this.toggleLoading = this.toggleLoading.bind(this);
         this.applyFilters = this.applyFilters.bind(this);
         this.getPagedComps = this.getPagedComps.bind(this);
@@ -42,26 +36,24 @@ class CompositionHome extends Component {
         this.applyHandler = this.applyHandler.bind(this);
     }
     componentDidMount() {
-        const { pageSize } = this.state;
-        apiComposition.compositionsLoad()
-            .then(data => {
-                console.log('my comps', data);
-                const compositionsToShow = this.applyFilters(data);
-                this.setState(() => ({
-                    compositions: data,
-                    loadingCompositions: false,
-                    compositionsToShow,
-                }));
-            });
+        apiComposition.compositionsLoad().then((data) => {
+            console.log('Compositions:', data); // remove
+            const compositionsToShow = this.applyFilters(data);
+            this.setState(() => ({
+                compositions: data,
+                loadingCompositions: false,
+                compositionsToShow,
+            }));
+        });
     }
     toggleLoading() {
-        this.setState((state) => {
-            return { loadingCompositions: !state.loadingCompositions };
-        });
+        this.setState((state) => ({
+            loadingCompositions: !state.loadingCompositions,
+        }));
     }
     applyFilters(comps) {
         const { sort, lanes } = this.state.filters;
-        //do filters for champs first
+        // do filters for champs first
         let filteredComps = filter(comps, (comp, key) => {
             let isMatch = true;
             forEach(lanes, (champId, lane) => {
@@ -73,20 +65,9 @@ class CompositionHome extends Component {
             return isMatch;
         });
         if (sort === 'newest') {
-            return sortBy(filteredComps, [(item) => {
-                return item.time.created;
-            }]).reverse();
+            return sortBy(filteredComps, [(item) => item.time.created]).reverse();
         }
         return filteredComps;
-    }
-    nextPage() {
-        const { curPage, pageSize, compositionsToShow } = this.state;
-        const newStart = curPage * pageSize;
-        if (newStart < compositionsToShow.length) {
-            this.setState(() => ({
-                curPage: curPage + 1
-            }));
-        }
     }
     prevPage() {
         const { curPage } = this.state;
@@ -95,23 +76,31 @@ class CompositionHome extends Component {
             newPage = 1;
         }
         this.setState(() => ({
-            curPage: newPage
+            curPage: newPage,
         }));
     }
-    filterChamps(position, champ) {
-        let { compositions, filters } = this.state;
-        let { lanes } = filters;
-        if (champ === "none") {
-            delete lanes[position];
+    nextPage() {
+        const { curPage, pageSize, compositionsToShow } = this.state;
+        const newStart = curPage * pageSize;
+        if (newStart < compositionsToShow.length) {
+            this.setState(() => ({
+                curPage: curPage + 1,
+            }));
         }
-        else {
+    }
+    filterChamps(position, champ) {
+        let { filters } = this.state;
+        let { lanes } = filters;
+        if (champ === 'none') {
+            delete lanes[position];
+        } else {
             lanes[position] = champ;
         }
         this.setState(() => ({
             filters: {
                 ...filters,
-                lanes
-            }
+                lanes,
+            },
         }));
     }
     applyHandler() {
@@ -119,7 +108,7 @@ class CompositionHome extends Component {
         let filteredComps = this.applyFilters(compositions);
         this.setState(() => ({
             compositionsToShow: filteredComps,
-            curPage: 1 //reset page
+            curPage: 1, // reset page
         }));
     }
     getPagedComps(comps) {
@@ -129,7 +118,7 @@ class CompositionHome extends Component {
         return comps.slice(start, end);
     }
     render() {
-        const { authenticated, profile, championsMap, wildcardsMap } = this.props;
+        const { championsMap, wildcardsMap } = this.props;
         const { compositionsToShow, loadingCompositions } = this.state;
         const item = 'composition';
         const pagedComposition = this.getPagedComps(compositionsToShow);
@@ -161,15 +150,8 @@ class CompositionHome extends Component {
         return (
             <main id="main" role="main">
                 <div className="container-fluid">
-                    <Basic space="space-xs-50">
-                        <header>
-                            <h1>Welcome to Invade.Blue</h1>
-                        </header>
-                    </Basic>
-                    <CompositionListFilter championsMap={championsMap}
-                        filterChamps={this.filterChamps}
-                        apply={this.applyHandler}/>
-                    <Pager next={this.nextPage} previous={this.prevPage} />
+                    <CompositionListFilter championsMap={championsMap} filterChamps={this.filterChamps} apply={this.applyHandler} />
+                    <Pager previous={this.prevPage} next={this.nextPage} />
                     <Feed space="space-xs-50">
                         <section>
                             {loadingCompositions ? (
@@ -185,6 +167,7 @@ class CompositionHome extends Component {
                             )}
                         </section>
                     </Feed>
+                    <Pager previous={this.prevPage} next={this.nextPage} />
                 </div>
             </main>
         );
@@ -192,25 +175,17 @@ class CompositionHome extends Component {
 }
 
 CompositionHome.propTypes = {
-    authenticated: PropTypes.bool.isRequired,
-    // loadingCompositions: PropTypes.bool.isRequired,
-    profile: PropTypes.objectOf(PropTypes.any).isRequired,
-    // compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     wildcardsMap: PropTypes.objectOf(PropTypes.any).isRequired,
-    // actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, champions, wildcards }) {
+function mapStateToProps({ champions, wildcards }) {
     const championsMap = arrayToObject(champions, 'id');
     const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
-        profile,
         championsMap,
         wildcardsMap,
     };
 }
 
-export default connect(
-    mapStateToProps
-)(CompositionHome);
+export default connect(mapStateToProps)(CompositionHome);
