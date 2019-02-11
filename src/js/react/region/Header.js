@@ -25,6 +25,11 @@ const Header = ({ location, authenticated, profile, onLogOut }) => {
                             Compositions
                         </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to={path.User}>
+                            Users
+                        </NavLink>
+                    </li>
                 </ul>
 
                 <Account location={location} authenticated={authenticated} profile={profile} onLogOut={onLogOut} />

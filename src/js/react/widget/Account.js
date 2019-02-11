@@ -18,6 +18,11 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
     return authenticated === true ? (
         <ul className="navbar-nav justify-content-end account account-member">
             <li className="nav-item">
+                <NavLink className="nav-link to-profile" to={`${path.User}/${profile.slug}`}>
+                    Profile
+                </NavLink>
+            </li>
+            <li className="nav-item">
                 <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
                     {_Private ? 'Home' : 'Dashboard'}
                 </NavLink>
@@ -26,7 +31,7 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
                 {profileName && <strong className="dropdown-header">{profileName}</strong>}
                 <p className="dropdown-text">{profile.email}</p>
                 <div className="dropdown-divider" />
-                <NavLink className="dropdown-item" to={`${path._Profile}`}>
+                <NavLink className="dropdown-item to-profile" to={path._Profile}>
                     Profile
                 </NavLink>
                 <div className="dropdown-divider" />
