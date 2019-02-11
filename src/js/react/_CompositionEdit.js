@@ -33,9 +33,19 @@ class _CompositionEdit extends Component {
             picks: buildLanes(),
             bans: buildLanes(),
             form: {},
-            formNotes: { top: {}, jungle: {}, middle: {}, bottom: {}, support: {} },
-            formStrategies: { '1': {} },
-            strategyCounter: 1,
+            formNotePicks: {
+                lanes: {
+                    top: '', jungle: '', middle: '', bottom: '', support: ''
+                },
+                general: ''
+            },
+            formNoteBans: {
+                lanes: {
+                    top: '', jungle: '', middle: '', bottom: '', support: ''
+                },
+                general: ''
+            },
+            formStrategies: [{}],
         };
         this.selectLane = this.selectLane.bind(this);
         this.selectChampion = this.selectChampion.bind(this);
@@ -75,15 +85,13 @@ class _CompositionEdit extends Component {
         };
         //conditionally add other data if present.
         if (view.strategies) {
-            let formStrategies = {};
-            stateObj.strategyCounter = view.strategies.length;
-            view.strategies.forEach((item, idx) => {
-                formStrategies[idx + 1] = item;
-            });
-            stateObj.formStrategies = formStrategies;
+            stateObj.formStrategies = [ ...view.strategies ];
         }
-        if (view.note) {
-            stateObj.formNotes = view.note;
+        if (view.notePick) {
+            stateObj.formNotePicks = view.notePick;
+        }
+        if (view.noteBan) {
+            stateObj.formNoteBans = view.noteBan;
         }
         this.setState(stateObj);
     }
@@ -155,38 +163,52 @@ class _CompositionEdit extends Component {
         });
     }
     addStrategy() {
-        let { strategyCounter, formStrategies } = this.state;
-        strategyCounter++;
-        formStrategies[strategyCounter] = {};
+        let { formStrategies } = this.state;
+        formStrategies[formStrategies.length] = {};
         this.setState({
-            strategyCounter,
             formStrategies,
         });
     }
-    onChange(event, formType) {
+    onChange(event, formName, index = -1) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const field = target.name;
         const group = target.dataset.group;
-        const newData = group
-            ? {
-                  ...this.state[formType],
-                  [group]: {
-                      ...this.state[formType][group],
-                      [field]: value,
-                  },
-              }
-            : {
-                  ...this.state[formType],
+        let newData;
+        if (group) {
+            newData = {
+                ...this.state[formName],
+                [group]: {
+                  ...this.state[formName][group],
                   [field]: value,
-              };
+                },
+            }
+        }
+        //the form object is an array.
+        else if (index > -1) {
+            newData = [...this.state[formName]];
+            newData[index][field] = value;
+        }
+        //the form is a k-v pair
+        else {
+            newData = {
+                ...this.state[formName],
+                [field]: value,
+            };
+        }
         this.setState({
-            [formType]: newData,
+            [formName]: newData,
         });
+    }
+    validateStrategies(strats) {
+        return strats.filter(item => {
+            return item.phase && item.phase.length > 0
+                item.strategy && item.strategy.length > 0
+            });
     }
     onSubmit() {
         const { history, authenticated, actionComposition, wildcardsMap } = this.props;
-        const { id, user, picks, bans, form, formNotes, formStrategies } = this.state;
+        const { id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies } = this.state;
         const slug = slugify(form.title) || id;
         const excerpt = excerptify(form.description, 210);
         let pick = {},
@@ -197,19 +219,14 @@ class _CompositionEdit extends Component {
         bans.forEach((banned, idx) => {
             ban[banned.position] = banned.champion.id || wildcardsMap.wildcardFill.id;
         });
-        let strategies = [];
-        Object.keys(formStrategies).forEach((key) => {
-            strategies.push(formStrategies[key]);
-        });
         const data = {
             meta: {
                 ...form,
                 excerpt,
             },
-            note: {
-                ...formNotes,
-            },
-            strategies,
+            notePick: formNotePicks,
+            noteBan: formNoteBans,
+            strategies: this.validateStrategies(formStrategies),
             id,
             slug,
             user,
@@ -226,7 +243,7 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form, formNotes, formStrategies } = this.state;
+        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form, formNotePicks, formNoteBans, formStrategies } = this.state;
         return (
             <main id="main" className="composition-edit" role="main">
                 <div className="container-fluid">
@@ -254,7 +271,8 @@ class _CompositionEdit extends Component {
                                     {authenticated && (
                                         <CompositionMeta
                                             form={form}
-                                            formNotes={formNotes}
+                                            formNotePicks={formNotePicks}
+                                            formNoteBans={formNoteBans}
                                             formStrategies={formStrategies}
                                             addStrategy={this.addStrategy}
                                             onChange={this.onChange}

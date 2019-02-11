@@ -11,11 +11,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const testData = {
-    name: 'foo',
-    handle: 'bar',
-};
-
 function updateChampList() {
     var batch = db.batch();
     var { riot } = config;

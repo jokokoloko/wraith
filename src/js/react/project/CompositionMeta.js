@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
 import InputText from '../input/InputText';
+import TabbedNotes from '../widget/TabbedNotes';
 import { positions } from '../../utilities';
 
 class CompositionMeta extends Component {
@@ -18,7 +19,7 @@ class CompositionMeta extends Component {
         });
     }
     render() {
-        const { form, formNotes, formStrategies, addStrategy, onChange } = this.props;
+        const { form, formNotePicks, formNoteBans, formStrategies, addStrategy, onChange } = this.props;
         let { currentPosition } = this.state;
         const size = 'lg';
         const buttonGroup = positions.map((position, index) => {
@@ -36,27 +37,25 @@ class CompositionMeta extends Component {
                 </button>
             );
         });
-        const strategyInputs = Object.keys(formStrategies).map((key, index) => {
+        const strategyInputs = formStrategies.map((item, index) => {
             return (
-                <div key={`strategy-${key}`} className="form-node">
+                <div key={`strategy-${index}`} className="form-node">
                     <InputText
                         name="phase"
                         label="phase"
                         placeholder="Phase"
-                        group={key}
                         size={size}
-                        onChange={(e) => onChange(e, 'formStrategies')}
-                        value={formStrategies[key].phase}
+                        onChange={(e) => onChange(e, 'formStrategies', index)}
+                        value={item.phase}
                     />
                     <InputText
                         type="area"
                         name="strategy"
                         label="strategy"
                         placeholder="Strategy"
-                        group={key}
                         size={size}
-                        onChange={(e) => onChange(e, 'formStrategies')}
-                        value={formStrategies[key].strategy}
+                        onChange={(e) => onChange(e, 'formStrategies', index)}
+                        value={item.strategy}
                     />
                 </div>
             );
@@ -88,51 +87,35 @@ class CompositionMeta extends Component {
                     <h3 className="form-title section-title">Picks</h3>
                     <InputText
                         type="area"
-                        name="note-picks-general"
+                        name="general"
                         label="General"
                         placeholder="General"
                         size={size}
-                        onChange={(e) => onChange(e, 'form')} // change and remove comment
-                        value={form.description} // change and remove comment
+                        onChange={(e) => onChange(e, 'formNotePicks')} // change and remove comment
+                        value={formNotePicks.general} // change and remove comment
                     />
-                    <div className="form-node">
-                        <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
-                        <InputText
-                            type="area"
-                            name="pick"
-                            label="pick"
-                            placeholder="Note"
-                            group={currentPosition}
-                            size={size}
-                            onChange={(e) => onChange(e, 'formNotes')} // change and remove comment
-                            value={formNotes[currentPosition].pick} // change and remove comment
-                        />
-                    </div>
+                    <TabbedNotes formObject={formNotePicks}
+                                formName="formNotePicks"
+                                formGroup="lanes"
+                                tabTitles={positions}
+                                onInputChange={onChange} />
                 </div>
                 <div className="form-panel">
                     <h3 className="form-title section-title">Bans</h3>
                     <InputText
                         type="area"
-                        name="note-bans-general"
+                        name="general"
                         label="General"
                         placeholder="General"
                         size={size}
-                        onChange={(e) => onChange(e, 'form')} // change and remove comment
-                        value={form.description} // change and remove comment
+                        onChange={(e) => onChange(e, 'formNoteBans')} // change and remove comment
+                        value={formNoteBans.general} // change and remove comment
                     />
-                    <div className="form-node">
-                        <div className="form-action d-flex justify-content-between">{buttonGroup}</div>
-                        <InputText
-                            type="area"
-                            name="ban"
-                            label="ban"
-                            placeholder="Note"
-                            group={currentPosition}
-                            size={size}
-                            onChange={(e) => onChange(e, 'formNotes')} // change and remove comment
-                            value={formNotes[currentPosition].ban} // change and remove comment
-                        />
-                    </div>
+                    <TabbedNotes formObject={formNoteBans}
+                                formName="formNoteBans"
+                                formGroup="lanes"
+                                tabTitles={positions}
+                                onInputChange={onChange} />
                 </div>
                 <div className="form-panel">
                     <h3 className="form-title section-title">Strategies</h3>
@@ -156,8 +139,9 @@ class CompositionMeta extends Component {
 
 CompositionMeta.propTypes = {
     form: PropTypes.objectOf(PropTypes.any).isRequired,
-    formNotes: PropTypes.objectOf(PropTypes.any).isRequired,
-    formStrategies: PropTypes.objectOf(PropTypes.any).isRequired,
+    formNotePicks: PropTypes.objectOf(PropTypes.any).isRequired,
+    formNoteBans: PropTypes.objectOf(PropTypes.any).isRequired,
+    formStrategies: PropTypes.arrayOf(PropTypes.any).isRequired,
     addStrategy: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
 };
