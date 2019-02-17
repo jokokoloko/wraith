@@ -19,6 +19,13 @@ import LoopNote from './project/LoopNote';
 
 class CompositionView extends Component {
     componentDidMount() {
+        this.loadView();
+    }
+    componentDidUpdate(prevProps) {
+        const { match } = this.props;
+        match.params.id !== prevProps.match.params.id && this.loadView();
+    }
+    loadView() {
         const { match, actionView } = this.props;
         actionView.viewLoad(match.params.id, COMPOSITIONS);
     }
