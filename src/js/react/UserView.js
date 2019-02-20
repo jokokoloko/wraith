@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as actionView from '../redux/action/actionView';
-import * as actionComposition from '../redux/action/actionComposition';
+import apiView from '../../api/apiView';
+import apiComposition from '../../api/apiComposition';
 import * as client from '../client';
 import * as logic from '../logic';
 import * as path from '../path';
@@ -19,6 +18,8 @@ class UserView extends Component {
         this.state = {
             loadingView: true,
             loadingCompositions: true,
+            view: {},
+            compositions: [],
         };
     }
     componentDidMount() {
@@ -36,23 +37,25 @@ class UserView extends Component {
             );
     }
     loadView() {
-        const { match, actionView, actionComposition } = this.props;
-        actionView.viewLoad(match.params.slug).then((user) => {
-            user.view &&
-                actionComposition.compositionsLoadByUser(user.view.id).then(() =>
+        const { match } = this.props;
+        apiView.viewLoad(match.params.slug).then((view) => {
+            view &&
+                apiComposition.compositionsLoadByUser(view.id).then((compositions) =>
                     this.setState({
                         loadingCompositions: false,
+                        compositions,
                     }),
                 );
             this.setState({
                 loadingView: false,
+                view,
             });
         });
     }
     render() {
-        const { view: user, profile, compositions } = this.props;
-        const { loadingView, loadingCompositions } = this.state;
-        const userName = logic.userName(user);
+        const { profile } = this.props;
+        const { view: user, compositions, loadingView, loadingCompositions } = this.state;
+        const userName = user && logic.userName(user);
         const item = 'composition';
         const loopComposition = compositions.map((composition, index) => {
             const count = compositions.length - index;
@@ -81,7 +84,7 @@ class UserView extends Component {
             <main id="main" role="main">
                 <div className="container-fluid">
                     <Basic space="space-xs-20 space-lg-80">
-                        {user.id ? (
+                        {user ? (
                             <div className="row gutter-20 gutter-lg-80">
                                 <div className="col-lg-3">
                                     <header className="card card-panel">
@@ -132,28 +135,12 @@ class UserView extends Component {
 UserView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     profile: PropTypes.objectOf(PropTypes.any).isRequired,
-    view: PropTypes.objectOf(PropTypes.any).isRequired,
-    compositions: PropTypes.arrayOf(PropTypes.object).isRequired,
-    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
-    actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ profile, view, compositions }) {
+function mapStateToProps({ profile }) {
     return {
         profile,
-        view,
-        compositions,
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actionView: bindActionCreators(actionView, dispatch),
-        actionComposition: bindActionCreators(actionComposition, dispatch),
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(UserView);
+export default connect(mapStateToProps)(UserView);

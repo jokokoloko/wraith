@@ -1,13 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as actionView from '../redux/action/actionView';
-import { VIEW_LOAD_REQUEST } from '../redux/type';
-import { findByString, removeStatus } from '../filter';
+import apiView from '../../api/apiView';
+import * as client from '../client';
 import { COMPOSITIONS } from '../data';
 import { paragraphify, arrayToObject } from '../function';
-import * as client from '../client';
 import { buildLanes } from '../utilities';
 import Basic from './section/Basic';
 import Affix from './unit/Affix';
@@ -18,19 +15,38 @@ import LoopChampion from './project/LoopChampion';
 import LoopNote from './project/LoopNote';
 
 class CompositionView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loadingView: true,
+            view: {},
+        };
+    }
     componentDidMount() {
         this.loadView();
     }
     componentDidUpdate(prevProps) {
         const { match } = this.props;
-        match.params.id !== prevProps.match.params.id && this.loadView();
+        match.params.id !== prevProps.match.params.id &&
+            this.setState(
+                {
+                    loadingView: true,
+                },
+                this.loadView(),
+            );
     }
     loadView() {
-        const { match, actionView } = this.props;
-        actionView.viewLoad(match.params.id, COMPOSITIONS);
+        const { match } = this.props;
+        apiView.viewLoad(match.params.id, COMPOSITIONS).then((view) =>
+            this.setState({
+                loadingView: false,
+                view,
+            }),
+        );
     }
     render() {
-        const { view: composition, loadingView, championsMap, wildcardsMap } = this.props;
+        const { championsMap, wildcardsMap } = this.props;
+        const { view: composition, loadingView } = this.state;
         const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
         const bans = buildLanes(composition.ban, championsMap, wildcardsMap);
         const meta = composition.meta;
@@ -71,7 +87,7 @@ class CompositionView extends Component {
         ) : (
             <main id="main" className="composition-view" role="main">
                 <div className="container-fluid">
-                    {composition.id ? (
+                    {composition ? (
                         <Fragment>
                             <Basic space="space-xs-50">
                                 <ul className="composition-picks row text-center">{loopPick}</ul>
@@ -144,31 +160,17 @@ class CompositionView extends Component {
 
 CompositionView.propTypes = {
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    loadingView: PropTypes.bool.isRequired,
-    view: PropTypes.objectOf(PropTypes.any).isRequired,
     championsMap: PropTypes.objectOf(PropTypes.any).isRequired,
     wildcardsMap: PropTypes.objectOf(PropTypes.any).isRequired,
-    actionView: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls, champions, wildcards }) {
+function mapStateToProps({ champions, wildcards }) {
     const championsMap = arrayToObject(champions, 'id');
     const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
-        loadingView: findByString(calls, removeStatus(VIEW_LOAD_REQUEST)),
-        view,
         championsMap,
         wildcardsMap,
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actionView: bindActionCreators(actionView, dispatch),
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(CompositionView);
+export default connect(mapStateToProps)(CompositionView);
