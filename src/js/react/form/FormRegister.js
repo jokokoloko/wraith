@@ -25,19 +25,19 @@ class FormRegister extends Component {
     onChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const field = target.name;
+        const name = target.name;
         const group = target.dataset.group;
         const form = group
             ? {
                   ...this.state.form,
                   [group]: {
                       ...this.state.form[group],
-                      [field]: value,
+                      [name]: value,
                   },
               }
             : {
                   ...this.state.form,
-                  [field]: value,
+                  [name]: value,
               };
         this.setState({
             form,
