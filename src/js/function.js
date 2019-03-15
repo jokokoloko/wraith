@@ -58,6 +58,8 @@ export const paragraphify = (text) => text.split('\n\n').map((paragraph) => <p k
 
 export const excerptify = (text, limit) => (text && (text.length > limit ? text.substr(0, text.lastIndexOf(' ', limit)) : text)) || null;
 
+export const contentify = (text) => text.replace(/(<([^>]+)>)/gi, '');
+
 // Object
 export const flattenObject = (object) => {
     const result = {};
