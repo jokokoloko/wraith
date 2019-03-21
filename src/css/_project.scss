@@ -414,21 +414,21 @@ $window: 540px;
     }
 
 /* ----------!NOTES---------- */
-.composition-notes > header {
+.composition-note > header {
     margin-top: -16px;
     margin-bottom: -16px;
     }
-.composition-notes > section > article > header {
+.composition-note > section > article > header {
     margin-top: -7px;
     margin-bottom: -8px;
     }
-.composition-notes .icon-lane {
+.composition-note .icon-lane {
     margin: -5px;
     margin-right: 10px;
     width: 40px;
     height: 40px;
     }
-.composition-notes .champion-name {
+.composition-note .champion-name {
     @extend [class*="xs-15"];
     @extend .p-xs-15;
     margin: 0;
@@ -436,14 +436,14 @@ $window: 540px;
     text-transform: uppercase;
     color: $color-text-cream-F1E6D0;
     }
-.composition-notes .champion-list {
+.composition-note .champion-list {
     width: 300px;
     }
-.composition-notes .champion-list .cell > .membrane {
+.composition-note .champion-list .cell > .membrane {
     width: 50px;
     height: 50px;
     }
-.composition-notes .champion-list .cell > .membrane > .nucleus > .champion-avatar {
+.composition-note .champion-list .cell > .membrane > .nucleus > .champion-avatar {
     width: 53px;
     height: 53px;
     }

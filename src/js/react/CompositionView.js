@@ -50,7 +50,8 @@ class CompositionView extends Component {
         const picks = buildLanes(composition.pick, championsMap, wildcardsMap);
         const bans = buildLanes(composition.ban, championsMap, wildcardsMap);
         const meta = composition.meta;
-        const notes = composition.note;
+        const notePick = composition.notePick;
+        const noteBan = composition.noteBan;
         const strategies = composition.strategies || [];
         const loopPick = picks.map((pick, index) => {
             const count = index + 1;
@@ -104,8 +105,8 @@ class CompositionView extends Component {
                                                 {meta.description && paragraphify(meta.description)}
                                             </header>
                                         )}
-                                        {notes && (
-                                            <section className="composition-notes composition-notes-picks node-xs-80">
+                                        {notePick && (
+                                            <section className="composition-note composition-note-picks node-xs-80">
                                                 <header className="d-flex align-items-center justify-content-between node-xs-50">
                                                     <h3 className="section-title">Picks</h3>
                                                     <ul className="champion-list composition-picks list-reset d-flex justify-content-between">
@@ -113,23 +114,21 @@ class CompositionView extends Component {
                                                     </ul>
                                                 </header>
                                                 <section className="node-xs-50">
-                                                    <article
-                                                        key="note-pick-general"
-                                                        id="note-pick-general"
-                                                        className="note-pick note-pick-0 node-xs-50"
-                                                    >
-                                                        <section className="node-xs-30">
-                                                            {paragraphify(
-                                                                'Picks general. Venison tri-tip salami rump, ham jerky filet mignon ground round pig shank shoulder bacon strip steak. Meatloaf hamburger rump alcatra tail chuck frankfurter filet mignon pork short ribs drumstick.',
-                                                            )}
-                                                        </section>
-                                                    </article>
-                                                    <LoopNote type="pick" collection={picks} notes={notes} />
+                                                    {notePick.general && (
+                                                        <article
+                                                            key="note-pick-general"
+                                                            id="note-pick-general"
+                                                            className="note-pick note-pick-0 node-xs-50"
+                                                        >
+                                                            <section>{paragraphify(notePick.general)}</section>
+                                                        </article>
+                                                    )}
+                                                    <LoopNote type="pick" collection={picks} note={notePick} />
                                                 </section>
                                             </section>
                                         )}
-                                        {notes && (
-                                            <section className="composition-notes composition-notes-bans node-xs-80">
+                                        {noteBan && (
+                                            <section className="composition-note composition-note-bans node-xs-80">
                                                 <header className="d-flex align-items-center justify-content-between node-xs-50">
                                                     <h3 className="section-title">Bans</h3>
                                                     <ul className="champion-list composition-bans list-reset d-flex justify-content-between">
@@ -137,14 +136,16 @@ class CompositionView extends Component {
                                                     </ul>
                                                 </header>
                                                 <section className="node-xs-50">
-                                                    <article key="note-ban-general" id="note-ban-general" className="note-ban note-ban-0 node-xs-50">
-                                                        <section className="node-xs-30">
-                                                            {paragraphify(
-                                                                'Bans general. Venison tri-tip salami rump, ham jerky filet mignon ground round pig shank shoulder bacon strip steak. Meatloaf hamburger rump alcatra tail chuck frankfurter filet mignon pork short ribs drumstick.',
-                                                            )}
-                                                        </section>
-                                                    </article>
-                                                    <LoopNote type="ban" collection={bans} notes={notes} />
+                                                    {noteBan.general && (
+                                                        <article
+                                                            key="note-ban-general"
+                                                            id="note-ban-general"
+                                                            className="note-ban note-ban-0 node-xs-50"
+                                                        >
+                                                            <section>{paragraphify(noteBan.general)}</section>
+                                                        </article>
+                                                    )}
+                                                    <LoopNote type="ban" collection={bans} note={noteBan} />
                                                 </section>
                                             </section>
                                         )}

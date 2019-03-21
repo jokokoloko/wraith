@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { paragraphify } from '../../function';
 import IconLane from './IconLane';
 
-const LoopNote = ({ collection, notes, type }) =>
+const LoopNote = ({ collection, note, type }) =>
     collection.map((lane, index) => {
         const count = index + 1;
         const { champion, position } = lane;
-        const content = notes[position][type];
+        const content = note.lanes[position];
         return (
             content && (
                 <article
@@ -27,7 +27,7 @@ const LoopNote = ({ collection, notes, type }) =>
 
 LoopNote.propTypes = {
     collection: PropTypes.arrayOf(PropTypes.object).isRequired,
-    notes: PropTypes.objectOf(PropTypes.any).isRequired,
+    note: PropTypes.objectOf(PropTypes.any).isRequired,
     type: PropTypes.string.isRequired,
 };
 
