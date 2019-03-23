@@ -34,15 +34,11 @@ class _CompositionEdit extends Component {
             bans: buildLanes(),
             form: {},
             formNotePicks: {
-                lanes: {
-                    top: '', jungle: '', middle: '', bottom: '', support: ''
-                },
+                lanes: {},
                 general: ''
             },
             formNoteBans: {
-                lanes: {
-                    top: '', jungle: '', middle: '', bottom: '', support: ''
-                },
+                lanes: {},
                 general: ''
             },
             formStrategies: [{}],
@@ -202,8 +198,8 @@ class _CompositionEdit extends Component {
     }
     validateStrategies(strats) {
         return strats.filter(item => {
-            return item.phase && item.phase.length > 0
-                item.strategy && item.strategy.length > 0
+            return (item.phase && item.phase.length > 0) &&
+                (item.strategy && item.strategy.length > 0);
             });
     }
     onSubmit() {

@@ -61,9 +61,6 @@ TabbedNotes.propTypes = {
     formName: PropTypes.string.isRequired,
     formGroup: PropTypes.string.isRequired,
     tabTitles: PropTypes.arrayOf(PropTypes.any).isRequired,
-    // formNoteBans: PropTypes.objectOf(PropTypes.any).isRequired,
-    // formStrategies: PropTypes.arrayOf(PropTypes.any).isRequired,
-    // addStrategy: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Cell from './Cell';
 import InputText from '../input/InputText';
 import TabbedNotes from '../widget/TabbedNotes';
 import { positions } from '../../utilities';
@@ -22,21 +21,6 @@ class CompositionMeta extends Component {
         const { form, formNotePicks, formNoteBans, formStrategies, addStrategy, onChange } = this.props;
         let { currentPosition } = this.state;
         const size = 'lg';
-        const buttonGroup = positions.map((position, index) => {
-            const active = currentPosition === position;
-            return (
-                <button
-                    key={`btn-${index}`}
-                    type="button"
-                    className={`btn btn-tab ${active ? 'active' : ''}`}
-                    onClick={() => this.selectPosition(position)}
-                >
-                    <Cell>
-                        <div className="exact-center">{position}</div>
-                    </Cell>
-                </button>
-            );
-        });
         const strategyInputs = formStrategies.map((item, index) => {
             return (
                 <div key={`strategy-${index}`} className="form-node">
@@ -91,8 +75,8 @@ class CompositionMeta extends Component {
                         label="General"
                         placeholder="General"
                         size={size}
-                        onChange={(e) => onChange(e, 'formNotePicks')} // change and remove comment
-                        value={formNotePicks.general} // change and remove comment
+                        onChange={(e) => onChange(e, 'formNotePicks')}
+                        value={formNotePicks.general}
                     />
                     <TabbedNotes formObject={formNotePicks}
                                 formName="formNotePicks"
@@ -108,8 +92,8 @@ class CompositionMeta extends Component {
                         label="General"
                         placeholder="General"
                         size={size}
-                        onChange={(e) => onChange(e, 'formNoteBans')} // change and remove comment
-                        value={formNoteBans.general} // change and remove comment
+                        onChange={(e) => onChange(e, 'formNoteBans')}
+                        value={formNoteBans.general}
                     />
                     <TabbedNotes formObject={formNoteBans}
                                 formName="formNoteBans"
