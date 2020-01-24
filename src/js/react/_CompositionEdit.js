@@ -86,26 +86,13 @@ function _CompositionEdit(props) {
         setSelectedCollection(selCollection)
     }, [setSelectedLaneIdx, setSelectedCollection])
 
-    const removeFromChampionsSelected = useCallback((newChampion, oldChampion) => {
-        const { picks: picksSelected, bans: bansSelected } = championsSelected;
-        delete picksSelected[oldChampion];
-        delete bansSelected[oldChampion];
-        if (picksSelected.hasOwnProperty(newChampion)) {
-            picks[picksSelected[newChampion]].champion = {};
-            delete picksSelected[newChampion];
-        }
-        if (bansSelected.hasOwnProperty(newChampion)) {
-            bans[bansSelected[newChampion]].champion = {};
-            delete bansSelected[newChampion];
-        }
-
-        setSelectedChampion({ picksSelected, bansSelected })
-        setPicks(picks)
-        setBans(bans)
-    }, [championsSelected, setSelectedChampion, setPicks, setBans])
-
     const selectChampion = useCallback((selectedChampion) => {
         if (selectedLaneIdx === undefined || selectedLaneIdx === -1) return;
+
+        if(selectedChampionsArray.find(item => item.id === selectedChampion.id)) {
+            // should set some sort of exceptional case here so that the user knows they made a mistake.
+            return
+        }
 
         const index = (selectedCollection === 'picks') ? selectedLaneIdx : selectedLaneIdx + 5
 
@@ -118,8 +105,8 @@ function _CompositionEdit(props) {
         selectedCollection
     ])
 
+    // if any sort of update to the array of picks happens then update the previous values that were being used to manage them.
     useEffect(() => {
-        console.log(selectedChampionsArray)
         const generatePickBans = (champArray) => champArray.reduce((map, obj, idx) => {
             if(obj && obj.name) {
                 if(idx >= 5) {
@@ -143,14 +130,23 @@ function _CompositionEdit(props) {
 
         const pickBans = generatePickBans(selectedChampionsArray)
         const newChampionsSelected = {picks: picksToMap(pickBans.picks), bans: picksToMap(pickBans.bans)}
-        console.log(newChampionsSelected)
-        console.log(pickBans.picks)
-        console.log(pickBans.bans)
+
         setChampionsSelected(newChampionsSelected)
         setPicks(pickBans.picks)
         setBans(pickBans.bans)
 
-    }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans])
+        // seems overly complicated to do this this way but it is compatible with the existing structure and function
+        const newSelectedLaneIdx = findNextEmpty(pickBans.picks, selectedLaneIdx)
+        if(newSelectedLaneIdx === -1) {
+            const isEmpty = pickBans.bans.reduce((resp, val) => resp && !val.champion.name, true)
+            const newBanSelectedIdx = findNextEmpty(pickBans.bans, isEmpty ? 0 : selectedLaneIdx)
+            setSelectedLaneIdx(newBanSelectedIdx)
+            setSelectedCollection('bans')
+        } else {
+            setSelectedLaneIdx(newSelectedLaneIdx)
+            setSelectedCollection('picks')
+        }
+    }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans, setSelectedLaneIdx, setSelectedCollection])
 
     const onSubmit = () => {}
     const addStrategy = () => {}
