@@ -18,6 +18,43 @@ import ChampionInformation from './project/ChampionInformation';
 import CompositionMeta from './project/CompositionMeta';
 import CompositionSelector from './project/CompositionSelector';
 
+
+const picksBansEmpty = {
+    picks: [{
+        champion: {},
+        position: 'top'
+    },{
+        champion: {},
+        position: 'jungle'
+    },{
+        champion: {},
+        position: 'middle'
+    },{
+        champion: {},
+        position: 'bottom'
+    },{
+        champion: {},
+        position: 'support'
+    }],
+    bans: [{
+        champion: {},
+        position: 'top'
+    },{
+        champion: {},
+        position: 'jungle'
+    },{
+        champion: {},
+        position: 'middle'
+    },{
+        champion: {},
+        position: 'bottom'
+    },{
+        champion: {},
+        position: 'support'
+    }]
+}
+
+
 function _CompositionEdit(props) {
     const { loadingView, submitting, authenticated } = props;
     const [ id, setId] = useState()
@@ -31,7 +68,18 @@ function _CompositionEdit(props) {
     const [ formNoteBans, setFormNoteBans ] = useState({lanes: {}, general: ''})
     const [ formStrategies, setFormStrategies ] = useState([{}])
     const [ championsSelected, setChampionsSelected ] = useState({picks: {}, bans: {}})
-    const [ selectedChampionsArray, setSelectedChampionsArray ] = useState([{},{},{},])
+    const [ selectedChampionsArray, setSelectedChampionsArray ] = useState([
+        {}, // top
+        {}, // jg
+        {}, // mid
+        {}, // adc
+        {}, // sup
+        {}, // ban1
+        {}, // ban2
+        {}, // ban3
+        {}, // ban4
+        {}, // ban5
+    ])
 
     const selectLane = useCallback((selLaneIdx, selCollection) => {
         setSelectedLaneIdx(selLaneIdx)
@@ -56,65 +104,53 @@ function _CompositionEdit(props) {
         setBans(bans)
     }, [championsSelected, setSelectedChampion, setPicks, setBans])
 
-    const selectChampion = useCallback(() => {
+    const selectChampion = useCallback((selectedChampion) => {
         if (selectedLaneIdx === undefined || selectedLaneIdx === -1) return;
 
-        let curCollection = this.state[selectedCollection];
-        let curChampSelected = curCollection[selectedLaneIdx].champion;
-        if (selectedChampion.type && selectedChampion.type === 'wildcard') {
-            if (curChampSelected.id && curChampSelected.id === selectedChampion.id) return;
-            // if champion is already selected, remove it from the other lane
-            //pass id because wildcards have no name
-            removeFromChampionsSelected(selectedChampion.id, curChampSelected.name);
-            // put wildcard in current lane index
-            curCollection[selectedLaneIdx].champion = selectedChampion;
-        } else {
-            if (curChampSelected.name && curChampSelected.name === selectedChampion.name) return;
-            // if champion is already selected, remove it from the other lane
-            removeFromChampionsSelected(selectedChampion.name, curChampSelected.name);
-            // add champion to champions selected
-            championsSelected[selectedCollection][selectedChampion.name] = selectedLaneIdx;
-            // put champion in current lane index
-            curCollection[selectedLaneIdx].champion = selectedChampion;
-        }
-        // if the current list is full, switch the collection
-        if (isFull(curCollection)) {
-            setSelectedCollection(selectedCollection === 'picks' ? 'bans' : 'picks')
-            curCollection = this.state[selectedCollection];
-            setSelectedLaneIdx(-1)
-        } else {
+        const index = (selectedCollection === 'picks') ? selectedLaneIdx : selectedLaneIdx + 5
 
-            // set to the next empty index
-            const newSelectedLaneIdx = findNextEmpty(curCollection, selectedLaneIdx + 1);
-            setSelectedLaneIdx(newSelectedLaneIdx)
-        }
-        setSelectedChampion(selectedChampion)
-        setSelectedCollection(selectedCollection)
-        setChampionsSelected(championsSelected)
-        setPicks(picks)
-        setBans(bans)
-        // set the state
-        this.setState({
-            selectedLaneIdx,
-            selectedChampion,
-            selectedCollection,
-            championsSelected,
-            picks,
-            bans,
-        });
+        const newSelectedChampionsArray = [...selectedChampionsArray]
+        newSelectedChampionsArray[index] = selectedChampion
+        setSelectedChampionsArray(newSelectedChampionsArray)
     }, [
+        selectedChampionsArray,
         selectedLaneIdx,
-        championsSelected,
-        selectedCollection,
-        picks,
-        bans,
-        removeFromChampionsSelected,
-        setSelectedLaneIdx,
-        setChampionsSelected,
-        setSelectedCollection,
-        setPicks,
-        setBans
+        selectedCollection
     ])
+
+    useEffect(() => {
+        console.log(selectedChampionsArray)
+        const generatePickBans = (champArray) => champArray.reduce((map, obj, idx) => {
+            if(obj && obj.name) {
+                if(idx >= 5) {
+                    // bans
+                    map.bans[idx - 5].champion = obj
+                }
+                else {
+                    // picks
+                    map.picks[idx].champion = obj
+                }
+            }
+            return map
+        }, picksBansEmpty)
+
+        const picksToMap = (picks) => picks.reduce((map, obj, idx) => {
+            if(obj.champion && obj.champion.name) {
+                map[obj.champion.name] = idx
+            }
+            return map
+        }, {})
+
+        const pickBans = generatePickBans(selectedChampionsArray)
+        const newChampionsSelected = {picks: picksToMap(pickBans.picks), bans: picksToMap(pickBans.bans)}
+        console.log(newChampionsSelected)
+        console.log(pickBans.picks)
+        console.log(pickBans.bans)
+        setChampionsSelected(newChampionsSelected)
+        setPicks(pickBans.picks)
+        setBans(pickBans.bans)
+
+    }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans])
 
     const onSubmit = () => {}
     const addStrategy = () => {}

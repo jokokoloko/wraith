@@ -59,7 +59,7 @@ class Root extends Component {
                         <PublicRoute path={path.ResetPassword} component={ResetPassword} authenticated={authenticated} />
                         <PublicRoute path={path.Login} component={Login} authenticated={authenticated} />
                         <PublicRoute path={path.Register} component={Register} authenticated={authenticated} />
-                        <SmartRoute path={'/selectNew'} component={_CompositionEdit} authenticated={authenticated} exact />
+                        <SmartRoute path={'/new'} component={_CompositionEdit} authenticated={authenticated} exact />
                         <SmartRoute path={path.User} component={User} authenticated={authenticated} />
                         <SmartRoute path={path._Add} component={_CompositionEdit} authenticated={authenticated} />
                         <SmartRoute path={path.Composition} component={Composition} authenticated={authenticated} />

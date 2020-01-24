@@ -148,6 +148,13 @@ class _CompositionEdit extends Component {
         // set to the next empty index
         selectedLaneIdx = findNextEmpty(curCollection, selectedLaneIdx + 1);
 
+        console.log(selectedLaneIdx)
+        console.log(selectedChampion)
+        console.log(selectedCollection)
+        console.log(championsSelected)
+        console.log(picks)
+        console.log(bans)
+
         // set the state
         this.setState({
             selectedLaneIdx,
