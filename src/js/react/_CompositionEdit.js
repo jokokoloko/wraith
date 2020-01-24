@@ -54,10 +54,18 @@ const picksBansEmpty = {
     }]
 }
 
+const validateStrategies = (strats) => {
+    return strats.filter(item => {
+        return (item.phase && item.phase.length > 0) &&
+            (item.strategy && item.strategy.length > 0);
+    });
+}
+
 
 function _CompositionEdit(props) {
-    const { loadingView, submitting, authenticated } = props;
+    const { loadingView, submitting, authenticated, history, actionComposition, wildcardsMap } = props;
     const [ id, setId] = useState()
+    const [ user, setUser] = useState()
     const [ selectedLaneIdx, setSelectedLaneIdx ] = useState(0)
     const [ selectedCollection, setSelectedCollection ] = useState('picks')
     const [ selectedChampion, setSelectedChampion ] = useState({})
@@ -148,7 +156,40 @@ function _CompositionEdit(props) {
         }
     }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans, setSelectedLaneIdx, setSelectedCollection])
 
-    const onSubmit = () => {}
+    const onSubmit = useCallback(() => {
+        const slug = slugify(form.title) || id;
+        const excerpt = excerptify(form.description, 210);
+        let pick = {},
+            ban = {};
+        picks.forEach((picked, idx) => {
+            pick[picked.position] = picked.champion.id || wildcardsMap.wildcardFill.id;
+        });
+        bans.forEach((banned, idx) => {
+            ban[banned.position] = banned.champion.id || wildcardsMap.wildcardFill.id;
+        });
+        const data = {
+            meta: {
+                ...form,
+                excerpt,
+            },
+            notePick: formNotePicks,
+            noteBan: formNoteBans,
+            strategies: validateStrategies(formStrategies),
+            id,
+            slug,
+            user,
+            pick,
+            ban,
+        };
+        actionComposition.compositionSave(data).then((composition) => {
+            if (authenticated && composition) {
+                history.push(`${path._Edit}/${composition.id}`);
+            } else if (!authenticated) {
+                history.push(path.Register);
+            }
+        });
+    }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies])
+
     const addStrategy = () => {}
     const onChange = () => {}
 
