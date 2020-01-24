@@ -190,8 +190,10 @@ function _CompositionEdit(props) {
         });
     }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies])
 
-    const addStrategy = () => {}
-    const onChange = () => {}
+    const addStrategy = useCallback(() => {setFormStrategies([...formStrategies, {}])}, [formStrategies, setFormStrategies])
+    const onChange = useCallback((event, formName, index) => {
+
+    }, [])
 
     return (
         <main id="main" className="composition-edit" role="main">
