@@ -15,7 +15,7 @@ import Affix from './unit/Affix';
 import Loader from './unit/Loader';
 import Champion from './project/Champion';
 import ChampionInformation from './project/ChampionInformation';
-import CompositionMeta from './project/CompositionMeta';
+import CompositionMeta from './project/CompositionMeta_New';
 import CompositionSelector from './project/CompositionSelector';
 
 
@@ -54,6 +54,19 @@ const picksBansEmpty = {
     }]
 }
 
+const defaultSelectedChampionsArray = [
+    {}, // top
+    {}, // jg
+    {}, // mid
+    {}, // adc
+    {}, // sup
+    {}, // ban1
+    {}, // ban2
+    {}, // ban3
+    {}, // ban4
+    {}, // ban5
+]
+
 const validateStrategies = (strats) => {
     return strats.filter(item => {
         return (item.phase && item.phase.length > 0) &&
@@ -76,18 +89,7 @@ function _CompositionEdit(props) {
     const [ formNoteBans, setFormNoteBans ] = useState({lanes: {}, general: ''})
     const [ formStrategies, setFormStrategies ] = useState([{}])
     const [ championsSelected, setChampionsSelected ] = useState({picks: {}, bans: {}})
-    const [ selectedChampionsArray, setSelectedChampionsArray ] = useState([
-        {}, // top
-        {}, // jg
-        {}, // mid
-        {}, // adc
-        {}, // sup
-        {}, // ban1
-        {}, // ban2
-        {}, // ban3
-        {}, // ban4
-        {}, // ban5
-    ])
+    const [ selectedChampionsArray, setSelectedChampionsArray ] = useState(defaultSelectedChampionsArray)
 
     const selectLane = useCallback((selLaneIdx, selCollection) => {
         setSelectedLaneIdx(selLaneIdx)
@@ -230,9 +232,11 @@ function _CompositionEdit(props) {
                                     />
                                 )}
                             </div>
-                            <div className="col-auto">
+                            {!authenticated && (
+                                <div className="col-auto">
                                 <ChampionInformation champion={selectedChampion} />
-                            </div>
+                                </div>
+                            )}
                         </div>
                     )}
                 </Basic>

@@ -146,6 +146,7 @@ class _CompositionEdit extends Component {
         }
 
         // set to the next empty index
+        console.log(curCollection)
         selectedLaneIdx = findNextEmpty(curCollection, selectedLaneIdx + 1);
 
         console.log(selectedLaneIdx)

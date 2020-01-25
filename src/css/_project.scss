@@ -661,3 +661,15 @@ $header-column-width: 210px;
 		margin-top: 0px;
 	}
 }
+
+.tab-customized-deselected {
+    color: red;
+    background: none;
+    border: 0px;
+}
+
+.tab-customized-selected {
+    color: blue;
+    background: none;
+    border: 0px;
+}
