@@ -78,11 +78,13 @@ class CompositionMeta extends Component {
                         onChange={(e) => onChange(e, 'formNotePicks')}
                         value={formNotePicks.general}
                     />
-                    <TabbedNotes formObject={formNotePicks}
-                                formName="formNotePicks"
-                                formGroup="lanes"
-                                tabTitles={positions}
-                                onInputChange={onChange} />
+                    <TabbedNotes
+                        formObject={formNotePicks}
+                        formName="formNotePicks"
+                        formGroup="lanes"
+                        tabTitles={positions}
+                        onInputChange={onChange}
+                    />
                 </div>
                 <div className="form-panel">
                     <h3 className="form-title section-title">Bans</h3>
@@ -95,11 +97,7 @@ class CompositionMeta extends Component {
                         onChange={(e) => onChange(e, 'formNoteBans')}
                         value={formNoteBans.general}
                     />
-                    <TabbedNotes formObject={formNoteBans}
-                                formName="formNoteBans"
-                                formGroup="lanes"
-                                tabTitles={positions}
-                                onInputChange={onChange} />
+                    <TabbedNotes formObject={formNoteBans} formName="formNoteBans" formGroup="lanes" tabTitles={positions} onInputChange={onChange} />
                 </div>
                 <div className="form-panel">
                     <h3 className="form-title section-title">Strategies</h3>

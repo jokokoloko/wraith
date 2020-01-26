@@ -35,11 +35,11 @@ class _CompositionEdit extends Component {
             form: {},
             formNotePicks: {
                 lanes: {},
-                general: ''
+                general: '',
             },
             formNoteBans: {
                 lanes: {},
-                general: ''
+                general: '',
             },
             formStrategies: [{}],
         };
@@ -52,7 +52,7 @@ class _CompositionEdit extends Component {
     componentDidMount() {
         const { history, match, actionView } = this.props;
         match.params.id &&
-        actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => !composition.view && history.push(path.Root));
+            actionView.viewLoad(match.params.id, COMPOSITIONS, true).then((composition) => !composition.view && history.push(path.Root));
     }
     componentDidUpdate(prevProps) {
         const { match, view } = this.props;
@@ -81,7 +81,7 @@ class _CompositionEdit extends Component {
         };
         //conditionally add other data if present.
         if (view.strategies) {
-            stateObj.formStrategies = [ ...view.strategies ];
+            stateObj.formStrategies = [...view.strategies];
         }
         if (view.notePick) {
             stateObj.formNotePicks = view.notePick;
@@ -146,15 +146,15 @@ class _CompositionEdit extends Component {
         }
 
         // set to the next empty index
-        console.log(curCollection)
+        console.log(curCollection);
         selectedLaneIdx = findNextEmpty(curCollection, selectedLaneIdx + 1);
 
-        console.log(selectedLaneIdx)
-        console.log(selectedChampion)
-        console.log(selectedCollection)
-        console.log(championsSelected)
-        console.log(picks)
-        console.log(bans)
+        console.log(selectedLaneIdx);
+        console.log(selectedChampion);
+        console.log(selectedCollection);
+        console.log(championsSelected);
+        console.log(picks);
+        console.log(bans);
 
         // set the state
         this.setState({
@@ -186,7 +186,7 @@ class _CompositionEdit extends Component {
                     ...this.state[formName][group],
                     [field]: value,
                 },
-            }
+            };
         }
         //the form object is an array.
         else if (index > -1) {
@@ -205,9 +205,8 @@ class _CompositionEdit extends Component {
         });
     }
     validateStrategies(strats) {
-        return strats.filter(item => {
-            return (item.phase && item.phase.length > 0) &&
-                (item.strategy && item.strategy.length > 0);
+        return strats.filter((item) => {
+            return item.phase && item.phase.length > 0 && item.strategy && item.strategy.length > 0;
         });
     }
     onSubmit() {
@@ -247,7 +246,18 @@ class _CompositionEdit extends Component {
     }
     render() {
         const { loadingView, submitting, authenticated } = this.props;
-        const { id, selectedLaneIdx, selectedCollection, selectedChampion, picks, bans, form, formNotePicks, formNoteBans, formStrategies } = this.state;
+        const {
+            id,
+            selectedLaneIdx,
+            selectedCollection,
+            selectedChampion,
+            picks,
+            bans,
+            form,
+            formNotePicks,
+            formNoteBans,
+            formStrategies,
+        } = this.state;
         return (
             <main id="main" className="composition-edit" role="main">
                 <div className="container-fluid">
@@ -327,7 +337,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(_CompositionEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);

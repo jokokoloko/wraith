@@ -32,9 +32,7 @@ class apiProfile {
                 return userRef
                     .update(updatedData)
                     .then(() => console.log(`Authored a new document in ${collection}:`, reference)) // remove
-                    .catch((error) =>
-                        console.error(`Error authoring a new document in ${collection}:`, error),
-                    ); // remove
+                    .catch((error) => console.error(`Error authoring a new document in ${collection}:`, error)); // remove
             }
         }
     };

@@ -5,7 +5,6 @@ import { COMPOSITIONS, PUBLISHED } from '../js/data';
 import * as client from '../js/client';
 
 class apiComposition {
-
     constructor() {
         this._last = null;
     }
@@ -93,18 +92,20 @@ class apiComposition {
     static compositionsLoadByTime = (order, limit, startAfterDoc = false) => {
         let ref = compositions.orderBy('time.created', order).limit(limit);
         if (startAfterDoc) {
-            ref = compositions.orderBy('time.created', order)
+            ref = compositions
+                .orderBy('time.created', order)
                 .startAfter(startAfterDoc.time.created)
                 .limit(limit);
         }
-        return ref.get()
-            .then(function (snapshot) {
+        return ref
+            .get()
+            .then(function(snapshot) {
                 return snapshot.docs.map((composition) => {
                     return composition.data();
                 });
             })
             .catch((error) => console.error('Error getting compositions by time:', error));
-    }
+    };
 }
 
 export default apiComposition;

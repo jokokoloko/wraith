@@ -18,41 +18,52 @@ import ChampionInformation from './project/ChampionInformation';
 import CompositionMeta from './project/CompositionMeta_New';
 import CompositionSelector from './project/CompositionSelector';
 
-
 const picksBansEmpty = {
-    picks: [{
-        champion: {},
-        position: 'top'
-    },{
-        champion: {},
-        position: 'jungle'
-    },{
-        champion: {},
-        position: 'middle'
-    },{
-        champion: {},
-        position: 'bottom'
-    },{
-        champion: {},
-        position: 'support'
-    }],
-    bans: [{
-        champion: {},
-        position: 'top'
-    },{
-        champion: {},
-        position: 'jungle'
-    },{
-        champion: {},
-        position: 'middle'
-    },{
-        champion: {},
-        position: 'bottom'
-    },{
-        champion: {},
-        position: 'support'
-    }]
-}
+    picks: [
+        {
+            champion: {},
+            position: 'top',
+        },
+        {
+            champion: {},
+            position: 'jungle',
+        },
+        {
+            champion: {},
+            position: 'middle',
+        },
+        {
+            champion: {},
+            position: 'bottom',
+        },
+        {
+            champion: {},
+            position: 'support',
+        },
+    ],
+    bans: [
+        {
+            champion: {},
+            position: 'top',
+        },
+        {
+            champion: {},
+            position: 'jungle',
+        },
+        {
+            champion: {},
+            position: 'middle',
+        },
+        {
+            champion: {},
+            position: 'bottom',
+        },
+        {
+            champion: {},
+            position: 'support',
+        },
+    ],
+};
 
 const defaultSelectedChampionsArray = [
     {}, // top
@@ -65,98 +76,99 @@ const defaultSelectedChampionsArray = [
     {}, // ban3
     {}, // ban4
     {}, // ban5
-]
+];
 
 const validateStrategies = (strats) => {
-    return strats.filter(item => {
-        return (item.phase && item.phase.length > 0) &&
-            (item.strategy && item.strategy.length > 0);
+    return strats.filter((item) => {
+        return item.phase && item.phase.length > 0 && item.strategy && item.strategy.length > 0;
     });
-}
-
+};
 
 function _CompositionEdit(props) {
     const { loadingView, submitting, authenticated, history, actionComposition, wildcardsMap } = props;
-    const [ id, setId] = useState()
-    const [ user, setUser] = useState()
-    const [ selectedLaneIdx, setSelectedLaneIdx ] = useState(0)
-    const [ selectedCollection, setSelectedCollection ] = useState('picks')
-    const [ selectedChampion, setSelectedChampion ] = useState({})
-    const [ picks, setPicks ] = useState(buildLanes())
-    const [ bans, setBans ] = useState(buildLanes())
-    const [ form, setForm ] = useState({})
-    const [ formNotePicks, setFormNotePicks ] = useState({lanes: {}, general: ''})
-    const [ formNoteBans, setFormNoteBans ] = useState({lanes: {}, general: ''})
-    const [ formStrategies, setFormStrategies ] = useState([{}])
-    const [ championsSelected, setChampionsSelected ] = useState({picks: {}, bans: {}})
-    const [ selectedChampionsArray, setSelectedChampionsArray ] = useState(defaultSelectedChampionsArray)
+    const [id, setId] = useState();
+    const [user, setUser] = useState();
+    const [selectedLaneIdx, setSelectedLaneIdx] = useState(0);
+    const [selectedCollection, setSelectedCollection] = useState('picks');
+    const [selectedChampion, setSelectedChampion] = useState({});
+    const [picks, setPicks] = useState(buildLanes());
+    const [bans, setBans] = useState(buildLanes());
+    const [form, setForm] = useState({});
+    const [formNotePicks, setFormNotePicks] = useState({ lanes: {}, general: '' });
+    const [formNoteBans, setFormNoteBans] = useState({ lanes: {}, general: '' });
+    const [formStrategies, setFormStrategies] = useState([{}]);
+    const [championsSelected, setChampionsSelected] = useState({ picks: {}, bans: {} });
+    const [selectedChampionsArray, setSelectedChampionsArray] = useState(defaultSelectedChampionsArray);
 
-    const selectLane = useCallback((selLaneIdx, selCollection) => {
-        setSelectedLaneIdx(selLaneIdx)
-        setSelectedCollection(selCollection)
-    }, [setSelectedLaneIdx, setSelectedCollection])
+    const selectLane = useCallback(
+        (selLaneIdx, selCollection) => {
+            setSelectedLaneIdx(selLaneIdx);
+            setSelectedCollection(selCollection);
+        },
+        [setSelectedLaneIdx, setSelectedCollection],
+    );
 
-    const selectChampion = useCallback((selectedChampion) => {
-        if (selectedLaneIdx === undefined || selectedLaneIdx === -1) return;
+    const selectChampion = useCallback(
+        (selectedChampion) => {
+            if (selectedLaneIdx === undefined || selectedLaneIdx === -1) return;
 
-        if(selectedChampionsArray.find(item => item.id === selectedChampion.id)) {
-            // should set some sort of exceptional case here so that the user knows they made a mistake.
-            return
-        }
+            if (selectedChampionsArray.find((item) => item.id === selectedChampion.id)) {
+                // should set some sort of exceptional case here so that the user knows they made a mistake.
+                return;
+            }
 
-        const index = (selectedCollection === 'picks') ? selectedLaneIdx : selectedLaneIdx + 5
+            const index = selectedCollection === 'picks' ? selectedLaneIdx : selectedLaneIdx + 5;
 
-        const newSelectedChampionsArray = [...selectedChampionsArray]
-        newSelectedChampionsArray[index] = selectedChampion
-        setSelectedChampionsArray(newSelectedChampionsArray)
-    }, [
-        selectedChampionsArray,
-        selectedLaneIdx,
-        selectedCollection
-    ])
+            const newSelectedChampionsArray = [...selectedChampionsArray];
+            newSelectedChampionsArray[index] = selectedChampion;
+            setSelectedChampionsArray(newSelectedChampionsArray);
+        },
+        [selectedChampionsArray, selectedLaneIdx, selectedCollection],
+    );
 
     // if any sort of update to the array of picks happens then update the previous values that were being used to manage them.
     useEffect(() => {
-        const generatePickBans = (champArray) => champArray.reduce((map, obj, idx) => {
-            if(obj && obj.name) {
-                if(idx >= 5) {
-                    // bans
-                    map.bans[idx - 5].champion = obj
+        const generatePickBans = (champArray) =>
+            champArray.reduce((map, obj, idx) => {
+                if (obj && obj.name) {
+                    if (idx >= 5) {
+                        // bans
+                        map.bans[idx - 5].champion = obj;
+                    } else {
+                        // picks
+                        map.picks[idx].champion = obj;
+                    }
                 }
-                else {
-                    // picks
-                    map.picks[idx].champion = obj
+                return map;
+            }, picksBansEmpty);
+
+        const picksToMap = (picks) =>
+            picks.reduce((map, obj, idx) => {
+                if (obj.champion && obj.champion.name) {
+                    map[obj.champion.name] = idx;
                 }
-            }
-            return map
-        }, picksBansEmpty)
+                return map;
+            }, {});
 
-        const picksToMap = (picks) => picks.reduce((map, obj, idx) => {
-            if(obj.champion && obj.champion.name) {
-                map[obj.champion.name] = idx
-            }
-            return map
-        }, {})
+        const pickBans = generatePickBans(selectedChampionsArray);
+        const newChampionsSelected = { picks: picksToMap(pickBans.picks), bans: picksToMap(pickBans.bans) };
 
-        const pickBans = generatePickBans(selectedChampionsArray)
-        const newChampionsSelected = {picks: picksToMap(pickBans.picks), bans: picksToMap(pickBans.bans)}
-
-        setChampionsSelected(newChampionsSelected)
-        setPicks(pickBans.picks)
-        setBans(pickBans.bans)
+        setChampionsSelected(newChampionsSelected);
+        setPicks(pickBans.picks);
+        setBans(pickBans.bans);
 
         // seems overly complicated to do this this way but it is compatible with the existing structure and function
-        const newSelectedLaneIdx = findNextEmpty(pickBans.picks, selectedLaneIdx)
-        if(newSelectedLaneIdx === -1) {
-            const isEmpty = pickBans.bans.reduce((resp, val) => resp && !val.champion.name, true)
-            const newBanSelectedIdx = findNextEmpty(pickBans.bans, isEmpty ? 0 : selectedLaneIdx)
-            setSelectedLaneIdx(newBanSelectedIdx)
-            setSelectedCollection('bans')
+        const newSelectedLaneIdx = findNextEmpty(pickBans.picks, selectedLaneIdx);
+        if (newSelectedLaneIdx === -1) {
+            const isEmpty = pickBans.bans.reduce((resp, val) => resp && !val.champion.name, true);
+            const newBanSelectedIdx = findNextEmpty(pickBans.bans, isEmpty ? 0 : selectedLaneIdx);
+            setSelectedLaneIdx(newBanSelectedIdx);
+            setSelectedCollection('bans');
         } else {
-            setSelectedLaneIdx(newSelectedLaneIdx)
-            setSelectedCollection('picks')
+            setSelectedLaneIdx(newSelectedLaneIdx);
+            setSelectedCollection('picks');
         }
-    }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans, setSelectedLaneIdx, setSelectedCollection])
+    }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans, setSelectedLaneIdx, setSelectedCollection]);
 
     const onSubmit = useCallback(() => {
         const slug = slugify(form.title) || id;
@@ -190,12 +202,12 @@ function _CompositionEdit(props) {
                 history.push(path.Register);
             }
         });
-    }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies])
+    }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies]);
 
-    const addStrategy = useCallback(() => {setFormStrategies([...formStrategies, {}])}, [formStrategies, setFormStrategies])
-    const onChange = useCallback((event, formName, index) => {
-
-    }, [])
+    const addStrategy = useCallback(() => {
+        setFormStrategies([...formStrategies, {}]);
+    }, [formStrategies, setFormStrategies]);
+    const onChange = useCallback((event, formName, index) => {}, []);
 
     return (
         <main id="main" className="composition-edit" role="main">
@@ -234,7 +246,7 @@ function _CompositionEdit(props) {
                             </div>
                             {!authenticated && (
                                 <div className="col-auto">
-                                <ChampionInformation champion={selectedChampion} />
+                                    <ChampionInformation champion={selectedChampion} />
                                 </div>
                             )}
                         </div>
@@ -277,7 +289,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(_CompositionEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);

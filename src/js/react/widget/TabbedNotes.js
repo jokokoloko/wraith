@@ -17,7 +17,7 @@ class TabbedNotes extends Component {
     }
     selectTab(tab) {
         this.setState({
-            currentTab: tab
+            currentTab: tab,
         });
     }
     render() {
@@ -27,11 +27,7 @@ class TabbedNotes extends Component {
         const buttonGroup = tabTitles.map((tab, index) => {
             const active = currentTab === tab;
             return (
-                <button
-                    key={`btn-${index}`}
-                    type="button"
-                    className={`btn btn-tab ${active ? 'active' : ''}`}
-                    onClick={() => this.selectTab(tab)}>
+                <button key={`btn-${index}`} type="button" className={`btn btn-tab ${active ? 'active' : ''}`} onClick={() => this.selectTab(tab)}>
                     <Cell>
                         <div className="exact-center">{tab}</div>
                     </Cell>
@@ -52,7 +48,7 @@ class TabbedNotes extends Component {
                     value={formObject[formGroup][currentTab]}
                 />
             </div>
-        )
+        );
     }
 }
 

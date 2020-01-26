@@ -139,7 +139,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(FormLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

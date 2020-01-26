@@ -70,7 +70,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(PostView);
+export default connect(mapStateToProps, mapDispatchToProps)(PostView);

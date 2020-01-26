@@ -170,9 +170,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(FormPost),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormPost));

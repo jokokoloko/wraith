@@ -8,7 +8,7 @@ export default function(state = initial.compositions, action) {
             //     ...state,
             //     ...action.compositions //|| initial.compositions
             // ];
-            return action.compositions || initial.compositions
+            return action.compositions || initial.compositions;
         case COMPOSITIONS_VOID:
             return initial.compositions;
         default:

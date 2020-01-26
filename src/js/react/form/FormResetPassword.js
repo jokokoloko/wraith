@@ -114,9 +114,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps,
-    )(FormResetPassword),
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FormResetPassword));
