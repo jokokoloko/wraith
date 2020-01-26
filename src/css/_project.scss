@@ -662,14 +662,24 @@ $header-column-width: 210px;
 	}
 }
 
+// dont know where to put these in this style organization @jokokoloko
+.zero-border {
+    border: 0px;
+}
+
+.react-tabs__tab-list-customized {
+    border: 0px;
+}
+
 .tab-customized-deselected {
-    color: red;
+    color: $color-stone;
     background: none;
     border: 0px;
 }
 
 .tab-customized-selected {
-    color: blue;
+    color: $color-text-gold-937341;
     background: none;
     border: 0px;
+    border-bottom: inset $color-text-gold-937341;
 }

@@ -3,6 +3,25 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form'
 import { Tabs, TabPanel, TabList, Tab } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css';
+import capitalize from 'capitalize'
+
+function InputNote({lane, field}) {
+    return (
+        <div className='form-node'>
+            <input
+                type="area"
+                name={field}
+                placeholder={`Note for ${capitalize(lane)}`}
+                className="form-control form-control-lg"
+            />
+        </div>
+    )
+}
+
+InputNote.propTypes = {
+    lane: PropTypes.string,
+    field: PropTypes.string,
+}
 
 function CompositionMeta(props) {
     const { register, handleSubmit, watch, errors } = useForm()
@@ -28,18 +47,22 @@ function CompositionMeta(props) {
                     />
                 </div>
 
-                <div className='form-group'>
+                <div className={`form-group zero-border`}>
 
                     <Tabs>
-                        <TabList>
+                        <TabList className='react-tabs__tab-list react-tabs__tab-list-customized'>
                             <Tab className='react-tabs__tab tab-customized-deselected' selectedClassName='react-tabs__tab--selected tab-customized-selected'>Top</Tab>
                             <Tab className='react-tabs__tab tab-customized-deselected' selectedClassName='react-tabs__tab--selected tab-customized-selected'>Jungle</Tab>
                             <Tab className='react-tabs__tab tab-customized-deselected' selectedClassName='react-tabs__tab--selected tab-customized-selected'>Middle</Tab>
                             <Tab className='react-tabs__tab tab-customized-deselected' selectedClassName='react-tabs__tab--selected tab-customized-selected'>Bottom</Tab>
                             <Tab className='react-tabs__tab tab-customized-deselected' selectedClassName='react-tabs__tab--selected tab-customized-selected'>Support</Tab>
                         </TabList>
-                        <TabPanel>Top</TabPanel>
-                        <TabPanel>Jungle</TabPanel>
+                        <TabPanel>
+                            <InputNote field='top' lane='top' />
+                        </TabPanel>
+                        <TabPanel>
+                            <InputNote field='jungle' lane='jungle'/>
+                        </TabPanel>
                         <TabPanel>Middle</TabPanel>
                         <TabPanel>Bottom</TabPanel>
                         <TabPanel>Support</TabPanel>
