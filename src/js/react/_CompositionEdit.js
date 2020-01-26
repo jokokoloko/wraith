@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -99,6 +99,7 @@ function _CompositionEdit(props) {
     const [formStrategies, setFormStrategies] = useState([{}]);
     const [championsSelected, setChampionsSelected] = useState({ picks: {}, bans: {} });
     const [selectedChampionsArray, setSelectedChampionsArray] = useState(defaultSelectedChampionsArray);
+    const [formData, setFormData] = useReducer((state, action) => ({ ...state, ...action }), {});
 
     const selectLane = useCallback(
         (selLaneIdx, selCollection) => {
@@ -125,6 +126,8 @@ function _CompositionEdit(props) {
         },
         [selectedChampionsArray, selectedLaneIdx, selectedCollection],
     );
+
+    const onFormUpdate = useCallback((data) => setFormData(data), [setFormData]);
 
     // if any sort of update to the array of picks happens then update the previous values that were being used to manage them.
     useEffect(() => {
@@ -204,11 +207,6 @@ function _CompositionEdit(props) {
         });
     }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies]);
 
-    const addStrategy = useCallback(() => {
-        setFormStrategies([...formStrategies, {}]);
-    }, [formStrategies, setFormStrategies]);
-    const onChange = useCallback((event, formName, index) => {}, []);
-
     return (
         <main id="main" className="composition-edit" role="main">
             <div className="container-fluid">
@@ -233,16 +231,7 @@ function _CompositionEdit(props) {
                             </div>
                             <div className="col">
                                 <Champion selectChampion={selectChampion} />
-                                {authenticated && (
-                                    <CompositionMeta
-                                        form={form}
-                                        formNotePicks={formNotePicks}
-                                        formNoteBans={formNoteBans}
-                                        formStrategies={formStrategies}
-                                        addStrategy={addStrategy}
-                                        onChange={onChange}
-                                    />
-                                )}
+                                {authenticated && <CompositionMeta onChange={onFormUpdate} />}
                             </div>
                             {!authenticated && (
                                 <div className="col-auto">

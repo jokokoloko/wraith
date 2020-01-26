@@ -669,12 +669,15 @@ $header-column-width: 210px;
 
 .react-tabs__tab-list-customized {
     border: 0px;
+    padding-bottom: 20px;
+    text-align: center;
+    padding-left: 0px;
 }
 
 .tab-customized-deselected {
     color: $color-stone;
     background: none;
-    border: 0px;
+    border: 0px !important;
 }
 
 .tab-customized-selected {
