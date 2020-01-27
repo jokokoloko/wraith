@@ -15,8 +15,9 @@ import Affix from './unit/Affix';
 import Loader from './unit/Loader';
 import Champion from './project/Champion';
 import ChampionInformation from './project/ChampionInformation';
-import CompositionMeta from './project/CompositionMeta_New';
+import CompositionMeta from './project/CompositionMeta';
 import CompositionSelector from './project/CompositionSelector';
+import { useDebounceCallback } from '@react-hook/debounce';
 
 const picksBansEmpty = {
     picks: [
@@ -93,13 +94,10 @@ function _CompositionEdit(props) {
     const [selectedChampion, setSelectedChampion] = useState({});
     const [picks, setPicks] = useState(buildLanes());
     const [bans, setBans] = useState(buildLanes());
-    const [form, setForm] = useState({});
-    const [formNotePicks, setFormNotePicks] = useState({ lanes: {}, general: '' });
-    const [formNoteBans, setFormNoteBans] = useState({ lanes: {}, general: '' });
-    const [formStrategies, setFormStrategies] = useState([{}]);
     const [championsSelected, setChampionsSelected] = useState({ picks: {}, bans: {} });
     const [selectedChampionsArray, setSelectedChampionsArray] = useState(defaultSelectedChampionsArray);
-    const [formData, setFormData] = useReducer((state, action) => ({ ...state, ...action }), {});
+    // const [formData, setFormData] = useReducer((state, action) => ({ ...state, ...action }), {});
+    const [formData, setFormData] = useState({});
 
     const selectLane = useCallback(
         (selLaneIdx, selCollection) => {
@@ -127,7 +125,7 @@ function _CompositionEdit(props) {
         [selectedChampionsArray, selectedLaneIdx, selectedCollection],
     );
 
-    const onFormUpdate = useCallback((data) => setFormData(data), [setFormData]);
+    useEffect(() => console.log(formData), [formData]);
 
     // if any sort of update to the array of picks happens then update the previous values that were being used to manage them.
     useEffect(() => {
@@ -174,23 +172,41 @@ function _CompositionEdit(props) {
     }, [selectedChampionsArray, setChampionsSelected, setPicks, setBans, setSelectedLaneIdx, setSelectedCollection]);
 
     const onSubmit = useCallback(() => {
-        const slug = slugify(form.title) || id;
-        const excerpt = excerptify(form.description, 210);
-        let pick = {},
-            ban = {};
-        picks.forEach((picked, idx) => {
-            pick[picked.position] = picked.champion.id || wildcardsMap.wildcardFill.id;
-        });
-        bans.forEach((banned, idx) => {
-            ban[banned.position] = banned.champion.id || wildcardsMap.wildcardFill.id;
-        });
+        const pick = picks.reduce((prev, value) => ({ ...prev, [value.position]: value.champion.id || wildcardsMap.wildcardFill.id }), {});
+        const ban = bans.reduce((prev, value) => {
+            return { ...prev, [value.position]: value.champion.id || wildcardsMap.wildcardFill.id };
+        }, {});
+
+        const { title, strategy, formNotePicks, formNoteBans, formStrategies } = formData;
+        const excerpt = excerptify(strategy, 210);
+        const slug = slugify(title) || id;
+
         const data = {
             meta: {
-                ...form,
+                title,
+                description: strategy,
                 excerpt,
             },
-            notePick: formNotePicks,
-            noteBan: formNoteBans,
+            notePick: {
+                general: formNotePicks.general,
+                lanes: {
+                    top: formNotePicks.lanes[0],
+                    jungle: formNotePicks.lanes[1],
+                    middle: formNotePicks.lanes[2],
+                    bottom: formNotePicks.lanes[3],
+                    support: formNotePicks.lanes[4],
+                },
+            },
+            noteBan: {
+                general: formNoteBans.general,
+                lanes: {
+                    top: formNoteBans.lanes[0],
+                    jungle: formNoteBans.lanes[1],
+                    middle: formNoteBans.lanes[2],
+                    bottom: formNoteBans.lanes[3],
+                    support: formNoteBans.lanes[4],
+                },
+            },
             strategies: validateStrategies(formStrategies),
             id,
             slug,
@@ -198,6 +214,7 @@ function _CompositionEdit(props) {
             pick,
             ban,
         };
+        console.log(data);
         actionComposition.compositionSave(data).then((composition) => {
             if (authenticated && composition) {
                 history.push(`${path._Edit}/${composition.id}`);
@@ -205,7 +222,10 @@ function _CompositionEdit(props) {
                 history.push(path.Register);
             }
         });
-    }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, form, formNotePicks, formNoteBans, formStrategies]);
+    }, [authenticated, history, actionComposition, wildcardsMap, id, user, picks, bans, formData]);
+
+    useEffect(() => console.log(picks), [picks]);
+    useEffect(() => console.log(bans), [bans]);
 
     return (
         <main id="main" className="composition-edit" role="main">
@@ -231,7 +251,7 @@ function _CompositionEdit(props) {
                             </div>
                             <div className="col">
                                 <Champion selectChampion={selectChampion} />
-                                {authenticated && <CompositionMeta onChange={onFormUpdate} />}
+                                {authenticated && <CompositionMeta onChange={setFormData} />}
                             </div>
                             {!authenticated && (
                                 <div className="col-auto">

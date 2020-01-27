@@ -1,130 +1,215 @@
-import React, { Component } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import InputText from '../input/InputText';
-import TabbedNotes from '../widget/TabbedNotes';
-import { positions } from '../../utilities';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { Tabs, TabPanel, TabList, Tab } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import capitalize from 'capitalize';
+import Cell from './Cell';
 
-class CompositionMeta extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentPosition: 'top',
-        };
-        this.selectPosition = this.selectPosition.bind(this);
-    }
-    selectPosition(position) {
-        this.setState({
-            currentPosition: position,
-        });
-    }
-    render() {
-        const { form, formNotePicks, formNoteBans, formStrategies, addStrategy, onChange } = this.props;
-        let { currentPosition } = this.state;
-        const size = 'lg';
-        const strategyInputs = formStrategies.map((item, index) => {
-            return (
-                <div key={`strategy-${index}`} className="form-node">
-                    <InputText
-                        name="phase"
-                        label="phase"
-                        placeholder="Phase"
-                        size={size}
-                        onChange={(e) => onChange(e, 'formStrategies', index)}
-                        value={item.phase}
-                    />
-                    <InputText
+function InputNote({ lane, field, register }) {
+    return (
+        <textarea
+            type="area"
+            name={field}
+            placeholder={`Notes on the ${capitalize(lane)} pick`}
+            className="form-control form-control-lg"
+            ref={register}
+        />
+    );
+}
+
+InputNote.propTypes = {
+    lane: PropTypes.string,
+    field: PropTypes.string,
+    register: PropTypes.func,
+};
+
+function CompositionMeta({ onChange }) {
+    const { control, register, handleSubmit, watch, errors, getValues } = useForm();
+    const { fields: pickFields } = useFieldArray({ control, name: 'formNotePicks.lanes' });
+    const { fields: banFields } = useFieldArray({ control, name: 'formNoteBans.lanes' });
+    const { fields: strategyFields, append, remove } = useFieldArray({ control, name: 'formStrategies' });
+
+    const appendStrategy = useCallback(() => append({}), [append]);
+
+    return (
+        <form id="form-composition" className={`form form-lg`} onChange={() => onChange(getValues({ nest: true }))}>
+            <div className="form-panel">
+                <div className="form-group">
+                    <input name="title" placeholder="Title" ref={register} className="form-control form-control-lg" />
+                </div>
+                <div className="form-group">
+                    <textarea name="strategy" placeholder="Strategy" ref={register} className="form-control form-control-lg" />
+                </div>
+            </div>
+            <div className="form-panel">
+                <h3 className="form-title section-title">Picks</h3>
+                <div className="form-group">
+                    <textarea
                         type="area"
-                        name="strategy"
-                        label="strategy"
-                        placeholder="Strategy"
-                        size={size}
-                        onChange={(e) => onChange(e, 'formStrategies', index)}
-                        value={item.strategy}
+                        name="formNotePicks.general"
+                        placeholder="General reason for picks"
+                        className="form-control form-control-lg"
+                        ref={register}
                     />
                 </div>
-            );
-        });
-        return (
-            <form id="form-composition" className={`form form-${size}`}>
-                <div className="form-panel">
-                    <InputText
-                        name="title"
-                        label="Title"
-                        placeholder="Title"
-                        size={size}
-                        onChange={(e) => onChange(e, 'form')}
-                        value={form.title}
-                        tip={true}
-                    />
-                    <InputText
+
+                <div className={`form-group zero-border`}>
+                    <Tabs>
+                        <TabList className="react-tabs__tab-list react-tabs__tab-list-customized">
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Top
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Jungle
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Middle
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Bottom
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Support
+                            </Tab>
+                        </TabList>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNotePicks.lanes[0]" lane="top" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNotePicks.lanes[1]" lane="jungle" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNotePicks.lanes[2]" lane="middle" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNotePicks.lanes[3]" lane="bottom" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNotePicks.lanes[4]" lane="support" register={register} />
+                        </TabPanel>
+                    </Tabs>
+                </div>
+            </div>
+            <div className="form-panel">
+                <h3 className="form-title section-title">Bans</h3>
+                <div className="form-group">
+                    <textarea
                         type="area"
-                        name="description"
-                        label="Description"
-                        placeholder="Description"
-                        size={size}
-                        onChange={(e) => onChange(e, 'form')}
-                        value={form.description}
-                        tip={true}
+                        name="formNoteBans.general"
+                        placeholder="General reason for bans"
+                        className="form-control form-control-lg"
+                        ref={register}
                     />
                 </div>
-                <div className="form-panel">
-                    <h3 className="form-title section-title">Picks</h3>
-                    <InputText
-                        type="area"
-                        name="general"
-                        label="General"
-                        placeholder="General"
-                        size={size}
-                        onChange={(e) => onChange(e, 'formNotePicks')}
-                        value={formNotePicks.general}
-                    />
-                    <TabbedNotes
-                        formObject={formNotePicks}
-                        formName="formNotePicks"
-                        formGroup="lanes"
-                        tabTitles={positions}
-                        onInputChange={onChange}
-                    />
+
+                <div className={`form-group zero-border`}>
+                    <Tabs>
+                        <TabList className="react-tabs__tab-list react-tabs__tab-list-customized">
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Top
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Jungle
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Middle
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Bottom
+                            </Tab>
+                            <Tab
+                                className="react-tabs__tab tab-customized-deselected"
+                                selectedClassName="react-tabs__tab--selected tab-customized-selected"
+                            >
+                                Support
+                            </Tab>
+                        </TabList>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNoteBans.lanes[0]" lane="top" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNoteBans.lanes[1]" lane="jungle" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNoteBans.lanes[2]" lane="middle" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNoteBans.lanes[3]" lane="bottom" register={register} />
+                        </TabPanel>
+                        <TabPanel className="react-tabs__tab-panel react-tabs__tab-panel-customized">
+                            <InputNote field="formNoteBans.lanes[4]" lane="support" register={register} />
+                        </TabPanel>
+                    </Tabs>
                 </div>
-                <div className="form-panel">
-                    <h3 className="form-title section-title">Bans</h3>
-                    <InputText
-                        type="area"
-                        name="general"
-                        label="General"
-                        placeholder="General"
-                        size={size}
-                        onChange={(e) => onChange(e, 'formNoteBans')}
-                        value={formNoteBans.general}
-                    />
-                    <TabbedNotes formObject={formNoteBans} formName="formNoteBans" formGroup="lanes" tabTitles={positions} onInputChange={onChange} />
-                </div>
-                <div className="form-panel">
-                    <h3 className="form-title section-title">Strategies</h3>
-                    {strategyInputs}
-                    <div className="form-action text-right">
-                        <button type="button" className="btn btn-add-group btn-main" onClick={addStrategy}>
-                            <div className="first">
-                                <div className="second">
-                                    <div className="third">
-                                        <div className="fourth">+ Phase</div>
-                                    </div>
+            </div>
+            <div className="form-panel">
+                <h3 className="form-title section-title">Strategies</h3>
+
+                {strategyFields.map((field, index) => (
+                    <div key={field.id} className="form-node">
+                        <div className="form-group">
+                            <input
+                                name={`formStrategies[${index}].phase`}
+                                placeholder="Phase"
+                                ref={register}
+                                className="form-control form-control-lg"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                name={`formStrategies[${index}].strategy`}
+                                placeholder="Strategy description"
+                                ref={register}
+                                className="form-control form-control-lg"
+                            />
+                        </div>
+                    </div>
+                ))}
+                <div className="form-action text-center">
+                    <button type="button" className="btn btn-add-group btn-main " onClick={appendStrategy}>
+                        <div className="first">
+                            <div className="second">
+                                <div className="third">
+                                    <div className="fourth">+ Phase</div>
                                 </div>
                             </div>
-                        </button>
-                    </div>
+                        </div>
+                    </button>
                 </div>
-            </form>
-        );
-    }
+            </div>
+        </form>
+    );
 }
 
 CompositionMeta.propTypes = {
-    form: PropTypes.objectOf(PropTypes.any).isRequired,
-    formNotePicks: PropTypes.objectOf(PropTypes.any).isRequired,
-    formNoteBans: PropTypes.objectOf(PropTypes.any).isRequired,
-    formStrategies: PropTypes.arrayOf(PropTypes.any).isRequired,
-    addStrategy: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
 };
 
