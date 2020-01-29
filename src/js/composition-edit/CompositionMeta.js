@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Tabs, TabPanel, TabList, Tab } from 'react-tabs';
@@ -24,10 +24,10 @@ InputNote.propTypes = {
 };
 
 function CompositionMeta({ onChange }) {
-    const { control, register, handleSubmit, watch, errors, getValues } = useForm();
-    const { fields: pickFields } = useFieldArray({ control, name: 'formNotePicks.lanes' });
-    const { fields: banFields } = useFieldArray({ control, name: 'formNoteBans.lanes' });
-    const { fields: strategyFields, append, remove } = useFieldArray({ control, name: 'formStrategies' });
+    const { control, register, getValues } = useForm();
+    useFieldArray({ control, name: 'formNotePicks.lanes' });
+    useFieldArray({ control, name: 'formNoteBans.lanes' });
+    const { fields: strategyFields, append } = useFieldArray({ control, name: 'formStrategies' });
 
     const appendStrategy = useCallback(() => append({}), [append]);
 

@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { slugify, excerptify, arrayToObject } from '../function';
+import { slugify, excerptify } from '../function';
 import * as path from '../path';
-import { buildLanes, isFull, findNextEmpty } from '../utilities';
+import { buildLanes, findNextEmpty } from '../utilities';
 import Basic from '../react/section/Basic';
 import Affix from '../react/unit/Affix';
 import Champion from './Champion';

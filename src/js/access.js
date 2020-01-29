@@ -60,7 +60,7 @@ PublicRoute.propTypes = {
 SmartRoute.propTypes = {
     path: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
-    authenticated: PropTypes.bool.isRequired,
+    authenticated: PropTypes.bool,
 };
 
 PrivateRoute.defaultProps = {
