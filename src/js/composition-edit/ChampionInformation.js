@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as client from '../../client';
-import * as path from '../../path';
-import Cell from './Cell';
-import Image from '../unit/Image';
-import rift from '../../../img/summoners-rift.jpg';
+import * as client from '../client';
+import * as path from '../path';
+import Cell from '../react/project/Cell';
+import Image from '../react/unit/Image';
+import rift from '../../img/summoners-rift.jpg';
 
 const ChampionInformation = ({ champion }) => {
     let champImg,

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as client from '../../client';
-import Cell from './Cell';
-import IconLane from './IconLane';
+import * as client from '../client';
+import Cell from '../react/project/Cell';
+import IconLane from '../react/project/IconLane';
 
 const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
     const generateAvatar = (champion, championAvatar, position) => (

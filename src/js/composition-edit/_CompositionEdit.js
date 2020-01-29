@@ -5,19 +5,17 @@ import PropTypes from 'prop-types';
 import * as actionView from '../redux/action/actionView';
 import * as actionComposition from '../redux/action/actionComposition';
 import { VIEW_LOAD_REQUEST, COMPOSITION_SAVE_REQUEST } from '../redux/type';
-import { COMPOSITIONS } from '../data';
 import { findByString, removeStatus } from '../filter';
 import { slugify, excerptify, arrayToObject } from '../function';
 import * as path from '../path';
 import { buildLanes, isFull, findNextEmpty } from '../utilities';
-import Basic from './section/Basic';
-import Affix from './unit/Affix';
-import Loader from './unit/Loader';
-import Champion from './project/Champion';
-import ChampionInformation from './project/ChampionInformation';
-import CompositionMeta from './project/CompositionMeta';
-import CompositionSelector from './project/CompositionSelector';
-import { useDebounceCallback } from '@react-hook/debounce';
+import Basic from '../react/section/Basic';
+import Affix from '../react/unit/Affix';
+import Loader from '../react/unit/Loader';
+import Champion from './Champion';
+import ChampionInformation from './ChampionInformation';
+import CompositionMeta from './CompositionMeta';
+import CompositionSelector from './CompositionSelector';
 
 const picksBansEmpty = {
     picks: [
@@ -86,6 +84,7 @@ const validateStrategies = (strats) => {
 };
 
 function _CompositionEdit(props) {
+    debugger;
     const { loadingView, submitting, authenticated, history, actionComposition, wildcardsMap } = props;
     const [id, setId] = useState();
     const [user, setUser] = useState();
@@ -279,7 +278,8 @@ _CompositionEdit.propTypes = {
     actionComposition: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
-function mapStateToProps({ view, calls, champions, wildcards }) {
+function mapStateToProps({ account, view, calls, champions, wildcards }) {
+    debugger;
     const championsMap = arrayToObject(champions, 'id');
     const wildcardsMap = arrayToObject(wildcards, 'id');
     return {
@@ -299,3 +299,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(_CompositionEdit);
+// export default _CompositionEdit;

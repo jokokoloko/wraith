@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CHAMPIONS_LOAD_REQUEST, WILDCARDS_LOAD_REQUEST } from '../../redux/type';
-import { findByString, removeStatus } from '../../filter';
-import * as client from '../../client';
-import Cell from './Cell';
-import ChampionFilter from './ChampionFilter';
-import Loader from '../unit/Loader';
+import { CHAMPIONS_LOAD_REQUEST, WILDCARDS_LOAD_REQUEST } from '../redux/type';
+import { findByString, removeStatus } from '../filter';
+import * as client from '../client';
+import Cell from '../react/project/Cell';
+import ChampionFilter from '../react/project/ChampionFilter';
+import Loader from '../react/unit/Loader';
 
 class Champion extends Component {
     constructor(props) {

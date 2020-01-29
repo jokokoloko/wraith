@@ -9,7 +9,7 @@ import { findByString, removeStatus } from '../filter';
 import * as path from '../path';
 import { PrivateRoute, PublicRoute, SmartRoute } from '../access';
 import _Composition from './_Composition';
-import _CompositionEdit from './_CompositionEdit';
+import _CompositionEdit from '../composition-edit/_CompositionEdit';
 import _Profile from './_Profile';
 import _Private from './_Private';
 import ResetPassword from './ResetPassword';
@@ -62,7 +62,7 @@ class Root extends Component {
                         <SmartRoute path={path._Add} component={_CompositionEdit} authenticated={authenticated} />
                         <SmartRoute path={path.Composition} component={Composition} authenticated={authenticated} />
                         <SmartRoute path={path.CompositionView} component={CompositionView} authenticated={authenticated} />
-                        <SmartRoute path={path.Root} component={_CompositionEdit} authenticated={authenticated} exact />
+                        <SmartRoute path={path.Root} component={_CompositionEdit} exact />
                         <Route component={Empty} />
                     </Switch>
 

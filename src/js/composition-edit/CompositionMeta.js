@@ -4,7 +4,6 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { Tabs, TabPanel, TabList, Tab } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import capitalize from 'capitalize';
-import Cell from './Cell';
 
 function InputNote({ lane, field, register }) {
     return (

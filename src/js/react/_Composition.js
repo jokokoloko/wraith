@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as path from '../path';
 import { PrivateRoute } from '../access';
-import _CompositionEdit from './_CompositionEdit';
+import _CompositionEdit from '../composition-edit/_CompositionEdit';
 import _Empty from './_404';
 
 const _Composition = ({ match, authenticated }) => (
