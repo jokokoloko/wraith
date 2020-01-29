@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import * as client from '../client';
 import Cell from '../react/project/Cell';
 import IconLane from '../react/project/IconLane';
+import { LoadingContext } from '../loading-context';
 
-const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit, submitting }) => {
+const CompositionSelector = ({ id, selectedLaneIdx, selectedCollection, picks, bans, selectLane, onSubmit }) => {
+    const { submitting } = useContext(LoadingContext);
+
     const generateAvatar = (champion, championAvatar, position) => (
         <Cell>
             {champion.id ? (
@@ -81,7 +84,6 @@ CompositionSelector.propTypes = {
     bans: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectLane: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
 };
 
 CompositionSelector.defaultProps = {

@@ -8,6 +8,7 @@ import { championsLoad } from './js/redux/action/actionChampion';
 import { wildcardsLoad } from './js/redux/action/actionWildcard';
 import '../node_modules/toastr/build/toastr.min.css'; // 6 kb
 import './css/theme.css';
+import RootContext from './js/root-context';
 
 const store = configureStore();
 store.dispatch(championsLoad());
@@ -15,7 +16,9 @@ store.dispatch(wildcardsLoad());
 
 ReactDOM.render(
     <Provider store={store}>
-        <Root />
+        <RootContext>
+            <Root />
+        </RootContext>
     </Provider>,
     document.getElementById('root'),
 );
