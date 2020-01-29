@@ -117,8 +117,6 @@ function _CompositionEdit({ history }) {
         [selectedChampionsArray, selectedLaneIdx, selectedCollection],
     );
 
-    useEffect(() => console.log(formData), [formData]);
-
     // if any sort of update to the array of picks happens then update the previous values that were being used to manage them.
     useEffect(() => {
         const generatePickBans = (champArray) =>
