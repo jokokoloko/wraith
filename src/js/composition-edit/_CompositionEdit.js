@@ -73,6 +73,9 @@ const defaultSelectedChampionsArray = [
 ];
 
 const validateStrategies = (strats) => {
+    if (!strats) {
+        return [];
+    }
     return strats.filter((item) => {
         return item.phase && item.phase.length > 0 && item.strategy && item.strategy.length > 0;
     });

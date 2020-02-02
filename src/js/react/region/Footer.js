@@ -5,10 +5,8 @@ import * as client from '../../client';
 import * as path from '../../path';
 
 const Footer = ({ location }) => {
-    const _Private = location.pathname.includes(path._Private);
     const type = 'fixed';
     let container = 'container';
-    _Private && (container = 'container-fluid');
     return (
         <footer id="footer" className={`navbar navbar-expand-lg navbar-${type}-bottom bottom`} role="contentinfo">
             <div className={`${container} justify-content-center`}>

@@ -8,7 +8,6 @@ import Avatar from '../unit/Avatar';
 import Dropdown from '../unit/Dropdown';
 
 const Account = ({ location, authenticated, profile, onLogOut }) => {
-    const _Private = location.pathname.includes(path._Private);
     const profileName = logic.userName(profile);
     const profileAvatar = profile.avatar ? (
         <Avatar position="fit exact-center" source={profile.avatar || client.EMPTY_AVATAR} alternate={logic.userNameHandle(profile, 'Avatar')} />
@@ -20,11 +19,6 @@ const Account = ({ location, authenticated, profile, onLogOut }) => {
             <li className="nav-item">
                 <NavLink className="nav-link to-profile" to={`${path.User}/${profile.slug}`}>
                     Profile
-                </NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className={`nav-link no-focus to-${_Private ? 'home' : 'dashboard'}`} to={_Private ? path.Root : path._Private} exact>
-                    {_Private ? 'Home' : 'Dashboard'}
                 </NavLink>
             </li>
             <Dropdown name="account" label={profileAvatar} alignment="right">
